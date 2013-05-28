@@ -12,6 +12,8 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.Stack;
 
@@ -160,6 +162,13 @@ public class X extends javax.swing.JFrame {
 		}
 	}
 	private void initGUI() {
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				close();
+			}
+		});
 		try{
 			Image img = Toolkit.getDefaultToolkit().getImage(getMainDir()+"media/ablauf/X.png");
 			ImageIcon bild1 = new ImageIcon(img);
@@ -175,7 +184,7 @@ public class X extends javax.swing.JFrame {
 			//setResizable(false);
 			this.setTitle("X");
 			{
-				hintergrundBild = new gui.components.Bildschirm("media/ablauf/iceBG.jpg");
+				hintergrundBild = new gui.components.Bildschirm("media/ablauf/iceBG.jpg", true);
 				getContentPane().add(hintergrundBild, BorderLayout.CENTER);
 				hintergrundBild.setLayout(new BorderLayout());
 				hintergrundBild.centerMe(true);

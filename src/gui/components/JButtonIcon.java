@@ -24,6 +24,9 @@ public class JButtonIcon extends JButton {
 		catch(Exception e){
 			this.setText(alternativ);
 		}
+		if(this.icon.getIconHeight()<0 || this.icon.getIconWidth()<0){
+			this.setText(alternativ);
+		}
 	}
 	@Override
 	public Dimension getPreferredSize(){
