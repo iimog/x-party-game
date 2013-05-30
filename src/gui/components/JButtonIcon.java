@@ -25,6 +25,7 @@ public class JButtonIcon extends JButton {
 			this.setText(alternativ);
 		}
 		if(this.icon.getIconHeight()<0 || this.icon.getIconWidth()<0){
+			this.icon = null;
 			this.setText(alternativ);
 		}
 	}
