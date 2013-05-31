@@ -202,7 +202,7 @@ public class X extends javax.swing.JFrame {
 				gd.setFullScreenWindow(null);
 				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				setSize(screenSize.width, screenSize.height-50);
-				revalidate();
+				invalidate();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -149,6 +149,30 @@ public class Stimmts extends Game implements PC {
 		aussageListe.add(new StimmtsAussage("Die Amtssprache von Belize ist Französisch ", false, "Es ist Englisch"));
 		aussageListe.add(new StimmtsAussage("'The Sun' ist eine englische Tageszeitung ", true, "The Sun ist eine täglich erscheinende englische Boulevardzeitung. Sie zählt zu den einflussreichsten Zeitungen des Landes"));
 		aussageListe.add(new StimmtsAussage("Lebron James wechselte 2010 zu den Miami Heat ", true, "James ist womöglich der Beste Basketballer dieses Jahrhunderts und wurde bis 2013 schon viermal zum MVP gewählt."));
+		aussageListe.add(new StimmtsAussage("Die Gebrüder Grimm hießen mit Vornamen Richard und August ", false, "Die Märchenschriftsteller hießen mit Vornamen Jacob und Wilhelm."));
+		aussageListe.add(new StimmtsAussage("Pink Lady ist der Name einer Apfelsorte ", true, "Vermarktet wird der Apfel mit einem Aufkleber, der ein pinkes Herz enthält."));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+		
 		
 		
 		/*
