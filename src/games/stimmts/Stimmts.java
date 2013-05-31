@@ -151,13 +151,13 @@ public class Stimmts extends Game implements PC {
 		aussageListe.add(new StimmtsAussage("Lebron James wechselte 2010 zu den Miami Heat ", true, "James ist womöglich der Beste Basketballer dieses Jahrhunderts und wurde bis 2013 schon viermal zum MVP gewählt."));
 		aussageListe.add(new StimmtsAussage("Die Gebrüder Grimm hießen mit Vornamen Richard und August ", false, "Die Märchenschriftsteller hießen mit Vornamen Jacob und Wilhelm."));
 		aussageListe.add(new StimmtsAussage("Pink Lady ist der Name einer Apfelsorte ", true, "Vermarktet wird der Apfel mit einem Aufkleber, der ein pinkes Herz enthält."));
-//		aussageListe.add(new StimmtsAussage("", false, ""));
-//		aussageListe.add(new StimmtsAussage("", false, ""));
-//		aussageListe.add(new StimmtsAussage("", false, ""));
-//		aussageListe.add(new StimmtsAussage("", false, ""));
-//		aussageListe.add(new StimmtsAussage("", false, ""));
-//		aussageListe.add(new StimmtsAussage("", false, ""));
-//		aussageListe.add(new StimmtsAussage("", false, ""));
+		aussageListe.add(new StimmtsAussage("Angela Merkel ist die erste Frau im Amt des deutschen Bundespräsidenten ", false, "Merkel ist Parteimitglied der CDU und die erste deutsche Bundeskanzlerin."));
+		aussageListe.add(new StimmtsAussage("S ist der 17 Buchstabe des Alphabets ", false, "S  ist der 19. Buchstabe des lateinischen Alphabets und ein Konsonant. Der Buchstabe S hat in deutschen Texten eine durchschnittliche Häufigkeit von 7,27 %. Er ist damit der vierthäufigste Buchstabe in deutschen Texten."));
+		aussageListe.add(new StimmtsAussage("S ist der 19 Buchstabe des Alphabets ", true, "Richtig S  ist der 19. Buchstabe des lateinischen Alphabets und ein Konsonant. Der Buchstabe S hat in deutschen Texten eine durchschnittliche Häufigkeit von 7,27 %. Er ist damit der vierthäufigste Buchstabe in deutschen Texten."));
+		aussageListe.add(new StimmtsAussage("'h.M._ ist die Abkürzung für 'herrschende Meinung' ", true, "wahr Der Begriff der herrschenden Meinung bezeichnet im akademischen und insbesondere juristischen Kontext die in einem Diskurs oder zu einer konkreten Streitfrage vorwiegend eingenommene Position."));
+		aussageListe.add(new StimmtsAussage("Seit der Erfindung des Computers ist der Papierverbrauch gesunken", false, "Durch den Drucker wurde der Papierkonsum sogar noch gesteigert. Im Vergleich zum Jahr 1990 ist der Verbrauch um bis zu 20% gestiegen."));
+		aussageListe.add(new StimmtsAussage("Wenn man von Westen nach Osten fliegt ist der Jetlag schlimmer als umgekehrt", true));
+		aussageListe.add(new StimmtsAussage("Man kann am Geweih des Hirsches sein Alter ablesen ", false, "Die Größe des Geweihs wächst zwar zunächst von Jahr zu Jahr. Ab 8 Jahren setzt dieses aber wieder zurück/ wird wieder kleiner. "));
 //		aussageListe.add(new StimmtsAussage("", false, ""));
 //		aussageListe.add(new StimmtsAussage("", false, ""));
 //		aussageListe.add(new StimmtsAussage("", false, ""));
@@ -180,7 +180,7 @@ public class Stimmts extends Game implements PC {
 				"Zugegeben, es gibt mehr als einen Leo. Aber der den ich meine (Lieutenant)"
 				+" ist tatsächlich ein Kater."));
 		*/
-		aussageListe.add(new StimmtsAussage("Elefanten werden an die 120 Jahre alt",false));
+		aussageListe.add(new StimmtsAussage("Elefanten werden an die 120 Jahre alt",false, "Der älteste Elefant lebte im Zoo von Taipeh und wurde „nur“ 86 Jahre alt."));
 	}
 	
 	public Stimmts(Player[] player, Modus modus) {

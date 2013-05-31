@@ -349,6 +349,39 @@ public class WerLuegt extends Game implements PC {
 		falsch.add("Domstraße");
 		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
 		
+//		aussage = "";
+//		info = "";
+//		richtig = new ArrayList<String>();
+//		falsch = new ArrayList<String>();
+//		richtig.add("");
+//		richtig.add("");
+//		richtig.add("");
+//		richtig.add("");
+//		richtig.add("Lessingstraße");
+//		richtig.add("Goethestraße");
+//		richtig.add("Badstraße");
+//		richtig.add("Turmstraße");
+//		richtig.add("Chausseestraße");
+//		richtig.add("Elisenstraße");
+//		richtig.add("Poststraße");
+//		richtig.add("Seestraße");
+//		richtig.add("Hafenstraße");
+//		richtig.add("Münchner Straße");
+//		richtig.add("Berliner Straße");
+//		richtig.add("Wiener Straße");
+//		richtig.add("Theaterstraße");
+//		richtig.add("Museumsstraße");
+//		richtig.add("Opernplatz");
+//		richtig.add("Rathausplatz");
+//		richtig.add("Bahnhofstraße");
+//		richtig.add("Hauptstraße");
+//		falsch.add("Burgstraße");
+//		falsch.add("Mozartstraße");
+//		falsch.add("Elyseestraße");
+//		falsch.add("Bremer Straße");
+//		falsch.add("Domstraße");
+//		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
+		
 		/*
 		aussage = "";
 		info = "";
