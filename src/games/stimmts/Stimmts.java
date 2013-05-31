@@ -137,7 +137,19 @@ public class Stimmts extends Game implements PC {
 		aussageListe.add(new StimmtsAussage("Jeder Kontinent weist mindestens eine Stadt mit dem Namen Rom auf.", true, "Die bekannteste Stadt mit diesem Namen ist die italienische Hauptstadt."));
 		aussageListe.add(new StimmtsAussage("In Kalifornien ist es gesetzlich verboten, einen Schmetterling mit dem Tode zu bedrohen.", true, "In Pacific Grove, Kalifornien, kann das Töten oder Belästigen eines Schmetterling mit bis zu $1000 Strafe geahndet werden."));
 		aussageListe.add(new StimmtsAussage("Der Kölner Dom hat den höchsten Kirchturm weltweit.", false, "Das Ulmer Münster hat mit 161,5 Metern den höchsten Kirchturm der Welt."));
-		aussageListe.add(new StimmtsAussage("Die Blackbox eines Flugzeuges ist schwarz.", false, "Sie ist orange, dass man sie nach einem Flugzeugabsturz besser findet!"));
+		aussageListe.add(new StimmtsAussage("Die Blackbox eines Flugzeuges ist schwarz.", false, "Sie ist orange, dass man sie nach einem Flugzeugabsturz besser findet!"));		aussageListe.add(new StimmtsAussage("Die Blackbox eines Flugzeuges ist schwarz.", false, "Sie ist orange, dass man sie nach einem Flugzeugabsturz besser findet!"));
+		aussageListe.add(new StimmtsAussage("Der Blauwal ist der größte Fisch der Erde", false, "Der Blauwal ist ein Säugetier, der größte Fisch ist hingegen der Walhai"));
+		aussageListe.add(new StimmtsAussage("79+33+10-3=129 ", false, "Die Rechnung ergibt 119"));
+		aussageListe.add(new StimmtsAussage("33+79+17= 129 ", true));
+		aussageListe.add(new StimmtsAussage("Patrick Swayze wurde 1991 zum 'Sexiest Man Alive' gekürt ", true, "Sexiest Man Alive ist eine internationale Auszeichnung, die jährlich vom US-amerikanischen People Magazine verliehen wird."));
+		aussageListe.add(new StimmtsAussage("Die Flagge Schwedens hat ein blaues Kreuz auf gelbem Hintergrund", false, "Es ist genau umgekehrt"));
+		aussageListe.add(new StimmtsAussage("Google ist das größte börsennotierte Aktienunternehmen (2013) ", false, "Apple ist das größte notierte Aktienunternehmen der Welt. Google belegt hingegen Platz 25."));
+		aussageListe.add(new StimmtsAussage("Indien ist im „British Commonwealth of Nations“ ", true, "Das Commonwealth of Nations ist eine Vereinigung unabhängiger Staaten, die heute als Nachfolger des British Empire gesehen werden kann."));
+		aussageListe.add(new StimmtsAussage("Europa hat mehr Einwohner als Südamerika", true, "Europa hat knapp doppelt so viele Einwohner wie Südamerika."));
+		aussageListe.add(new StimmtsAussage("Die Amtssprache von Belize ist Französisch ", false, "Es ist Englisch"));
+		aussageListe.add(new StimmtsAussage("'The Sun' ist eine englische Tageszeitung ", true, "The Sun ist eine täglich erscheinende englische Boulevardzeitung. Sie zählt zu den einflussreichsten Zeitungen des Landes"));
+		aussageListe.add(new StimmtsAussage("Lebron James wechselte 2010 zu den Miami Heat ", true, "James ist womöglich der Beste Basketballer dieses Jahrhunderts und wurde bis 2013 schon viermal zum MVP gewählt."));
+		
 		
 		/*
 		aussageListe.add(new StimmtsAussage("Leo ist ein Kater.",true,
