@@ -59,7 +59,7 @@ public class HauptMenu extends Anzeige {
 			this.add(logoPanel);
 			logoPanel.setOpaque(false);
 			{
-				logoBildschirm = new Bildschirm("media/ablauf/X3k.png");
+				logoBildschirm = new Bildschirm("media/ablauf/xnewk.png");
 				logoPanel.add(logoBildschirm);
 			}
 		}

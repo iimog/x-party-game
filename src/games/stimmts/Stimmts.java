@@ -137,14 +137,50 @@ public class Stimmts extends Game implements PC {
 		aussageListe.add(new StimmtsAussage("Jeder Kontinent weist mindestens eine Stadt mit dem Namen Rom auf.", true, "Die bekannteste Stadt mit diesem Namen ist die italienische Hauptstadt."));
 		aussageListe.add(new StimmtsAussage("In Kalifornien ist es gesetzlich verboten, einen Schmetterling mit dem Tode zu bedrohen.", true, "In Pacific Grove, Kalifornien, kann das Töten oder Belästigen eines Schmetterling mit bis zu $1000 Strafe geahndet werden."));
 		aussageListe.add(new StimmtsAussage("Der Kölner Dom hat den höchsten Kirchturm weltweit.", false, "Das Ulmer Münster hat mit 161,5 Metern den höchsten Kirchturm der Welt."));
-		aussageListe.add(new StimmtsAussage("Die Blackbox eines Flugzeuges ist schwarz.", false, "Sie ist orange, dass man sie nach einem Flugzeugabsturz besser findet!"));
+		aussageListe.add(new StimmtsAussage("Die Blackbox eines Flugzeuges ist schwarz.", false, "Sie ist orange, dass man sie nach einem Flugzeugabsturz besser findet!"));		aussageListe.add(new StimmtsAussage("Die Blackbox eines Flugzeuges ist schwarz.", false, "Sie ist orange, dass man sie nach einem Flugzeugabsturz besser findet!"));
+		aussageListe.add(new StimmtsAussage("Der Blauwal ist der größte Fisch der Erde", false, "Der Blauwal ist ein Säugetier, der größte Fisch ist hingegen der Walhai"));
+		aussageListe.add(new StimmtsAussage("79+33+10-3=129 ", false, "Die Rechnung ergibt 119"));
+		aussageListe.add(new StimmtsAussage("33+79+17= 129 ", true));
+		aussageListe.add(new StimmtsAussage("Patrick Swayze wurde 1991 zum 'Sexiest Man Alive' gekürt ", true, "Sexiest Man Alive ist eine internationale Auszeichnung, die jährlich vom US-amerikanischen People Magazine verliehen wird."));
+		aussageListe.add(new StimmtsAussage("Die Flagge Schwedens hat ein blaues Kreuz auf gelbem Hintergrund", false, "Es ist genau umgekehrt"));
+		aussageListe.add(new StimmtsAussage("Google ist das größte börsennotierte Aktienunternehmen (2013) ", false, "Apple ist das größte notierte Aktienunternehmen der Welt. Google belegt hingegen Platz 25."));
+		aussageListe.add(new StimmtsAussage("Indien ist im „British Commonwealth of Nations“ ", true, "Das Commonwealth of Nations ist eine Vereinigung unabhängiger Staaten, die heute als Nachfolger des British Empire gesehen werden kann."));
+		aussageListe.add(new StimmtsAussage("Europa hat mehr Einwohner als Südamerika", true, "Europa hat knapp doppelt so viele Einwohner wie Südamerika."));
+		aussageListe.add(new StimmtsAussage("Die Amtssprache von Belize ist Französisch ", false, "Es ist Englisch"));
+		aussageListe.add(new StimmtsAussage("'The Sun' ist eine englische Tageszeitung ", true, "The Sun ist eine täglich erscheinende englische Boulevardzeitung. Sie zählt zu den einflussreichsten Zeitungen des Landes"));
+		aussageListe.add(new StimmtsAussage("Lebron James wechselte 2010 zu den Miami Heat ", true, "James ist womöglich der Beste Basketballer dieses Jahrhunderts und wurde bis 2013 schon viermal zum MVP gewählt."));
+		aussageListe.add(new StimmtsAussage("Die Gebrüder Grimm hießen mit Vornamen Richard und August ", false, "Die Märchenschriftsteller hießen mit Vornamen Jacob und Wilhelm."));
+		aussageListe.add(new StimmtsAussage("Pink Lady ist der Name einer Apfelsorte ", true, "Vermarktet wird der Apfel mit einem Aufkleber, der ein pinkes Herz enthält."));
+		aussageListe.add(new StimmtsAussage("Angela Merkel ist die erste Frau im Amt des deutschen Bundespräsidenten ", false, "Merkel ist Parteimitglied der CDU und die erste deutsche Bundeskanzlerin."));
+		aussageListe.add(new StimmtsAussage("S ist der 17 Buchstabe des Alphabets ", false, "S  ist der 19. Buchstabe des lateinischen Alphabets und ein Konsonant. Der Buchstabe S hat in deutschen Texten eine durchschnittliche Häufigkeit von 7,27 %. Er ist damit der vierthäufigste Buchstabe in deutschen Texten."));
+		aussageListe.add(new StimmtsAussage("S ist der 19 Buchstabe des Alphabets ", true, "Richtig S  ist der 19. Buchstabe des lateinischen Alphabets und ein Konsonant. Der Buchstabe S hat in deutschen Texten eine durchschnittliche Häufigkeit von 7,27 %. Er ist damit der vierthäufigste Buchstabe in deutschen Texten."));
+		aussageListe.add(new StimmtsAussage("'h.M._ ist die Abkürzung für 'herrschende Meinung' ", true, "wahr Der Begriff der herrschenden Meinung bezeichnet im akademischen und insbesondere juristischen Kontext die in einem Diskurs oder zu einer konkreten Streitfrage vorwiegend eingenommene Position."));
+		aussageListe.add(new StimmtsAussage("Seit der Erfindung des Computers ist der Papierverbrauch gesunken", false, "Durch den Drucker wurde der Papierkonsum sogar noch gesteigert. Im Vergleich zum Jahr 1990 ist der Verbrauch um bis zu 20% gestiegen."));
+		aussageListe.add(new StimmtsAussage("Wenn man von Westen nach Osten fliegt ist der Jetlag schlimmer als umgekehrt", true));
+		aussageListe.add(new StimmtsAussage("Man kann am Geweih des Hirsches sein Alter ablesen ", false, "Die Größe des Geweihs wächst zwar zunächst von Jahr zu Jahr. Ab 8 Jahren setzt dieses aber wieder zurück/ wird wieder kleiner. "));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+//		aussageListe.add(new StimmtsAussage("", false, ""));
+		
+		
 		
 		/*
 		aussageListe.add(new StimmtsAussage("Leo ist ein Kater.",true,
 				"Zugegeben, es gibt mehr als einen Leo. Aber der den ich meine (Lieutenant)"
 				+" ist tatsächlich ein Kater."));
 		*/
-		aussageListe.add(new StimmtsAussage("Elefanten werden an die 120 Jahre alt",false));
+		aussageListe.add(new StimmtsAussage("Elefanten werden an die 120 Jahre alt",false, "Der älteste Elefant lebte im Zoo von Taipeh und wurde „nur“ 86 Jahre alt."));
 	}
 	
 	public Stimmts(Player[] player, Modus modus) {
