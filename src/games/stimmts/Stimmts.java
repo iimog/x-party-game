@@ -58,6 +58,7 @@ public class Stimmts extends Game implements PC {
 	int current = -1;
 	boolean letzteAussageWahr;
 	Set<Integer> winnerIDs;
+	private boolean[] answerGiven;
 
 	private void initAussagen() {
 		aussageListe = new ArrayList<StimmtsAussage>();
@@ -436,6 +437,7 @@ public class Stimmts extends Game implements PC {
 		super(gameName, player, defaultNumOfRounds, modus);
 		initAussagen();
 		vermutung = new boolean[player.length];
+		answerGiven = new boolean[player.length];
 		resetVermutungen();
 		initGUI();
 		registerBuzzerActions();
@@ -465,6 +467,7 @@ public class Stimmts extends Game implements PC {
 	private void resetVermutungen() {
 		for (int i = 0; i < spielerZahl; i++) {
 			vermutung[i] = true;
+			answerGiven[i] = false;
 		}
 	}
 
@@ -502,6 +505,8 @@ public class Stimmts extends Game implements PC {
 		}
 		winnerIDs = new HashSet<Integer>();
 		for (int i = 0; i < spielerZahl; i++) {
+			if (!answerGiven[i])
+				vermutung[i] = !letzteAussageWahr;
 			if (vermutung[i] == letzteAussageWahr)
 				winnerIDs.add(i);
 		}
@@ -564,6 +569,7 @@ public class Stimmts extends Game implements PC {
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			answerGiven[playerID] = true;
 			vermutung[playerID] = stimmt;
 		}
 	}
