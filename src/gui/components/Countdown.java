@@ -48,6 +48,7 @@ public class Countdown extends JPanel {
 		c.count();
 	}
 	private int secs;
+	private int vergangen=0;
 	public int getSecs() {
 		return secs;
 	}
@@ -60,6 +61,18 @@ public class Countdown extends JPanel {
 	public boolean timeOver = false;
 
 	private boolean stopped = false;
+	
+	// Diese Methode setzt stopped auf stop. Sie gibt true zurück falls sie stopped ändern musste
+	// und false falls stopped bereits auf stop stand.
+	private synchronized boolean setStopped(boolean stop){
+		if(stopped == stop){
+			return false;
+		}
+		else{
+			stopped = stop;
+			return true;
+		}
+	}
 
 	private ArrayList<util.ChangeManager> cM = new ArrayList<util.ChangeManager>();
 
@@ -77,10 +90,10 @@ public class Countdown extends JPanel {
 	}
 
 	public void count(){
-		stopped = false;
-		for(int i=0; i<secs; i++){
+		setStopped(false);
+		for(int i=vergangen; i<secs; i++){
 			if(stopped){
-				stopped = false;
+				setStopped(false);
 				return;
 			}
 			try {
@@ -88,9 +101,14 @@ public class Countdown extends JPanel {
 			} catch (InterruptedException e) {
 				System.out.println("I wurd underbrochn");
 			}
+			if(stopped){
+				setStopped(false);
+				return;
+			}
 			int colorFade = getValue(i);
 			time[i].setBackground(new Color(colorFade,00,00));
 			repaint();
+			vergangen++;
 		}
 		if(!stopped){
 			timeOver = true;
@@ -136,6 +154,7 @@ public class Countdown extends JPanel {
 			int colorFade = getValue(i);
 			time[i].setBackground(new Color(00,colorFade,00));
 		}
+		vergangen = 0;
 		timeOver = false;
 	}
 	public void start(){
@@ -145,6 +164,11 @@ public class Countdown extends JPanel {
 		new Count(Count.RESTART).start();
 	}
 	public void stop(){
-		stopped = true;
+		setStopped(true);
+	}
+	public void resume(){
+		if(!setStopped(false)){			
+			start();
+		}
 	}
 }

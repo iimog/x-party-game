@@ -47,6 +47,13 @@ public class Stimmts extends Game implements PC {
 	public static String getGameName() {
 		return gameName;
 	}
+	
+	public void pause(){
+		countdown.stop();
+	}
+	public void resume(){
+		countdown.resume();
+	}
 
 	private JPanel hauptbereichPanel;
 

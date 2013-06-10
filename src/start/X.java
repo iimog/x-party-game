@@ -1,4 +1,5 @@
 package start;
+import games.Game;
 import gui.Anzeige;
 import gui.AnzeigeDialog;
 import gui.EasyDialog;
@@ -12,6 +13,8 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -22,7 +25,11 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import settings.MainSettings;
@@ -116,6 +123,8 @@ public class X extends javax.swing.JFrame {
 
 	private Stack<AnzeigeDialog> currentDialogs = new Stack<AnzeigeDialog>();
 
+	private Game currentGame;
+
 	private X() {
 		super();
 		instance = this;
@@ -135,6 +144,9 @@ public class X extends javax.swing.JFrame {
 		hintergrundBild.changePic(bild);
 	}
 	public void close(){
+		if(currentGame != null){
+			currentGame.autoPause();
+		}
 		EasyDialog.showConfirm("Wirklich beenden?", null, new ConfirmListener() {
 			@Override
 			public void confirmOptionPerformed(int optionType) {
@@ -143,6 +155,9 @@ public class X extends javax.swing.JFrame {
 					System.exit(0);	
 				}
 				else{
+					if(currentGame != null){
+						currentGame.autoResume();
+					}
 					instance.closeDialog();
 				}
 			}
@@ -204,14 +219,43 @@ public class X extends javax.swing.JFrame {
 				setSize(screenSize.width, screenSize.height-50);
 				invalidate();
 			}
+			setBasicKeystrokes();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	private void setBasicKeystrokes() {
+		JPanel content = (JPanel) this.getContentPane();
+        content.getInputMap().put(KeyStroke.getKeyStroke(
+                KeyEvent.VK_ESCAPE, 0), "pause");
+            content.getActionMap().put("pause", new ButtonPressed("pause"));
+	}
+	
+    private class ButtonPressed extends AbstractAction {
+		private static final long serialVersionUID = 1L;
+		String action;
+    	
+        public ButtonPressed(String action) {
+            this.action = action;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(action.equals("pause")){
+            	if(currentGame != null)
+            		currentGame.togglePause();
+            }
+        }
+    }
+
 	public void showDialog(AnzeigeDialog dialog){
 		hintergrundBild.removeAll();
 		hintergrundBild.add(currentDialogs.push(dialog), BorderLayout.CENTER);
 		hintergrundBild.revalidate();
 		hintergrundBild.repaint();
+	}
+
+	public void setGame(Game game) {
+		this.currentGame = game;
 	}
 }

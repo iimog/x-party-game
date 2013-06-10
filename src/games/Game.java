@@ -16,6 +16,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
@@ -37,17 +38,18 @@ import util.ConfirmListener;
 import ablauf.MatchCredits;
 
 @SuppressWarnings("serial")
-public abstract class Game extends Anzeige{
-	
-	public static final Font STANDARD_FONT = new Font("Sergeo UI",0,16);
-	public static final Font PLAYER_FONT = new java.awt.Font("Comic Sans MS",1,26);
+public abstract class Game extends Anzeige {
+
+	public static final Font STANDARD_FONT = new Font("Sergeo UI", 0, 16);
+	public static final Font PLAYER_FONT = new java.awt.Font("Comic Sans MS",
+			1, 26);
 	public String gameName;
 	public player.Player[] myPlayer;
 	private Team[] myTeam = new Team[2];
-	
+
 	public int numOfRounds;
 	public int spielerZahl;
-	
+
 	public String winner; // String für "beide"/"keiner"
 	public int whosTurn;
 
@@ -62,10 +64,13 @@ public abstract class Game extends Anzeige{
 		standardBuzz[2] = KeyEvent.VK_C;
 		standardBuzz[3] = KeyEvent.VK_N;
 	}
-	public HashSet<Integer> schonWeg = new HashSet<Integer>(); // Hilfsstruktur um doppelte Fragen zu vermeiden
-	
+	public HashSet<Integer> schonWeg = new HashSet<Integer>(); // Hilfsstruktur
+																// um doppelte
+																// Fragen zu
+																// vermeiden
+
 	private ArrayList<games.GameListener> myListener = new ArrayList<games.GameListener>();
-	
+
 	public JPanel spielBereichPanel;
 	public JLabel[] playerLabel;
 	private JLabel[] matchCredLabel;
@@ -79,11 +84,12 @@ public abstract class Game extends Anzeige{
 	private JLabel[] activePlayerLabel = new JLabel[2];
 	private JPanel credLinksPanel;
 	private JPanel credRechtsPanel;
-	
-	public Game(String name, player.Player[] player, int numOfRounds, Modus modus){
+
+	public Game(String name, player.Player[] player, int numOfRounds,
+			Modus modus) {
 		gameName = name;
 		myPlayer = player;
-		if(modus == Modus.TEAM){
+		if (modus == Modus.TEAM) {
 			myTeam[0] = (Team) myPlayer[0];
 			myTeam[1] = (Team) myPlayer[1];
 		}
@@ -92,12 +98,13 @@ public abstract class Game extends Anzeige{
 		spielerZahl = modus.getSpielerzahl();
 		initVariablen();
 		initGUI();
+		instance.setGame(this);
 		instance.changeAnzeige(this);
 		instance.showDialog(new GameStartDialog(this));
 	}
-	
+
 	private void initVariablen() {
-		if(modus == Modus.SOLO)
+		if (modus == Modus.SOLO)
 			spielerZahl++;
 		creds = new GameCredits[spielerZahl];
 		playerLabel = new JLabel[spielerZahl];
@@ -105,7 +112,7 @@ public abstract class Game extends Anzeige{
 		playerPanel = new JPanel[spielerZahl];
 	}
 
-	private void initGUI(){
+	private void initGUI() {
 		this.setLayout(new BorderLayout());
 		addCreds();
 		{
@@ -120,16 +127,18 @@ public abstract class Game extends Anzeige{
 				playerBereichPanelLayout.setColumns(spielerZahl);
 				controlPane.add(playerBereichPanel);
 				playerBereichPanel.setLayout(playerBereichPanelLayout);
-				for(int i=0; i<spielerZahl; i++){
+				for (int i = 0; i < spielerZahl; i++) {
 					playerPanel[i] = new JPanel();
 					FlowLayout playerPanelLayout = new FlowLayout();
 					playerBereichPanel.add(playerPanel[i]);
-					playerBereichPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+					playerBereichPanel.setBorder(BorderFactory
+							.createEtchedBorder(EtchedBorder.RAISED));
 					playerPanel[i].setLayout(playerPanelLayout);
-					if(modus == Modus.TEAM){
+					if (modus == Modus.TEAM) {
 						activePlayerLabel[i] = new JLabel();
 						activePlayerLabel[i].setText(myTeam[i].nextMember());
-						activePlayerLabel[i].setFont(new java.awt.Font("Comic Sans MS",0,20));
+						activePlayerLabel[i].setFont(new java.awt.Font(
+								"Comic Sans MS", 0, 20));
 						playerPanel[i].add(activePlayerLabel[i]);
 					}
 					{
@@ -137,16 +146,20 @@ public abstract class Game extends Anzeige{
 						playerPanel[i].add(playerLabel[i]);
 						playerLabel[i].setText(myPlayer[i].name);
 						playerLabel[i].setFont(PLAYER_FONT);
-						playerLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
+						playerLabel[i]
+								.setHorizontalAlignment(SwingConstants.CENTER);
 					}
 					{
 						matchCredLabel[i] = new JLabel();
 						playerPanel[i].add(matchCredLabel[i]);
-						matchCredLabel[i].setText(myPlayer[i].matchCredit+"");
-						matchCredLabel[i].setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
+						matchCredLabel[i].setText(myPlayer[i].matchCredit + "");
+						matchCredLabel[i].setBorder(BorderFactory
+								.createEtchedBorder(BevelBorder.LOWERED));
 						matchCredLabel[i].setFont(PLAYER_FONT);
-						matchCredLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
-						matchCredLabel[i].setToolTipText("Match Punkte von " + myPlayer[i].name);
+						matchCredLabel[i]
+								.setHorizontalAlignment(SwingConstants.CENTER);
+						matchCredLabel[i].setToolTipText("Match Punkte von "
+								+ myPlayer[i].name);
 					}
 				}
 			}
@@ -159,18 +172,19 @@ public abstract class Game extends Anzeige{
 			menuPane.setLayout(menuPaneLayout);
 			this.add(menuPane, BorderLayout.NORTH);
 			{
-				anleitungButton = new JButtonIcon("media/ablauf/hilfe.png","Anleitung");
-				anleitungButton.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent evt){
+				anleitungButton = new JButtonIcon("media/ablauf/hilfe.png",
+						"Anleitung");
+				anleitungButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
 						anleitungButtonActionPerformed(evt);
 					}
 				});
 				menuPane.add(anleitungButton);
 			}
 			{
-				quitButton = new JButtonIcon("media/ablauf/quit.png","Quit");
-				quitButton.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent evt){
+				quitButton = new JButtonIcon("media/ablauf/quit.png", "Quit");
+				quitButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
 						quitButtonActionPerformed(evt);
 					}
 				});
@@ -179,139 +193,184 @@ public abstract class Game extends Anzeige{
 		}
 		spielBereichPanel = new JPanel();
 		spielBereichPanel.setOpaque(false);
-		GridBagLayout gbl      = new GridBagLayout();
+		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.anchor             = GridBagConstraints.CENTER;
+		gbc.anchor = GridBagConstraints.CENTER;
 		JPanel panel = new JPanel(gbl);
 		panel.setOpaque(false);
-		gbl.setConstraints(spielBereichPanel,gbc);
+		gbl.setConstraints(spielBereichPanel, gbc);
 		panel.add(spielBereichPanel);
 		spielBereichPanel.setLayout(new FlowLayout());
-		this.add(panel,BorderLayout.CENTER);
+		this.add(panel, BorderLayout.CENTER);
+	}
+
+	private boolean paused = false;
+	private int automaticallyPaused = 0;
+
+	public void togglePause() {
+		automaticallyPaused = 0;
+		if (paused == false) {
+			paused = true;
+			pause();
+		} else {
+			paused = false;
+			resume();
+		}
+	}
+
+	public void autoPause() {
+		if(automaticallyPaused > 0)
+			automaticallyPaused++;
+		else if(!paused){
+			pause();
+			automaticallyPaused = 1;
+		}
+	}
+	
+	public void autoResume() {
+		if(automaticallyPaused > 0){			
+			automaticallyPaused--;
+			if(automaticallyPaused == 0){
+				resume();
+			}
+		}
+	}
+	
+	public void pause() {
+	}
+
+	public void resume() {
 	}
 
 	private void addCreds() {
 		credLinksPanel = new JPanel();
 		credLinksPanel.setOpaque(false);
-		int spaltenLinks = (spielerZahl>2) ? 2 : 1;
-		
+		int spaltenLinks = (spielerZahl > 2) ? 2 : 1;
+
 		credLinksPanel.setLayout(new GridLayout(1, spaltenLinks));
 		this.add(credLinksPanel, BorderLayout.WEST);
 		credRechtsPanel = new JPanel();
 		credRechtsPanel.setOpaque(false);
-		int spaltenRechts = (spielerZahl>3) ? 2 : 1;
+		int spaltenRechts = (spielerZahl > 3) ? 2 : 1;
 		credRechtsPanel.setLayout(new GridLayout(1, spaltenRechts));
 		this.add(credRechtsPanel, BorderLayout.EAST);
-		for(int i=0; i<spielerZahl; i++)
-		{
+		for (int i = 0; i < spielerZahl; i++) {
 			creds[i] = new GameCredits(numOfRounds, myPlayer[i].farbe);
-			if(i>1 || (i==1 && spielerZahl==2)){
+			if (i > 1 || (i == 1 && spielerZahl == 2)) {
 				credRechtsPanel.add(creds[i]);
-			}
-			else{
+			} else {
 				credLinksPanel.add(creds[i]);
 			}
 		}
 	}
 
-	public void abbruch(){
+	public void abbruch() {
 		// TODO
 		// Methode die einen Vorzeitigen Spielabbruch handled
 		// z.B. Wenn keine Fragen mehr zur Verfügung stehen
 		ended();
 	};
 
-	public void addGameListener(games.GameListener gl){
+	public void addGameListener(games.GameListener gl) {
 		myListener.add(gl);
 	}
+
 	protected void anleitungButtonActionPerformed(ActionEvent evt) {
 		getAnleitung();
 	}
-	public void changeActivePlayers(){
-		if(modus!=Modus.TEAM)return;
+
+	public void changeActivePlayers() {
+		if (modus != Modus.TEAM)
+			return;
 		activePlayerLabel[0].setText(myTeam[0].nextMember());
 		activePlayerLabel[1].setText(myTeam[1].nextMember());
 	}
+
 	@Override
-	public void destroy(){
+	public void destroy() {
 		super.destroy();
 	}
 
-	public void ended(){
+	public void ended() {
 		Iterator<games.GameListener> i = myListener.iterator();
-		while(i.hasNext()){
+		while (i.hasNext()) {
 			i.next().gameOver();
 		}
 	}
 
-	public void gameEnd(){
+	public void gameEnd() {
 		// TODO
 		// Methode, die das Spielende handhabt
 		ended();
 	}
-	public void getAnleitung(){
+
+	public void getAnleitung() {
 		try {
-			File anleitungFile = new File(X.getMainDir()+"anleitungen/"+gameName+".html");
+			File anleitungFile = new File(X.getMainDir() + "anleitungen/"
+					+ gameName + ".html");
 			Desktop.getDesktop().open(anleitungFile);
 		} catch (Exception e) {
 			showMessage("Für dieses Spiel ist leider noch keine Anleitung verfügbar");
 		}
 	}
+
 	public abstract String getShortInfo();
+
 	public abstract int getGameID();
-	
-	public int getStartPlayerID(boolean inform){
+
+	public int getStartPlayerID(boolean inform) {
 		Random r = new Random();
 		int next = r.nextInt(spielerZahl);
-		if(inform){
-			showMessage( "Diesmal darf " + myPlayer[next].name + " beginnen.");
+		if (inform) {
+			showMessage("Diesmal darf " + myPlayer[next].name + " beginnen.");
 		}
 		whosTurn = next;
-		hebeAktivenSpielerHervor();		
+		hebeAktivenSpielerHervor();
 		return next;
 	}
-	public void goBack(){
+
+	public void goBack() {
 
 	}
-	public boolean isOver(){
+
+	public boolean isOver() {
 		int tempSpielerZahl = spielerZahl;
-		if(modus == Modus.SOLO){
+		if (modus == Modus.SOLO) {
 			tempSpielerZahl = 2;
 		}
 		boolean keinerFertig = true;
 		int hoechstePunktzahl = 0;
 		int hoechstePunktzahlZaehler = 0;
-		for(int i=0; i<tempSpielerZahl; i++){
-			if(myPlayer[i].gameCredit>=numOfRounds){
+		for (int i = 0; i < tempSpielerZahl; i++) {
+			if (myPlayer[i].gameCredit >= numOfRounds) {
 				keinerFertig = false;
-				if(myPlayer[i].gameCredit==hoechstePunktzahl){
+				if (myPlayer[i].gameCredit == hoechstePunktzahl) {
 					hoechstePunktzahlZaehler++;
-				}
-				else if(myPlayer[i].gameCredit>hoechstePunktzahl){
+				} else if (myPlayer[i].gameCredit > hoechstePunktzahl) {
 					hoechstePunktzahl = myPlayer[i].gameCredit;
 					hoechstePunktzahlZaehler = 1;
 				}
-			}	
+			}
 		}
-		if(keinerFertig){
+		if (keinerFertig) {
 			return false;
 		}
-		if(hoechstePunktzahlZaehler>1){
+		if (hoechstePunktzahlZaehler > 1) {
 			stechen = true;
 			return false;
-		}
-		else{
+		} else {
 			return true;
 		}
 	}
+
 	// Diese Methode gibt zufällig den Index der nächsten Frage zurück
-	// und prüft, dass keine Frage doppelt gestellt wird. Falls keine Fragen mehr
+	// und prüft, dass keine Frage doppelt gestellt wird. Falls keine Fragen
+	// mehr
 	// übrig sind wird -1 zurück gegeben
-	public int nextRandom(int numOfQuests){
-		if(schonWeg.size()==numOfQuests){
+	public int nextRandom(int numOfQuests) {
+		if (schonWeg.size() == numOfQuests) {
 			return -1;
-		}
-		else {
+		} else {
 			Random r = new Random();
 			int ret = r.nextInt(numOfQuests);
 			while (schonWeg.add(ret) == false) {
@@ -321,130 +380,152 @@ public abstract class Game extends Anzeige{
 		}
 	}
 
-	public void openDetailsDialog(){
+	public void openDetailsDialog() {
 
 	}
-	public void openInfoDialog(){
+
+	public void openInfoDialog() {
 
 	}
-	public void openRoundDialog(String winner){
+
+	public void openRoundDialog(String winner) {
 
 	}
+
 	public void openSettingsDialog() {
 		showMessage("Für dieses Spiel gibt es (noch) keinen Einstellungsdialog");
 	}
-	public void playAudioFile(String filename){
+
+	public void playAudioFile(String filename) {
 		X.playAudioFile(filename);
 	}
-	public void quitButtonActionPerformed(ActionEvent evt){
+
+	public void quitButtonActionPerformed(ActionEvent evt) {
 		schliessen();
 	}
-	public void schliessen(){
-		EasyDialog.showConfirm("Das Minispiel \'"+this.gameName+"\' wird vorzeitig beendet, soll es mit dem " +
-				"aktuellen Spielstand gewertet werden?", null, new ConfirmListener() {
+
+	public void schliessen() {
+		autoPause();
+		EasyDialog.showConfirm("Das Minispiel \'" + this.gameName
+				+ "\' wird vorzeitig beendet, soll es mit dem "
+				+ "aktuellen Spielstand gewertet werden?", null,
+				new ConfirmListener() {
 					@Override
 					public void confirmOptionPerformed(int optionType) {
-						if(optionType == ConfirmListener.YES_OPTION){
-							if(unentschieden()){
-								for(int i=0; i<spielerZahl; i++){
+						if (optionType == ConfirmListener.YES_OPTION) {
+							if (unentschieden()) {
+								for (int i = 0; i < spielerZahl; i++) {
 									myPlayer[i].gameCredit = MatchCredits.UNENTSCHIEDEN;
 								}
 							}
-							abbruch();							
+							abbruch();
 						}
-						if(optionType == ConfirmListener.NO_OPTION){
-							for(int i=0; i<spielerZahl; i++){
+						else if (optionType == ConfirmListener.NO_OPTION) {
+							for (int i = 0; i < spielerZahl; i++) {
 								myPlayer[i].gameCredit = 0;
 							}
 							abbruch();
+						}
+						else{
+							autoResume();
 						}
 						instance.closeDialog();
 					}
 				});
 	}
-	
+
 	protected boolean unentschieden() {
 		boolean unentschieden = false;
 		int winnerID = -1;
-		for(int i=0; i<myPlayer.length; i++){
+		for (int i = 0; i < myPlayer.length; i++) {
 			boolean alleinigerSieger = true;
-			for(int j=0; j<myPlayer.length; j++){
-				if(i!=j && myPlayer[j].gameCredit >= myPlayer[i].gameCredit){
+			for (int j = 0; j < myPlayer.length; j++) {
+				if (i != j && myPlayer[j].gameCredit >= myPlayer[i].gameCredit) {
 					alleinigerSieger = false;
 				}
 			}
-			if(alleinigerSieger){
+			if (alleinigerSieger) {
 				winnerID = i;
 				break;
 			}
 		}
-		if(winnerID == -1) unentschieden = true;
+		if (winnerID == -1)
+			unentschieden = true;
 		return unentschieden;
 	}
 
 	public abstract void settingsChanged();
-	
-	public void showMessage(String message){
+
+	public void showMessage(String message) {
 		EasyDialog.showMessage(message);
 	}
+
 	public abstract void start();
 
-	public boolean stechen(){
+	public boolean stechen() {
 		return stechen;
 	}
-	public void turnOver(){
+
+	public void turnOver() {
 		playerLabel[whosTurn].setForeground(Color.black);
 		playerLabel[whosTurn].setBorder(null);
-		if(modus == Modus.TEAM){
+		if (modus == Modus.TEAM) {
 			activePlayerLabel[whosTurn].setText(myTeam[whosTurn].nextMember());
 		}
-		whosTurn = (whosTurn+1)%spielerZahl;
+		whosTurn = (whosTurn + 1) % spielerZahl;
 		hebeAktivenSpielerHervor();
 	}
+
 	private void hebeAktivenSpielerHervor() {
 		playerLabel[whosTurn].setForeground(myPlayer[whosTurn].farbe);
-		playerLabel[whosTurn].setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		playerLabel[whosTurn].setBorder(BorderFactory
+				.createBevelBorder(BevelBorder.LOWERED));
 	}
 
 	/**
-	 * Ermittelt wer den Buzzer gedrückt hat, liefert die SpielerID oder -1 falls die Taste keine Buzzertaste ist.
+	 * Ermittelt wer den Buzzer gedrückt hat, liefert die SpielerID oder -1
+	 * falls die Taste keine Buzzertaste ist.
+	 * 
 	 * @return SpielerID oder -1
 	 */
-	public int whoBuzz(int keyCode){
-		for(int i=0; i<spielerZahl; i++){
-			if(keyCode==myPlayer[i].getKey()){	
+	public int whoBuzz(int keyCode) {
+		for (int i = 0; i < spielerZahl; i++) {
+			if (keyCode == myPlayer[i].getKey()) {
 				return i;
 			}
 		}
 		return -1;
 	}
 
-	// TODO Um die Option erweitern: bei undefinierter Buzzertaste --> neue zuweisen!
+	// TODO Um die Option erweitern: bei undefinierter Buzzertaste --> neue
+	// zuweisen!
 	// TODO Modusunabhängig machen
-	public void standardBuzzerTest(){
+	public void standardBuzzerTest() {
 		HashSet<Integer> verbrauchteBuzzer = new HashSet<Integer>();
 		ArrayList<Integer> neueZuweisen = new ArrayList<Integer>();
-		for(int i=0; i<spielerZahl; i++){
-			if(!verbrauchteBuzzer.add(myPlayer[i].getKey())){
+		for (int i = 0; i < spielerZahl; i++) {
+			if (!verbrauchteBuzzer.add(myPlayer[i].getKey())) {
 				neueZuweisen.add(i);
 			}
 		}
-		if(neueZuweisen.size()>0){
+		if (neueZuweisen.size() > 0) {
 			int c = 0;
-		for(int i=0; i<neueZuweisen.size(); i++){
-			int buzz = 0;
-			do{
-				buzz = standardBuzz[c];
-				myPlayer[neueZuweisen.get(i)].setKey(buzz);
-				c++;
-			}while(!verbrauchteBuzzer.add(buzz));
-		}
-												  
-		StringBuilder message = new StringBuilder("ACHTUNG! Neue Buzzertasten: ");
-		for(int i=0; i<spielerZahl; i++){
-			message.append(myPlayer[i].name + " --> " + KeyEvent.getKeyText(myPlayer[i].getKey())+"; ");
-		}
-		showMessage(message.toString());
+			for (int i = 0; i < neueZuweisen.size(); i++) {
+				int buzz = 0;
+				do {
+					buzz = standardBuzz[c];
+					myPlayer[neueZuweisen.get(i)].setKey(buzz);
+					c++;
+				} while (!verbrauchteBuzzer.add(buzz));
+			}
+
+			StringBuilder message = new StringBuilder(
+					"ACHTUNG! Neue Buzzertasten: ");
+			for (int i = 0; i < spielerZahl; i++) {
+				message.append(myPlayer[i].name + " --> "
+						+ KeyEvent.getKeyText(myPlayer[i].getKey()) + "; ");
+			}
+			showMessage(message.toString());
 		}
 	}
 
