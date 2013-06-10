@@ -84,6 +84,7 @@ public abstract class Game extends Anzeige {
 	private JLabel[] activePlayerLabel = new JLabel[2];
 	private JPanel credLinksPanel;
 	private JPanel credRechtsPanel;
+	private JLabel pauseLabel;
 
 	public Game(String name, player.Player[] player, int numOfRounds,
 			Modus modus) {
@@ -113,6 +114,7 @@ public abstract class Game extends Anzeige {
 	}
 
 	private void initGUI() {
+		initPauseLabel();
 		this.setLayout(new BorderLayout());
 		addCreds();
 		{
@@ -204,6 +206,12 @@ public abstract class Game extends Anzeige {
 		this.add(panel, BorderLayout.CENTER);
 	}
 
+	private void initPauseLabel() {
+		pauseLabel = new JLabel("PAUSE");
+		pauseLabel.setFont(X.buttonFont);
+		pauseLabel.setForeground(Color.WHITE);
+	}
+
 	private boolean paused = false;
 	private int automaticallyPaused = 0;
 
@@ -237,9 +245,17 @@ public abstract class Game extends Anzeige {
 	}
 	
 	public void pause() {
+		controlPane.removeAll();
+		controlPane.add(pauseLabel);
+		revalidate();
+		repaint();
 	}
 
 	public void resume() {
+		controlPane.removeAll();
+		controlPane.add(playerBereichPanel);
+		revalidate();
+		repaint();
 	}
 
 	private void addCreds() {

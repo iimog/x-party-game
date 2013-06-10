@@ -1,4 +1,5 @@
 package gui.menu;
+import gui.AnzeigeDialog;
 import gui.EasyDialog;
 import gui.components.JButtonIcon;
 
@@ -49,9 +50,6 @@ import util.ChangeManager;
  */
 public class PlayerFactory extends javax.swing.JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2970422219132276258L;
 	private String name;
 	private boolean male;
@@ -170,9 +168,18 @@ public class PlayerFactory extends javax.swing.JPanel {
 	}
 	private void buzzerChooserKeyPressed(KeyEvent evt) {
 		if(!keyActive)return;
-		key = evt.getKeyCode();
-		buzzerChooser.setText(KeyEvent.getKeyText(key));
-		keyActive = false;
+		if(evt.getKeyCode() == KeyEvent.VK_ESCAPE || evt.getKeyCode() == KeyEvent.VK_SPACE){
+			EasyDialog.showMessage("Escape und Leerzeichen können leider nicht als Buzzertasten gewählt werden.");
+			buzzerChooser.setText("...");
+			if(key != 0){
+				buzzerChooser.setText(KeyEvent.getKeyText(key));
+			}
+		}
+		else{
+			key = evt.getKeyCode();
+			buzzerChooser.setText(KeyEvent.getKeyText(key));
+			keyActive = false;			
+		}
 	}
 
 	private void changeBack(){

@@ -49,9 +49,11 @@ public class Stimmts extends Game implements PC {
 	}
 	
 	public void pause(){
+		super.pause();
 		countdown.stop();
 	}
 	public void resume(){
+		super.resume();
 		countdown.resume();
 	}
 
