@@ -87,6 +87,7 @@ public class Difference extends Game implements PC {
 	private gui.components.Bildschirm rightPic;
 	private gui.components.Bildschirm wrongPic;
 	private List<Integer> uebersprungeneBilder;
+	public boolean timeOver;
 	{
 		pics[0] = path + "villa2.jpg";
 		ePics[0] = path + "villa2E.jpg";
@@ -263,6 +264,7 @@ public class Difference extends Game implements PC {
 					schaltflaechenPanel.setLayout(schaltflaechenPanelLayout);
 					class Changer implements util.ChangeManager{
 						public void change(){
+							timeOver = true;
 							roundEnd();
 						}
 					}
@@ -303,6 +305,7 @@ public class Difference extends Game implements PC {
 	}
 
 	private void nextRound(){
+		timeOver = false;
 		last = current;
 		current = nextRandom(numOfPics);
 		if(current==-1){
@@ -348,7 +351,7 @@ public class Difference extends Game implements PC {
 			revalidate();
 			repaint();
 			buzzerable = true;
-			count.reset();
+			count.stop();
 			for(JLabel l : super.playerLabel){
 				l.setForeground(Color.black);
 			}
@@ -388,12 +391,12 @@ public class Difference extends Game implements PC {
 		if(whoBuzz>=0 && whoBuzz<=spielerZahl){
 			dauer = System.currentTimeMillis()- start;
 			int winID;
-			if(distance<okDist && !count.timeOver){
+			if(distance<okDist && !timeOver){
 				winID = whoBuzz;
 			}
 			else{
 				winID = whoBuzz*(-1) -1;
-				if(count.timeOver){
+				if(timeOver){
 					lastClick=new Point(-10,-10);
 					distance = -1;
 				}

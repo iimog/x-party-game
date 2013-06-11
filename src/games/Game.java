@@ -16,7 +16,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
@@ -85,6 +84,7 @@ public abstract class Game extends Anzeige {
 	private JPanel credLinksPanel;
 	private JPanel credRechtsPanel;
 	private JLabel pauseLabel;
+	private JPanel centeredPanel;
 
 	public Game(String name, player.Player[] player, int numOfRounds,
 			Modus modus) {
@@ -198,22 +198,26 @@ public abstract class Game extends Anzeige {
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.anchor = GridBagConstraints.CENTER;
-		JPanel panel = new JPanel(gbl);
-		panel.setOpaque(false);
+		centeredPanel = new JPanel(gbl);
+		centeredPanel.setOpaque(false);
 		gbl.setConstraints(spielBereichPanel, gbc);
-		panel.add(spielBereichPanel);
+		centeredPanel.add(spielBereichPanel);
 		spielBereichPanel.setLayout(new FlowLayout());
-		this.add(panel, BorderLayout.CENTER);
+		this.add(centeredPanel, BorderLayout.CENTER);
 	}
 
 	private void initPauseLabel() {
 		pauseLabel = new JLabel("PAUSE");
-		pauseLabel.setFont(X.buttonFont);
-		pauseLabel.setForeground(Color.WHITE);
+		pauseLabel.setFont(X.buttonFont.deriveFont(100f).deriveFont(Font.BOLD));
+		pauseLabel.setForeground(Color.RED);
 	}
 
-	private boolean paused = false;
+	protected boolean paused = false;
 	private int automaticallyPaused = 0;
+	
+	public void buzzeredBy(int whoBuzz){
+		
+	}
 
 	public void togglePause() {
 		automaticallyPaused = 0;
@@ -231,6 +235,7 @@ public abstract class Game extends Anzeige {
 			automaticallyPaused++;
 		else if(!paused){
 			pause();
+			paused = true;
 			automaticallyPaused = 1;
 		}
 	}
@@ -240,20 +245,21 @@ public abstract class Game extends Anzeige {
 			automaticallyPaused--;
 			if(automaticallyPaused == 0){
 				resume();
+				paused = false;
 			}
 		}
 	}
 	
 	public void pause() {
-		controlPane.removeAll();
-		controlPane.add(pauseLabel);
+		centeredPanel.removeAll();
+		centeredPanel.add(pauseLabel);
 		revalidate();
 		repaint();
 	}
 
 	public void resume() {
-		controlPane.removeAll();
-		controlPane.add(playerBereichPanel);
+		centeredPanel.removeAll();
+		centeredPanel.add(spielBereichPanel);
 		revalidate();
 		repaint();
 	}

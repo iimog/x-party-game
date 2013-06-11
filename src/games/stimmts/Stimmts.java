@@ -50,7 +50,7 @@ public class Stimmts extends Game implements PC {
 	
 	public void pause(){
 		super.pause();
-		countdown.stop();
+		countdown.pause();
 	}
 	public void resume(){
 		super.resume();
@@ -563,7 +563,7 @@ public class Stimmts extends Game implements PC {
 			// TODO besser handhaben!
 		} else {
 			aussageLabel.setText(aussageListe.get(current).getAussage());
-			countdown.restart();
+			countdown.start();
 		}
 	}
 

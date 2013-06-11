@@ -231,6 +231,12 @@ public class X extends javax.swing.JFrame {
             content.getActionMap().put("pause", new ButtonPressed("pause"));
 	}
 	
+	public void addBuzzer(int playerID, int keyCode){
+		JPanel content = (JPanel) this.getContentPane();
+		content.getInputMap().put(KeyStroke.getKeyStroke(keyCode, 0), "buzzer"+playerID);
+		content.getActionMap().put("buzzer"+playerID, new ButtonPressed("buzzer"+playerID));
+	}
+	
     private class ButtonPressed extends AbstractAction {
 		private static final long serialVersionUID = 1L;
 		String action;
@@ -244,6 +250,22 @@ public class X extends javax.swing.JFrame {
             if(action.equals("pause")){
             	if(currentGame != null)
             		currentGame.togglePause();
+            }
+            if(action.equals("player0")){
+            	if(currentGame != null)
+            		currentGame.buzzeredBy(0);
+            }
+            if(action.equals("player1")){
+            	if(currentGame != null)
+            		currentGame.buzzeredBy(1);
+            }
+            if(action.equals("player2")){
+            	if(currentGame != null)
+            		currentGame.buzzeredBy(2);
+            }
+            if(action.equals("player3")){
+            	if(currentGame != null)
+            		currentGame.buzzeredBy(3);
             }
         }
     }
