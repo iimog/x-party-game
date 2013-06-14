@@ -47,6 +47,15 @@ public class Stimmts extends Game implements PC {
 	public static String getGameName() {
 		return gameName;
 	}
+	
+	public void pause(){
+		super.pause();
+		countdown.pause();
+	}
+	public void resume(){
+		super.resume();
+		countdown.resume();
+	}
 
 	private JPanel hauptbereichPanel;
 
@@ -407,6 +416,40 @@ public class Stimmts extends Game implements PC {
 						"Man kann am Geweih des Hirsches sein Alter ablesen ",
 						false,
 						"Die Größe des Geweihs wächst zwar zunächst von Jahr zu Jahr. Ab 8 Jahren setzt dieses aber wieder zurück/ wird wieder kleiner. "));
+		
+		 aussageListe.add(new StimmtsAussage("Auf der Flagge der Dominikanischen Republik ist eine Bibel abgebildet ", true, "Die Flagge der Dominikanischen Republik ist die einzige auf der Welt, die eine Bibel zeigt."));
+		
+		 aussageListe.add(new StimmtsAussage("New York und Neapel liegen auf dem gleichen Breitengrad", true, "Beide Städte liegen auf 40° nördlicher Breite. Das Klima ist jedoch komplett verschieden."));
+		
+		 aussageListe.add(new StimmtsAussage("Tel Aviv heißt übersetzt unfruchtbares Land", false, "Es heißt übersetzt Frühlingshügel."));
+		
+		 aussageListe.add(new StimmtsAussage("'Mam(m)a' (für Mutter) kommt aus dem Lateinischen und heißt Brust.", true, "Die Anrede für eine Mutter ist regional sehr unterschiedlich, doch ist im deutschen Sprachraum die Form 'Mama', 'Mami' oder 'Mutti' am häufigsten. Die Wörter werden dabei nicht nur von Kindern verwendet, sondern auch viele Erwachsene betiteln so ihre Mutter."));
+		
+		 aussageListe.add(new StimmtsAussage("Das Nike-Symbol heißt 'Swish'", false, "Das Symbol heißt 'swoosh'"));
+		
+		 aussageListe.add(new StimmtsAussage("Jeder Mensch ist ein Primat", true, "Primaten werden in die beiden Unterordnungen der Feuchtnasenaffen und Trockennasenaffen eingeteilt, wobei letztere auch den Homo sapiens mit einschließen."));
+		
+		 aussageListe.add(new StimmtsAussage("Paris ist eine sogenannte Mega-City", false, "Paris hat nur rund 2 Millionen Einwohner. Laut Definition gilt eine Stadt aber erst ab 10 Millionen Einwohnern als Megastadt."));
+		
+		 aussageListe.add(new StimmtsAussage("Der Hippocampus liegt im Ellebogen", false, "Der Hippocampus ist ein Teil des Gehirns."));
+		
+		 aussageListe.add(new StimmtsAussage("Am 21 Dezember geht die Sonne in der Arktis nicht unter", false, " Am 21. Dezember geht die Sonne in der Antarktis nicht unter und in der ARKTIS nicht auf. Am 21. Juni ist es umgekehrt."));
+		
+		 aussageListe.add(new StimmtsAussage("Die Texte der Tora kann man in der Bibel wiederfinden", true, "Die Tora ist ein Teil des Alten Testaments."));
+		
+		 aussageListe.add(new StimmtsAussage("Das Antiteilchen des Elektrons heißt Positron", true, "Antiteilchen haben die gleiche Masse aber entgegengestzte Ladung."));
+		
+		 aussageListe.add(new StimmtsAussage("Rotes Licht hat eine Wellenlänge von 6mm", false, "Tatsächlich hat rotes Licht eine Wellenlänge von rund 6nm (Nano Meter). Also 0,0000006mm"));
+		
+		 aussageListe.add(new StimmtsAussage("Die Machtergreifung Hitlers war 1933", true, "Am 30 Januar 1933 wurde Hitler zum Reichskanzler ernannt."));
+		
+		 aussageListe.add(new StimmtsAussage("Antarktis ist die größte Wüste der Welt", true, "Wüste ist der Begriff für ein vegetationsloses Gebiet. Antarktis macht die größte zusammenhängende vegetationsfreie Zone der Welt aus."));
+		
+		 aussageListe.add(new StimmtsAussage("Die Telefonvorwahl für Österreich ist die 18", false, "Die Österreichische Vorwahl ist die 43"));
+		
+		 aussageListe.add(new StimmtsAussage("Das Berliner Olympiastadion ist das größte Fußballstadion Deutschlands", true, "Das Berliner Olympiastadion ist das zweitgrößte Deutschlands mit knapp 75.000 Sitzplätzen. Das Westfalenstadion in Dortmund gibt rund 80.000 Zuschauern Platz."));
+		
+		// aussageListe.add(new StimmtsAussage("", false, ""));				
 		// aussageListe.add(new StimmtsAussage("", false, ""));
 		// aussageListe.add(new StimmtsAussage("", false, ""));
 		// aussageListe.add(new StimmtsAussage("", false, ""));
@@ -415,9 +458,7 @@ public class Stimmts extends Game implements PC {
 		// aussageListe.add(new StimmtsAussage("", false, ""));
 		// aussageListe.add(new StimmtsAussage("", false, ""));
 		// aussageListe.add(new StimmtsAussage("", false, ""));
-		// aussageListe.add(new StimmtsAussage("", false, ""));
-		// aussageListe.add(new StimmtsAussage("", false, ""));
-		// aussageListe.add(new StimmtsAussage("", false, ""));
+		// aussageListe.add(new StimmtsAussage("", false, ""));				
 		// aussageListe.add(new StimmtsAussage("", false, ""));
 		// aussageListe.add(new StimmtsAussage("", false, ""));
 		// aussageListe.add(new StimmtsAussage("", false, ""));
@@ -554,7 +595,7 @@ public class Stimmts extends Game implements PC {
 			// TODO besser handhaben!
 		} else {
 			aussageLabel.setText(aussageListe.get(current).getAussage());
-			countdown.restart();
+			countdown.start();
 		}
 	}
 
