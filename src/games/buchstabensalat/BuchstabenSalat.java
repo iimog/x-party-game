@@ -311,6 +311,7 @@ public class BuchstabenSalat extends Game implements PC {
 	private JTextField antwortTextField;
 	private String answer;
 	boolean wortErraten = false;
+	private boolean aufdeckend;
 
 	private void addSalatPanel() {
 		salatPanel = new JPanel();
@@ -387,7 +388,6 @@ public class BuchstabenSalat extends Game implements PC {
 			public void actionPerformed(ActionEvent e) {
 				durchEnterBeendet = true;
 				countdown.stop();
-				countdown.reset();
 				roundEnd();
 			}
 		});
@@ -416,7 +416,7 @@ public class BuchstabenSalat extends Game implements PC {
 		kategorieLabel.setText(kategorie[current]);
 		buchstabenGewirrPanel.setWord(loesungswort[current]);
 		antwortTextField.setText("");
-		countdown.reset();
+		countdown.stop();
 		loesungsWortPanel.setUnsichtbarWord(loesungswort[current]);
 		aufdecker = new Aufdecker();
 		new Thread(aufdecker).start();
@@ -512,4 +512,25 @@ public class BuchstabenSalat extends Game implements PC {
 		aufdecker.interrupted = true;
 		super.abbruch();
 	}
+	
+	@Override
+	public void pause(){
+		super.pause();
+		aufdeckend = !aufdecker.interrupted;
+		aufdecker.interrupted = true;
+		countdown.stop();
+	}
+	
+	@Override
+	public void resume(){
+		super.resume();
+		if(aufdeckend){
+			aufdecker = new Aufdecker();
+			new Thread(aufdecker).start();
+		}
+		else{
+			countdown.resume();
+		}
+	}
+	
 }
