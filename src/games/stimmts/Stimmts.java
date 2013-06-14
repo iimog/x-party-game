@@ -458,7 +458,6 @@ public class Stimmts extends Game implements PC {
 		// aussageListe.add(new StimmtsAussage("", false, ""));
 		// aussageListe.add(new StimmtsAussage("", false, ""));
 		// aussageListe.add(new StimmtsAussage("", false, ""));
-		// aussageListe.add(new StimmtsAussage("", false, ""));				
 		// aussageListe.add(new StimmtsAussage("", false, ""));
 		// aussageListe.add(new StimmtsAussage("", false, ""));
 		// aussageListe.add(new StimmtsAussage("", false, ""));
