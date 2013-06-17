@@ -11,8 +11,6 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -197,8 +195,10 @@ public class Difference extends Game implements PC {
 		initGUI();
 	}
 
-	private void buzzer(int player){
+	@Override
+	public void buzzeredBy(int player){
 		if(!buzzerable)return;
+		unstoppable = true;
 		clickable = true;
 		buzzerable = false;		// am Rundenende wieder buzzerable setzen
 		if(modus == Modus.SOLO){
@@ -224,12 +224,6 @@ public class Difference extends Game implements PC {
 			{
 				BorderLayout thisLayout = new BorderLayout();
 				spielBereichPanel.setLayout(thisLayout);
-				this.addKeyListener(new KeyAdapter() {
-					@Override
-					public void keyPressed(KeyEvent evt) {
-						thisKeyPressed(evt);
-					}
-				});
 				{
 					darstellungPanel = new JPanel();
 					GridLayout darstellungPanelLayout = new GridLayout(1, 2);
@@ -277,12 +271,6 @@ public class Difference extends Game implements PC {
 						nextPicButton = new JButton();
 						schaltflaechenPanel.add(nextPicButton);
 						nextPicButton.setText("Nächstes Bild");
-						nextPicButton.addKeyListener(new KeyAdapter() {
-							@Override
-							public void keyPressed(KeyEvent evt) {
-								thisKeyPressed(evt);
-							}
-						});
 						nextPicButton.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) {
 								nextPicButtonActionPerformed(evt);
@@ -306,6 +294,7 @@ public class Difference extends Game implements PC {
 
 	private void nextRound(){
 		timeOver = false;
+		unstoppable = false;
 		last = current;
 		current = nextRandom(numOfPics);
 		if(current==-1){
@@ -451,14 +440,8 @@ public class Difference extends Game implements PC {
 	}
 	@Override
 	public void start(){
-		standardBuzzerTest();
 	}
-	private void thisKeyPressed(KeyEvent evt) {
-		int playerID = whoBuzz(evt.getKeyCode());
-		if(playerID!=-1){
-			buzzer(playerID);
-		}
-	}
+
 	private void wrongPicMouseReleased(MouseEvent evt) {
 		if(!clickable)return;
 		clickable = false;

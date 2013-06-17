@@ -6,7 +6,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
@@ -138,12 +137,6 @@ public class InnereUhr extends games.Game implements PC {
 				}
 			}
 			setSize(500, 300);
-			this.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyPressed(KeyEvent evt) {
-					thisKeyPressed(evt);
-				}
-			});
 		} catch (Exception e) {
 			//add your error handling code here
 			e.printStackTrace();
@@ -151,6 +144,7 @@ public class InnereUhr extends games.Game implements PC {
 	}
 
 	void nextRound(){
+		unstoppable = false;
 		startButton.setEnabled(true);
 		if(modus == Modus.TEAM){
 			changeActivePlayers();
@@ -237,22 +231,22 @@ public class InnereUhr extends games.Game implements PC {
 	}
 	@Override
 	public void start(){
-		standardBuzzerTest();
 		nextRound();
 	}
 	private void startButtonActionPerformed(ActionEvent evt) {
 		startTime = System.currentTimeMillis();
 		startButton.setEnabled(false);
+		unstoppable = true;
 		isRunning = true;
 		for(int i=0; i<spielerZahl; i++){
 			statusLabel[i].setText(KeyEvent.getKeyText(myPlayer[i].getKey())+" drücken");
 		}
 		this.requestFocus();
 	}
-	private void thisKeyPressed(KeyEvent evt) {
+	
+	@Override
+	public void buzzeredBy(int playerID) {
 		if(!isRunning)return;
-		int playerID = whoBuzz(evt.getKeyCode());
-		if(playerID==-1)return;
 		playerTime[playerID] = System.currentTimeMillis()-startTime;
 		finished[playerID]=true;
 		statusLabel[playerID].setText("Fertig");

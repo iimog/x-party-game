@@ -54,6 +54,14 @@ public class Tron extends Game implements PC{
 	private JPanel hauptbereichPanel;
 	JButton startButton;
 	
+	public void pause(){
+		currentGameLoop.pause();
+	}
+	
+	public void resume(){
+		spielfeld.requestFocusInWindow();
+	}
+	
 	public boolean isGitterVisible() {
 		return gitterVisible;
 	}
@@ -185,8 +193,10 @@ public class Tron extends Game implements PC{
 			if(evt.getKeyCode() == KeyEvent.VK_K && spielerZahl>3 && aktuelleRichtung[3] != UP)
 				neueRichtung[3] = DOWN;
 			
-			if(evt.getKeyCode() == KeyEvent.VK_P)
+			if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
 				currentGameLoop.togglePause();
+				evt.consume();
+			}
 		}
 	};
 	private TronGameLoop getGameLoop(){
@@ -306,6 +316,6 @@ public class Tron extends Game implements PC{
 	}
 	
 	public void nowVisible(){
-		instance.changeBackground("media/tron/tron.jpg");
+		instance.changeBackground("media/tron/Tron.jpg");
 	}
 }

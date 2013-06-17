@@ -56,7 +56,7 @@ public abstract class Game extends Anzeige {
 
 	public boolean stechen = false;
 
-	public int[] standardBuzz = new int[4];
+	public static final int[] standardBuzz = new int[4];
 	{
 		standardBuzz[0] = KeyEvent.VK_A;
 		standardBuzz[1] = KeyEvent.VK_L;
@@ -212,30 +212,33 @@ public abstract class Game extends Anzeige {
 		pauseLabel.setForeground(Color.RED);
 	}
 
-	protected boolean paused = false;
+	private boolean paused = false;
 	private int automaticallyPaused = 0;
+	protected boolean unstoppable = false;
 	
 	public void buzzeredBy(int whoBuzz){
 		
 	}
 
 	public void togglePause() {
+		if(unstoppable) return;
 		automaticallyPaused = 0;
-		if (paused == false) {
-			paused = true;
+		if (isPaused() == false) {
+			setPaused(true);
 			pause();
 		} else {
-			paused = false;
+			setPaused(false);
 			resume();
 		}
 	}
 
 	public void autoPause() {
+		if(unstoppable) return;
 		if(automaticallyPaused > 0)
 			automaticallyPaused++;
-		else if(!paused){
+		else if(!isPaused()){
 			pause();
-			paused = true;
+			setPaused(true);
 			automaticallyPaused = 1;
 		}
 	}
@@ -245,7 +248,7 @@ public abstract class Game extends Anzeige {
 			automaticallyPaused--;
 			if(automaticallyPaused == 0){
 				resume();
-				paused = false;
+				setPaused(false);
 			}
 		}
 	}
@@ -519,41 +522,17 @@ public abstract class Game extends Anzeige {
 		return -1;
 	}
 
-	// TODO Um die Option erweitern: bei undefinierter Buzzertaste --> neue
-	// zuweisen!
-	// TODO Modusunabhängig machen
-	public void standardBuzzerTest() {
-		HashSet<Integer> verbrauchteBuzzer = new HashSet<Integer>();
-		ArrayList<Integer> neueZuweisen = new ArrayList<Integer>();
-		for (int i = 0; i < spielerZahl; i++) {
-			if (!verbrauchteBuzzer.add(myPlayer[i].getKey())) {
-				neueZuweisen.add(i);
-			}
-		}
-		if (neueZuweisen.size() > 0) {
-			int c = 0;
-			for (int i = 0; i < neueZuweisen.size(); i++) {
-				int buzz = 0;
-				do {
-					buzz = standardBuzz[c];
-					myPlayer[neueZuweisen.get(i)].setKey(buzz);
-					c++;
-				} while (!verbrauchteBuzzer.add(buzz));
-			}
-
-			StringBuilder message = new StringBuilder(
-					"ACHTUNG! Neue Buzzertasten: ");
-			for (int i = 0; i < spielerZahl; i++) {
-				message.append(myPlayer[i].name + " --> "
-						+ KeyEvent.getKeyText(myPlayer[i].getKey()) + "; ");
-			}
-			showMessage(message.toString());
-		}
-	}
-
 	protected void updateCreds() {
 		for (int i = 0; i < spielerZahl; i++) {
 			creds[i].setNumOfRounds(numOfRounds);
 		}
+	}
+
+	public boolean isPaused() {
+		return paused;
+	}
+
+	public void setPaused(boolean paused) {
+		this.paused = paused;
 	}
 }

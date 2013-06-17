@@ -18,6 +18,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import javax.sound.sampled.AudioFormat;
@@ -27,8 +29,9 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
@@ -125,8 +128,11 @@ public class X extends javax.swing.JFrame {
 
 	private Game currentGame;
 
+	private List<KeyStroke> registeredBuzzers;
+
 	private X() {
 		super();
+		registeredBuzzers = new ArrayList<KeyStroke>();
 		instance = this;
 		initGUI();
 	}
@@ -226,15 +232,23 @@ public class X extends javax.swing.JFrame {
 	}
 	private void setBasicKeystrokes() {
 		JPanel content = (JPanel) this.getContentPane();
-        content.getInputMap().put(KeyStroke.getKeyStroke(
+        content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
                 KeyEvent.VK_ESCAPE, 0), "pause");
             content.getActionMap().put("pause", new ButtonPressed("pause"));
 	}
 	
 	public void addBuzzer(int playerID, int keyCode){
+		JRootPane rootPane = this.getRootPane();
+		rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(keyCode, 0), "buzzer"+playerID);
+		rootPane.getActionMap().put("buzzer"+playerID, new ButtonPressed("buzzer"+playerID));
+		registeredBuzzers.add(KeyStroke.getKeyStroke(keyCode, 0));
+	}
+	
+	public void forgetBuzzers(){
 		JPanel content = (JPanel) this.getContentPane();
-		content.getInputMap().put(KeyStroke.getKeyStroke(keyCode, 0), "buzzer"+playerID);
-		content.getActionMap().put("buzzer"+playerID, new ButtonPressed("buzzer"+playerID));
+		for(KeyStroke ks : registeredBuzzers){			
+			content.getInputMap().put(ks, "none");
+		}
 	}
 	
     private class ButtonPressed extends AbstractAction {
@@ -251,20 +265,20 @@ public class X extends javax.swing.JFrame {
             	if(currentGame != null)
             		currentGame.togglePause();
             }
-            if(action.equals("player0")){
+            if(action.equals("buzzer0")){
             	if(currentGame != null)
             		currentGame.buzzeredBy(0);
             }
-            if(action.equals("player1")){
-            	if(currentGame != null)
+            if(action.equals("buzzer1")){
+            	if(currentGame != null && currentGame.spielerZahl>1)
             		currentGame.buzzeredBy(1);
             }
-            if(action.equals("player2")){
-            	if(currentGame != null)
+            if(action.equals("buzzer2")){
+            	if(currentGame != null && currentGame.spielerZahl>2)
             		currentGame.buzzeredBy(2);
             }
-            if(action.equals("player3")){
-            	if(currentGame != null)
+            if(action.equals("buzzer3")){
+            	if(currentGame != null && currentGame.spielerZahl>3)
             		currentGame.buzzeredBy(3);
             }
         }

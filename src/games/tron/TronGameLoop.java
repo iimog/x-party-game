@@ -69,12 +69,16 @@ public class TronGameLoop extends Thread {
 			normalGameLoop();
 		}
 	}
+	public void pause(){
+		setPause(true);
+	}
 	public void interrupt(){
 		super.interrupt();
 		currentLoopCore.interrupt();
 	}
 	synchronized void setPause(boolean p){
 		pause = p;
+		tron.setPaused(p);
 	}
 	synchronized boolean getPause(){
 		return pause;

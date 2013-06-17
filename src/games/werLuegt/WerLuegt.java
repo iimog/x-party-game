@@ -10,19 +10,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 
 import player.Player;
 import start.X;
@@ -829,7 +824,6 @@ public class WerLuegt extends Game implements PC {
 		super(gameName, player, defaultNumOfRounds, modus);
 		initAussagen();	
 		initGUI();
-		registerBuzzerActions();
 	}
 
 	private void initGUI(){
@@ -863,30 +857,10 @@ public class WerLuegt extends Game implements PC {
 		hauptbereichPanel.add(aussageLabel, BorderLayout.CENTER);
 	}
 	
-	private class BuzzerAction extends AbstractAction{
-		private static final long serialVersionUID = 1L;
-		private int playerID;
-
-		public BuzzerAction(int playerID){
-			this.playerID = playerID;
-		}
-		
-		public void actionPerformed(ActionEvent e){
-			antwortRotater.interrupted = true;
-			roundEnd(playerID);
-		}
-	}
-	
-	private void registerBuzzerActions() {
-		for(int i=0; i<spielerZahl; i++){
-			Action action = new BuzzerAction(i);
-			String actionName = "Buzzer"+i;
-			// Register keystroke
-			hauptbereichPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
-			    KeyStroke.getKeyStroke(myPlayer[i].getKey(),0), actionName);
-			// Register action
-			hauptbereichPanel.getActionMap().put(actionName, action);
-		}	
+	@Override
+	public void buzzeredBy(int playerID){
+		antwortRotater.interrupt();
+		roundEnd(playerID);
 	}
 	
 	private boolean aktuelleAussageWahr;
@@ -949,13 +923,21 @@ public class WerLuegt extends Game implements PC {
 		else{
 			aussageLabel.setText(aussageListe.get(current).getAussage());
 			antwortRotater = new AntwortRotator();
-			new Thread(antwortRotater).start();
+			antwortRotater.start();
 		}
 	}
+	
+	public void pause(){
+		super.pause();
+		antwortRotater.interrupt();
+	}
+	public void resume(){
+		super.resume();
+		antwortRotater = new AntwortRotator();
+		antwortRotater.start();
+	}
 
-	class AntwortRotator implements Runnable{
-		boolean interrupted = false;
-		
+	class AntwortRotator extends Thread{		
 		@Override
 		public void run() {
 			aktuelleAntwortLabel.setText("");
@@ -963,9 +945,9 @@ public class WerLuegt extends Game implements PC {
 				Thread.sleep(timeProAussage*1000);
 			}
 			catch(Exception e){
-				e.printStackTrace();
+				return;
 			}
-			while(!interrupted){
+			while(!Thread.interrupted()){
 				if(!aussageListe.get(current).hasMore()){
 					roundEnd(-1);
 					break;
@@ -975,7 +957,7 @@ public class WerLuegt extends Game implements PC {
 					Thread.sleep(timeProAussage*1000);
 				}
 				catch(Exception e){
-					e.printStackTrace();
+					return;
 				}
 			}
 		}
