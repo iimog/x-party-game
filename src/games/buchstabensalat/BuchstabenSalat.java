@@ -48,7 +48,7 @@ public class BuchstabenSalat extends Game implements PC {
 	private boolean durchEnterBeendet = false;
 	private Aufdecker aufdecker;
 	protected int whoBuzzered;
-	protected int numOfWords = 71;
+	protected int numOfWords = 124;
 	String[] kategorie = new String[numOfWords];
 	String[] loesungswort = new String[numOfWords];
 	{
@@ -264,7 +264,165 @@ public class BuchstabenSalat extends Game implements PC {
 
 		loesungswort[70] = "STONEHENGE";
 		kategorie[70] = "Sehenswürdigkeiten";
+		
+		loesungswort[71] = "ZIEGENTRITT";
+		kategorie[71] = "Unfall in der Zoohandlung";
+		
+		loesungswort[72] = "KATZENKRATZER";
+		kategorie[72] = "Unfall in der Zoohandlung";
+		
+		loesungswort[73] = "PETERSDOM";
+		kategorie[73] = "Sehenswürdigkeiten";
+		
+		loesungswort[74] = "NEUSCHWANSTEIN";
+		kategorie[74] = "Sehenswürdigkeit";
+		
+		loesungswort[75] = "NIAGARAFÄLLE";
+		kategorie[75] = "Sehenswürdigkeit";
+		
+		loesungswort[76] = "SEMPEROPER";
+		kategorie[76] = "Sehenswürdigkeit";
+		
+		loesungswort[77] = "VERSAILLES";
+		kategorie[77] = "Sehenswürdigkeit";
+		
+		loesungswort[78] = "AUTOMOBIL";
+		kategorie[78] = "Fortbewegungsmittel";
+		
+		loesungswort[79] = "MOUNTAINBIKE";
+		kategorie[79] = "Fortbewegungsmittel";
+		
+		loesungswort[80] = "LASTKRAFTWAGEN";
+		kategorie[80] = "Fortbewegungsmittel";
+		
+		loesungswort[81] = "AQUARIUMRISS";
+		kategorie[81] = "Unfall in der Zoohandlung";
+		
+		loesungswort[82] = "ROLLSTUHL";
+		kategorie[82] = "Fortbewegungsmittel";
+		
+		loesungswort[83] = "PFERDEKUTSCHE";
+		kategorie[83] = "Fortbewegungsmittel";
+		
+		loesungswort[84] = "GABELSTAPLER";
+		kategorie[84] = "Fortbewegungsmittel";
+		
+		loesungswort[85] = "GEOGRAPHIE";
+		kategorie[85] = "Schulfach";
+		
+		loesungswort[86] = "MATHEMATIK";
+		kategorie[86] = "Schulfach";
+		
+		loesungswort[87] = "RELIGIONSLEHRE";
+		kategorie[87] = "Schulfach";
+		
+		loesungswort[88] = "SOZIALKUNDE";
+		kategorie[88] = "Schulfach";
+		
+		loesungswort[89] = "SEXUALKUNDE";
+		kategorie[89] = "Schulfach";
+		
+		loesungswort[90] = "BIOLOGIE";
+		kategorie[90] = "Schulfach";
+		
+		loesungswort[91] = "ITALIENISCH";
+		kategorie[91] = "Schulfach";
+		
+		loesungswort[92] = "CHEMIE";
+		kategorie[92] = "Schulfach";
+		
+		loesungswort[93] = "ENGLISCH";
+		kategorie[93] = "Schulfach";
+		
+		loesungswort[94] = "GESCHICHTE";
+		kategorie[94] = "Schulfach";
+		
+		loesungswort[95] = "DEUTSCH";
+		kategorie[95] = "Schulfach";
+		
+		loesungswort[96] = "MINERALWASSER";
+		kategorie[96] = "Getränk";
+		
+		loesungswort[97] = "TRAUBENSAFT";
+		kategorie[97] = "Getränk";
+		
+		loesungswort[98] = "APFELSCHORLE";
+		kategorie[98] = "Getränk";
+		
+		loesungswort[99] = "WEIßWEIN";
+		kategorie[99] = "Getränk";
+		
+		loesungswort[100] = "WHISKY";
+		kategorie[100] = "Getränk";
+		
+		loesungswort[101] = "BUTTERMILCH";
+		kategorie[101] = "Getränk";
+		
+		loesungswort[102] = "ORANGENSAFT";
+		kategorie[102] = "Getränk";
+		
+		loesungswort[103] = "HOLZBRANTWEIN";
+		kategorie[103] = "Getränk";
+		
+		loesungswort[104] = "EIERLIKÖR";
+		kategorie[104] = "Getränk";
+		
+		loesungswort[105] = "FRÜCHTETEE";
+		kategorie[105] = "Getränk";
+		
+		loesungswort[106] = "KAFFEE";
+		kategorie[106] = "Getränk";
+		
+		loesungswort[107] = "LIMONADE";
+		kategorie[107] = "Getränk";
+		
+		loesungswort[108] = "AMEISE";
+		kategorie[108] = "Tier";
+		
+		loesungswort[109] = "KROKODIL";
+		kategorie[109] = "Tier";
+		
+		loesungswort[110] = "ERDMÄNNCHEN";
+		kategorie[110] = "Tier";
+		
+		loesungswort[111] = "MEERSCHWEINCHEN";
+		kategorie[111] = "Tier";
+		
+		loesungswort[112] = "ALPAKA";
+		kategorie[112] = "Tier";
 
+		loesungswort[113] = "WILDSCHWEIN";
+		kategorie[113] = "Tier";
+		
+		loesungswort[114] = "BRAUNBÄR";
+		kategorie[114] = "Tier";
+		
+		loesungswort[115] = "SCHIMPANSE";
+		kategorie[115] = "Tier";
+		
+		loesungswort[116] = "SCHILDKRÖTE";
+		kategorie[116] = "Tier";
+		
+		loesungswort[117] = "WEIßSTORCH";
+		kategorie[117] = "Tier";
+		
+		loesungswort[118] = "KLAPPERSCHLANGE";
+		kategorie[118] = "Tier";
+		
+		loesungswort[119] = "SCHÄFERHUND";
+		kategorie[119] = "Tier";
+		
+		loesungswort[120] = "THUNFISCH";
+		kategorie[120] = "Tier";
+		
+		loesungswort[121] = "SALAMANDER";
+		kategorie[121] = "Tier";
+		
+		loesungswort[122] = "KOMODOWARAN";
+		kategorie[122] = "Tier";
+		
+		loesungswort[123] = "WEIßKOPFSEEADLER";
+		kategorie[123] = "Tier";
 	}
 
 	public BuchstabenSalat(Player[] player, Modus modus) {
