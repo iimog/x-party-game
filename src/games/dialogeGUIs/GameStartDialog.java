@@ -72,7 +72,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 					schaltflaechenPanel = new JPanel();
 					mainPane.add(schaltflaechenPanel, BorderLayout.SOUTH);
 					{
-						anleitungButton = new JButtonIcon("media/ablauf/hilfe2.png","Anleitung");
+						anleitungButton = new JButtonIcon("media/ablauf/hilfe.png","Anleitung");
 						schaltflaechenPanel.add(anleitungButton);
 						anleitungButton.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) {

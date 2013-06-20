@@ -69,7 +69,7 @@ public class Memory extends games.Game implements PC {
 		pic[1] = path + "feuerwerk.jpg";
 		pic[2] = path + "gruen.jpg";
 		pic[3] = path + "holz.jpg";
-		pic[4] = path + "laser.png";
+		pic[4] = path + "laser.jpg";
 		pic[5] = path + "loewe.jpg";
 		pic[6] = path + "audia5.jpg";
 		pic[7] = path + "berg.jpg";
