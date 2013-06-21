@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
@@ -63,19 +64,21 @@ public class Memory extends games.Game implements PC {
 			}
 		});
 	}
-	private String path = "media/memory/";public static String[] pic = new String[27];
+	private String path = "media/memory/";public static String[] pic = new String[35];
 	{
+		pic[6] = path + "audia5.jpg";
+		pic[7] = path + "berg.jpg";
+		pic[24] = path + "dschungel.jpg";
 		pic[0] = path + "erde.jpg";
+		pic[8] = path + "eisvogel.jpg";
+		pic[9] = path + "eisvogel2.jpg";
+		pic[10] = path + "elefant.jpg";
 		pic[1] = path + "feuerwerk.jpg";
+		pic[26] = path + "fische.jpg";
 		pic[2] = path + "gruen.jpg";
 		pic[3] = path + "holz.jpg";
 		pic[4] = path + "laser.jpg";
 		pic[5] = path + "loewe.jpg";
-		pic[6] = path + "audia5.jpg";
-		pic[7] = path + "berg.jpg";
-		pic[8] = path + "eisvogel.jpg";
-		pic[9] = path + "eisvogel2.jpg";
-		pic[10] = path + "elefant.jpg";
 		pic[11] = path + "meer.jpg";
 		pic[12] = path + "orange.jpg";
 		pic[13] = path + "palme1.jpg";
@@ -88,15 +91,22 @@ public class Memory extends games.Game implements PC {
 		pic[20] = path + "sonne2.jpg";
 		pic[21] = path + "spiderman.jpg";
 		pic[22] = path + "tiger.jpg";
-		pic[23] = path + "wasser.jpg";
-		pic[24] = path + "dschungel.jpg";
 		pic[25] = path + "tigers.jpg";
-		pic[26] = path + "fische.jpg";
+		pic[23] = path + "wasser.jpg";
+		pic[27] = path + "erde-und-mond.jpg";
+		pic[28] = path + "insel_1.jpg";
+		pic[29] = path + "festung.jpg";
+		pic[30] = path + "ornament1.jpg";
+		pic[31] = path + "ornament2.jpg";
+		pic[32] = path + "ornament3.jpg";
+		pic[33] = path + "welle3.jpg";
+		pic[34] = path + "wueste.jpg";
 	}
 	public String background = path + "optisch.jpg";
 	Bildschirm[] karte;
 	HashSet<Integer> set1, set2;
 	HashSet<Integer> open = new HashSet<Integer>();
+	ArrayList<String> pictures;
 	boolean waiting = false;
 	HashMap<Integer, Integer> loesung;
 	private JPanel spielfeldPanel;
@@ -114,7 +124,7 @@ public class Memory extends games.Game implements PC {
 			if(clicked<2){
 				int clickInd = Integer.parseInt(bs.getName());
 				if(!open.add(clickInd))return;
-				bs.changePic(pic[loesung.get(clickInd)]);
+				bs.changePic(pictures.get(loesung.get(clickInd)));
 				if(modus == Modus.SOLO){
 					memoryRobot.setInfo(clickInd, loesung.get(clickInd));
 				}				
@@ -246,6 +256,19 @@ public class Memory extends games.Game implements PC {
 			spielfeldPanel.setMinimumSize(new Dimension(columns*105, rows*105));
 		}
 	}
+	
+	private void getRandomPairs(int numOfPairs){
+		pictures = new ArrayList<String>();
+		HashSet<Integer> verbraucht = new HashSet<Integer>();
+		Random r = new Random();
+		while(pictures.size()<numOfPairs){
+			int nextPic = r.nextInt(pic.length);
+			if(verbraucht.add(nextPic)){
+				pictures.add(pic[nextPic]);
+			}
+		}
+	}
+	
 	public void rueckdecken(){
 		Thread t = new Thread(){
 			@Override
@@ -279,7 +302,7 @@ public class Memory extends games.Game implements PC {
 		}
 		int zug = memoryRobot.getAnzugPosition();
 		open.add(zug);
-		karte[zug].changePic(pic[loesung.get(zug)]);
+		karte[zug].changePic(pictures.get(loesung.get(zug)));
 		click[0] = zug;
 		memoryRobot.setInfo(zug, loesung.get(zug));
 		try {
@@ -289,7 +312,7 @@ public class Memory extends games.Game implements PC {
 		}
 		zug = memoryRobot.getWeiterzugPosition();
 		open.add(zug);
-		karte[zug].changePic(pic[loesung.get(zug)]);
+		karte[zug].changePic(pictures.get(loesung.get(zug)));
 		click[1] = zug;
 		memoryRobot.setInfo(zug, loesung.get(zug));
 		if(loesung.get(click[0]) == loesung.get(click[1])){
@@ -308,6 +331,7 @@ public class Memory extends games.Game implements PC {
 
 	@Override
 	public void start(){
+		getRandomPairs(numOfPairs);
 		whosTurn = getStartPlayerID(true);
 		if(myPlayer[whosTurn].isRobot()){
 			startRobotState();
