@@ -122,7 +122,7 @@ public class Spielablauf implements GameListener, Ablauf {
 		sa.setProfile(Profile.getDefaultProfile());
 		if (modus == Modus.SOLO)
 			sa.spielerZahl++;
-		addBuzzerToKeymap(pl);
+		//addBuzzerToKeymap(pl);
 		return sa;
 	}
 
@@ -299,6 +299,7 @@ public class Spielablauf implements GameListener, Ablauf {
 	}
 
 	public void showZwischenstand() {
+		addBuzzerToKeymap(myPlayer);
 		mCredits.aktualisierePlayer();
 		X.getInstance().changeAnzeige(mCredits);
 	}

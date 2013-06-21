@@ -100,9 +100,8 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 						});
 					}
 					{
-						startButton = new JButton();
+						startButton = new JButtonIcon("media/ablauf/rightarrow.png","Spiel starten");
 						schaltflaechenPanel.add(startButton);
-						startButton.setText("Spiel starten");
 						startButton.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) {
 								startButtonActionPerformed(evt);

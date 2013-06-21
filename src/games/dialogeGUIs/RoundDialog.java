@@ -1,6 +1,7 @@
 package games.dialogeGUIs;
 
 import games.Game;
+import gui.components.JButtonIcon;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -8,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -31,11 +31,11 @@ public class RoundDialog extends gui.AnzeigeDialog {
 	 */
 	private static final long serialVersionUID = -8760048075099985741L;
 	private JPanel schaltflaechenPanel;
-	private JButton infoButton;
-	private JButton detailsButton;
+	private JButtonIcon infoButton;
+	private JButtonIcon detailsButton;
 	public JLabel winnerLabel;
 	private JLabel jLabel1;
-	private JButton okButton;
+	private JButtonIcon okButton;
 	private Game game;
 
 
@@ -85,22 +85,20 @@ public class RoundDialog extends gui.AnzeigeDialog {
 				FlowLayout schaltflaechenPanelLayout = new FlowLayout();
 				schaltflaechenPanel.setLayout(schaltflaechenPanelLayout);
 				dialogPane.add(schaltflaechenPanel, BorderLayout.SOUTH);
-				schaltflaechenPanel.setPreferredSize(new java.awt.Dimension(359, 33));
+				// schaltflaechenPanel.setPreferredSize(new java.awt.Dimension(359, 55));
 				schaltflaechenPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				{
-					okButton = new JButton();
-					schaltflaechenPanel.add(okButton);
-					okButton.setText("OK");
-					okButton.addActionListener(new ActionListener() {
+					infoButton = new JButtonIcon("media/ablauf/info.png","Info");
+					schaltflaechenPanel.add(infoButton);
+					infoButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-							okButtonActionPerformed(evt);
+							infoButtonActionPerformed(evt);
 						}
 					});
 				}
 				{
-					detailsButton = new JButton();
+					detailsButton = new JButtonIcon("media/ablauf/details.png","Details");
 					schaltflaechenPanel.add(detailsButton);
-					detailsButton.setText("Details");
 					detailsButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							detailsButtonActionPerformed(evt);
@@ -108,12 +106,11 @@ public class RoundDialog extends gui.AnzeigeDialog {
 					});
 				}
 				{
-					infoButton = new JButton();
-					schaltflaechenPanel.add(infoButton);
-					infoButton.setText("Info");
-					infoButton.addActionListener(new ActionListener() {
+					okButton = new JButtonIcon("media/ablauf/rightarrow.png","OK");
+					schaltflaechenPanel.add(okButton);
+					okButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-							infoButtonActionPerformed(evt);
+							okButtonActionPerformed(evt);
 						}
 					});
 				}
