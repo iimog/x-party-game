@@ -3,6 +3,7 @@ package gui.menu;
 import gui.Anzeige;
 import gui.aterai.RoundedCornerButton;
 import gui.components.Bildschirm;
+import gui.components.DefaultButton;
 import highscore.HighscoreAnzeige;
 
 import java.awt.BorderLayout;
@@ -77,13 +78,8 @@ public class HauptMenu extends Anzeige {
 			menuPanel.add(neuesSpielPanel);
 			neuesSpielPanel.setOpaque(false);
 			{
-				neuesSpielButton = new RoundedCornerButton();
-				neuesSpielButton.setBackground(Color.DARK_GRAY);
-				neuesSpielButton.setForeground(Color.LIGHT_GRAY);
-				neuesSpielButton.setFocusPainted(false);
+				neuesSpielButton = new DefaultButton("Neues Spiel");
 				neuesSpielPanel.add(neuesSpielButton);
-				neuesSpielButton.setText("Neues Spiel");
-				neuesSpielButton.setFont(X.buttonFont);
 				neuesSpielButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						neuesSpielButtonActionPerformed(evt);
@@ -96,13 +92,8 @@ public class HauptMenu extends Anzeige {
 			menuPanel.add(spielLadenPanel);
 			spielLadenPanel.setOpaque(false);
 			{
-				spielLadenButton = new RoundedCornerButton();
-				spielLadenButton.setBackground(Color.DARK_GRAY);
-				spielLadenButton.setForeground(Color.LIGHT_GRAY);
-				spielLadenButton.setFocusPainted(false);
+				spielLadenButton = new DefaultButton("Spiel laden");
 				spielLadenPanel.add(spielLadenButton);
-				spielLadenButton.setText("Spiel laden");
-				spielLadenButton.setFont(X.buttonFont);
 				spielLadenButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						spielLadenButtonActionPerformed(evt);
@@ -115,13 +106,8 @@ public class HauptMenu extends Anzeige {
 			menuPanel.add(einstellungenPanel);
 			einstellungenPanel.setOpaque(false);
 			{
-				einstellungenButton = new RoundedCornerButton();
-				einstellungenButton.setBackground(Color.DARK_GRAY);
-				einstellungenButton.setForeground(Color.LIGHT_GRAY);
-				einstellungenButton.setFocusPainted(false);
+				einstellungenButton = new DefaultButton("Einstellungen");
 				einstellungenPanel.add(einstellungenButton);
-				einstellungenButton.setText("Einstellungen");
-				einstellungenButton.setFont(X.buttonFont);
 				einstellungenButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						einstellungenButtonActionPerformed(evt);
@@ -134,13 +120,8 @@ public class HauptMenu extends Anzeige {
 			menuPanel.add(highscorePanel);
 			highscorePanel.setOpaque(false);
 			{
-				highscoreButton = new RoundedCornerButton();
-				highscoreButton.setBackground(Color.DARK_GRAY);
-				highscoreButton.setForeground(Color.LIGHT_GRAY);
-				highscoreButton.setFocusPainted(false);
+				highscoreButton = new DefaultButton("Highscore");
 				highscorePanel.add(highscoreButton);
-				highscoreButton.setText("Highscore");
-				highscoreButton.setFont(X.buttonFont);
 				highscoreButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						highscoreButtonActionPerformed(evt);
@@ -153,13 +134,8 @@ public class HauptMenu extends Anzeige {
 			menuPanel.add(beendenPanel);
 			beendenPanel.setOpaque(false);
 			{
-				beendenButton = new RoundedCornerButton();
-				beendenButton.setBackground(Color.DARK_GRAY);
-				beendenButton.setForeground(Color.LIGHT_GRAY);
-				beendenButton.setFocusPainted(false);
+				beendenButton = new DefaultButton("Beenden");
 				beendenPanel.add(beendenButton);
-				beendenButton.setText("Beenden");
-				beendenButton.setFont(X.buttonFont);
 				beendenButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						beendenButtonActionPerformed(evt);

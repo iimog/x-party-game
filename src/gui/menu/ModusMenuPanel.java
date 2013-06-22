@@ -2,6 +2,7 @@ package gui.menu;
 
 import games.Modus;
 import gui.Anzeige;
+import gui.components.DefaultButton;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -56,10 +57,8 @@ public class ModusMenuPanel extends Anzeige {
 			add(soloPanel);
 			soloPanel.setOpaque(false);
 			{
-				soloButton = new JButton();
+				soloButton = new DefaultButton(Modus.SOLO.toString());
 				soloPanel.add(soloButton);
-				soloButton.setText(Modus.SOLO.toString());
-				soloButton.setFont(X.buttonFont);
 				soloButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						soloButtonActionPerformed(evt);
@@ -72,10 +71,9 @@ public class ModusMenuPanel extends Anzeige {
 			add(duellPanel);
 			duellPanel.setOpaque(false);
 			{
-				duellButton = new JButton();
+				duellButton = new DefaultButton();
 				duellPanel.add(duellButton);
 				duellButton.setText(Modus.DUELL.toString());
-				duellButton.setFont(X.buttonFont);
 				duellButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						duellButtonActionPerformed(evt);
@@ -88,10 +86,9 @@ public class ModusMenuPanel extends Anzeige {
 			add(teamPanel);
 			teamPanel.setOpaque(false);
 			{
-				teamButton = new JButton();
+				teamButton = new DefaultButton();
 				teamPanel.add(teamButton);
 				teamButton.setText(Modus.TEAM.toString());
-				teamButton.setFont(X.buttonFont);
 				teamButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						teamButtonActionPerformed(evt);
@@ -104,10 +101,9 @@ public class ModusMenuPanel extends Anzeige {
 			add(tripplePanel);
 			tripplePanel.setOpaque(false);
 			{
-				trippleButton = new JButton();
+				trippleButton = new DefaultButton();
 				tripplePanel.add(trippleButton);
 				trippleButton.setText(Modus.TRIPPLE.toString());
-				trippleButton.setFont(X.buttonFont);
 				trippleButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						trippleButtonActionPerformed(evt);
@@ -120,10 +116,9 @@ public class ModusMenuPanel extends Anzeige {
 			add(viererPanel);
 			viererPanel.setOpaque(false);
 			{
-				viererButton = new JButton();
+				viererButton = new DefaultButton();
 				viererPanel.add(viererButton);
 				viererButton.setText(Modus.VIERER.toString());
-				viererButton.setFont(X.buttonFont);
 				viererButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						viererButtonActionPerformed(evt);

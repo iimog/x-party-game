@@ -1,6 +1,9 @@
 package gui;
 
+import gui.components.DefaultButton;
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -75,21 +78,22 @@ public class EasyDialog extends AnzeigeDialog {
 
 	private JPanel getConfirmButtonPanel(){
 		JPanel panel = new JPanel();
-		JButton jaButton = new JButton("Ja");
+		panel.setOpaque(false);
+		DefaultButton jaButton = new DefaultButton("Ja");
 		jaButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt){
 				cListener.confirmOptionPerformed(ConfirmListener.YES_OPTION);
 			}
 		});
 		panel.add(jaButton);
-		JButton neinButton = new JButton("Nein");
+		DefaultButton neinButton = new DefaultButton("Nein");
 		neinButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt){
 				cListener.confirmOptionPerformed(ConfirmListener.NO_OPTION);
 			}
 		});
 		panel.add(neinButton);
-		JButton abbrechenButton = new JButton("Abbrechen");
+		DefaultButton abbrechenButton = new DefaultButton("Abbrechen");
 		abbrechenButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt){
 				cListener.confirmOptionPerformed(ConfirmListener.CANCEL_OPTION);
@@ -100,7 +104,8 @@ public class EasyDialog extends AnzeigeDialog {
 	}
 	private JPanel getMessageButtonPanel(){
 		JPanel panel = new JPanel();
-		JButton okButton = new JButton("OK");
+		panel.setOpaque(false);
+		JButton okButton = new DefaultButton("OK");
 		okButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt){
 				instance.closeDialog();
@@ -111,19 +116,20 @@ public class EasyDialog extends AnzeigeDialog {
 	}
 	private JPanel getInputButtonPanel(){
 		JPanel hauptpanel = new JPanel();
+		hauptpanel.setOpaque(false);
 		hauptpanel.setLayout(new GridLayout(2,1));
 		inputTextField = new JTextField(defText);
 		hauptpanel.add(inputTextField);
 		JPanel panel = new JPanel();
 		hauptpanel.add(panel);
-		JButton okButton = new JButton("OK");
+		JButton okButton = new DefaultButton("OK");
 		okButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt){
 				iListener.giveMeInput(inputTextField.getText());
 			}
 		});
 		panel.add(okButton);
-		JButton abbrechenButton = new JButton("Abbrechen");
+		JButton abbrechenButton = new DefaultButton("Abbrechen");
 		abbrechenButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt){
 				iListener.abgebrochen();
@@ -140,6 +146,7 @@ public class EasyDialog extends AnzeigeDialog {
 		JLabel label = new JLabel(message);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new java.awt.Font("Comic Sans MS",1,22));
+		label.setForeground(Color.WHITE);
 		hauptbereich.add(label, BorderLayout.NORTH);
 		if(icon != null){
 			JPanel hilfsPanel = new JPanel();

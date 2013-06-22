@@ -30,7 +30,7 @@ public class AnzeigeDialog extends Anzeige {
 		dialogPane = new JPanel();
 		addDialogPaneToDummyPanel();
 		dialogPane.setLayout(new FlowLayout());
-		dialogPane.setBackground(new Color(100,100,255));
+		dialogPane.setBackground(Color.BLACK);
 		dialogPane.setBorder(BorderFactory.createEtchedBorder(BevelBorder.RAISED));
 		
 	}
