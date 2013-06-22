@@ -1,9 +1,13 @@
 package gui.menu;
 
 import gui.Anzeige;
+import gui.aterai.RoundedCornerButton;
 import gui.components.Bildschirm;
 import highscore.HighscoreAnzeige;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,6 +49,7 @@ public class HauptMenu extends Anzeige {
 	private JButton highscoreButton;
 	private JPanel beendenPanel;
 	private JButton beendenButton;
+	private JPanel menuPanel;
 
 	public HauptMenu(){
 		GridLayout myLayout = new GridLayout(6, 1);
@@ -53,10 +58,14 @@ public class HauptMenu extends Anzeige {
 		myLayout.setColumns(1);
 		myLayout.setRows(6);
 		this.setLayout(myLayout);
+		this.setLayout(new BorderLayout());
+		menuPanel = new JPanel(new GridLayout(5, 1));
+		menuPanel.setOpaque(false);
+		this.add(menuPanel, BorderLayout.CENTER);
 		this.setOpaque(false);
 		{
 			logoPanel = new JPanel();
-			this.add(logoPanel);
+			this.add(logoPanel, BorderLayout.NORTH);
 			logoPanel.setOpaque(false);
 			{
 				logoBildschirm = new Bildschirm("media/ablauf/xnewk.png");
@@ -65,10 +74,13 @@ public class HauptMenu extends Anzeige {
 		}
 		{
 			neuesSpielPanel = new JPanel();
-			add(neuesSpielPanel);
+			menuPanel.add(neuesSpielPanel);
 			neuesSpielPanel.setOpaque(false);
 			{
-				neuesSpielButton = new JButton();
+				neuesSpielButton = new RoundedCornerButton();
+				neuesSpielButton.setBackground(Color.DARK_GRAY);
+				neuesSpielButton.setForeground(Color.LIGHT_GRAY);
+				neuesSpielButton.setFocusPainted(false);
 				neuesSpielPanel.add(neuesSpielButton);
 				neuesSpielButton.setText("Neues Spiel");
 				neuesSpielButton.setFont(X.buttonFont);
@@ -81,10 +93,13 @@ public class HauptMenu extends Anzeige {
 		}
 		{
 			spielLadenPanel = new JPanel();
-			add(spielLadenPanel);
+			menuPanel.add(spielLadenPanel);
 			spielLadenPanel.setOpaque(false);
 			{
-				spielLadenButton = new JButton();
+				spielLadenButton = new RoundedCornerButton();
+				spielLadenButton.setBackground(Color.DARK_GRAY);
+				spielLadenButton.setForeground(Color.LIGHT_GRAY);
+				spielLadenButton.setFocusPainted(false);
 				spielLadenPanel.add(spielLadenButton);
 				spielLadenButton.setText("Spiel laden");
 				spielLadenButton.setFont(X.buttonFont);
@@ -97,10 +112,13 @@ public class HauptMenu extends Anzeige {
 		}
 		{
 			einstellungenPanel = new JPanel();
-			add(einstellungenPanel);
+			menuPanel.add(einstellungenPanel);
 			einstellungenPanel.setOpaque(false);
 			{
-				einstellungenButton = new JButton();
+				einstellungenButton = new RoundedCornerButton();
+				einstellungenButton.setBackground(Color.DARK_GRAY);
+				einstellungenButton.setForeground(Color.LIGHT_GRAY);
+				einstellungenButton.setFocusPainted(false);
 				einstellungenPanel.add(einstellungenButton);
 				einstellungenButton.setText("Einstellungen");
 				einstellungenButton.setFont(X.buttonFont);
@@ -113,10 +131,13 @@ public class HauptMenu extends Anzeige {
 		}
 		{
 			highscorePanel = new JPanel();
-			add(highscorePanel);
+			menuPanel.add(highscorePanel);
 			highscorePanel.setOpaque(false);
 			{
-				highscoreButton = new JButton();
+				highscoreButton = new RoundedCornerButton();
+				highscoreButton.setBackground(Color.DARK_GRAY);
+				highscoreButton.setForeground(Color.LIGHT_GRAY);
+				highscoreButton.setFocusPainted(false);
 				highscorePanel.add(highscoreButton);
 				highscoreButton.setText("Highscore");
 				highscoreButton.setFont(X.buttonFont);
@@ -129,10 +150,13 @@ public class HauptMenu extends Anzeige {
 		}
 		{
 			beendenPanel = new JPanel();
-			add(beendenPanel);
+			menuPanel.add(beendenPanel);
 			beendenPanel.setOpaque(false);
 			{
-				beendenButton = new JButton();
+				beendenButton = new RoundedCornerButton();
+				beendenButton.setBackground(Color.DARK_GRAY);
+				beendenButton.setForeground(Color.LIGHT_GRAY);
+				beendenButton.setFocusPainted(false);
 				beendenPanel.add(beendenButton);
 				beendenButton.setText("Beenden");
 				beendenButton.setFont(X.buttonFont);
@@ -143,6 +167,28 @@ public class HauptMenu extends Anzeige {
 				});
 			}
 		}
+		setButtonSizes();
+		logoBildschirm.requestFocusInWindow();
+	}
+
+	private void setButtonSizes() {
+		int buttonHeight = 0;
+		int buttonWidth = 0;
+		buttonHeight = Math.max(buttonHeight, neuesSpielButton.getPreferredSize().height);
+		buttonHeight = Math.max(buttonHeight, spielLadenButton.getPreferredSize().height);
+		buttonHeight = Math.max(buttonHeight, einstellungenButton.getPreferredSize().height);
+		buttonHeight = Math.max(buttonHeight, highscoreButton.getPreferredSize().height);
+		buttonHeight = Math.max(buttonHeight, beendenButton.getPreferredSize().height);
+		buttonWidth = Math.max(buttonWidth, neuesSpielButton.getPreferredSize().width);
+		buttonWidth = Math.max(buttonWidth, spielLadenButton.getPreferredSize().width);
+		buttonWidth = Math.max(buttonWidth, einstellungenButton.getPreferredSize().width);
+		buttonWidth = Math.max(buttonWidth, highscoreButton.getPreferredSize().width);
+		buttonWidth = Math.max(buttonWidth, beendenButton.getPreferredSize().width);
+		neuesSpielButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+		spielLadenButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+		einstellungenButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+		highscoreButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+		beendenButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
 	}
 
 	protected void beendenButtonActionPerformed(ActionEvent evt) {
