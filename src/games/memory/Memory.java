@@ -64,7 +64,7 @@ public class Memory extends games.Game implements PC {
 			}
 		});
 	}
-	private String path = "media/memory/";public static String[] pic = new String[35];
+	private String path = "media/memory/";public static String[] pic = new String[60];
 	{
 		pic[6] = path + "audia5.jpg";
 		pic[7] = path + "berg.jpg";
@@ -101,6 +101,34 @@ public class Memory extends games.Game implements PC {
 		pic[32] = path + "ornament3.jpg";
 		pic[33] = path + "welle3.jpg";
 		pic[34] = path + "wueste.jpg";
+		pic[35] = path + "früchte.jpg";
+		pic[36] = path + "früchte1.jpg";
+		pic[37] = path + "früchte2.jpg";
+		pic[38] = path + "früchte3.jpg";
+		pic[39] = path + "früchte4.jpg";
+		pic[40] = path + "früchte5.jpg";
+		pic[41] = path + "früchte6.jpg";
+		pic[42] = path + "früchte7.jpg";
+		pic[43] = path + "früchte8.jpg";
+		pic[44] = path + "früchte9.jpg";
+		pic[45] = path + "früchte10.jpg";
+		pic[46] = path + "früchte11.jpg";
+		pic[47] = path + "früchte12.jpg";
+		pic[48] = path + "früchte13.jpg";
+		pic[49] = path + "früchte14.jpg";
+		pic[50] = path + "früchte15.jpg";
+		pic[51] = path + "früchte16.jpg";
+		pic[52] = path + "früchte17.jpg";
+		pic[53] = path + "früchte18.jpg";
+		pic[54] = path + "früchte19.jpg";
+		pic[55] = path + "früchte20.jpg";
+		pic[56] = path + "früchte21.jpg";
+		pic[57] = path + "früchte22.jpg";
+		pic[58] = path + "früchte23.jpg";
+		pic[59] = path + "früchte24.jpg";
+		
+		
+				
 	}
 	public String background = path + "optisch.jpg";
 	Bildschirm[] karte;
