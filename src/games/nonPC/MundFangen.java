@@ -1,7 +1,11 @@
 package games.nonPC;
 
 import games.Modus;
+
+import java.io.File;
+
 import player.Player;
+import start.X;
 import util.SpielListen;
 
 public class MundFangen extends StandardNonPC {
@@ -22,6 +26,7 @@ public class MundFangen extends StandardNonPC {
 	public static int defaultNumOfRounds = 8;
 	public MundFangen(Player[] player, Modus modus) {
 		super(gameName, player, defaultNumOfRounds, modus);
+		NonPCGameFileHandler.loadGame(new File(X.getDataDir()+"/gemes/nonPC/MundFangen.game"), player, modus);
 	}
 	@Override
 	public String getShortInfo() {

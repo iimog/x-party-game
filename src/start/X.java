@@ -67,7 +67,7 @@ public class X extends javax.swing.JFrame {
 	private MainSettings mainSettings = MainSettings.getMainSettings();
 
 	public static String getDataDir(){
-		return System.getProperty("user.home")+"/X/";
+		return System.getProperty("user.home")+"/.xpartygame/";
 	}
 
 	public static X getInstance(){
