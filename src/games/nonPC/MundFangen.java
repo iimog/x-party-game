@@ -6,7 +6,6 @@ import java.io.File;
 
 import player.Player;
 import start.X;
-import util.SpielListen;
 
 public class MundFangen extends StandardNonPC {
 	/**
@@ -19,10 +18,6 @@ public class MundFangen extends StandardNonPC {
 	}
 	public static String shortInfo = "Es geht darum Gummibären (oder Erdnüsse) mit dem Mund aufzufangen \n" +
 	"Geworfen wird nacheinander, wenn ein Team fängt und das andere nicht bekommt es einen Punkt";
-	private static final int GAME_ID = SpielListen.MUNDFANG;
-	public int getGameID(){
-		return GAME_ID;
-	}
 	public static int defaultNumOfRounds = 8;
 	public MundFangen(Player[] player, Modus modus) {
 		super(gameName, player, defaultNumOfRounds, modus);

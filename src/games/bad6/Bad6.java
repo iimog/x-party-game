@@ -16,7 +16,6 @@ import javax.swing.SwingConstants;
 
 import player.Player;
 import util.ChangeManager;
-import util.SpielListen;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -29,10 +28,6 @@ import util.SpielListen;
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class Bad6 extends games.Game implements PC {
-	private static final int GAME_ID = SpielListen.BAD6;
-	public int getGameID(){
-		return GAME_ID;
-	}
 	class DiceChange implements ChangeManager {
 		@Override
 		public void change() {

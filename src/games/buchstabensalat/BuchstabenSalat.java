@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 import player.Player;
 import start.X;
 import util.ChangeManager;
-import util.SpielListen;
 
 public class BuchstabenSalat extends Game implements PC {
 	private static final long serialVersionUID = 1L;
@@ -579,11 +578,6 @@ public class BuchstabenSalat extends Game implements PC {
 	@Override
 	public String getShortInfo() {
 		return shortInfo;
-	}
-
-	@Override
-	public int getGameID() {
-		return SpielListen.BUCHSTABENSALAT;
 	}
 
 	@Override

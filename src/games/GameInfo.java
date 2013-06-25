@@ -4,14 +4,16 @@ public class GameInfo {
 	private int ID;
 	private String gameName;
 	private String path;
+	private String shortInfo;
 	private int modi;
-	public GameInfo(int iD, String gameName, String path, int modi) {
+	public GameInfo(int iD, String gameName, String path, int modi, String shortInfo) {
 		super();
 		ID = iD;
 		this.gameName = gameName;
 		this.path = path;
 		this.modi = modi;
-	}
+		this.shortInfo = shortInfo;
+}
 	public int getID() {
 		return ID;
 	}
@@ -48,5 +50,8 @@ public class GameInfo {
 	}
 	public boolean isTeam(){
 		return (modi/16)%2 == 1;
+	}
+	public String getShortInfo() {
+		return shortInfo;
 	}
 }

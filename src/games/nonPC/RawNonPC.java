@@ -19,12 +19,6 @@ public class RawNonPC extends StandardNonPC {
 	public String getShortInfo() {
 		return shortInfo;
 	}
-
-	@Override
-	public int getGameID() {
-		// TODO Altlast, sollte nach beenden der Umstrukturierung entfernt werden 
-		return 0;
-	}
 	
 	@Override
 	public void nowVisible(){

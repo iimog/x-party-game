@@ -2,11 +2,8 @@ package util;
 
 import games.GameInfo;
 import games.Modus;
-import games.NonPC;
-import games.PC;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -31,7 +28,7 @@ public class SpielListen {
 	public static HashMap<Integer, GameInfo> getSpieleMap() {
 		if(spieleMap == null){
 			spieleMap = new HashMap<Integer, GameInfo>();
-			spieleMap.put(RANDOM_GAME, new GameInfo(0, "Zufallsspiel", "", 31));
+			spieleMap.put(RANDOM_GAME, new GameInfo(0, "Zufallsspiel", "", 31, "Ein zufällig ausgewähltes Spiel"));
 			spieleMap.putAll(loadSystemPCGames());
 			spieleMap.putAll(loadSystemNonPCGames());
 			spieleMap.putAll(loadUserNonPCGames());
@@ -55,7 +52,7 @@ public class SpielListen {
 				String[] elements = line.split("\t");
 				userNonPC.put(counter * 4 + 3,
 						new GameInfo(counter * 4 + 3, elements[0], elements[1],
-								Integer.parseInt(elements[2])));
+								Integer.parseInt(elements[2]), elements[3]));
 				counter++;
 			}
 			br.close();
@@ -84,7 +81,7 @@ public class SpielListen {
 				String[] elements = line.split("\t");
 				systemNonPC.put(counter * 4 + 1,
 						new GameInfo(counter * 4 + 1, elements[0], elements[1],
-								Integer.parseInt(elements[2])));
+								Integer.parseInt(elements[2]), elements[3]));
 				counter++;
 			}
 			br.close();
@@ -113,7 +110,7 @@ public class SpielListen {
 				String[] elements = line.split("\t");
 				systemPC.put(counter * 4,
 						new GameInfo(counter * 4, elements[0], elements[1],
-								Integer.parseInt(elements[2])));
+								Integer.parseInt(elements[2]), elements[3]));
 				counter++;
 			}
 			br.close();

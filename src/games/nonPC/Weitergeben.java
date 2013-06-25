@@ -2,7 +2,6 @@ package games.nonPC;
 
 import games.Modus;
 import player.Player;
-import util.SpielListen;
 
 public class Weitergeben extends StandardNonPC {
 	/**
@@ -14,10 +13,6 @@ public class Weitergeben extends StandardNonPC {
 		return gameName;
 	}
 	public static String shortInfo = "Gib eine Erbse, über im Mund gehaltene Löffel, einmal im Kreis!";
-	private static final int GAME_ID = SpielListen.WEITERGEBEN;
-	public int getGameID(){
-		return GAME_ID;
-	}
 	public static int defaultNumOfRounds = 1;
 	public Weitergeben(Player[] player, Modus modus) {
 		super(gameName, player, defaultNumOfRounds, modus);

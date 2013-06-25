@@ -21,7 +21,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import player.Player;
-import util.SpielListen;
 
 public class Tron extends Game implements PC{
 	private static final long serialVersionUID = 1L;
@@ -30,7 +29,6 @@ public class Tron extends Game implements PC{
 		return gameName;
 	}
 	final static String shortInfo = "Verbaue deinem Gegner den Weg aber fahr nicht gegen die Wand.";
-	private static final int GAME_ID = SpielListen.TRON;
 	// up, down, right, left evtl. durch enum ersetzen
 	private static final int UP = -1;
 	private static final int DOWN = 1;
@@ -144,10 +142,6 @@ public class Tron extends Game implements PC{
 		spielfeld.showGitter(isGitterVisible());
 		hauptbereichPanel.validate();
 		hauptbereichPanel.repaint();
-	}
-	@Override
-	public int getGameID() {
-		return GAME_ID;
 	}
 
 	@Override

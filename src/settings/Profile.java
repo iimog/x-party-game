@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import util.SpielListen;
+
 public class Profile{
 	private String name;
 	private List<Integer> soloSpielliste;
@@ -58,11 +60,11 @@ public class Profile{
 	public static Profile getDefaultProfile(){
 		Profile p = new Profile();
 		p.setName("Standard");
-		p.setSpielliste(Modus.moeglicheSpielIDs(Modus.SOLO), Modus.SOLO);
-		p.setSpielliste(Modus.moeglicheSpielIDs(Modus.DUELL), Modus.DUELL);
-		p.setSpielliste(Modus.moeglicheSpielIDs(Modus.TRIPPLE), Modus.TRIPPLE);
-		p.setSpielliste(Modus.moeglicheSpielIDs(Modus.VIERER), Modus.VIERER);
-		p.setSpielliste(Modus.moeglicheSpielIDs(Modus.TEAM), Modus.TEAM);
+		p.setSpielliste(SpielListen.moeglicheSpiele(Modus.SOLO), Modus.SOLO);
+		p.setSpielliste(SpielListen.moeglicheSpiele(Modus.DUELL), Modus.DUELL);
+		p.setSpielliste(SpielListen.moeglicheSpiele(Modus.TRIPPLE), Modus.TRIPPLE);
+		p.setSpielliste(SpielListen.moeglicheSpiele(Modus.VIERER), Modus.VIERER);
+		p.setSpielliste(SpielListen.moeglicheSpiele(Modus.TEAM), Modus.TEAM);
 		return p;
 	}
 

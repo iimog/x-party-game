@@ -2,7 +2,6 @@ package games.nonPC;
 
 import games.Modus;
 import player.Player;
-import util.SpielListen;
 
 public class ApfelImWasser extends StandardNonPC {
 	/**
@@ -14,10 +13,7 @@ public class ApfelImWasser extends StandardNonPC {
 		return gameName;
 	}
 	public static String shortInfo = "Hole einen Apfel nur mit deinem Mund aus einer Schüssel Wasser/Sangria!";
-	private static final int GAME_ID = SpielListen.APFELWASSER;
-	public int getGameID(){
-		return GAME_ID;
-	}
+
 	public static int defaultNumOfRounds = 5;
 	public ApfelImWasser(Player[] player, Modus modus) {
 		super(gameName, player, defaultNumOfRounds, modus);

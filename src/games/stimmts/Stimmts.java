@@ -26,7 +26,6 @@ import javax.swing.KeyStroke;
 import player.Player;
 import start.X;
 import util.ChangeManager;
-import util.SpielListen;
 
 public class Stimmts extends Game implements PC {
 	private static final long serialVersionUID = 1L;
@@ -668,11 +667,6 @@ public class Stimmts extends Game implements PC {
 	@Override
 	public String getShortInfo() {
 		return shortInfo;
-	}
-
-	@Override
-	public int getGameID() {
-		return SpielListen.STIMMTS;
 	}
 
 	@Override

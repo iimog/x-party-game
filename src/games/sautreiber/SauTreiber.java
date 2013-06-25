@@ -18,7 +18,6 @@ import javax.swing.SwingConstants;
 
 import player.Player;
 import util.ChangeManager;
-import util.SpielListen;
 
 // TODO Alle Würfel verbraucht
 /**
@@ -39,10 +38,6 @@ public class SauTreiber extends Game implements PC {
 	}
 	static String shortInfo = "Ein spannendes Würfelspiel. Sammle Punkte, aber wer zu viel riskiert verliert alles.";
 	public static int defaultNumOfRounds = 3;		// !!Wird im Constructor mit 1000 multipliziert
-	private static final int GAME_ID = SpielListen.SAUTREIBER;
-	public int getGameID(){
-		return GAME_ID;
-	}
 	private JPanel hauptbereichPanel;
 	private JLabel[] roundCred;
 	private JButton aufhoerenButton;

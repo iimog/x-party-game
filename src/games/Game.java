@@ -341,8 +341,6 @@ public abstract class Game extends Anzeige {
 
 	public abstract String getShortInfo();
 
-	public abstract int getGameID();
-
 	public int getStartPlayerID(boolean inform) {
 		Random r = new Random();
 		int next = r.nextInt(spielerZahl);

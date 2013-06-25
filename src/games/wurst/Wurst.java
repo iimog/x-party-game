@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 
 import player.Player;
 import util.ChangeManager;
-import util.SpielListen;
 
 public class Wurst extends Game implements PC{
 	private static final long serialVersionUID = 1L;
@@ -115,11 +114,6 @@ public class Wurst extends Game implements PC{
 	@Override
 	public String getShortInfo() {
 		return shortInfo;
-	}
-
-	@Override
-	public int getGameID() {
-		return SpielListen.WURST;
 	}
 
 	@Override

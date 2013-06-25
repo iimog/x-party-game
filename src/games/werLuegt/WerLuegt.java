@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 
 import player.Player;
 import start.X;
-import util.SpielListen;
 
 public class WerLuegt extends Game implements PC {
 	private static final long serialVersionUID = 1L;
@@ -966,11 +965,6 @@ public class WerLuegt extends Game implements PC {
 	@Override
 	public String getShortInfo() {
 		return shortInfo;
-	}
-
-	@Override
-	public int getGameID() {
-		return SpielListen.WERLUEGT;
 	}
 
 	@Override

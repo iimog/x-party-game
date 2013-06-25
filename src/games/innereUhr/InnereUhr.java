@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import player.Player;
-import util.SpielListen;
 
 
 /**
@@ -38,10 +37,6 @@ public class InnereUhr extends games.Game implements PC {
 	}
 	final static String shortInfo = "Es geht darum seine innere Uhr zu nutzen um zur " +
 	"richtigen Zeit den Buzzer zu drücken.";
-	private static final int GAME_ID = SpielListen.UHR;
-	public int getGameID(){
-		return GAME_ID;
-	}
 	public static int defaultNumOfRounds = 5;
 	
 	private JPanel hauptbereichPanel;
