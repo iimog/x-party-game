@@ -20,7 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import player.Player;
-import util.SpielListen;
 
 
 /**
@@ -40,11 +39,6 @@ public class World extends Game implements PC{
 	static String gameName = "Wo";
 	public static String getGameName(){
 		return gameName;
-	}
-	public static String shortInfo="Kennst du die Erde wie deine Westentasche?";
-	private static final int GAME_ID = SpielListen.WO;
-	public int getGameID(){
-		return GAME_ID;
 	}
 	public static int defaultNumOfRounds = 5;
 	private JButton zoomButton;
@@ -196,11 +190,11 @@ public class World extends Game implements PC{
 		info[29] = 		"Im Jahre 1959 floh der gegenwärtige Dalai Lama am 17. März während des Tibetaufstands ins indische Exil nach Dharamsala.";
 	}
 
-	public World(Player[] myPlayer, Modus modus) {
-		this(myPlayer, defaultNumOfRounds, modus);
+	public World(Player[] myPlayer, Modus modus, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
 	}
-	public World(Player[] player, int numOfRounds, Modus modus) {
-		super(gameName, player, numOfRounds, modus);
+	public World(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
+		super(gameName, player, numOfRounds, modus, globalGameID);
 		if(modus == Modus.SOLO){
 			spielerZahl--;
 			toleranzOn = true;
@@ -250,10 +244,6 @@ public class World extends Game implements PC{
 		if(centerY<264)centerY=264;
 		if(centerX>3276-512)centerX=3276-512;
 		if(centerY>1689-264)centerY=1689-264;
-	}
-	@Override
-	public String getShortInfo(){
-		return shortInfo;
 	}
 	
 	class ButtonListener implements ActionListener{

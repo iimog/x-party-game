@@ -45,6 +45,8 @@ public abstract class Game extends Anzeige {
 	public String gameName;
 	public player.Player[] myPlayer;
 	private Team[] myTeam = new Team[2];
+	
+	private int globalGameID;
 
 	public int numOfRounds;
 	public int spielerZahl;
@@ -87,7 +89,7 @@ public abstract class Game extends Anzeige {
 	private JPanel centeredPanel;
 
 	public Game(String name, player.Player[] player, int numOfRounds,
-			Modus modus) {
+			Modus modus, int globalGameID) {
 		gameName = name;
 		myPlayer = player;
 		if (modus == Modus.TEAM) {
@@ -96,6 +98,7 @@ public abstract class Game extends Anzeige {
 		}
 		this.modus = modus;
 		this.numOfRounds = numOfRounds;
+		this.globalGameID = globalGameID;
 		spielerZahl = modus.getSpielerzahl();
 		initVariablen();
 		initGUI();
@@ -339,8 +342,6 @@ public abstract class Game extends Anzeige {
 		}
 	}
 
-	public abstract String getShortInfo();
-
 	public int getStartPlayerID(boolean inform) {
 		Random r = new Random();
 		int next = r.nextInt(spielerZahl);
@@ -532,5 +533,9 @@ public abstract class Game extends Anzeige {
 
 	public void setPaused(boolean paused) {
 		this.paused = paused;
+	}
+
+	public int getGlobalGameID() {
+		return globalGameID;
 	}
 }

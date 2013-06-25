@@ -24,7 +24,6 @@ import util.ChangeManager;
 public class BuchstabenSalat extends Game implements PC {
 	private static final long serialVersionUID = 1L;
 	private static String gameName = "Buchstabensalat";
-	private static String shortInfo = "Behältst du den Überblick im Buchstabengewirr?";
 	static Font standardFont = new JLabel().getFont().deriveFont(40f);
 
 	private static int defaultNumOfRounds = 5;
@@ -424,8 +423,8 @@ public class BuchstabenSalat extends Game implements PC {
 		kategorie[123] = "Tier";
 	}
 
-	public BuchstabenSalat(Player[] player, Modus modus) {
-		super(gameName, player, defaultNumOfRounds, modus);
+	public BuchstabenSalat(Player[] player, Modus modus, int globalGameID) {
+		super(gameName, player, defaultNumOfRounds, modus, globalGameID);
 		initGUI();
 	}
 
@@ -573,11 +572,6 @@ public class BuchstabenSalat extends Game implements PC {
 			aufdecker = new Aufdecker();
 			aufdecker.start();
 		}
-	}
-
-	@Override
-	public String getShortInfo() {
-		return shortInfo;
 	}
 
 	@Override

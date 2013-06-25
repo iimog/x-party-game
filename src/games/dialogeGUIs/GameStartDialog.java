@@ -1,5 +1,6 @@
 package games.dialogeGUIs;
 import games.Game;
+import games.GameInfo;
 import gui.EasyDialog;
 import gui.components.JButtonIcon;
 import highscore.GameHighscore;
@@ -17,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+
+import util.SpielListen;
 
 
 /**
@@ -51,8 +54,9 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 	private JButton highscoreButton;
 
 	public GameStartDialog(Game game) {
-		gameName = game.gameName;
-		shortInfo = game.getShortInfo();
+		GameInfo gi = SpielListen.getSpieleMap().get(game.getGlobalGameID());
+		gameName = gi.getGameName();
+		shortInfo = gi.getShortInfo();
 		this.game = game;
 		initGUI();
 	}

@@ -6,18 +6,11 @@ import player.Player;
 public class RawNonPC extends StandardNonPC {
 	private static final long serialVersionUID = 1L;
 
-	public String shortInfo;
 	public String background;
 	
-	public RawNonPC(String name, Player[] player, int numOfRounds, Modus modus, String shortInfo, String background) {
-		super(name, player, numOfRounds, modus);
+	public RawNonPC(String name, Player[] player, int numOfRounds, Modus modus, String background, int globalGameID) {
+		super(name, player, numOfRounds, modus, globalGameID);
 		this.background = background;
-		this.shortInfo = shortInfo;
-	}
-
-	@Override
-	public String getShortInfo() {
-		return shortInfo;
 	}
 	
 	@Override

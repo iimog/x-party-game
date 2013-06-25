@@ -23,8 +23,8 @@ public abstract class StandardNonPC extends Game implements NonPC {
 	private JPanel punktePanel;
 	private JButton[] punktGemachtButton;
 
-	public StandardNonPC(String name, Player[] player, int numOfRounds, Modus modus) {
-		super(name, player, numOfRounds, modus);
+	public StandardNonPC(String name, Player[] player, int numOfRounds, Modus modus, int globalGameID) {
+		super(name, player, numOfRounds, modus, globalGameID);
 		punktGemachtButton = new JButton[spielerZahl];
 		initGUI();
 	}

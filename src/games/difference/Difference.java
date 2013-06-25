@@ -23,11 +23,8 @@ import javax.swing.JPanel;
 
 import player.Player;
 import util.ConfirmListener;
-import util.SpielListen;
 import ablauf.MatchCredits;
 
-
-// TODO Schließen während Countdown läuft
 /**
  * This code was edited or generated using CloudGarden's Jigloo
  * SWT/Swing GUI Builder, which is free for non-commercial
@@ -42,15 +39,10 @@ import ablauf.MatchCredits;
  */
 public class Difference extends Game implements PC {
 	private static final long serialVersionUID = -6078006638537351232L;
-	private static final int GAME_ID = SpielListen.FEHLERTEUFEL;
-	public int getGameID(){
-		return GAME_ID;
-	}
 	public static String gameName = "Fehlersuche";
 	public static String getGameName(){
 		return gameName;
 	}
-	public static String shortInfo = "Finde den Fehler im linken Bild - bevor es dein Gegner tut.";
 	private JPanel darstellungPanel;
 	private JPanel schaltflaechenPanel;
 	private gui.components.Countdown count;
@@ -180,12 +172,12 @@ public class Difference extends Game implements PC {
 		coords[22] = new Point(277,47);
 	}
 
-	public Difference(Player[] player, Modus modus){
-		this(player, 5, modus);
+	public Difference(Player[] player, Modus modus, int globalGameID){
+		this(player, 5, modus, globalGameID);
 	}
 
-	public Difference(Player[] player, int numOfRounds, Modus modus) {
-		super(gameName, player, numOfRounds, modus);
+	public Difference(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
+		super(gameName, player, numOfRounds, modus, globalGameID);
 		this.numOfRounds = numOfRounds;
 		uebersprungeneBilder = Collections.synchronizedList(new ArrayList<Integer>());
 		current = nextRandom(numOfPics);
@@ -212,11 +204,6 @@ public class Difference extends Game implements PC {
 		count.start();
 		whoBuzz = player;
 		start = System.currentTimeMillis();
-	}
-
-	@Override
-	public String getShortInfo(){
-		return shortInfo;
 	}
 
 	private void initGUI() {

@@ -24,7 +24,6 @@ import javax.swing.SwingConstants;
 
 import player.Player;
 import util.InputListener;
-import util.SpielListen;
 
 
 /**
@@ -43,17 +42,8 @@ public class Ghosts extends Game implements PC {
 	public static String getGameName(){
 		return gameName;
 	}
-	static String shortInfo = "Ein Strategiespiel. Es geht darum zu bluffen, den Gegner zu täuschen"
-		+ " aber ihn selbst richtig einzuschätzen. Wer ist der bessere Menschenkenner?";
 
 	public static int defaultNumOfRounds = 2;
-	private static final int GAME_ID = SpielListen.GEISTER;
-	public int getGameID(){
-		return GAME_ID;
-	}
-	public static void main(String[] args) {
-		new Ghosts(new Player[] {}, 5, Modus.TEAM); // Test besser über TestStarter!
-	}
 	private Spielfeld spielfeld;
 	private JPanel player0Panel;
 	private JLabel[] playerLabel = new JLabel[2];
@@ -75,12 +65,12 @@ public class Ghosts extends Game implements PC {
 	private JButton fertigButton;
 	private Container hauptbereichPanel;
 	
-	public Ghosts(Player[] myPlayer, Modus modus) {
-		this(myPlayer, defaultNumOfRounds, modus);
+	public Ghosts(Player[] myPlayer, Modus modus, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
 	}
 
-	public Ghosts(Player[] player, int numOfRounds, Modus modus) {
-		super(gameName, player, numOfRounds, modus);
+	public Ghosts(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
+		super(gameName, player, numOfRounds, modus, globalGameID);
 		initGUI();
 	}
 
@@ -146,11 +136,6 @@ public class Ghosts extends Game implements PC {
 			}
 		}
 		repaint();
-	}
-
-	@Override
-	public String getShortInfo() {
-		return shortInfo;
 	}
 
 	private void initGUI() {

@@ -36,7 +36,6 @@ public class SauTreiber extends Game implements PC {
 	public static String getGameName(){
 		return gameName;
 	}
-	static String shortInfo = "Ein spannendes Würfelspiel. Sammle Punkte, aber wer zu viel riskiert verliert alles.";
 	public static int defaultNumOfRounds = 3;		// !!Wird im Constructor mit 1000 multipliziert
 	private JPanel hauptbereichPanel;
 	private JLabel[] roundCred;
@@ -58,12 +57,12 @@ public class SauTreiber extends Game implements PC {
 	int bestaetigCredit = 0;
 	int bestaetigCount = 0;
 	boolean strasse = false;
-	public SauTreiber(Player[] myPlayer, Modus modus) {
-		this(myPlayer, defaultNumOfRounds, modus);
+	public SauTreiber(Player[] myPlayer, Modus modus, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
 	}
 
-	public SauTreiber(player.Player[] pl, int numOfRounds, Modus modus) {
-		super(gameName, pl, numOfRounds * 1000, modus);
+	public SauTreiber(player.Player[] pl, int numOfRounds, Modus modus, int globalGameID) {
+		super(gameName, pl, numOfRounds * 1000, modus, globalGameID);
 		initElements();
 		{
 			hauptbereichPanel = new JPanel();
@@ -295,11 +294,6 @@ public class SauTreiber extends Game implements PC {
 		}
 		wuerfelbar = true;
 		analyzed = false;
-	}
-
-	@Override
-	public String getShortInfo() {
-		return shortInfo;
 	}
 
 	private void gewuerfelt(Dice d) {

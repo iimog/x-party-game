@@ -35,8 +35,6 @@ public class InnereUhr extends games.Game implements PC {
 	public static String getGameName(){
 		return gameName;
 	}
-	final static String shortInfo = "Es geht darum seine innere Uhr zu nutzen um zur " +
-	"richtigen Zeit den Buzzer zu drücken.";
 	public static int defaultNumOfRounds = 5;
 	
 	private JPanel hauptbereichPanel;
@@ -59,12 +57,12 @@ public class InnereUhr extends games.Game implements PC {
 
 	int rWinner;				// playerID des Rundensiegers
 
-	public InnereUhr(Player[] myPlayer, Modus modus) {
-		this(myPlayer, defaultNumOfRounds, modus);
+	public InnereUhr(Player[] myPlayer, Modus modus, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
 	}
 
-	public InnereUhr(Player[] myPlayer, int numOfRounds, Modus modus) {
-		super(gameName, myPlayer, numOfRounds, modus);
+	public InnereUhr(Player[] myPlayer, int numOfRounds, Modus modus, int globalGameID) {
+		super(gameName, myPlayer, numOfRounds, modus, globalGameID);
 		if(modus == Modus.SOLO){
 			spielerZahl--;
 			toleranz = 2000;
@@ -74,11 +72,6 @@ public class InnereUhr extends games.Game implements PC {
 		distance = new long[spielerZahl];
 		finished = new boolean[spielerZahl];
 		initGUI();
-	}
-
-	@Override
-	public String getShortInfo() {
-		return shortInfo;
 	}
 
 	private void initGUI() {

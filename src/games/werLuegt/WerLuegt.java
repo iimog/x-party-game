@@ -25,7 +25,6 @@ import start.X;
 public class WerLuegt extends Game implements PC {
 	private static final long serialVersionUID = 1L;
 	private static String gameName = "Wer lügt";
-	private static String shortInfo = "Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)";
 	static Font standardFont = new JLabel().getFont().deriveFont(40f);
 	static Font labelFont = X.buttonFont.deriveFont(50f);
 	
@@ -819,8 +818,8 @@ public class WerLuegt extends Game implements PC {
 		 */
 	}
 	
-	public WerLuegt(Player[] player, Modus modus) {
-		super(gameName, player, defaultNumOfRounds, modus);
+	public WerLuegt(Player[] player, Modus modus, int globalGameID) {
+		super(gameName, player, defaultNumOfRounds, modus, globalGameID);
 		initAussagen();	
 		initGUI();
 	}
@@ -961,11 +960,6 @@ public class WerLuegt extends Game implements PC {
 			}
 		}
 	};
-	
-	@Override
-	public String getShortInfo() {
-		return shortInfo;
-	}
 
 	@Override
 	public void settingsChanged() {

@@ -14,7 +14,6 @@ import util.ChangeManager;
 
 public class Wurst extends Game implements PC{
 	private static final long serialVersionUID = 1L;
-	private static String shortInfo = "Wer mehr auf die Waage bringt gewinnt - aber gib nicht alles auf einmal aus.";
 	private static String gameName = "Die Wurst";
 	public static String getGameName(){
 		return gameName;
@@ -28,8 +27,8 @@ public class Wurst extends Game implements PC{
 	boolean schonEinsOffen = false;
 	private int[] abgabe;
 
-	public Wurst(Player[] player, Modus modus) {
-		super(gameName, player, defaultNumOfRounds, modus);
+	public Wurst(Player[] player, Modus modus, int globalGameID) {
+		super(gameName, player, defaultNumOfRounds, modus, globalGameID);
 		wurstPanel = new WurstPanel[spielerZahl];
 		abgabe = new int[spielerZahl];
 		initGUI();
@@ -109,11 +108,6 @@ public class Wurst extends Game implements PC{
 			}
 		}
 		return winnerID;
-	}
-
-	@Override
-	public String getShortInfo() {
-		return shortInfo;
 	}
 
 	@Override

@@ -34,15 +34,11 @@ public class Bad6 extends games.Game implements PC {
 			throwFinish();
 		}
 	}
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3953537180751315641L;
 	public static String gameName = "Böse 6";
 	public static String getGameName(){
 		return gameName;
 	}
-	public static String shortInfo = "Lass dich nicht verführen.";
 	public static int defaultNumOfRounds = 4;	// !!Wird im Constructor mit 10 multipliziert!!
 	private JPanel hauptbereichPanel;
 	JButton stopButton;
@@ -56,12 +52,12 @@ public class Bad6 extends games.Game implements PC {
 	private String lache = "media/sounds/lache.wav";
 	private Bad6Robot myRobot;
 
-	public Bad6(Player[] myPlayer, Modus modus) {
-		this(myPlayer, defaultNumOfRounds, modus);
+	public Bad6(Player[] myPlayer, Modus modus, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
 	}
 
-	public Bad6(player.Player[] myPlayer, int numOfRounds, Modus modus) {
-		super(gameName, myPlayer, 10 * numOfRounds, modus);
+	public Bad6(player.Player[] myPlayer, int numOfRounds, Modus modus, int globalGameID) {
+		super(gameName, myPlayer, 10 * numOfRounds, modus, globalGameID);
 		if(modus == Modus.SOLO){
 			myRobot = new Bad6Robot(this);
 		}
@@ -76,10 +72,6 @@ public class Bad6 extends games.Game implements PC {
 		dice[whosTurn].doClick();
 	}
 
-	@Override
-	public String getShortInfo(){
-		return shortInfo;
-	}
 	private void initGUI() {
 		try {
 			{

@@ -17,7 +17,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 
 import player.Player;
-import util.SpielListen;
 
 
 // TODO führende Nullen und Leerzeichen
@@ -125,12 +124,6 @@ public class Guess extends Game implements PC {
 	static String gameName = "Guess";
 	public static String getGameName(){
 		return gameName;
-	}
-	static String shortInfo = "Das ist ein Ratespiel. Wer näher an die richtige Antwort kommt" +
-	" gewinnt.";
-	private static final int GAME_ID = SpielListen.GUESS;
-	public int getGameID(){
-		return GAME_ID;
 	}
 	public double toleranz = 0.95;
 	public boolean toleranzOn = true;
@@ -358,12 +351,12 @@ public class Guess extends Game implements PC {
 	JPasswordField[] eingabe;
 	JButton finish = new JButton("OK");
 
-	public Guess(Player[] player, Modus modus){
-		this(player, 5, modus);
+	public Guess(Player[] player, Modus modus, int globalGameID){
+		this(player, 5, modus, globalGameID);
 	}
 
-	public Guess(Player[] players, int numOfRounds, Modus modus){
-		super(gameName, players, numOfRounds, modus);
+	public Guess(Player[] players, int numOfRounds, Modus modus, int globalGameID){
+		super(gameName, players, numOfRounds, modus, globalGameID);
 		// numOfPlayers = players.length; --> if there are more than two Players
 		this.numOfRounds = numOfRounds;
 		if(modus == Modus.SOLO){
@@ -392,12 +385,6 @@ public class Guess extends Game implements PC {
 		finish.addActionListener(new Action());
 	}
 
-
-
-	@Override
-	public String getShortInfo(){
-		return shortInfo;
-	}
 	public void nowVisible(){
 		instance.changeBackground("media/guess/fragezeichen.jpg");
 	}

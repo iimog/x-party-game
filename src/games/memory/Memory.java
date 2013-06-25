@@ -14,10 +14,8 @@ import java.util.HashSet;
 import java.util.Random;
 
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import player.Player;
-import util.SpielListen;
 
 
 /**
@@ -38,11 +36,6 @@ public class Memory extends games.Game implements PC {
 	public static String getGameName(){
 		return gameName;
 	}
-	public static String shortInfo = "Das klassische Merkspiel";
-	private static final int GAME_ID = SpielListen.MEMORY;
-	public int getGameID(){
-		return GAME_ID;
-	}
 	public static int defaultNumOfRounds = 5;
 	private int schwierigkeit = 5;
 	public int getSchwierigkeit() {
@@ -53,17 +46,6 @@ public class Memory extends games.Game implements PC {
 		this.schwierigkeit = schwierigkeit;
 	}
 
-	/**
-	 * Auto-generated main method to display this JFrame
-	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				Memory inst = new Memory(new Player[] {},0, Modus.DUELL); // nur für Testzwecke
-				inst.setVisible(true);
-			}
-		});
-	}
 	private String path = "media/memory/";public static String[] pic = new String[60];
 	{
 		pic[6] = path + "audia5.jpg";
@@ -179,23 +161,18 @@ public class Memory extends games.Game implements PC {
 	};
 	private MemoryRobot memoryRobot;
 
-	public Memory(Player[] myPlayer, Modus modus) {
-		this(myPlayer, defaultNumOfRounds, modus);
+	public Memory(Player[] myPlayer, Modus modus, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
 	}
 
-	public Memory(Player[] player, int numOfRounds, Modus modus) {
-		super(gameName, player, numOfRounds, modus);
+	public Memory(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
+		super(gameName, player, numOfRounds, modus, globalGameID);
 		if(modus == Modus.SOLO){
 			memoryRobot = new MemoryRobot(this);
 			memoryRobot.setGrenzWert(schwierigkeit*10);
 		}
 		mischen(27);
 		initGUI();
-	}
-
-	@Override
-	public String getShortInfo() {
-		return shortInfo;
 	}
 
 	private void initGUI() {

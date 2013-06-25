@@ -30,10 +30,6 @@ import util.ChangeManager;
 public class Stimmts extends Game implements PC {
 	private static final long serialVersionUID = 1L;
 	private static String gameName = "Stimmts";
-	private static String shortInfo = "Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)\n\n"
-			+ "Spieler 1: D->wahr F->falsch, Spieler 2: K->wahr L->falsch, \n"
-			+ "Spieler 3: B->wahr N->falsch, Spieler 4: Z->wahr U->falsch \n\n"
-			+ "Eselsbrücken: F->Falsch, L->Lüge, N->Nichtwahr, U->Unwahr";
 	static Font standardFont = new JLabel().getFont().deriveFont(40f);
 
 	public static final int[] trueBuzz = { KeyEvent.VK_D, KeyEvent.VK_K,
@@ -523,8 +519,8 @@ public class Stimmts extends Game implements PC {
 						"Der älteste Elefant lebte im Zoo von Taipeh und wurde „nur“ 86 Jahre alt."));
 	}
 
-	public Stimmts(Player[] player, Modus modus) {
-		super(gameName, player, defaultNumOfRounds, modus);
+	public Stimmts(Player[] player, Modus modus, int globalGameID) {
+		super(gameName, player, defaultNumOfRounds, modus, globalGameID);
 		initAussagen();
 		vermutung = new boolean[player.length];
 		answerGiven = new boolean[player.length];
@@ -662,11 +658,6 @@ public class Stimmts extends Game implements PC {
 			answerGiven[playerID] = true;
 			vermutung[playerID] = stimmt;
 		}
-	}
-
-	@Override
-	public String getShortInfo() {
-		return shortInfo;
 	}
 
 	@Override

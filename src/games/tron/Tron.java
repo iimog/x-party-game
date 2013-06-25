@@ -28,7 +28,6 @@ public class Tron extends Game implements PC{
 	public static String getGameName(){
 		return gameName;
 	}
-	final static String shortInfo = "Verbaue deinem Gegner den Weg aber fahr nicht gegen die Wand.";
 	// up, down, right, left evtl. durch enum ersetzen
 	private static final int UP = -1;
 	private static final int DOWN = 1;
@@ -68,11 +67,11 @@ public class Tron extends Game implements PC{
 		spielfeld.showGitter(gitterVisible);
 	}
 
-	public Tron(Player[] player, Modus modus) {
-		this(player, defaultNumOfRounds, modus);
+	public Tron(Player[] player, Modus modus, int globalGameID) {
+		this(player, defaultNumOfRounds, modus, globalGameID);
 	}
-	public Tron(Player[] player, int numOfRounds, Modus modus) {
-		super(gameName, player, numOfRounds, modus);
+	public Tron(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
+		super(gameName, player, numOfRounds, modus, globalGameID);
 		colums = defaultColums;
 		rows = defaultRows;
 		initArrays();
@@ -144,10 +143,6 @@ public class Tron extends Game implements PC{
 		hauptbereichPanel.repaint();
 	}
 
-	@Override
-	public String getShortInfo() {
-		return shortInfo;
-	}
 	private KeyAdapter steuerung = new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent evt) {
