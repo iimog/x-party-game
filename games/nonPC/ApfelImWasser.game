@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>ApfelImWasser NonPC Spiel</comment>
+<entry key="name">Apfel im Wasser</entry>
+<entry key="background">games/nonPC/backgrounds/apfelwasser.png</entry>
+<entry key="numOfRounds">5</entry>
+<entry key="anleitung">games/nonPC/anleitungen/apfelwasser.html</entry>
+</properties>

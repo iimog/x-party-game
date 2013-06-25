@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>MuenzWurf NonPC Spiel</comment>
+<entry key="name">Münzwurf</entry>
+<entry key="background">games/nonPC/backgrounds/muenzwurf.png</entry>
+<entry key="numOfRounds">7</entry>
+<entry key="anleitung">games/nonPC/anleitungen/muenzwurf.html</entry>
+</properties>
