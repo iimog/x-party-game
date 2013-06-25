@@ -175,7 +175,7 @@ public class Spielablauf implements GameListener, Ablauf {
 		formparas[0] = Player[].class;
 		formparas[1] = Modus.class;
 		try {
-			Class<?> c = Class.forName(SpielListen.getSpieleMap().get(iD));
+			Class<?> c = Class.forName(SpielListen.getSpieleMap().get(iD).getPath());
 			Constructor<?> con = c.getConstructor(formparas);
 			game = (Game) con.newInstance(new Object[] { myPlayer, modus });
 		} catch (Exception e) {
