@@ -4,17 +4,12 @@ public class GameInfo {
 	private int ID;
 	private String gameName;
 	private String path;
-	private boolean PC;
-	private boolean system;
 	private int modi;
-	public GameInfo(int iD, String gameName, String path, boolean pC,
-			boolean system, int modi) {
+	public GameInfo(int iD, String gameName, String path, int modi) {
 		super();
 		ID = iD;
 		this.gameName = gameName;
 		this.path = path;
-		PC = pC;
-		this.system = system;
 		this.modi = modi;
 	}
 	public int getID() {
@@ -27,10 +22,17 @@ public class GameInfo {
 		return path;
 	}
 	public boolean isPC() {
-		return PC;
+		return ID%2 == 0;
 	}
 	public boolean isSystem() {
-		return system;
+		return ID%4 < 2;
+	}
+	public boolean isModus(Modus modus){
+		if(modus == Modus.SOLO) return isSolo();
+		if(modus == Modus.DUELL) return isDuell();
+		if(modus == Modus.TRIPPLE) return isTripple();
+		if(modus == Modus.VIERER) return isVierer();
+		return isTeam();
 	}
 	public boolean isSolo(){
 		return modi%2 == 1;
