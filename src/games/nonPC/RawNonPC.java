@@ -8,8 +8,8 @@ public class RawNonPC extends StandardNonPC {
 
 	public String background;
 	
-	public RawNonPC(String name, Player[] player, int numOfRounds, Modus modus, String background, int globalGameID) {
-		super(name, player, numOfRounds, modus, globalGameID);
+	public RawNonPC(Player[] player, int numOfRounds, Modus modus, String background, int globalGameID) {
+		super(player, numOfRounds, modus, globalGameID);
 		this.background = background;
 	}
 	

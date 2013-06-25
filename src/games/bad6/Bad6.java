@@ -57,7 +57,7 @@ public class Bad6 extends games.Game implements PC {
 	}
 
 	public Bad6(player.Player[] myPlayer, int numOfRounds, Modus modus, int globalGameID) {
-		super(gameName, myPlayer, 10 * numOfRounds, modus, globalGameID);
+		super(myPlayer, 10 * numOfRounds, modus, globalGameID);
 		if(modus == Modus.SOLO){
 			myRobot = new Bad6Robot(this);
 		}

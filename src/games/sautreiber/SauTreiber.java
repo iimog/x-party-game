@@ -62,7 +62,7 @@ public class SauTreiber extends Game implements PC {
 	}
 
 	public SauTreiber(player.Player[] pl, int numOfRounds, Modus modus, int globalGameID) {
-		super(gameName, pl, numOfRounds * 1000, modus, globalGameID);
+		super(pl, numOfRounds * 1000, modus, globalGameID);
 		initElements();
 		{
 			hauptbereichPanel = new JPanel();

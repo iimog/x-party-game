@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
 import start.X;
 
 public class ProfileFileHandler {
-	private static String profileDir = X.getDataDir() + "Settings/Profiles";
+	private static String profileDir = X.getDataDir() + "settings/profiles";
 	public static final String SOLO = "Solo";
 	public static final String DUELL = "Duell";
 	public static final String TRIPPLE = "Tripple";

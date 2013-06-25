@@ -520,7 +520,7 @@ public class Stimmts extends Game implements PC {
 	}
 
 	public Stimmts(Player[] player, Modus modus, int globalGameID) {
-		super(gameName, player, defaultNumOfRounds, modus, globalGameID);
+		super(player, defaultNumOfRounds, modus, globalGameID);
 		initAussagen();
 		vermutung = new boolean[player.length];
 		answerGiven = new boolean[player.length];

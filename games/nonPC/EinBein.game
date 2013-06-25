@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-<comment>Einbein NonPC Spiel</comment>
-<entry key="name">Einbein</entry>
-<entry key="background">games/nonPC/backgrounds/einbein.png</entry>
-<entry key="numOfRounds">3</entry>
-<entry key="anleitung">games/nonPC/anleitungen/einbein.html</entry>
-</properties>

@@ -194,7 +194,7 @@ public class World extends Game implements PC{
 		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
 	}
 	public World(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
-		super(gameName, player, numOfRounds, modus, globalGameID);
+		super(player, numOfRounds, modus, globalGameID);
 		if(modus == Modus.SOLO){
 			spielerZahl--;
 			toleranzOn = true;

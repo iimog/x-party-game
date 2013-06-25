@@ -62,7 +62,7 @@ public class InnereUhr extends games.Game implements PC {
 	}
 
 	public InnereUhr(Player[] myPlayer, int numOfRounds, Modus modus, int globalGameID) {
-		super(gameName, myPlayer, numOfRounds, modus, globalGameID);
+		super(myPlayer, numOfRounds, modus, globalGameID);
 		if(modus == Modus.SOLO){
 			spielerZahl--;
 			toleranz = 2000;

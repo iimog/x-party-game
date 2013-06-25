@@ -177,7 +177,7 @@ public class Difference extends Game implements PC {
 	}
 
 	public Difference(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
-		super(gameName, player, numOfRounds, modus, globalGameID);
+		super(player, numOfRounds, modus, globalGameID);
 		this.numOfRounds = numOfRounds;
 		uebersprungeneBilder = Collections.synchronizedList(new ArrayList<Integer>());
 		current = nextRandom(numOfPics);

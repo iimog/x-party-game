@@ -1,13 +1,13 @@
-Böse 6	games.bad6.Bad6	31	Lass dich nicht verführen!
-Säutreiber	games.sautreiber.SauTreiber	30	Ein spannendes Würfelspiel. Sammle Punkte, aber wer zu viel riskiert verliert alles.
-Schätz mal	games.guess.Guess	31	Das ist ein Ratespiel. Wer näher an die richtige Antwort kommt gewinnt.
-Fehlerteufel	games.difference.Difference	31	Finde den Fehler im linken Bild - bevor es dein Gegner tut.
-Memory	games.memory.Memory	31	Das klassische Merkspiel.
-Wo?	games.world.World	31	Kennst du die Erde wie deine Westentasche?
-Uhr	games.innereUhr.InnereUhr	31	Es geht darum seine innere Uhr zu nutzen um zur richtigen Zeit den Buzzer zu drücken.
-Geister	games.ghosts.Ghosts	18	Ein Strategiespiel. Es geht darum zu bluffen, den Gegner zu täuschen aber ihn selbst richtig einzuschätzen. Wer ist der bessere Menschenkenner?
-Tron	games.tron.Tron	30	Verbaue deinem Gegner den Weg aber fahr nicht gegen die Wand.
-Wurst	games.wurst.Wurst	31	Wer mehr auf die Waage bringt gewinnt - aber gib nicht alles auf einmal aus.
-Buchstabensalat	games.buchstabensalat.BuchstabenSalat	30	Behältst du den Überblick im Buchstabengewirr?
-Stimmts?	games.stimmts.Stimmts	31	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)\n\nSpieler 1: D->wahr F->falsch, Spieler 2: K->wahr L->falsch, \nSpieler 3: B->wahr N->falsch, Spieler 4: Z->wahr U->falsch \n\nEselsbrücken: F->Falsch, L->Lüge, N->Nichtwahr, U->Unwahr	
-Wer lügt?	games.werLuegt.WerLuegt	30	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)
+Böse 6	games.bad6.Bad6	5	31	Lass dich nicht verführen!
+Säutreiber	games.sautreiber.SauTreiber	3	30	Ein spannendes Würfelspiel. Sammle Punkte, aber wer zu viel riskiert verliert alles.
+Schätz mal	games.guess.Guess	5	31	Das ist ein Ratespiel. Wer näher an die richtige Antwort kommt gewinnt.
+Fehlerteufel	games.difference.Difference	4	31	Finde den Fehler im linken Bild - bevor es dein Gegner tut.
+Memory	games.memory.Memory	5	31	Das klassische Merkspiel.
+Wo?	games.world.World	4	31	Kennst du die Erde wie deine Westentasche?
+Uhr	games.innereUhr.InnereUhr	5	31	Es geht darum seine innere Uhr zu nutzen um zur richtigen Zeit den Buzzer zu drücken.
+Geister	games.ghosts.Ghosts	2	18	Ein Strategiespiel. Es geht darum zu bluffen, den Gegner zu täuschen aber ihn selbst richtig einzuschätzen. Wer ist der bessere Menschenkenner?
+Tron	games.tron.Tron	5	30	Verbaue deinem Gegner den Weg aber fahr nicht gegen die Wand.
+Wurst	games.wurst.Wurst	5	31	Wer mehr auf die Waage bringt gewinnt - aber gib nicht alles auf einmal aus.
+Buchstabensalat	games.buchstabensalat.BuchstabenSalat	5	30	Behältst du den Überblick im Buchstabengewirr?
+Stimmts?	games.stimmts.Stimmts	5	31	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)\n\nSpieler 1: D->wahr F->falsch, Spieler 2: K->wahr L->falsch, \nSpieler 3: B->wahr N->falsch, Spieler 4: Z->wahr U->falsch \n\nEselsbrücken: F->Falsch, L->Lüge, N->Nichtwahr, U->Unwahr	
+Wer lügt?	games.werLuegt.WerLuegt	5	30	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)

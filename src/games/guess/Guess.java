@@ -356,7 +356,7 @@ public class Guess extends Game implements PC {
 	}
 
 	public Guess(Player[] players, int numOfRounds, Modus modus, int globalGameID){
-		super(gameName, players, numOfRounds, modus, globalGameID);
+		super(players, numOfRounds, modus, globalGameID);
 		// numOfPlayers = players.length; --> if there are more than two Players
 		this.numOfRounds = numOfRounds;
 		if(modus == Modus.SOLO){

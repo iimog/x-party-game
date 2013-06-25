@@ -28,7 +28,7 @@ public class Wurst extends Game implements PC{
 	private int[] abgabe;
 
 	public Wurst(Player[] player, Modus modus, int globalGameID) {
-		super(gameName, player, defaultNumOfRounds, modus, globalGameID);
+		super(player, defaultNumOfRounds, modus, globalGameID);
 		wurstPanel = new WurstPanel[spielerZahl];
 		abgabe = new int[spielerZahl];
 		initGUI();

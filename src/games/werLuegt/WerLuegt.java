@@ -819,7 +819,7 @@ public class WerLuegt extends Game implements PC {
 	}
 	
 	public WerLuegt(Player[] player, Modus modus, int globalGameID) {
-		super(gameName, player, defaultNumOfRounds, modus, globalGameID);
+		super(player, defaultNumOfRounds, modus, globalGameID);
 		initAussagen();	
 		initGUI();
 	}

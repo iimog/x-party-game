@@ -6,11 +6,13 @@ public class GameInfo {
 	private String path;
 	private String shortInfo;
 	private int modi;
-	public GameInfo(int iD, String gameName, String path, int modi, String shortInfo) {
+	private int defaultNumOfRounds;
+	public GameInfo(int iD, String gameName, String path, int defaultNumOfRounds, int modi, String shortInfo) {
 		super();
 		ID = iD;
 		this.gameName = gameName;
 		this.path = path;
+		this.defaultNumOfRounds = defaultNumOfRounds;
 		this.modi = modi;
 		this.shortInfo = shortInfo;
 }
@@ -53,5 +55,8 @@ public class GameInfo {
 	}
 	public String getShortInfo() {
 		return shortInfo;
+	}
+	public int getDefaultNumOfRounds() {
+		return defaultNumOfRounds;
 	}
 }

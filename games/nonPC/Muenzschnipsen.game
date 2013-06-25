@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-<comment>MuenzSchnipsen NonPC Spiel</comment>
-<entry key="name">Münzschnipsen</entry>
-<entry key="background">games/nonPC/backgrounds/muenzschnipsen.png</entry>
-<entry key="numOfRounds">4</entry>
-<entry key="anleitung">games/nonPC/anleitungen/muenzschnipsen.html</entry>
-</properties>

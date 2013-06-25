@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-<comment>Weitergeben NonPC Spiel</comment>
-<entry key="name">Weitergeben</entry>
-<entry key="background">games/nonPC/backgrounds/weitergeben.png</entry>
-<entry key="numOfRounds">7</entry>
-<entry key="anleitung">games/nonPC/anleitungen/weitergeben.html</entry>
-</properties>

@@ -16,7 +16,7 @@ public class MainSettings {
 	private static MainSettings ms;
 	public static final String FULLSCREEN = "Fullscreen";
 	public static final String SOUND = "Sound";
-	private String savePath = X.getDataDir() + "Settings";
+	private String savePath = X.getDataDir() + "settings";
 	private File saveFile = new File(savePath, "main.set");
 	private Properties p;
 	private MainSettings(){

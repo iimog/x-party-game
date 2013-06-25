@@ -424,7 +424,7 @@ public class BuchstabenSalat extends Game implements PC {
 	}
 
 	public BuchstabenSalat(Player[] player, Modus modus, int globalGameID) {
-		super(gameName, player, defaultNumOfRounds, modus, globalGameID);
+		super(player, defaultNumOfRounds, modus, globalGameID);
 		initGUI();
 	}
 

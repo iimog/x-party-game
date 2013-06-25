@@ -71,7 +71,7 @@ public class Tron extends Game implements PC{
 		this(player, defaultNumOfRounds, modus, globalGameID);
 	}
 	public Tron(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
-		super(gameName, player, numOfRounds, modus, globalGameID);
+		super(player, numOfRounds, modus, globalGameID);
 		colums = defaultColums;
 		rows = defaultRows;
 		initArrays();

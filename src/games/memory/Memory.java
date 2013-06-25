@@ -166,7 +166,7 @@ public class Memory extends games.Game implements PC {
 	}
 
 	public Memory(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
-		super(gameName, player, numOfRounds, modus, globalGameID);
+		super(player, numOfRounds, modus, globalGameID);
 		if(modus == Modus.SOLO){
 			memoryRobot = new MemoryRobot(this);
 			memoryRobot.setGrenzWert(schwierigkeit*10);

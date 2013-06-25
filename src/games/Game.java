@@ -21,6 +21,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
@@ -32,8 +33,10 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
 import player.Team;
+import settings.SettingsFileHandler;
 import start.X;
 import util.ConfirmListener;
+import util.SpielListen;
 import ablauf.MatchCredits;
 
 @SuppressWarnings("serial")
@@ -87,10 +90,11 @@ public abstract class Game extends Anzeige {
 	private JPanel credRechtsPanel;
 	private JLabel pauseLabel;
 	private JPanel centeredPanel;
+	Properties customSettings;
 
-	public Game(String name, player.Player[] player, int numOfRounds,
+	public Game(player.Player[] player, int numOfRounds,
 			Modus modus, int globalGameID) {
-		gameName = name;
+		gameName = SpielListen.getSpieleMap().get(globalGameID).getGameName();
 		myPlayer = player;
 		if (modus == Modus.TEAM) {
 			myTeam[0] = (Team) myPlayer[0];
@@ -114,6 +118,7 @@ public abstract class Game extends Anzeige {
 		playerLabel = new JLabel[spielerZahl];
 		matchCredLabel = new JLabel[spielerZahl];
 		playerPanel = new JPanel[spielerZahl];
+		customSettings = SettingsFileHandler.loadSettings(gameName);
 	}
 
 	private void initGUI() {

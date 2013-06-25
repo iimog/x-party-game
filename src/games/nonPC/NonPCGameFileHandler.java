@@ -2,10 +2,6 @@ package games.nonPC;
 
 import games.GameInfo;
 import games.Modus;
-
-import java.io.FileInputStream;
-import java.util.Properties;
-
 import player.Player;
 import start.X;
 import util.SpielListen;
@@ -22,6 +18,7 @@ public class NonPCGameFileHandler {
 		GameInfo gi = SpielListen.getSpieleMap().get(globalGameID);
 		String fileName = gi.getPath();
 		String prefix = (gi.isSystem() ? X.getMainDir() : X.getDataDir());
+		/*
 		Properties p = new Properties();
 		try {
 			FileInputStream fis = new FileInputStream(prefix+fileName);
@@ -30,12 +27,12 @@ public class NonPCGameFileHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String gameName = p.getProperty(NAME);
 		String gameBackground = prefix+p.getProperty(BACKGROUND);
-		String gameAnleitung = p.getProperty(ANLEITUNG);
 		String gameNumOfRounds = p.getProperty(NUMOFROUNDS);
-		int numOfRounds = Integer.parseInt(gameNumOfRounds);
-		RawNonPC game = new RawNonPC(gameName, players, numOfRounds, modus, gameBackground, globalGameID);
+		*/
+		int numOfRounds = gi.getDefaultNumOfRounds();
+		String background = (prefix + fileName).replaceAll(".game$", ".png");
+		RawNonPC game = new RawNonPC(players, numOfRounds, modus, background, globalGameID);
 		return game;
 	}
 }

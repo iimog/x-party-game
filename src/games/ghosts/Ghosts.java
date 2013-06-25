@@ -70,7 +70,7 @@ public class Ghosts extends Game implements PC {
 	}
 
 	public Ghosts(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
-		super(gameName, player, numOfRounds, modus, globalGameID);
+		super(player, numOfRounds, modus, globalGameID);
 		initGUI();
 	}
 
