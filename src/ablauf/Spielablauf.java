@@ -2,8 +2,10 @@ package ablauf;
 
 import games.Ergebnis;
 import games.Game;
+import games.GameInfo;
 import games.GameListener;
 import games.Modus;
+import games.nonPC.NonPCGameFileHandler;
 import gui.EasyDialog;
 import highscore.HighscoreFileHandler;
 
@@ -170,14 +172,31 @@ public class Spielablauf implements GameListener, Ablauf {
 	 * @return Game
 	 */
 	public Game gameGenerator(int iD) {
+		GameInfo gi = SpielListen.getSpieleMap().get(iD);
 		Game game = null;
-		Class<?>[] formparas = new Class[2];
+		if(gi.isPC()){
+			game = startPCGame(iD);
+		}
+		else{
+			game = startNonPCGame(iD);
+		}
+		return game;
+	}
+
+	private Game startNonPCGame(int iD) {
+		return NonPCGameFileHandler.loadGame(iD, myPlayer, modus);
+	}
+
+	private Game startPCGame(int iD) {
+		Game game = null;
+		Class<?>[] formparas = new Class[3];
 		formparas[0] = Player[].class;
 		formparas[1] = Modus.class;
+		formparas[2] = Integer.TYPE;
 		try {
 			Class<?> c = Class.forName(SpielListen.getSpieleMap().get(iD).getPath());
 			Constructor<?> con = c.getConstructor(formparas);
-			game = (Game) con.newInstance(new Object[] { myPlayer, modus });
+			game = (Game) con.newInstance(new Object[] { myPlayer, modus, iD });
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

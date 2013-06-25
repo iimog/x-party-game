@@ -24,14 +24,14 @@ public class NonPCGameFileHandler {
 		String prefix = (gi.isSystem() ? X.getMainDir() : X.getDataDir());
 		Properties p = new Properties();
 		try {
-			FileInputStream fis = new FileInputStream(prefix+"/"+fileName);
+			FileInputStream fis = new FileInputStream(prefix+fileName);
 			p.loadFromXML(fis);
 			fis.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		String gameName = p.getProperty(NAME);
-		String gameBackground = prefix+"/"+p.getProperty(BACKGROUND);
+		String gameBackground = prefix+p.getProperty(BACKGROUND);
 		String gameAnleitung = p.getProperty(ANLEITUNG);
 		String gameNumOfRounds = p.getProperty(NUMOFROUNDS);
 		int numOfRounds = Integer.parseInt(gameNumOfRounds);

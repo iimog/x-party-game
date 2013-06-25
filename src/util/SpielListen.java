@@ -45,7 +45,7 @@ public class SpielListen {
 		int counter = 1;
 		try {
 			FileReader fr = new FileReader(X.getDataDir()
-					+ "/games/nonPC.games");
+					+ "games/nonPC.games");
 			BufferedReader br = new BufferedReader(fr);
 			while (br.ready()) {
 				String line = br.readLine();
@@ -58,7 +58,7 @@ public class SpielListen {
 			br.close();
 			fr.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Datei: "+X.getDataDir() + "games/nonPC.games nicht gefunden");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -74,7 +74,7 @@ public class SpielListen {
 		int counter = 1;
 		try {
 			FileReader fr = new FileReader(X.getMainDir()
-					+ "/games/nonPC.games");
+					+ "games/nonPC.games");
 			BufferedReader br = new BufferedReader(fr);
 			while (br.ready()) {
 				String line = br.readLine();
@@ -87,7 +87,7 @@ public class SpielListen {
 			br.close();
 			fr.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Datei: "+X.getMainDir() + "games/nonPC.games nicht gefunden");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -103,7 +103,7 @@ public class SpielListen {
 		int counter = 1;
 		try {
 			FileReader fr = new FileReader(X.getMainDir()
-					+ "/games/pc.games");
+					+ "games/pc.games");
 			BufferedReader br = new BufferedReader(fr);
 			while (br.ready()) {
 				String line = br.readLine();
@@ -116,7 +116,7 @@ public class SpielListen {
 			br.close();
 			fr.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Datei: "+X.getMainDir() + "games/pc.games nicht gefunden");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -173,7 +173,7 @@ public class SpielListen {
 		for (Integer i : spiele) {
 			if (!spieleMap.containsKey(i))
 				continue;
-			if(spieleMap.get(i).isPC()){
+			if(!spieleMap.get(i).isPC()){
 				nonPcSpiele.add(i);
 			}
 		}
