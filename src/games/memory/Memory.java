@@ -46,43 +46,45 @@ public class Memory extends games.Game implements PC {
 		this.schwierigkeit = schwierigkeit;
 	}
 
-	private String path = "media/memory/";public static String[] pic = new String[60];
+	private String path = "media/memory/";public static String[] pic = new String[67];
 	{
-		pic[6] = path + "audia5.jpg";
-		pic[7] = path + "berg.jpg";
-		pic[24] = path + "dschungel.jpg";
-		pic[0] = path + "erde.jpg";
-		pic[8] = path + "eisvogel.jpg";
-		pic[9] = path + "eisvogel2.jpg";
-		pic[10] = path + "elefant.jpg";
-		pic[1] = path + "feuerwerk.jpg";
-		pic[26] = path + "fische.jpg";
-		pic[2] = path + "gruen.jpg";
-		pic[3] = path + "holz.jpg";
-		pic[4] = path + "laser.jpg";
-		pic[5] = path + "loewe.jpg";
-		pic[11] = path + "meer.jpg";
-		pic[12] = path + "orange.jpg";
-		pic[13] = path + "palme1.jpg";
-		pic[14] = path + "palme2.jpg";
-		pic[15] = path + "palme3.jpg";
-		pic[16] = path + "robbe.jpg";
-		pic[17] = path + "rose1.jpg";
-		pic[18] = path + "seerose.jpg";
-		pic[19] = path + "sonne1.jpg";
-		pic[20] = path + "sonne2.jpg";
-		pic[21] = path + "spiderman.jpg";
-		pic[22] = path + "tiger.jpg";
-		pic[25] = path + "tigers.jpg";
-		pic[23] = path + "wasser.jpg";
-		pic[27] = path + "erde-und-mond.jpg";
-		pic[28] = path + "insel_1.jpg";
-		pic[29] = path + "festung.jpg";
-		pic[30] = path + "ornament1.jpg";
-		pic[31] = path + "ornament2.jpg";
-		pic[32] = path + "ornament3.jpg";
-		pic[33] = path + "welle3.jpg";
-		pic[34] = path + "wueste.jpg";
+		pic[29] = path + "architektur.jpg";
+		pic[32] = path + "architektur1.jpg";
+		pic[24] = path + "natur7.jpg";
+		pic[27] = path + "natur8.jpg";
+		pic[13] = path + "natur9.jpg";
+		pic[60] = path + "natur10.jpg";
+		pic[18] = path + "natur11.jpg";
+		pic[20] = path + "natur12.jpg";
+		pic[28] = path + "natur13.jpg";
+		pic[33] = path + "natur14.jpg";
+		pic[8] = path + "tier.jpg";
+		pic[9] = path + "tier1.jpg";
+		pic[10] = path + "tier2.jpg";
+		pic[26] = path + "tier3.jpg";
+		pic[5] = path + "tier4.jpg";
+		pic[16] = path + "tier5.jpg";
+		pic[22] = path + "tier6.jpg";
+		pic[65] = path + "tier7.jpg";
+		pic[61] = path + "sonstiges.jpg";
+		pic[62] = path + "sonstiges1.jpg";
+		pic[63] = path + "sonstiges2.jpg";
+		pic[6] = path + "sonstiges3.jpg";
+		pic[1] = path + "sonstiges4.jpg";
+		pic[2] = path + "sonstiges5.jpg";
+		pic[3] = path + "sonstiges6.jpg";
+		pic[4] = path + "sonstiges7.jpg";
+		pic[11] = path + "sonstiges8.jpg";
+		pic[12] = path + "sonstiges9.jpg";
+		pic[15] = path + "sonstiges11.jpg";
+		pic[19] = path + "sonstiges10.jpg";
+		pic[21] = path + "sonstiges12.jpg";
+		pic[25] = path + "sonstiges13.jpg";
+		pic[23] = path + "sonstiges14.jpg";
+		pic[30] = path + "sonstiges15.jpg";
+		pic[31] = path + "sonstiges16.jpg";
+		pic[34] = path + "sonstiges17.jpg";
+		pic[64] = path + "sonstiges18.jpg";
 		pic[35] = path + "früchte.jpg";
 		pic[36] = path + "früchte1.jpg";
 		pic[37] = path + "früchte2.jpg";
@@ -108,6 +110,13 @@ public class Memory extends games.Game implements PC {
 		pic[57] = path + "früchte22.jpg";
 		pic[58] = path + "früchte23.jpg";
 		pic[59] = path + "früchte24.jpg";
+		pic[14] = path + "früchte25.jpg";
+		pic[17] = path + "früchte26.jpg";
+		pic[66] = path + "sonstiges19.jpg";
+		pic[67] = path + "architektur2.jpg";
+		pic[68] = path + "sonstiges20.jpg";
+		
+	
 		
 		
 				
