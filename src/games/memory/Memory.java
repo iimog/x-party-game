@@ -126,7 +126,7 @@ public class Memory extends games.Game implements PC {
 		
 				
 	}
-	public String background = path + "optisch.jpg";
+	public String backside = path + "optisch.jpg";
 	Bildschirm[] karte;
 	HashSet<Integer> set1, set2;
 	HashSet<Integer> open = new HashSet<Integer>();
@@ -178,6 +178,7 @@ public class Memory extends games.Game implements PC {
 	private Map<String, MemoryDeck> memDeckMap;
 	private MemoryDeck selectedDeck;
 	private JLabel deckLabel;
+	private List<String> backsides;
 
 	public Memory(Player[] myPlayer, Modus modus, int globalGameID) {
 		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
@@ -270,7 +271,7 @@ public class Memory extends games.Game implements PC {
 			spielfeldPanel.setLayout(spielfeldPanelLayout);
 			{
 				for(int i=0; i<2*numOfPairs; i++){
-					karte[i] = new Bildschirm(background);
+					karte[i] = new Bildschirm(backside);
 					karte[i].setName(""+i);
 					karte[i].addMouseListener(mouse);
 					spielfeldPanel.add(karte[i]);
@@ -309,8 +310,8 @@ public class Memory extends games.Game implements PC {
 				} catch (InterruptedException e) {
 					// nichts
 				}
-				karte[click[0]].changePic(background);
-				karte[click[1]].changePic(background);
+				karte[click[0]].changePic(backside);
+				karte[click[1]].changePic(backside);
 				spielfeldPanel.repaint();
 				open.remove(click[0]);
 				open.remove(click[1]);
@@ -372,6 +373,9 @@ public class Memory extends games.Game implements PC {
 	@Override
 	public void settingsChanged() {
 		updateCreds();
+		for(int i=0; i<karte.length; i++){
+			karte[i].changePic(backside);
+		}
 		if(modus == Modus.SOLO)memoryRobot.setGrenzWert(schwierigkeit*10);
 	}
 	
@@ -379,6 +383,10 @@ public class Memory extends games.Game implements PC {
 	public void loadProperties(){
 		memDecks = MemoryDeckLoader.loadMemoryDecks();
 		selectedDeck = MemoryDeck.getRandomDeck(memDecks);
+		while(selectedDeck.getPictures().size() < numOfPairs){
+			selectedDeck = MemoryDeck.getRandomDeck(memDecks);
+		}
+		backsides = MemoryDeckLoader.loadMemoryBacksides();
 	}
 
 	public List<MemoryDeck> getMemDecks() {
@@ -421,5 +429,9 @@ public class Memory extends games.Game implements PC {
 			selectedDeck = getMemDeckMap().get(deckName);
 		}
 		deckLabel.setText(selectedDeck.getDeckName());
+	}
+	
+	public List<String> getBacksides(){
+		return backsides;
 	}
 }

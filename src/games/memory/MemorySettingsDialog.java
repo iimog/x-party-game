@@ -1,14 +1,13 @@
 package games.memory;
 import games.Modus;
 import games.dialogeGUIs.GameSettingsDialog;
+import gui.EasyDialog;
+import gui.components.Bildschirm;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Vector;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -41,8 +40,9 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 	Memory game;
 	private JPanel hauptbereichPanel;
 	private JLabel paareLabel;
+	private JComboBox<String> backsideComboBox;
 	private JComboBox<String> paareComboBox;
-	private JComboBox<String> decksComboBox;
+	private JComboBox<String> deckComboBox;
 	private JPanel buttonPanel;
 	private JButton speichernButton;
 	private JButton verwerfenButton;
@@ -53,7 +53,8 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 	private JSlider schwierigkeitSlider;
 	private JLabel deckLabel;
 	String[] moeglichePaare = new String[5];
-	private JComboBox<String> deckComboBox;
+	private JLabel backsideLabel;
+	private Bildschirm backsidePreview;
 	{
 		moeglichePaare[0] = "27";
 		moeglichePaare[1] = "24";
@@ -70,13 +71,38 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 	private void initGUI(){
 		{
 			hauptbereichPanel = new JPanel();
-			hauptbereichPanelLayout = new GridLayout(3, 2);
+			hauptbereichPanelLayout = new GridLayout(4, 2);
 			hauptbereichPanelLayout.setHgap(5);
 			hauptbereichPanelLayout.setVgap(5);
 			hauptbereichPanelLayout.setColumns(2);
 			dialogPane.setLayout(new BorderLayout());
 			dialogPane.add(hauptbereichPanel, BorderLayout.CENTER);
 			hauptbereichPanel.setLayout(hauptbereichPanelLayout);
+			{
+				JPanel previewPanel = new JPanel();
+				backsidePreview = new Bildschirm(game.backside);
+				previewPanel.add(backsidePreview);
+				dialogPane.add(previewPanel, BorderLayout.EAST);
+			}
+			{
+				backsideLabel = new JLabel();
+				hauptbereichPanel.add(backsideLabel);
+				backsideLabel.setText("Rückseite:");
+			}
+			{
+				ComboBoxModel<String> backsideComboBoxModel =
+					new DefaultComboBoxModel<String>(game.getBacksides().toArray(new String[1]));
+				
+				backsideComboBox = new JComboBox<String>();
+				hauptbereichPanel.add(backsideComboBox);
+				backsideComboBox.setModel(backsideComboBoxModel);
+				backsideComboBox.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						backsidePreview.changePic((String)backsideComboBox.getSelectedItem());
+					}
+				});
+			}
 			{
 				deckLabel = new JLabel();
 				hauptbereichPanel.add(deckLabel);
@@ -92,6 +118,7 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 				deckComboBox.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						updateKartenZahl();
 						updateRundenzahlSlider();
 					}
 				});
@@ -159,6 +186,27 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 			}
 		}
 	}
+	protected void updateKartenZahl() {
+		if(deckComboBox.getSelectedIndex()<2) 		// Zufall oder Alles
+			return;
+		int karten = game.getMemDeckMap().get(deckComboBox.getSelectedItem()).getPictures().size();
+		int paare = Integer.parseInt(moeglichePaare[paareComboBox.getSelectedIndex()]);
+		if(karten < paare){
+			paare = Integer.parseInt(moeglichePaare[4]);
+			if(karten < paare){
+				EasyDialog.showMessage("Achtung! Dieses Deck hat zu wenige Paare bitte wählt ein anderes");
+			}
+			paareComboBox.setSelectedIndex(4);
+			for(int i = 3; i>=0; i--){
+				int nextPossibility = Integer.parseInt(moeglichePaare[i]);
+				if(nextPossibility <= karten){
+					karten = nextPossibility;
+					paareComboBox.setSelectedIndex(i);
+				}
+			}
+		}
+	}
+
 	private void addSchwierigkeitSlider() {
 		hauptbereichPanelLayout.setRows(3);
 		{
@@ -182,6 +230,7 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 		game.numOfRounds = rundenzahlSlider.getValue();
 		if(game.modus==Modus.SOLO)game.setSchwierigkeit(schwierigkeitSlider.getValue());
 		game.setSelectedDeck((String)deckComboBox.getSelectedItem());
+		game.backside = (String)backsideComboBox.getSelectedItem();
 		super.speichern();
 	}
 	private void verwerfenButtonActionPerformed(ActionEvent evt) {

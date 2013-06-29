@@ -11,10 +11,11 @@ import java.util.List;
 import start.X;
 
 public class MemoryDeckLoader {
+	private static File systemFolder = new File(X.getMainDir() + "games/pc/memory/");
+	private static File userFolder = new File(X.getDataDir() + "games/pc/memory/");
+
 	public static List<MemoryDeck> loadMemoryDecks() {
 		List<MemoryDeck> decks = new ArrayList<MemoryDeck>();
-		File systemFolder = new File(X.getMainDir() + "games/pc/memory/");
-		File userFolder = new File(X.getDataDir() + "games/pc/memory/");
 		String[] systemFiles = systemFolder.list();
 		for (String file : systemFiles) {
 			if (file.endsWith(".deck")) {
@@ -54,5 +55,41 @@ public class MemoryDeckLoader {
 			e.printStackTrace();
 		}
 		return newDeck;
+	}
+	
+	public static List<String> loadMemoryBacksides() {
+		List<String> backsides = new ArrayList<String>();
+		backsides.addAll(fileToBackside(new File(systemFolder, "backsides.txt"),true));
+		List<String> userBS = fileToBackside(new File(userFolder, "backsides.txt"),false);
+		if(userBS != null)
+			backsides.addAll(userBS);			
+		return backsides;
+	}
+
+	private static List<String> fileToBackside(File file, boolean system) {
+		if(!file.exists())
+			return null;
+		List<String> backsides = new ArrayList<String>();
+		
+		try {
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			while (br.ready()) {
+				String picture = br.readLine();
+				String prefix = X.getDataDir();
+				if(system)
+					prefix = X.getMainDir();
+				backsides.add(prefix+picture);
+			}
+			br.close();
+			fr.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Datei: " + file
+					+ " nicht gefunden");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return backsides;
 	}
 }
