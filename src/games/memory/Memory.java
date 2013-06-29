@@ -11,11 +11,15 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import player.Player;
+import start.X;
 
 
 /**
@@ -46,7 +50,8 @@ public class Memory extends games.Game implements PC {
 		this.schwierigkeit = schwierigkeit;
 	}
 
-	private String path = "media/memory/";public static String[] pic = new String[67];
+	private String path = "media/memory/";
+	public static String[] pic = new String[69];
 	{
 		pic[29] = path + "architektur.jpg";
 		pic[32] = path + "architektur1.jpg";
@@ -169,6 +174,10 @@ public class Memory extends games.Game implements PC {
 		}
 	};
 	private MemoryRobot memoryRobot;
+	private List<MemoryDeck> memDecks;
+	private Map<String, MemoryDeck> memDeckMap;
+	private MemoryDeck selectedDeck;
+	private JLabel deckLabel;
 
 	public Memory(Player[] myPlayer, Modus modus, int globalGameID) {
 		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
@@ -269,6 +278,14 @@ public class Memory extends games.Game implements PC {
 			}
 			spielfeldPanel.setMinimumSize(new Dimension(columns*105, rows*105));
 		}
+		{
+			deckLabel = new JLabel();
+			deckLabel.setOpaque(false);
+			deckLabel.setFont(X.buttonFont);
+			deckLabel.setText(selectedDeck.getDeckName());
+			deckLabel.setHorizontalAlignment(JLabel.CENTER);
+			spielBereichPanel.add(deckLabel, BorderLayout.NORTH);
+		}
 	}
 	
 	private void getRandomPairs(int numOfPairs){
@@ -276,9 +293,9 @@ public class Memory extends games.Game implements PC {
 		HashSet<Integer> verbraucht = new HashSet<Integer>();
 		Random r = new Random();
 		while(pictures.size()<numOfPairs){
-			int nextPic = r.nextInt(pic.length);
+			int nextPic = r.nextInt(selectedDeck.size());
 			if(verbraucht.add(nextPic)){
-				pictures.add(pic[nextPic]);
+				pictures.add(selectedDeck.getPictures().get(nextPic));
 			}
 		}
 	}
@@ -357,5 +374,52 @@ public class Memory extends games.Game implements PC {
 		updateCreds();
 		if(modus == Modus.SOLO)memoryRobot.setGrenzWert(schwierigkeit*10);
 	}
+	
+	@Override
+	public void loadProperties(){
+		memDecks = MemoryDeckLoader.loadMemoryDecks();
+		selectedDeck = MemoryDeck.getRandomDeck(memDecks);
+	}
 
+	public List<MemoryDeck> getMemDecks() {
+		return memDecks;
+	}
+	
+	public Map<String,MemoryDeck> getMemDeckMap() {
+		if(memDeckMap == null){
+			memDeckMap = new HashMap<String,MemoryDeck>();
+			for(MemoryDeck md : memDecks){
+				memDeckMap.put(md.getDeckName(), md);
+			}
+		}
+		return memDeckMap;
+	}
+	
+	/**
+	 * Gibt eine Liste mit Decknamen zurück. Pseudonamen sind "Zufall" und  "Alle"
+	 * @param withPseudoNames
+	 * @return Liste der Decknamen
+	 */
+	public List<String> getMemDeckNames(boolean withPseudoNames) {
+		List<String> deckNames = new ArrayList<String>();
+		if(withPseudoNames){
+			deckNames.add("Zufall");
+			deckNames.add("Alles");
+		}
+		deckNames.addAll(getMemDeckMap().keySet());
+		return deckNames;
+	}
+	
+	public void setSelectedDeck(String deckName){
+		if(deckName.equals("Zufall")){
+			selectedDeck = MemoryDeck.getRandomDeck(memDecks);
+		}
+		else if(deckName.equals("Alles")){
+			selectedDeck = MemoryDeck.getFullDeck(memDecks);
+		}
+		else{			
+			selectedDeck = getMemDeckMap().get(deckName);
+		}
+		deckLabel.setText(selectedDeck.getDeckName());
+	}
 }

@@ -119,6 +119,11 @@ public abstract class Game extends Anzeige {
 		matchCredLabel = new JLabel[spielerZahl];
 		playerPanel = new JPanel[spielerZahl];
 		customSettings = SettingsFileHandler.loadSettings(gameName);
+		loadProperties();
+	}
+
+	public void loadProperties() {
+		// In Subklassen überschreiben	
 	}
 
 	private void initGUI() {

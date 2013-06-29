@@ -6,6 +6,9 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Vector;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -38,16 +41,20 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 	Memory game;
 	private JPanel hauptbereichPanel;
 	private JLabel paareLabel;
-	private JComboBox paareComboBox;
+	private JComboBox<String> paareComboBox;
+	private JComboBox<String> decksComboBox;
 	private JPanel buttonPanel;
 	private JButton speichernButton;
 	private JButton verwerfenButton;
-	String[] moeglichePaare = new String[5];
 	private JLabel rundenzahlLabel;
 	private JSlider rundenzahlSlider;
 	private GridLayout hauptbereichPanelLayout;
 	private JLabel schwierigkeitLabel;
-	private JSlider schwierigkeitSlider;{
+	private JSlider schwierigkeitSlider;
+	private JLabel deckLabel;
+	String[] moeglichePaare = new String[5];
+	private JComboBox<String> deckComboBox;
+	{
 		moeglichePaare[0] = "27";
 		moeglichePaare[1] = "24";
 		moeglichePaare[2] = "20";
@@ -63,7 +70,7 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 	private void initGUI(){
 		{
 			hauptbereichPanel = new JPanel();
-			hauptbereichPanelLayout = new GridLayout(2, 2);
+			hauptbereichPanelLayout = new GridLayout(3, 2);
 			hauptbereichPanelLayout.setHgap(5);
 			hauptbereichPanelLayout.setVgap(5);
 			hauptbereichPanelLayout.setColumns(2);
@@ -71,14 +78,33 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 			dialogPane.add(hauptbereichPanel, BorderLayout.CENTER);
 			hauptbereichPanel.setLayout(hauptbereichPanelLayout);
 			{
+				deckLabel = new JLabel();
+				hauptbereichPanel.add(deckLabel);
+				deckLabel.setText("Deck:");
+			}
+			{
+				ComboBoxModel<String> deckComboBoxModel =
+					new DefaultComboBoxModel<String>(game.getMemDeckNames(true).toArray(new String[1]));
+				
+				deckComboBox = new JComboBox<String>();
+				hauptbereichPanel.add(deckComboBox);
+				deckComboBox.setModel(deckComboBoxModel);
+				deckComboBox.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						updateRundenzahlSlider();
+					}
+				});
+			}
+			{
 				paareLabel = new JLabel();
 				hauptbereichPanel.add(paareLabel);
 				paareLabel.setText("Pärchen:");
 			}
 			{
-				ComboBoxModel paareComboBoxModel =
-					new DefaultComboBoxModel(moeglichePaare);
-				paareComboBox = new JComboBox();
+				ComboBoxModel<String> paareComboBoxModel =
+					new DefaultComboBoxModel<String>(moeglichePaare);
+				paareComboBox = new JComboBox<String>();
 				hauptbereichPanel.add(paareComboBox);
 				paareComboBox.setModel(paareComboBoxModel);
 				paareComboBox.addActionListener(new ActionListener() {
@@ -155,6 +181,7 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 		game.paarZahl(numOfPairs);
 		game.numOfRounds = rundenzahlSlider.getValue();
 		if(game.modus==Modus.SOLO)game.setSchwierigkeit(schwierigkeitSlider.getValue());
+		game.setSelectedDeck((String)deckComboBox.getSelectedItem());
 		super.speichern();
 	}
 	private void verwerfenButtonActionPerformed(ActionEvent evt) {
