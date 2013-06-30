@@ -1,6 +1,6 @@
 package gui.menu;
-import gui.AnzeigeDialog;
 import gui.EasyDialog;
+import gui.components.DefaultButton;
 import gui.components.JButtonIcon;
 
 import java.awt.BorderLayout;
@@ -195,7 +195,7 @@ public class PlayerFactory extends javax.swing.JPanel {
 		this.add(colorChooser, BorderLayout.CENTER);
 		JPanel buttonP = new JPanel(new FlowLayout());
 		this.add(buttonP, BorderLayout.SOUTH);
-		JButton okB = new JButton("OK");
+		JButton okB = new DefaultButton("OK");
 		okB.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt){
 				Color col = colorChooser.getSelectionModel().getSelectedColor();
@@ -204,7 +204,7 @@ public class PlayerFactory extends javax.swing.JPanel {
 			}
 		});
 		buttonP.add(okB);
-		JButton verwerfenB = new JButton("Verwerfen");
+		JButton verwerfenB = new DefaultButton("Verwerfen");
 		verwerfenB.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt){
 				changeBack();
@@ -217,7 +217,7 @@ public class PlayerFactory extends javax.swing.JPanel {
 
 	private JButton getBuzzerChooser() {
 		if(buzzerChooser == null) {
-			buzzerChooser = new JButton();
+			buzzerChooser = new DefaultButton();
 			buzzerChooser.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent evt) {
@@ -254,7 +254,7 @@ public class PlayerFactory extends javax.swing.JPanel {
 
 	private JButton getColorSelectionButton1() {
 		if(colorSelectionButton1 == null) {
-			colorSelectionButton1 = new JButton();
+			colorSelectionButton1 = new DefaultButton();
 			colorSelectionButton1.setText("Farbe");
 			colorSelectionButton1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
@@ -280,7 +280,7 @@ public class PlayerFactory extends javax.swing.JPanel {
 				this.add(getMainPanel(), BorderLayout.NORTH);
 				buttonPanel.setOpaque(false);
 				{
-					okButton = new JButton();
+					okButton = new DefaultButton();
 					buttonPanel.add(okButton);
 					okButton.setText("Speichern");
 					okButton.addActionListener(new ActionListener() {
@@ -290,7 +290,7 @@ public class PlayerFactory extends javax.swing.JPanel {
 					});
 				}
 				{
-					abbrechenButton = new JButton();
+					abbrechenButton = new DefaultButton();
 					buttonPanel.add(abbrechenButton);
 					abbrechenButton.setText("Verwerfen");
 					abbrechenButton.addActionListener(new ActionListener() {

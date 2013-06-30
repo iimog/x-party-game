@@ -3,6 +3,7 @@ package gui.menu;
 import games.Modus;
 import gui.Anzeige;
 import gui.EasyDialog;
+import gui.components.DefaultButton;
 import gui.components.JButtonIcon;
 
 import java.awt.BorderLayout;
@@ -159,7 +160,7 @@ public class StartMatch extends Anzeige {
 						buttonsPanel.add(spielerPanel);
 						spielerPanel.setOpaque(false);
 						{
-							spielerButton = new JButton();
+							spielerButton = new DefaultButton();
 							spielerButton.setFont(X.buttonFont);
 							spielerPanel.add(spielerButton);
 							if(modus != Modus.TEAM){
@@ -235,7 +236,7 @@ public class StartMatch extends Anzeige {
 						buttonsPanel.add(spielePanel);
 						spielePanel.setOpaque(false);
 						{
-							spieleButton = new JButton();
+							spieleButton = new DefaultButton();
 							spieleButton.setFont(X.buttonFont);
 							spielePanel.add(spieleButton);
 							spieleButton.setText("Spiele");
@@ -253,7 +254,7 @@ public class StartMatch extends Anzeige {
 						buttonsPanel.add(einstellungenPanel);
 						einstellungenPanel.setOpaque(false);
 						{
-							einstellungenButton = new JButton();
+							einstellungenButton = new DefaultButton();
 							einstellungenButton.setFont(X.buttonFont);
 							einstellungenPanel.add(einstellungenButton);
 							einstellungenButton.setText("Einstellungen");
@@ -271,7 +272,7 @@ public class StartMatch extends Anzeige {
 						buttonsPanel.add(startPanel);
 						startPanel.setOpaque(false);
 						{
-							startButton = new JButton();
+							startButton = new DefaultButton();
 							startButton.setFont(X.buttonFont);
 							startPanel.add(startButton);
 							startButton.setText("Start");
@@ -301,7 +302,7 @@ public class StartMatch extends Anzeige {
 				bottomPanel.setOpaque(false);
 				add(bottomPanel, BorderLayout.SOUTH);
 				{
-					hauptMenuButton = new JButton("Hauptmenü");
+					hauptMenuButton = new DefaultButton("Hauptmenü");
 					hauptMenuButton.setFont(X.buttonFont);
 					hauptMenuButton.addActionListener(new ActionListener() {
 						@Override

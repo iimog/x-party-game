@@ -3,6 +3,7 @@ package gui.menu;
 import games.Modus;
 import gui.EasyDialog;
 import gui.components.Bildschirm;
+import gui.components.DefaultButton;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -110,7 +111,7 @@ public class MatchSettingsDialog extends JPanel {
 			}
 		});
 		profilPanel.add(profilComboBox);
-		profilSpeichernButton = new JButton("Speichern");
+		profilSpeichernButton = new DefaultButton("Speichern");
 		profilSpeichernButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -118,7 +119,7 @@ public class MatchSettingsDialog extends JPanel {
 			}
 		});
 		profilPanel.add(profilSpeichernButton);
-		profilManagerButton = new JButton("Profilmanager");
+		profilManagerButton = new DefaultButton("Profilmanager");
 		profilPanel.add(profilManagerButton);
 		profilManagerButton.addActionListener(new ActionListener() {			
 			@Override
@@ -217,7 +218,7 @@ public class MatchSettingsDialog extends JPanel {
 		buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		hauptPanel.add(buttonPanel, BorderLayout.SOUTH);
-		verwerfenButton = new JButton("Verwerfen");
+		verwerfenButton = new DefaultButton("Verwerfen");
 		buttonPanel.add(verwerfenButton);
 		verwerfenButton.addActionListener(new ActionListener() {			
 			@Override
@@ -225,7 +226,7 @@ public class MatchSettingsDialog extends JPanel {
 				verwerfenButtonActionPerformed();
 			}
 		});
-		UebernehmenButton = new JButton("Übernehmen");
+		UebernehmenButton = new DefaultButton("Übernehmen");
 		buttonPanel.add(UebernehmenButton);
 		UebernehmenButton.addActionListener(new ActionListener() {			
 			@Override

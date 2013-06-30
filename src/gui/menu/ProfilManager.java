@@ -3,6 +3,7 @@ package gui.menu;
 import gui.AnzeigeDialog;
 import gui.EasyDialog;
 import gui.components.Bildschirm;
+import gui.components.DefaultButton;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -52,7 +53,7 @@ public class ProfilManager extends AnzeigeDialog {
 		hauptPanel.add(profilListe, BorderLayout.CENTER);
 		initButtonPanel();
 		hauptPanel.add(buttonPanel, BorderLayout.EAST);
-		fertigButton = new JButton("Fertig");
+		fertigButton = new DefaultButton("Fertig");
 		fertigButton.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -81,7 +82,7 @@ public class ProfilManager extends AnzeigeDialog {
 		buttonPanel.add(loeschenButton);
 	}
 	private void initNeuButton() {
-		neuButton = new JButton("Neu");
+		neuButton = new DefaultButton("Neu");
 		neuButton.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -99,7 +100,7 @@ public class ProfilManager extends AnzeigeDialog {
 		});
 	}
 	private void initBearbeitenButton() {
-		bearbeitenButton = new JButton("Bearbeiten");
+		bearbeitenButton = new DefaultButton("Bearbeiten");
 		bearbeitenButton.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -108,7 +109,7 @@ public class ProfilManager extends AnzeigeDialog {
 		});
 	}
 	private void initUmbenennenButton() {
-		umbenennenButton = new JButton("Umbenennen");
+		umbenennenButton = new DefaultButton("Umbenennen");
 		umbenennenButton.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -130,7 +131,7 @@ public class ProfilManager extends AnzeigeDialog {
 		});
 	}
 	private void initLoeschenButton() {
-		loeschenButton = new JButton("Löschen");
+		loeschenButton = new DefaultButton("Löschen");
 		loeschenButton.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {

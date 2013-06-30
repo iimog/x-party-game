@@ -3,6 +3,7 @@ package gui.menu;
 import games.Modus;
 import gui.Anzeige;
 import gui.EasyDialog;
+import gui.components.DefaultButton;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -76,7 +77,7 @@ public class MatchLaden extends Anzeige {
 		buttonPanel = new JPanel();
 		buttonPanel.setOpaque(false);
 		buttonPanel.setLayout(new FlowLayout());
-		startenButton = new JButton("Spiel starten");
+		startenButton = new DefaultButton("Spiel starten");
 		startenButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -84,7 +85,7 @@ public class MatchLaden extends Anzeige {
 			}
 		});
 		buttonPanel.add(startenButton);
-		loeschenButton = new JButton("Spielstand löschen");
+		loeschenButton = new DefaultButton("Spielstand löschen");
 		loeschenButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -92,7 +93,7 @@ public class MatchLaden extends Anzeige {
 			}
 		});
 		buttonPanel.add(loeschenButton);
-		hauptmenuButton = new JButton("Zurück zum Hauptmenü");
+		hauptmenuButton = new DefaultButton("Zurück zum Hauptmenü");
 		hauptmenuButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

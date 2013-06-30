@@ -2,6 +2,7 @@ package highscore;
 
 import gui.Anzeige;
 import gui.EasyDialog;
+import gui.components.DefaultButton;
 import gui.components.JButtonIcon;
 import gui.menu.HauptMenu;
 
@@ -126,7 +127,7 @@ public class HighscoreAnzeige extends Anzeige {
 		buttonPanel.setOpaque(false);
 		add(buttonPanel, BorderLayout.SOUTH);
 		{
-			hauptMenuButton = new JButton("Hauptmenü");
+			hauptMenuButton = new DefaultButton("Hauptmenü");
 			hauptMenuButton.setFont(X.buttonFont);
 			hauptMenuButton.addActionListener(new ActionListener() {
 				@Override

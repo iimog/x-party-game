@@ -6,6 +6,7 @@ import games.Game;
 import games.Modus;
 import gui.Anzeige;
 import gui.EasyDialog;
+import gui.components.DefaultButton;
 import gui.components.JButtonIcon;
 import gui.menu.HauptMenu;
 
@@ -141,7 +142,7 @@ public class MatchCredits extends Anzeige {
 			playedGamesPanel.setOpaque(false);
 			{
 				for (int i = 0; i < numOfGames; i++) {
-					played[i] = new JButton("" + (i + 1));
+					played[i] = new DefaultButton("" + (i + 1));
 					playedGamesPanel.add(played[i]);
 					played[i].setEnabled(false);
 				}
@@ -307,7 +308,7 @@ public class MatchCredits extends Anzeige {
 				}
 			}
 			{
-				nextGame = new JButton();
+				nextGame = new DefaultButton();
 				this.add(nextGame, BorderLayout.SOUTH);
 				nextGame.setText("Nächstes Spiel");
 				nextGame.addActionListener(new ActionListener() {

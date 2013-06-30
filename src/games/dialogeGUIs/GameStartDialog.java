@@ -8,6 +8,7 @@ import highscore.GameHighscorePanel;
 import highscore.HighscoreFileHandler;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -72,8 +73,10 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 				BorderLayout mainPaneLayout = new BorderLayout();
 				super.dialogPane.add(mainPane);
 				mainPane.setLayout(mainPaneLayout);
+				mainPane.setOpaque(false);
 				{
 					schaltflaechenPanel = new JPanel();
+					schaltflaechenPanel.setOpaque(false);
 					mainPane.add(schaltflaechenPanel, BorderLayout.SOUTH);
 					{
 						anleitungButton = new JButtonIcon("media/ablauf/hilfe.png","Anleitung");
@@ -119,6 +122,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 					mainPane.add(hauptbereichPanel, BorderLayout.CENTER);
 					BorderLayout hauptbereichPanelLayout = new BorderLayout();
 					hauptbereichPanel.setLayout(hauptbereichPanelLayout);
+					hauptbereichPanel.setOpaque(false);
 					{
 						nameLabel = new JLabel();
 						hauptbereichPanel.add(nameLabel, BorderLayout.NORTH);
@@ -131,6 +135,8 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 						infoTextPanel = new JTextPane();
 						hauptbereichPanel.add(infoTextPanel, BorderLayout.CENTER);
 						infoTextPanel.setText(shortInfo);
+						infoTextPanel.setForeground(Color.WHITE);
+						infoTextPanel.setBackground(Color.BLACK);
 						infoTextPanel.setFont(new java.awt.Font("Comic Sans MS",0,16));
 						infoTextPanel.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 						infoTextPanel.setEditable(false);

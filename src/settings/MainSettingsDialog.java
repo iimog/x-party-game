@@ -1,6 +1,7 @@
 package settings;
 
 import gui.EasyDialog;
+import gui.components.DefaultButton;
 import gui.menu.ProfilManager;
 
 import java.awt.BorderLayout;
@@ -51,7 +52,7 @@ public class MainSettingsDialog  extends gui.AnzeigeDialog {
 			buttonPanel = new JPanel();
 			dialogPane.add(buttonPanel, BorderLayout.SOUTH);
 			{
-				speichernButton = new JButton();
+				speichernButton = new DefaultButton();
 				buttonPanel.add(speichernButton);
 				speichernButton.setText("Speichern");
 				speichernButton.addActionListener(new ActionListener() {
@@ -61,7 +62,7 @@ public class MainSettingsDialog  extends gui.AnzeigeDialog {
 				});
 			}
 			{
-				verwerfenButton = new JButton();
+				verwerfenButton = new DefaultButton();
 				buttonPanel.add(verwerfenButton);
 				verwerfenButton.setText("Verwerfen");
 				verwerfenButton.addActionListener(new ActionListener() {
@@ -79,7 +80,7 @@ public class MainSettingsDialog  extends gui.AnzeigeDialog {
 			hauptbereichPanel.add(profilLabel);
 		}
 		{
-			profilButton = new JButton("Profil Manager");
+			profilButton = new DefaultButton("Profil Manager");
 			profilButton.addActionListener(new ActionListener() {					
 				@Override
 				public void actionPerformed(ActionEvent arg0) {

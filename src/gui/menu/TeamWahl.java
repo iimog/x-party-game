@@ -1,5 +1,7 @@
 package gui.menu;
 
+import gui.components.DefaultButton;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -234,7 +236,7 @@ public class TeamWahl extends JPanel {
 					buttonPanel = new JPanel();
 					hauptbereichPanel.add(buttonPanel, BorderLayout.SOUTH);
 					{
-						shuffleButton = new JButton();
+						shuffleButton = new DefaultButton();
 						buttonPanel.add(shuffleButton);
 						shuffleButton.setText("Shuffle");
 						shuffleButton.addActionListener(new ActionListener() {
@@ -244,7 +246,7 @@ public class TeamWahl extends JPanel {
 						});
 					}
 					{
-						fertigButton = new JButton();
+						fertigButton = new DefaultButton();
 						buttonPanel.add(fertigButton);
 						fertigButton.setText("Fertig");
 						fertigButton.addActionListener(new ActionListener() {

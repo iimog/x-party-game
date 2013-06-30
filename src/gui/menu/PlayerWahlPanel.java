@@ -1,6 +1,7 @@
 package gui.menu;
 
 import gui.Anzeige;
+import gui.components.DefaultButton;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -134,7 +135,7 @@ public class PlayerWahlPanel extends Anzeige {
 	}
 
 	private void initNeuButton() {
-		neuButton = new JButton();
+		neuButton = new DefaultButton();
 		neuButton.setText("Neu");
 		neuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -154,7 +155,7 @@ public class PlayerWahlPanel extends Anzeige {
 	}
 
 	private void initBearbeitenButton() {
-		bearbeitenButton = new JButton();
+		bearbeitenButton = new DefaultButton();
 		bearbeitenButton.setText("Bearbeiten");
 		bearbeitenButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -181,7 +182,7 @@ public class PlayerWahlPanel extends Anzeige {
 	}
 
 	private void initAuswahlButton() {
-		auswahlButton = new JButton();
+		auswahlButton = new DefaultButton();
 		auswahlButton.setText("Wählen");
 		auswahlButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -202,7 +203,7 @@ public class PlayerWahlPanel extends Anzeige {
 	}
 
 	private void initEntfernenButton() {
-		entfernenButton = new JButton();
+		entfernenButton = new DefaultButton();
 		entfernenButton.setText("Löschen");
 		entfernenButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {

@@ -1,6 +1,7 @@
 package ablauf;
 
 import gui.Anzeige;
+import gui.components.DefaultButton;
 import gui.menu.HauptMenu;
 
 import java.awt.BorderLayout;
@@ -57,7 +58,7 @@ public class Siegerehrung extends Anzeige {
 			buttonPanel.setLayout(new FlowLayout());
 			mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 			{
-				okButton = new JButton("OK");
+				okButton = new DefaultButton("OK");
 				buttonPanel.add(okButton);
 				okButton.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent evt){
