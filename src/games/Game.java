@@ -548,4 +548,8 @@ public abstract class Game extends Anzeige {
 	public int getGlobalGameID() {
 		return globalGameID;
 	}
+	
+	public Properties getCustomSettings(){
+		return customSettings;
+	}
 }

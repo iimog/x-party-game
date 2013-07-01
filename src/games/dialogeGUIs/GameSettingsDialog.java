@@ -4,11 +4,16 @@ import gui.AnzeigeDialog;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Properties;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+
+import settings.SettingsFileHandler;
 
 
 
@@ -35,9 +40,13 @@ public class GameSettingsDialog extends AnzeigeDialog {
 	private JButton verwerfenButton;
 	public JPanel settingsPanel;
 	public Game myGame;
+	protected Properties defaultSettings;
+	private JPanel controlPanel;
+	private JCheckBox defaultSettingsCheckbox;
 
 	public GameSettingsDialog(Game g){
 		myGame = g;
+		defaultSettings = g.getCustomSettings();
 		initGUI();
 	}
 
@@ -50,9 +59,15 @@ public class GameSettingsDialog extends AnzeigeDialog {
 				dialogPane.add(settingsPanel, BorderLayout.CENTER);
 			}
 			{
+				controlPanel = new JPanel(new GridLayout(2,1));
+				defaultSettingsCheckbox = new JCheckBox("Als Standard speichern");
+				controlPanel.add(defaultSettingsCheckbox);
+				dialogPane.add(controlPanel, BorderLayout.SOUTH);
+			}
+			{
 				buttonPanel = new JPanel();
 				FlowLayout buttonPanelLayout = new FlowLayout();
-				dialogPane.add(buttonPanel, BorderLayout.SOUTH);
+				controlPanel.add(buttonPanel, BorderLayout.SOUTH);
 				buttonPanel.setLayout(buttonPanelLayout);
 				{
 					speichernButton = new JButton();
@@ -81,6 +96,9 @@ public class GameSettingsDialog extends AnzeigeDialog {
 	}
 
 	public void speichern() {
+		if(defaultSettingsCheckbox.isSelected()){
+			SettingsFileHandler.saveSettings(myGame.gameName, defaultSettings);
+		}
 		myGame.settingsChanged();
 		instance.closeDialog();
 	}

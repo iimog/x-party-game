@@ -1,4 +1,5 @@
 media/memory/optisch.jpg
-media/memory/tier.jpg
-media/memory/tier1.jpg
-media/memory/tier2.jpg
+media/memory/sonstiges.jpg
+media/memory/sonstiges1.jpg
+media/memory/sonstiges2.jpg
+media/memory/sonstiges5.jpg

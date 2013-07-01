@@ -8,10 +8,10 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Properties;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,15 +37,13 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 6318517814751967329L;
+	private static final String NUMOFROUNDS = "Rundenzahl";
 	Memory game;
 	private JPanel hauptbereichPanel;
 	private JLabel paareLabel;
 	private JComboBox<String> backsideComboBox;
 	private JComboBox<String> paareComboBox;
 	private JComboBox<String> deckComboBox;
-	private JPanel buttonPanel;
-	private JButton speichernButton;
-	private JButton verwerfenButton;
 	private JLabel rundenzahlLabel;
 	private JSlider rundenzahlSlider;
 	private GridLayout hauptbereichPanelLayout;
@@ -66,6 +64,7 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 		super(m);
 		game = m;
 		initGUI();
+		propertiesToSettings();
 	}
 
 	private void initGUI(){
@@ -75,8 +74,8 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 			hauptbereichPanelLayout.setHgap(5);
 			hauptbereichPanelLayout.setVgap(5);
 			hauptbereichPanelLayout.setColumns(2);
-			dialogPane.setLayout(new BorderLayout());
-			dialogPane.add(hauptbereichPanel, BorderLayout.CENTER);
+			settingsPanel.setLayout(new BorderLayout());
+			settingsPanel.add(hauptbereichPanel, BorderLayout.CENTER);
 			hauptbereichPanel.setLayout(hauptbereichPanelLayout);
 			{
 				JPanel previewPanel = new JPanel();
@@ -160,31 +159,6 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 				addSchwierigkeitSlider();
 			}
 		}
-		{
-			buttonPanel = new JPanel();
-			dialogPane.add(buttonPanel, BorderLayout.SOUTH);{
-				{
-					speichernButton = new JButton();
-					buttonPanel.add(speichernButton);
-					speichernButton.setText("Speichern");
-					speichernButton.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent evt) {
-							speichernButtonActionPerformed(evt);
-						}
-					});
-				}
-				{
-					verwerfenButton = new JButton();
-					buttonPanel.add(verwerfenButton);
-					verwerfenButton.setText("Verwerfen");
-					verwerfenButton.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent evt) {
-							verwerfenButtonActionPerformed(evt);
-						}
-					});
-				}
-			}
-		}
 	}
 	protected void updateKartenZahl() {
 		if(deckComboBox.getSelectedIndex()<2) 		// Zufall oder Alles
@@ -224,22 +198,31 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 		}
 	}
 
-	private void speichernButtonActionPerformed(ActionEvent evt) {
+	public void speichern() {
 		int numOfPairs = Integer.parseInt(moeglichePaare[paareComboBox.getSelectedIndex()]);
 		game.paarZahl(numOfPairs);
 		game.numOfRounds = rundenzahlSlider.getValue();
 		if(game.modus==Modus.SOLO)game.setSchwierigkeit(schwierigkeitSlider.getValue());
 		game.setSelectedDeck((String)deckComboBox.getSelectedItem());
 		game.backside = (String)backsideComboBox.getSelectedItem();
+		settingsToProperties();
 		super.speichern();
-	}
-	private void verwerfenButtonActionPerformed(ActionEvent evt) {
-		instance.closeDialog();
 	}
 	private void updateRundenzahlSlider(){
 		int maxRunden = Integer.parseInt(moeglichePaare[paareComboBox.getSelectedIndex()]);
 		maxRunden = maxRunden/2+1;
 		rundenzahlSlider.setMaximum(maxRunden);
 	}
-
+	private void settingsToProperties(){
+		if(defaultSettings == null){
+			defaultSettings = new Properties();
+		}
+		defaultSettings.setProperty(NUMOFROUNDS, ""+myGame.numOfRounds);
+	}
+	private void propertiesToSettings(){
+		if(defaultSettings == null){
+			return;
+		}
+		rundenzahlSlider.setValue(Integer.parseInt(defaultSettings.getProperty(NUMOFROUNDS, ""+myGame.numOfRounds)));
+	}
 }

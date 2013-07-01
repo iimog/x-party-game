@@ -289,7 +289,11 @@ public class Memory extends games.Game implements PC {
 		}
 	}
 	
-	private void getRandomPairs(int numOfPairs){
+	private void getRandomPairs(){
+		System.out.println(numOfPairs+" --> "+selectedDeck.size());
+		if(numOfPairs > selectedDeck.size()){
+			numOfPairs = getBiggestFeasableNumOfPairs(selectedDeck.size());
+		}
 		pictures = new ArrayList<String>();
 		HashSet<Integer> verbraucht = new HashSet<Integer>();
 		Random r = new Random();
@@ -301,6 +305,20 @@ public class Memory extends games.Game implements PC {
 		}
 	}
 	
+	public int getBiggestFeasableNumOfPairs(int possible) {
+		if(possible >= 27)
+			return 27;
+		if(possible >= 24)
+			return 24;
+		if(possible >= 20)
+			return 20;
+		if(possible >= 15)
+			return 15;
+		if(possible >= 10)
+			return 10;
+		return 0;
+	}
+
 	public void rueckdecken(){
 		Thread t = new Thread(){
 			@Override
@@ -363,7 +381,7 @@ public class Memory extends games.Game implements PC {
 
 	@Override
 	public void start(){
-		getRandomPairs(numOfPairs);
+		getRandomPairs();
 		whosTurn = getStartPlayerID(true);
 		if(myPlayer[whosTurn].isRobot()){
 			startRobotState();
@@ -384,6 +402,7 @@ public class Memory extends games.Game implements PC {
 		memDecks = MemoryDeckLoader.loadMemoryDecks();
 		selectedDeck = MemoryDeck.getRandomDeck(memDecks);
 		while(selectedDeck.getPictures().size() < numOfPairs){
+			System.out.println(selectedDeck.getPictures().size()+" --> " + numOfPairs);
 			selectedDeck = MemoryDeck.getRandomDeck(memDecks);
 		}
 		backsides = MemoryDeckLoader.loadMemoryBacksides();
