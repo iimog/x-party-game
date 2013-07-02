@@ -1,5 +1,6 @@
 package games;
 
+import games.dialogeGUIs.GameSettingsDialog;
 import games.dialogeGUIs.GameStartDialog;
 import gui.Anzeige;
 import gui.EasyDialog;
@@ -90,7 +91,7 @@ public abstract class Game extends Anzeige {
 	private JPanel credRechtsPanel;
 	private JLabel pauseLabel;
 	private JPanel centeredPanel;
-	Properties customSettings;
+	protected Properties customSettings;
 
 	public Game(player.Player[] player, int numOfRounds,
 			Modus modus, int globalGameID) {
@@ -551,5 +552,15 @@ public abstract class Game extends Anzeige {
 	
 	public Properties getCustomSettings(){
 		return customSettings;
+	}
+	
+	public void setCustomSettings(Properties settings){
+		customSettings = settings;
+		if(settings != null){
+			String rounds = settings.getProperty(GameSettingsDialog.NUM_OF_ROUNDS);
+			if(rounds != null){
+				numOfRounds = Integer.parseInt(rounds);
+			}
+		}
 	}
 }

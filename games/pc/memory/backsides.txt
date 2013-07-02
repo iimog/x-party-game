@@ -1,5 +1,5 @@
-media/memory/optisch.jpg
-media/memory/sonstiges.jpg
-media/memory/sonstiges1.jpg
-media/memory/sonstiges2.jpg
-media/memory/sonstiges5.jpg
+Optisch	media/memory/optisch.jpg
+Schwarzer Rauch	media/memory/sonstiges.jpg
+Blauer Rauch	media/memory/sonstiges1.jpg
+Muster	media/memory/sonstiges2.jpg
+Wirbel	media/memory/sonstiges5.jpg

@@ -178,7 +178,7 @@ public class Memory extends games.Game implements PC {
 	private Map<String, MemoryDeck> memDeckMap;
 	private MemoryDeck selectedDeck;
 	private JLabel deckLabel;
-	private List<String> backsides;
+	private Map<String, String> backsides;
 
 	public Memory(Player[] myPlayer, Modus modus, int globalGameID) {
 		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
@@ -192,6 +192,7 @@ public class Memory extends games.Game implements PC {
 		}
 		mischen(27);
 		initGUI();
+		settingsChanged();
 	}
 
 	private void initGUI() {
@@ -390,6 +391,7 @@ public class Memory extends games.Game implements PC {
 
 	@Override
 	public void settingsChanged() {
+		propertiesToSettings();
 		updateCreds();
 		for(int i=0; i<karte.length; i++){
 			karte[i].changePic(backside);
@@ -450,7 +452,28 @@ public class Memory extends games.Game implements PC {
 		deckLabel.setText(selectedDeck.getDeckName());
 	}
 	
-	public List<String> getBacksides(){
+	public Map<String, String> getBacksides(){
 		return backsides;
+	}
+	
+	private void propertiesToSettings(){
+		if(customSettings == null){
+			return;
+		}
+		numOfRounds = Integer.parseInt(customSettings.getProperty(MemorySettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
+		String newBackside = customSettings.getProperty(MemorySettingsDialog.BACKSIDE);
+		if(newBackside != null)
+			 backside = backsides.get(newBackside);
+		String deck = customSettings.getProperty(MemorySettingsDialog.DECK);
+		if(deck != null)	
+			setSelectedDeck(deck);
+		String pairs = customSettings.getProperty(MemorySettingsDialog.PAIRS);
+		if(pairs != null)	
+			paarZahl(Integer.parseInt(pairs));
+		if(modus == Modus.SOLO){
+			String schwierigkeit = customSettings.getProperty(MemorySettingsDialog.DIFFICULTY);
+			if(schwierigkeit != null)
+				setSchwierigkeit(Integer.parseInt(schwierigkeit));
+		}
 	}
 }

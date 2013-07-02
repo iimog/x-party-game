@@ -6,7 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import start.X;
 
@@ -57,29 +59,33 @@ public class MemoryDeckLoader {
 		return newDeck;
 	}
 	
-	public static List<String> loadMemoryBacksides() {
-		List<String> backsides = new ArrayList<String>();
-		backsides.addAll(fileToBackside(new File(systemFolder, "backsides.txt"),true));
-		List<String> userBS = fileToBackside(new File(userFolder, "backsides.txt"),false);
+	public static Map<String, String> loadMemoryBacksides() {
+		Map<String, String> backsides = new HashMap<String, String>();
+		backsides.putAll(fileToBackside(new File(systemFolder, "backsides.txt"),true));
+		Map<String, String> userBS = fileToBackside(new File(userFolder, "backsides.txt"),false);
 		if(userBS != null)
-			backsides.addAll(userBS);			
+			backsides.putAll(userBS);			
 		return backsides;
 	}
 
-	private static List<String> fileToBackside(File file, boolean system) {
+	private static Map<String, String> fileToBackside(File file, boolean system) {
 		if(!file.exists())
 			return null;
-		List<String> backsides = new ArrayList<String>();
+		Map<String, String> backsides = new HashMap<String, String>();
 		
 		try {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
 			while (br.ready()) {
-				String picture = br.readLine();
+				String line = br.readLine();
+				String[] elements = line.split("\t");
+				if(elements.length < 2) continue;
+				String name = elements[0];
+				String picture = elements[1];
 				String prefix = X.getDataDir();
 				if(system)
 					prefix = X.getMainDir();
-				backsides.add(prefix+picture);
+				backsides.put(name, prefix+picture);
 			}
 			br.close();
 			fr.close();

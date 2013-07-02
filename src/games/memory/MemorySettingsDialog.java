@@ -5,15 +5,13 @@ import gui.EasyDialog;
 import gui.components.Bildschirm;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Properties;
+import java.util.Map;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
@@ -32,27 +30,19 @@ import javax.swing.SwingConstants;
  * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class MemorySettingsDialog extends GameSettingsDialog {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6318517814751967329L;
-	private static final String NUMOFROUNDS = "Rundenzahl";
+	public static final String BACKSIDE = "Rückseite";
+	public static final String DECK = "Deck";
+	public static final String PAIRS = "Paare";
+	public static final String DIFFICULTY = "Schwierigkeit";
 	Memory game;
-	private JPanel hauptbereichPanel;
-	private JLabel paareLabel;
 	private JComboBox<String> backsideComboBox;
 	private JComboBox<String> paareComboBox;
 	private JComboBox<String> deckComboBox;
-	private JLabel rundenzahlLabel;
-	private JSlider rundenzahlSlider;
-	private GridLayout hauptbereichPanelLayout;
-	private JLabel schwierigkeitLabel;
 	private JSlider schwierigkeitSlider;
-	private JLabel deckLabel;
 	String[] moeglichePaare = new String[5];
-	private JLabel backsideLabel;
 	private Bildschirm backsidePreview;
+	private Map<String, String> backsides;
 	{
 		moeglichePaare[0] = "27";
 		moeglichePaare[1] = "24";
@@ -63,20 +53,13 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 	public MemorySettingsDialog(Memory m){
 		super(m);
 		game = m;
+		backsides = m.getBacksides();
 		initGUI();
 		propertiesToSettings();
 	}
 
 	private void initGUI(){
 		{
-			hauptbereichPanel = new JPanel();
-			hauptbereichPanelLayout = new GridLayout(4, 2);
-			hauptbereichPanelLayout.setHgap(5);
-			hauptbereichPanelLayout.setVgap(5);
-			hauptbereichPanelLayout.setColumns(2);
-			settingsPanel.setLayout(new BorderLayout());
-			settingsPanel.add(hauptbereichPanel, BorderLayout.CENTER);
-			hauptbereichPanel.setLayout(hauptbereichPanelLayout);
 			{
 				JPanel previewPanel = new JPanel();
 				backsidePreview = new Bildschirm(game.backside);
@@ -84,35 +67,23 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 				dialogPane.add(previewPanel, BorderLayout.EAST);
 			}
 			{
-				backsideLabel = new JLabel();
-				hauptbereichPanel.add(backsideLabel);
-				backsideLabel.setText("Rückseite:");
-			}
-			{
 				ComboBoxModel<String> backsideComboBoxModel =
-					new DefaultComboBoxModel<String>(game.getBacksides().toArray(new String[1]));
-				
+					new DefaultComboBoxModel<String>(game.getBacksides().keySet().toArray(new String[1]));
 				backsideComboBox = new JComboBox<String>();
-				hauptbereichPanel.add(backsideComboBox);
 				backsideComboBox.setModel(backsideComboBoxModel);
 				backsideComboBox.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						backsidePreview.changePic((String)backsideComboBox.getSelectedItem());
+						backsidePreview.changePic(backsides.get(backsideComboBox.getSelectedItem()));
 					}
 				});
-			}
-			{
-				deckLabel = new JLabel();
-				hauptbereichPanel.add(deckLabel);
-				deckLabel.setText("Deck:");
+				addSettingsComponent("Rückseite", backsideComboBox);
 			}
 			{
 				ComboBoxModel<String> deckComboBoxModel =
 					new DefaultComboBoxModel<String>(game.getMemDeckNames(true).toArray(new String[1]));
 				
 				deckComboBox = new JComboBox<String>();
-				hauptbereichPanel.add(deckComboBox);
 				deckComboBox.setModel(deckComboBoxModel);
 				deckComboBox.addActionListener(new ActionListener() {
 					@Override
@@ -121,17 +92,12 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 						updateRundenzahlSlider();
 					}
 				});
-			}
-			{
-				paareLabel = new JLabel();
-				hauptbereichPanel.add(paareLabel);
-				paareLabel.setText("Pärchen:");
+				addSettingsComponent("Deck", deckComboBox);
 			}
 			{
 				ComboBoxModel<String> paareComboBoxModel =
 					new DefaultComboBoxModel<String>(moeglichePaare);
 				paareComboBox = new JComboBox<String>();
-				hauptbereichPanel.add(paareComboBox);
 				paareComboBox.setModel(paareComboBoxModel);
 				paareComboBox.addActionListener(new ActionListener() {
 					@Override
@@ -139,21 +105,12 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 						updateRundenzahlSlider();
 					}
 				});
-			}
-			{
-				rundenzahlLabel = new JLabel("Siegpunktzahl");
-				hauptbereichPanel.add(rundenzahlLabel);
+				addSettingsComponent("Pärchen", paareComboBox);
 			}
 			{
 				int maxRunden = Integer.parseInt(moeglichePaare[paareComboBox.getSelectedIndex()]);
 				maxRunden = maxRunden/2+1;
-				rundenzahlSlider = new JSlider(SwingConstants.HORIZONTAL,1,maxRunden,game.numOfRounds);
-				rundenzahlSlider.setMajorTickSpacing(1);
-				rundenzahlSlider.setMinorTickSpacing(1);
-				rundenzahlSlider.setSnapToTicks(true);
-				rundenzahlSlider.setPaintTicks(true);
-				rundenzahlSlider.setPaintLabels(true);
-				hauptbereichPanel.add(rundenzahlSlider);
+				setMaxRunden(maxRunden);
 			}
 			if(game.modus == Modus.SOLO){
 				addSchwierigkeitSlider();
@@ -182,11 +139,6 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 	}
 
 	private void addSchwierigkeitSlider() {
-		hauptbereichPanelLayout.setRows(3);
-		{
-			schwierigkeitLabel = new JLabel("Schwierigkeitsstufe");
-			hauptbereichPanel.add(schwierigkeitLabel);
-		}
 		{
 			schwierigkeitSlider = new JSlider(SwingConstants.HORIZONTAL,1,10,game.getSchwierigkeit());
 			schwierigkeitSlider.setMajorTickSpacing(1);
@@ -194,35 +146,54 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 			schwierigkeitSlider.setSnapToTicks(true);
 			schwierigkeitSlider.setPaintTicks(true);
 			schwierigkeitSlider.setPaintLabels(true);
-			hauptbereichPanel.add(schwierigkeitSlider);
+			addSettingsComponent("Schwierigkeitsstufe", schwierigkeitSlider);
 		}
 	}
 
 	public void speichern() {
-		int numOfPairs = Integer.parseInt(moeglichePaare[paareComboBox.getSelectedIndex()]);
-		game.paarZahl(numOfPairs);
-		game.numOfRounds = rundenzahlSlider.getValue();
-		if(game.modus==Modus.SOLO)game.setSchwierigkeit(schwierigkeitSlider.getValue());
-		game.setSelectedDeck((String)deckComboBox.getSelectedItem());
-		game.backside = (String)backsideComboBox.getSelectedItem();
 		settingsToProperties();
 		super.speichern();
 	}
 	private void updateRundenzahlSlider(){
 		int maxRunden = Integer.parseInt(moeglichePaare[paareComboBox.getSelectedIndex()]);
 		maxRunden = maxRunden/2+1;
-		rundenzahlSlider.setMaximum(maxRunden);
+		setMaxRunden(maxRunden);
 	}
-	private void settingsToProperties(){
-		if(defaultSettings == null){
-			defaultSettings = new Properties();
+	public void settingsToProperties(){
+		super.settingsToProperties();
+		settings.setProperty(BACKSIDE, ""+backsideComboBox.getSelectedItem());
+		settings.setProperty(DECK, ""+deckComboBox.getSelectedItem());
+		settings.setProperty(PAIRS, ""+paareComboBox.getSelectedItem());
+		if(game.modus == Modus.SOLO){
+			settings.setProperty(DIFFICULTY, ""+schwierigkeitSlider.getValue());
 		}
-		defaultSettings.setProperty(NUMOFROUNDS, ""+myGame.numOfRounds);
 	}
-	private void propertiesToSettings(){
-		if(defaultSettings == null){
+	public void propertiesToSettings(){
+		super.propertiesToSettings();
+		String backside = settings.getProperty(BACKSIDE);
+		setSelectedElement(backsideComboBox, backside);
+		String deck = settings.getProperty(DECK);
+		setSelectedElement(deckComboBox, deck);
+		String pairs = settings.getProperty(PAIRS);
+		setSelectedElement(paareComboBox, pairs);
+		if(myGame == null){
+			System.out.println("game ist null");
 			return;
 		}
-		rundenzahlSlider.setValue(Integer.parseInt(defaultSettings.getProperty(NUMOFROUNDS, ""+myGame.numOfRounds)));
+		if(myGame.modus == Modus.SOLO){
+			String schwierigkeit = settings.getProperty(DIFFICULTY);
+			if(schwierigkeit != null)
+				schwierigkeitSlider.setValue(Integer.parseInt(schwierigkeit));
+		}
+	}
+
+	private void setSelectedElement(JComboBox<String> cb, String element) {
+		if(element == null || cb == null) return;
+		for(int i=0; i<cb.getItemCount(); i++){
+			if(cb.getItemAt(i).equals(element)){
+				cb.setSelectedIndex(i);
+				break;
+			}
+		}
 	}
 }
