@@ -92,6 +92,7 @@ public abstract class Game extends Anzeige {
 	private JLabel pauseLabel;
 	private JPanel centeredPanel;
 	protected Properties customSettings;
+	private JButtonIcon settingsButton;
 
 	public Game(player.Player[] player, int numOfRounds,
 			Modus modus, int globalGameID) {
@@ -188,6 +189,17 @@ public abstract class Game extends Anzeige {
 			menuPane.setLayout(menuPaneLayout);
 			this.add(menuPane, BorderLayout.NORTH);
 			{
+				settingsButton = new JButtonIcon("media/ablauf/settings2.png",
+						"Einstellungen");
+				settingsButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						settingsButtonActionPerformed(evt);
+					}
+				});
+				settingsButton.setEnabled(false);
+				menuPane.add(settingsButton);
+			}
+			{
 				anleitungButton = new JButtonIcon("media/ablauf/hilfe.png",
 						"Anleitung");
 				anleitungButton.addActionListener(new ActionListener() {
@@ -218,6 +230,14 @@ public abstract class Game extends Anzeige {
 		centeredPanel.add(spielBereichPanel);
 		spielBereichPanel.setLayout(new FlowLayout());
 		this.add(centeredPanel, BorderLayout.CENTER);
+	}
+
+	protected void settingsButtonActionPerformed(ActionEvent evt) {
+		openSettingsDialog();
+	}
+	
+	public void enableSettingsButton(boolean enable){
+		settingsButton.setEnabled(enable);
 	}
 
 	private void initPauseLabel() {

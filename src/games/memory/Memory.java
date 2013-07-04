@@ -387,6 +387,7 @@ public class Memory extends games.Game implements PC {
 		if(myPlayer[whosTurn].isRobot()){
 			startRobotState();
 		}
+		enableSettingsButton(true);
 	}
 
 	@Override
@@ -462,8 +463,9 @@ public class Memory extends games.Game implements PC {
 		}
 		numOfRounds = Integer.parseInt(customSettings.getProperty(MemorySettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
 		String newBackside = customSettings.getProperty(MemorySettingsDialog.BACKSIDE);
-		if(newBackside != null)
+		if(newBackside != null){
 			 backside = backsides.get(newBackside);
+		}
 		String deck = customSettings.getProperty(MemorySettingsDialog.DECK);
 		if(deck != null)	
 			setSelectedDeck(deck);
