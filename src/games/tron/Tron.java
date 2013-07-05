@@ -105,6 +105,7 @@ public class Tron extends Game implements PC{
 			}
 			kollision[i] = false;
 		}
+		enableSettingsButton(true);
 		startButton.setEnabled(true);
 	}
 	
@@ -129,6 +130,7 @@ public class Tron extends Game implements PC{
 			public void actionPerformed(ActionEvent arg0) {
 				getGameLoop().start();
 				startButton.setEnabled(false);
+				enableSettingsButton(false);
 			}
 		});
 		addSpielfeld();

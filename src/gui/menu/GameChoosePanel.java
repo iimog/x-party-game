@@ -44,6 +44,8 @@ public class GameChoosePanel extends JPanel {
 			lab.setHorizontalAlignment(SwingConstants.RIGHT);
 			labelList.add(lab);
 			JComboBox combo = new JComboBox();
+			combo.setForeground(Color.WHITE);
+			combo.setBackground(Color.DARK_GRAY);
 			ComboBoxModel model = new DefaultComboBoxModel(erwuenschteSpiele.toArray());
 			model.setSelectedItem(SpielListen.getGameName(gameList.get(i)));
 			combo.setModel(model);

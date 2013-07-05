@@ -170,6 +170,9 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 	}
 	public void propertiesToSettings(){
 		super.propertiesToSettings();
+		if(settings == null){
+			return;
+		}
 		String backside = settings.getProperty(BACKSIDE);
 		setSelectedElement(backsideComboBox, backside);
 		String deck = settings.getProperty(DECK);

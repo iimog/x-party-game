@@ -3,3 +3,4 @@ Schwarzer Rauch	media/memory/sonstiges.jpg
 Blauer Rauch	media/memory/sonstiges1.jpg
 Muster	media/memory/sonstiges2.jpg
 Wirbel	media/memory/sonstiges5.jpg
+Ananas	media/memory/früchte15.jpg
