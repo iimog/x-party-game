@@ -277,11 +277,12 @@ public class Spielablauf implements GameListener, Ablauf {
 	public int nextGameID(boolean wiederholen) {
 		Random r = new Random();
 		while (true) {
-			int nextID = r.nextInt(SpielListen.getTotalGameNumber()) + 1;
+			int nextID = r.nextInt(SpielListen.getTotalGameNumber()*4) + 1;
 			if (!getErwuenschteSpieleIDs().contains(nextID)) {
 				continue;
 			}
 			if (!wiederholen) {
+				System.out.println(nextID);
 				if (playedGameIDs.add(nextID))
 					return nextID;
 				else {
