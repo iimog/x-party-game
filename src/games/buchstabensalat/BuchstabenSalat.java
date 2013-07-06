@@ -49,6 +49,7 @@ public class BuchstabenSalat extends Game implements PC {
 	protected int numOfWords = 124;
 	String[] kategorie = new String[numOfWords];
 	String[] loesungswort = new String[numOfWords];
+	private boolean buzzerblocked = false;
 	{
 		loesungswort[0] = "SCHLANGENBISS";
 		kategorie[0] = "Unfall in der Zoohandlung";
@@ -446,6 +447,9 @@ public class BuchstabenSalat extends Game implements PC {
 
 	@Override
 	public void buzzeredBy(int whoBuzzered) {
+		if(buzzerblocked)
+			return;
+		buzzerblocked = true;
 		this.whoBuzzered = whoBuzzered;
 		unstoppable = true;
 		aufdecker.interrupt();
@@ -550,6 +554,7 @@ public class BuchstabenSalat extends Game implements PC {
 	}
 
 	private void nextRound() {
+		buzzerblocked = false;
 		if (modus == Modus.TEAM)
 			changeActivePlayers();
 		answer = "";
