@@ -38,6 +38,7 @@ public class GameSettingsDialog extends AnzeigeDialog {
 	private JSlider rundenzahlSlider;
 	private int maxRunden = 10;
 	protected int numOfRounds = 5;
+	private boolean inGame;
 	
 	public int getMaxRunden() {
 		return maxRunden;
@@ -48,8 +49,12 @@ public class GameSettingsDialog extends AnzeigeDialog {
 		rundenzahlSlider.setMaximum(maxRunden);
 	}
 
-
 	public GameSettingsDialog(Game g){
+		this(g, false);
+	}
+	
+	public GameSettingsDialog(Game g, boolean inGame){
+		this.setInGame(inGame);
 		myGame = g;
 		settings = g.getCustomSettings();
 		initGUI();
@@ -76,6 +81,9 @@ public class GameSettingsDialog extends AnzeigeDialog {
 				rundenzahlSlider.setSnapToTicks(true);
 				rundenzahlSlider.setPaintTicks(true);
 				rundenzahlSlider.setPaintLabels(true);
+				if(isInGame()){
+					rundenzahlSlider.setEnabled(false);
+				}
 				settingsPanel.add(rundenzahlSlider);
 			}
 			{
@@ -150,6 +158,14 @@ public class GameSettingsDialog extends AnzeigeDialog {
 		settingsPanel.add(komponente);
 		revalidate();
 		repaint();
+	}
+
+	public boolean isInGame() {
+		return inGame;
+	}
+
+	public void setInGame(boolean inGame) {
+		this.inGame = inGame;
 	}
 
 }

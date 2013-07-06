@@ -51,82 +51,14 @@ public class Memory extends games.Game implements PC {
 	}
 
 	private String path = "media/memory/";
-	public static String[] pic = new String[69];
-	{
-		pic[29] = path + "architektur.jpg";
-		pic[32] = path + "architektur1.jpg";
-		pic[24] = path + "natur7.jpg";
-		pic[27] = path + "natur8.jpg";
-		pic[13] = path + "natur9.jpg";
-		pic[60] = path + "natur10.jpg";
-		pic[18] = path + "natur11.jpg";
-		pic[20] = path + "natur12.jpg";
-		pic[28] = path + "natur13.jpg";
-		pic[33] = path + "natur14.jpg";
-		pic[8] = path + "tier.jpg";
-		pic[9] = path + "tier1.jpg";
-		pic[10] = path + "tier2.jpg";
-		pic[26] = path + "tier3.jpg";
-		pic[5] = path + "tier4.jpg";
-		pic[16] = path + "tier5.jpg";
-		pic[22] = path + "tier6.jpg";
-		pic[65] = path + "tier7.jpg";
-		pic[61] = path + "sonstiges.jpg";
-		pic[62] = path + "sonstiges1.jpg";
-		pic[63] = path + "sonstiges2.jpg";
-		pic[6] = path + "sonstiges3.jpg";
-		pic[1] = path + "sonstiges4.jpg";
-		pic[2] = path + "sonstiges5.jpg";
-		pic[3] = path + "sonstiges6.jpg";
-		pic[4] = path + "sonstiges7.jpg";
-		pic[11] = path + "sonstiges8.jpg";
-		pic[12] = path + "sonstiges9.jpg";
-		pic[15] = path + "sonstiges11.jpg";
-		pic[19] = path + "sonstiges10.jpg";
-		pic[21] = path + "sonstiges12.jpg";
-		pic[25] = path + "sonstiges13.jpg";
-		pic[23] = path + "sonstiges14.jpg";
-		pic[30] = path + "sonstiges15.jpg";
-		pic[31] = path + "sonstiges16.jpg";
-		pic[34] = path + "sonstiges17.jpg";
-		pic[64] = path + "sonstiges18.jpg";
-		pic[35] = path + "früchte.jpg";
-		pic[36] = path + "früchte1.jpg";
-		pic[37] = path + "früchte2.jpg";
-		pic[38] = path + "früchte3.jpg";
-		pic[39] = path + "früchte4.jpg";
-		pic[40] = path + "früchte5.jpg";
-		pic[41] = path + "früchte6.jpg";
-		pic[42] = path + "früchte7.jpg";
-		pic[43] = path + "früchte8.jpg";
-		pic[44] = path + "früchte9.jpg";
-		pic[45] = path + "früchte10.jpg";
-		pic[46] = path + "früchte11.jpg";
-		pic[47] = path + "früchte12.jpg";
-		pic[48] = path + "früchte13.jpg";
-		pic[49] = path + "früchte14.jpg";
-		pic[50] = path + "früchte15.jpg";
-		pic[51] = path + "früchte16.jpg";
-		pic[52] = path + "früchte17.jpg";
-		pic[53] = path + "früchte18.jpg";
-		pic[54] = path + "früchte19.jpg";
-		pic[55] = path + "früchte20.jpg";
-		pic[56] = path + "früchte21.jpg";
-		pic[57] = path + "früchte22.jpg";
-		pic[58] = path + "früchte23.jpg";
-		pic[59] = path + "früchte24.jpg";
-		pic[14] = path + "früchte25.jpg";
-		pic[17] = path + "früchte26.jpg";
-		pic[66] = path + "sonstiges19.jpg";
-		pic[67] = path + "architektur2.jpg";
-		pic[68] = path + "sonstiges20.jpg";
-		
-	
-		
-		
-				
+	private String backside = path + "optisch.jpg";
+	public synchronized String getBackside() {
+		return backside;
 	}
-	public String backside = path + "optisch.jpg";
+
+	public synchronized void setBackside(String backside) {
+		this.backside = backside;
+	}
 	Bildschirm[] karte;
 	HashSet<Integer> set1, set2;
 	HashSet<Integer> open = new HashSet<Integer>();
@@ -230,8 +162,8 @@ public class Memory extends games.Game implements PC {
 	}
 
 	@Override
-	public void openSettingsDialog(){
-		instance.showDialog(new MemorySettingsDialog(this));
+	public void openSettingsDialog(boolean inGame){
+		instance.showDialog(new MemorySettingsDialog(this, inGame));
 	}
 
 	public void paarZahl(int zahl){
@@ -272,7 +204,7 @@ public class Memory extends games.Game implements PC {
 			spielfeldPanel.setLayout(spielfeldPanelLayout);
 			{
 				for(int i=0; i<2*numOfPairs; i++){
-					karte[i] = new Bildschirm(backside);
+					karte[i] = new Bildschirm(getBackside());
 					karte[i].setName(""+i);
 					karte[i].addMouseListener(mouse);
 					spielfeldPanel.add(karte[i]);
@@ -288,10 +220,11 @@ public class Memory extends games.Game implements PC {
 			deckLabel.setHorizontalAlignment(JLabel.CENTER);
 			spielBereichPanel.add(deckLabel, BorderLayout.NORTH);
 		}
+		revalidate();
+		repaint();
 	}
 	
 	private void getRandomPairs(){
-		System.out.println(numOfPairs+" --> "+selectedDeck.size());
 		if(numOfPairs > selectedDeck.size()){
 			numOfPairs = getBiggestFeasableNumOfPairs(selectedDeck.size());
 		}
@@ -329,8 +262,8 @@ public class Memory extends games.Game implements PC {
 				} catch (InterruptedException e) {
 					// nichts
 				}
-				karte[click[0]].changePic(backside);
-				karte[click[1]].changePic(backside);
+				karte[click[0]].changePic(getBackside());
+				karte[click[1]].changePic(getBackside());
 				spielfeldPanel.repaint();
 				open.remove(click[0]);
 				open.remove(click[1]);
@@ -394,10 +327,14 @@ public class Memory extends games.Game implements PC {
 	public void settingsChanged() {
 		propertiesToSettings();
 		updateCreds();
-		for(int i=0; i<karte.length; i++){
-			karte[i].changePic(backside);
-		}
 		if(modus == Modus.SOLO)memoryRobot.setGrenzWert(schwierigkeit*10);
+	}
+	
+	private synchronized void changeBackside(String newBackside){
+		setBackside(newBackside);
+		for(int i=0; i<karte.length; i++){
+			karte[i].changePic(newBackside);
+		}
 	}
 	
 	@Override
@@ -405,7 +342,6 @@ public class Memory extends games.Game implements PC {
 		memDecks = MemoryDeckLoader.loadMemoryDecks();
 		selectedDeck = MemoryDeck.getRandomDeck(memDecks);
 		while(selectedDeck.getPictures().size() < numOfPairs){
-			System.out.println(selectedDeck.getPictures().size()+" --> " + numOfPairs);
 			selectedDeck = MemoryDeck.getRandomDeck(memDecks);
 		}
 		backsides = MemoryDeckLoader.loadMemoryBacksides();
@@ -462,16 +398,16 @@ public class Memory extends games.Game implements PC {
 			return;
 		}
 		numOfRounds = Integer.parseInt(customSettings.getProperty(MemorySettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
+		String pairs = customSettings.getProperty(MemorySettingsDialog.PAIRS);
+		if(pairs != null && Integer.parseInt(pairs) != numOfPairs)	
+			paarZahl(Integer.parseInt(pairs));
 		String newBackside = customSettings.getProperty(MemorySettingsDialog.BACKSIDE);
 		if(newBackside != null){
-			 backside = backsides.get(newBackside);
+			 changeBackside(backsides.get(newBackside));
 		}
 		String deck = customSettings.getProperty(MemorySettingsDialog.DECK);
 		if(deck != null)	
 			setSelectedDeck(deck);
-		String pairs = customSettings.getProperty(MemorySettingsDialog.PAIRS);
-		if(pairs != null)	
-			paarZahl(Integer.parseInt(pairs));
 		if(modus == Modus.SOLO){
 			String schwierigkeit = customSettings.getProperty(MemorySettingsDialog.DIFFICULTY);
 			if(schwierigkeit != null)

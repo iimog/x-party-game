@@ -233,7 +233,7 @@ public abstract class Game extends Anzeige {
 	}
 
 	protected void settingsButtonActionPerformed(ActionEvent evt) {
-		openSettingsDialog();
+		openSettingsDialog(true);
 	}
 	
 	public void enableSettingsButton(boolean enable){
@@ -447,7 +447,12 @@ public abstract class Game extends Anzeige {
 
 	}
 
-	public void openSettingsDialog() {
+	// TODO remove this method when eventually all of those are replaced by the parametrized version
+	public void openSettingsDialog(){
+		openSettingsDialog(false);
+	}
+	
+	public void openSettingsDialog(boolean inGame) {
 		showMessage("Für dieses Spiel gibt es (noch) keinen Einstellungsdialog");
 	}
 

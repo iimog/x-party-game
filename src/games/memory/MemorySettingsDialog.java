@@ -50,8 +50,8 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 		moeglichePaare[3] = "15";
 		moeglichePaare[4] = "10";
 	}
-	public MemorySettingsDialog(Memory m){
-		super(m);
+	public MemorySettingsDialog(Memory m, boolean inGame){
+		super(m, inGame);
 		game = m;
 		backsides = m.getBacksides();
 		initGUI();
@@ -62,7 +62,7 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 		{
 			{
 				JPanel previewPanel = new JPanel();
-				backsidePreview = new Bildschirm(game.backside);
+				backsidePreview = new Bildschirm(game.getBackside());
 				previewPanel.add(backsidePreview);
 				dialogPane.add(previewPanel, BorderLayout.EAST);
 			}
@@ -92,6 +92,9 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 						updateRundenzahlSlider();
 					}
 				});
+				if(isInGame()){
+					deckComboBox.setEnabled(false);
+				}
 				addSettingsComponent("Deck", deckComboBox);
 			}
 			{
@@ -105,6 +108,9 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 						updateRundenzahlSlider();
 					}
 				});
+				if(isInGame()){
+					paareComboBox.setEnabled(false);
+				}
 				addSettingsComponent("Pärchen", paareComboBox);
 			}
 			{

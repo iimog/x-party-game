@@ -196,8 +196,11 @@ public class Bildschirm extends JPanel {
 		mt.addImage(bild, 0);
 		try {
 			mt.waitForAll();
+			if(mt.isErrorAny()){
+				System.out.println("Fehler beim laden von " + bildname);
+			}
 		} catch (InterruptedException e) {
-			// nichts
+			e.printStackTrace();
 		}
 		if (autoSize) {
 			setPreferredSize(new Dimension(bild.getWidth(this),
