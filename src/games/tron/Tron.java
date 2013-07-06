@@ -281,8 +281,8 @@ public class Tron extends Game implements PC{
 	public void openDetailsDialog(){
 		instance.showDialog(new TronDetailsDialog(this));
 	}
-	public void openSettingsDialog(){
-		instance.showDialog(new TronSettingsDialog(this));
+	public void openSettingsDialog(boolean inGame){
+		instance.showDialog(new TronSettingsDialog(this, inGame));
 	}
 	public void settingsChanged(){
 		updateCreds();

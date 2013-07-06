@@ -32,8 +32,8 @@ public class TronSettingsDialog extends GameSettingsDialog {
 	private JLabel flaechenGroesseLabel;
 	private JSlider flaechenGroesseSlider;
 	
-	public TronSettingsDialog(Tron tron){
-		super(tron);
+	public TronSettingsDialog(Tron tron, boolean inGame){
+		super(tron, inGame);
 		this.tron = tron;
 		initGUI();
 	}
