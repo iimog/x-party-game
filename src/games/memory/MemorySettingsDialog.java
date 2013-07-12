@@ -36,9 +36,9 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 	public static final String PAIRS = "Paare";
 	public static final String DIFFICULTY = "Schwierigkeit";
 	Memory game;
-	private JComboBox<String> backsideComboBox;
-	private JComboBox<String> paareComboBox;
-	private JComboBox<String> deckComboBox;
+	private JComboBox backsideComboBox;
+	private JComboBox paareComboBox;
+	private JComboBox deckComboBox;
 	private JSlider schwierigkeitSlider;
 	String[] moeglichePaare = new String[5];
 	private Bildschirm backsidePreview;
@@ -67,9 +67,9 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 				dialogPane.add(previewPanel, BorderLayout.EAST);
 			}
 			{
-				ComboBoxModel<String> backsideComboBoxModel =
-					new DefaultComboBoxModel<String>(game.getBacksides().keySet().toArray(new String[1]));
-				backsideComboBox = new JComboBox<String>();
+				ComboBoxModel backsideComboBoxModel =
+					new DefaultComboBoxModel(game.getBacksides().keySet().toArray(new String[1]));
+				backsideComboBox = new JComboBox();
 				backsideComboBox.setModel(backsideComboBoxModel);
 				backsideComboBox.addActionListener(new ActionListener() {
 					@Override
@@ -80,10 +80,10 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 				addSettingsComponent("Rückseite", backsideComboBox);
 			}
 			{
-				ComboBoxModel<String> deckComboBoxModel =
-					new DefaultComboBoxModel<String>(game.getMemDeckNames(true).toArray(new String[1]));
+				ComboBoxModel deckComboBoxModel =
+					new DefaultComboBoxModel(game.getMemDeckNames(true).toArray(new String[1]));
 				
-				deckComboBox = new JComboBox<String>();
+				deckComboBox = new JComboBox();
 				deckComboBox.setModel(deckComboBoxModel);
 				deckComboBox.addActionListener(new ActionListener() {
 					@Override
@@ -98,9 +98,9 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 				addSettingsComponent("Deck", deckComboBox);
 			}
 			{
-				ComboBoxModel<String> paareComboBoxModel =
-					new DefaultComboBoxModel<String>(moeglichePaare);
-				paareComboBox = new JComboBox<String>();
+				ComboBoxModel paareComboBoxModel =
+					new DefaultComboBoxModel(moeglichePaare);
+				paareComboBox = new JComboBox();
 				paareComboBox.setModel(paareComboBoxModel);
 				paareComboBox.addActionListener(new ActionListener() {
 					@Override
@@ -196,7 +196,7 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 		}
 	}
 
-	private void setSelectedElement(JComboBox<String> cb, String element) {
+	private void setSelectedElement(JComboBox cb, String element) {
 		if(element == null || cb == null) return;
 		for(int i=0; i<cb.getItemCount(); i++){
 			if(cb.getItemAt(i).equals(element)){

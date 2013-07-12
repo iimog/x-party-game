@@ -1,6 +1,6 @@
 Optisch	media/memory/optisch.jpg
-Schwarzer Rauch	media/memory/sonstiges.jpg
-Blauer Rauch	media/memory/sonstiges1.jpg
-Muster	media/memory/sonstiges2.jpg
-Wirbel	media/memory/sonstiges5.jpg
-Ananas	media/memory/früchte15.jpg
+Feuer	media/memory/optisch1.jpg
+Marmor	media/memory/optisch2.jpg
+Deko	media/memory/optisch3.jpg
+Grüner Wirbel	media/memory/optisch4.jpg
+Wallnuss	media/memory/optisch5.jpg
