@@ -59,6 +59,7 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 	}
 
 	private void initGUI(){
+		System.out.println(myGame.modus);
 		{
 			{
 				JPanel previewPanel = new JPanel();
@@ -118,9 +119,10 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 				maxRunden = maxRunden/2+1;
 				setMaxRunden(maxRunden);
 			}
-			if(game.modus == Modus.SOLO){
+			if(myGame.modus == Modus.SOLO){
 				addSchwierigkeitSlider();
 			}
+			
 		}
 	}
 	protected void updateKartenZahl() {
@@ -191,8 +193,9 @@ public class MemorySettingsDialog extends GameSettingsDialog {
 		}
 		if(myGame.modus == Modus.SOLO){
 			String schwierigkeit = settings.getProperty(DIFFICULTY);
-			if(schwierigkeit != null)
+			if(schwierigkeit != null && schwierigkeitSlider != null){
 				schwierigkeitSlider.setValue(Integer.parseInt(schwierigkeit));
+			}
 		}
 	}
 
