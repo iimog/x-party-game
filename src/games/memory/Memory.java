@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -333,6 +334,7 @@ public class Memory extends games.Game implements PC {
 	private synchronized void changeBackside(String newBackside){
 		setBackside(newBackside);
 		for(int i=0; i<karte.length; i++){
+			if(open.contains(i)) continue;
 			karte[i].changePic(newBackside);
 		}
 	}
@@ -403,7 +405,9 @@ public class Memory extends games.Game implements PC {
 			paarZahl(Integer.parseInt(pairs));
 		String newBackside = customSettings.getProperty(MemorySettingsDialog.BACKSIDE);
 		if(newBackside != null){
-			 changeBackside(backsides.get(newBackside));
+			String backsidePath = backsides.get(newBackside);
+			if(backsidePath != null)
+				changeBackside(backsidePath);
 		}
 		String deck = customSettings.getProperty(MemorySettingsDialog.DECK);
 		if(deck != null)	

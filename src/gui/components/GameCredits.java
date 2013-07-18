@@ -90,7 +90,7 @@ public class GameCredits extends JPanel {
 		setOpaque(false);
 		setLayout(new GridLayout(numOfRounds+1, 1));
 		creds = new JButton[numOfRounds];
-		creditLabel = new JLabel("0");
+		creditLabel = new JLabel(credits+"");
 		creditLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		creditLabel.setOpaque(true);
 		creditLabel.setBackground(Color.darkGray);
@@ -101,6 +101,9 @@ public class GameCredits extends JPanel {
 			creds[i] = new JButton("" + (i + 1));
 			creds[i].setEnabled(false);
 			creds[i].setBackground(standardCol);
+			if(i < credits){
+				creds[i].setBackground(actionCol);
+			}
 			add(creds[i]);
 		}
 	}

@@ -7,20 +7,21 @@ import games.dialogeGUIs.InfoDialog;
 import games.dialogeGUIs.RoundDialog;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import player.Player;
 import start.X;
+import util.ChangeManager;
 
 public class WerLuegt extends Game implements PC {
 	private static final long serialVersionUID = 1L;
@@ -37,16 +38,34 @@ public class WerLuegt extends Game implements PC {
 	private JPanel hauptbereichPanel;
 	
 	List<WerLuegtAussage> aussageListe;
+	List<File> aussageFileListe;
 	private JLabel aussageLabel;
-	private JLabel aktuelleAntwortLabel;
+	private WerLuegtRotator aktuelleAntwortRotator;
 	int timeProAussage = 5;
 	int current = -1;
 	int whoBuzzed;
 	Set<Integer> winnerIDs;
 	private JPanel aktuelleAntwortPanel;
+	private static File systemFolder = new File(X.getMainDir() + "games/pc/werLuegt/");
+	private static File userFolder = new File(X.getDataDir() + "games/pc/werLuegt/");
 	
 	private void initAussagen(){
-		aussageListe = new ArrayList<WerLuegtAussage>();
+		aussageFileListe = new ArrayList<File>();
+		String[] systemFiles = systemFolder.list();
+		for (String file : systemFiles) {
+			if (file.endsWith(".deck")) {
+				aussageFileListe.add(new File(systemFolder+"/"+file));
+			}
+		}
+		if(userFolder.exists()){
+			String[] userFiles = userFolder.list();
+			for (String file : userFiles) {
+				if (file.endsWith(".deck")) {
+					aussageFileListe.add(new File(userFolder+"/"+file));
+				}
+			}
+		}
+	/*
 		String aussage = "Ich bin Land mit dem Euro als Währung";
 		String info = "Die Engländer haben ihre Währung damals behalten.";
 		List<String> richtig = new ArrayList<String>();
@@ -717,105 +736,8 @@ public class WerLuegt extends Game implements PC {
 		falsch.add("Nürnberg");
 		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
 		
-		aussage = "Ich bin ein Lied von Robbie Williams";
-		info = "Robbie ist eine britische Pop-Legende und tut es vor Allem seinen weiblichen Fans an.";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("Angel");
-		richtig.add("She’s the one");
-		richtig.add("Eternity");
-		richtig.add("Feel");
-		richtig.add("Supreme");
-		richtig.add("Bodies");
-		richtig.add("Let me entertain you");
-		richtig.add("Come Undone");
-		richtig.add("You Know Me");
-		richtig.add("Something Beautiful");
-		richtig.add("Strong");
-		richtig.add("Something stupid");
-		falsch.add("Somethings in the air");
-		falsch.add("U make me wanna");
-		falsch.add("Butterfly");
-		falsch.add("One love");
-		falsch.add("Beat it");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
 		
-		aussage = "Ich bin Olympia Goldmedaillengewinner";
-		info = "Die Goldmedaille ist die größte sportliche Auszeichnung für einen Sportler.";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("Michael Phelps");
-		richtig.add("Usain Bolt");
-		richtig.add("Carl Lewis");
-		richtig.add("Birgit Fischer");
-		richtig.add("Kobe Bryant");
-		richtig.add("Jonas Reckermann");
-		richtig.add("Yohan Blake");
-		richtig.add("Rafael Nadal");
-		richtig.add("Boris Becker");
-		richtig.add("Robert Harting");
-		falsch.add("Fabian Hambüchen");
-		falsch.add("Novak Djokovic");
-		falsch.add("Tiger Woods");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-		
-//		aussage = "";
-//		info = "";
-//		richtig = new ArrayList<String>();
-//		falsch = new ArrayList<String>();
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		richtig.add("");
-//		falsch.add("");
-//		falsch.add("");
-//		falsch.add("");
-//		falsch.add("");
-//		falsch.add("");
-//		falsch.add("");
-//		falsch.add("");
-//		falsch.add("");
-//		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-		
-		/*
-		aussage = "";
-		info = "";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("");
-		richtig.add("");
-		richtig.add("");
-		richtig.add("");
-		richtig.add("");
-		falsch.add("");
-		falsch.add("");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-		 */
+	*/
 	}
 	
 	public WerLuegt(Player[] player, Modus modus, int globalGameID) {
@@ -838,12 +760,19 @@ public class WerLuegt extends Game implements PC {
 		aktuelleAntwortPanel.setLayout(new GridLayout(2, 1));
 		aktuelleAntwortPanel.setOpaque(false);
 		aktuelleAntwortPanel.add(new JLabel());
-		aktuelleAntwortLabel = new JLabel("Aktuelle Antwort");
-		aktuelleAntwortLabel.setFont(labelFont);
-		aktuelleAntwortLabel.setOpaque(true);
-		aktuelleAntwortLabel.setHorizontalAlignment(JLabel.CENTER);
-		aktuelleAntwortLabel.setBorder(BorderFactory.createLineBorder(Color.black));
-		aktuelleAntwortPanel.add(aktuelleAntwortLabel);
+		aktuelleAntwortRotator = new WerLuegtRotator();
+		aktuelleAntwortRotator.setFont(labelFont);
+		aktuelleAntwortRotator.setOpaque(true);
+		aktuelleAntwortRotator.addChangeManager(new ChangeManager() {			
+			@Override
+			public void change() {
+				roundEnd(-1);
+			}
+		});
+		aktuelleAntwortRotator.setRotationTime(timeProAussage);
+//		aktuelleAntwortRotator.setHorizontalAlignment(JLabel.CENTER);
+//		aktuelleAntwortRotator.setBorder(BorderFactory.createLineBorder(Color.black));
+		aktuelleAntwortPanel.add(aktuelleAntwortRotator);
 		hauptbereichPanel.add(aktuelleAntwortPanel, BorderLayout.SOUTH);
 	}
 
@@ -857,16 +786,16 @@ public class WerLuegt extends Game implements PC {
 	
 	@Override
 	public void buzzeredBy(int playerID){
-		antwortRotater.interrupt();
+		aktuelleAntwortRotator.pause();
 		roundEnd(playerID);
 	}
 	
 	private boolean aktuelleAussageWahr;
-	private AntwortRotator antwortRotater;
 
 	public void roundEnd(int whoBuzzered) {
+		aktuelleAntwortRotator.pause();
 		whoBuzzed = whoBuzzered;
-		aktuelleAussageWahr = aussageListe.get(current).isWahr();
+		aktuelleAussageWahr = aktuelleAntwortRotator.isCurrentTrue();
 		winnerIDs = new HashSet<Integer>();	
 		if(aktuelleAussageWahr || whoBuzzered == -1){
 			// Leider zu Unrecht gebuzzert oder keiner gebuzzert
@@ -913,57 +842,32 @@ public class WerLuegt extends Game implements PC {
 	private void nextRound(){
 		if(modus == Modus.TEAM)changeActivePlayers();
 		aktuelleAussageWahr = false;
-		current = nextRandom(aussageListe.size());
+		current = nextRandom(aussageFileListe.size());
 		if(current==-1){
 			abbruch();
 			// TODO besser handhaben!
 		}
 		else{
-			aussageLabel.setText(aussageListe.get(current).getAussage());
-			antwortRotater = new AntwortRotator();
-			antwortRotater.start();
+			aktuelleAntwortRotator.changeDeck(aussageFileListe.get(current));
+			aussageLabel.setText(aktuelleAntwortRotator.getDeckName());
+			aktuelleAntwortRotator.start();
 		}
 	}
 	
 	public void pause(){
 		super.pause();
-		antwortRotater.interrupt();
+		aktuelleAntwortRotator.pause();
 	}
 	public void resume(){
 		super.resume();
-		antwortRotater = new AntwortRotator();
-		antwortRotater.start();
+		aktuelleAntwortRotator.start();
 	}
-
-	class AntwortRotator extends Thread{		
-		@Override
-		public void run() {
-			aktuelleAntwortLabel.setText("");
-			try{
-				Thread.sleep(timeProAussage*1000);
-			}
-			catch(Exception e){
-				return;
-			}
-			while(!Thread.interrupted()){
-				if(!aussageListe.get(current).hasMore()){
-					roundEnd(-1);
-					break;
-				}
-				aktuelleAntwortLabel.setText(aussageListe.get(current).getNextAntwort());
-				try{
-					Thread.sleep(timeProAussage*1000);
-				}
-				catch(Exception e){
-					return;
-				}
-			}
-		}
-	};
-
+	
 	@Override
 	public void settingsChanged() {
 		updateCreds();
+		if(aktuelleAntwortRotator != null)
+			aktuelleAntwortRotator.setRotationTime(timeProAussage);
 	}
 
 	@Override
@@ -999,6 +903,18 @@ public class WerLuegt extends Game implements PC {
 	
 	@Override
 	public void openInfoDialog(){
-		instance.showDialog(new InfoDialog(aussageListe.get(current).getInfo()));
+		instance.showDialog(new InfoDialog(aktuelleAntwortRotator.getDeckInfo()));
+	}
+
+	public String getCurrentAussage() {
+		return aktuelleAntwortRotator.getDeckName();
+	}
+
+	public Map<String, Boolean> getCorrectAnswers() {
+		return aktuelleAntwortRotator.getCorrectAnswers();
+	}
+	
+	public List<String> getVerlauf(){
+		return aktuelleAntwortRotator.getVerlauf();
 	}
 }

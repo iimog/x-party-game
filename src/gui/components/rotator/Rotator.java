@@ -1,0 +1,84 @@
+package gui.components.rotator;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import util.ChangeManager;
+
+public abstract class Rotator extends JPanel {
+	private static final long serialVersionUID = 1L;
+	private int rotationTime = 5;
+	ArrayList<ChangeManager> cMs = new ArrayList<ChangeManager>();
+	private Timer timer;
+
+	public int getRotationTime() {
+		return rotationTime;
+	}
+
+	public void setRotationTime(int rotationTime) {
+		this.rotationTime = rotationTime;
+	}
+
+	public Rotator() {
+		initGUI();
+	}
+
+	private void initGUI() {
+		setLayout(new BorderLayout());
+	}
+
+	public void start() {
+		timer = new Timer(rotationTime * 1000, new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				changeComponent();
+			}
+		});
+		timer.setInitialDelay(rotationTime * 1000);
+		timer.start();
+	}
+
+	public abstract void maskComponent();
+
+	public abstract void changeComponent();
+
+	public void pause() {
+		if (timer != null)
+			timer.stop();
+	}
+
+	private void fireChange() {
+		Iterator<ChangeManager> i = cMs.iterator();
+		while (i.hasNext()) {
+			i.next().change();
+		}
+	}
+
+	public void addChangeManager(ChangeManager cm) {
+		cMs.add(cm);
+	}
+
+	public HashSet<Integer> schonWeg = new HashSet<Integer>();
+
+	public int nextRandom(int numOfQuests) {
+		if (schonWeg.size() == numOfQuests) {
+			fireChange();
+			schonWeg = new HashSet<Integer>();
+		}
+		Random r = new Random();
+		int ret = r.nextInt(numOfQuests);
+		while (schonWeg.add(ret) == false) {
+			ret = r.nextInt(numOfQuests);
+		}
+		return ret;
+
+	}
+}

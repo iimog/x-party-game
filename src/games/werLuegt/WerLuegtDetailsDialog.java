@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -47,7 +48,7 @@ public class WerLuegtDetailsDialog extends AnzeigeDialog {
 			{
 				aussageLabel = new JLabel();
 				aussageLabel.setFont(WerLuegt.standardFont);
-				aussageLabel.setText(werLuegt.aussageListe.get(werLuegt.current).getAussage());
+				aussageLabel.setText(werLuegt.getCurrentAussage());
 				aussageLabel.setHorizontalAlignment(JLabel.CENTER);
 				topPanel.add(aussageLabel,BorderLayout.NORTH);
 			}
@@ -69,15 +70,17 @@ public class WerLuegtDetailsDialog extends AnzeigeDialog {
 				topPanel.add(new JSeparator(),BorderLayout.SOUTH);
 			{
 				antwortenPanel = new JPanel();
-				WerLuegtAussage aussage = werLuegt.aussageListe.get(werLuegt.current);
-				List<Integer> verlauf = aussage.getVerlauf();
+				Map<String, Boolean> correctAnswers = werLuegt.getCorrectAnswers(); 
+				List<String> verlauf = werLuegt.getVerlauf();
+//				List<Integer> verlauf = aussage.getVerlauf();
 				antwortenPanel.setLayout(new GridLayout(verlauf.size(),1));
 				for(int i=0; i<verlauf.size(); i++){
-					JLabel antwortLabel = new JLabel(aussage.getAussage(verlauf.get(i)));
+					JLabel antwortLabel = new JLabel(verlauf.get(i));
 					antwortLabel.setOpaque(true);
 					antwortLabel.setBackground(Color.RED);
 					antwortLabel.setHorizontalAlignment(JLabel.CENTER);
-					if(aussage.isWahr(verlauf.get(i)))antwortLabel.setBackground(Color.GREEN);
+					if(correctAnswers.get(verlauf.get(i)))
+							antwortLabel.setBackground(Color.GREEN);
 					antwortenPanel.add(antwortLabel);
 				}
 				hauptbereichPanel.add(antwortenPanel, BorderLayout.SOUTH);

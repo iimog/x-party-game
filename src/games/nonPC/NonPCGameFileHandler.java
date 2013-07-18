@@ -2,6 +2,9 @@ package games.nonPC;
 
 import games.GameInfo;
 import games.Modus;
+
+import java.io.File;
+
 import player.Player;
 import start.X;
 import util.SpielListen;
@@ -32,6 +35,9 @@ public class NonPCGameFileHandler {
 		*/
 		int numOfRounds = gi.getDefaultNumOfRounds();
 		String background = (prefix + fileName).replaceAll(".game$", ".png");
+		if(!new File(background).exists()){
+			background = (prefix + fileName).replaceAll(".game$", ".jpg");
+		}
 		RawNonPC game = new RawNonPC(players, numOfRounds, modus, background, globalGameID);
 		return game;
 	}
