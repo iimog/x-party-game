@@ -60,6 +60,7 @@ public class MatchLaden extends Anzeige {
 		matchListe = new MatchListe(getInfoPanels(spielstaende));
 		JScrollPane scrollPane = new JScrollPane(matchListe);
 		scrollPane.setMinimumSize(new Dimension(800,600));
+		scrollPane.setOpaque(false);
 		mainPanel.add(scrollPane, BorderLayout.CENTER);
 		mainPanel.add(getButtonPanel(), BorderLayout.SOUTH);
 	}

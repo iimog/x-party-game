@@ -1,5 +1,6 @@
 package gui.menu;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -34,8 +35,10 @@ public class MatchListe extends JPanel {
 	}
 	
 	private void initGUI() {
+		this.setBackground(Color.DARK_GRAY);
 		hauptPanel = new JPanel();
-		hauptPanel.setLayout(new GridLayout(infoPanels.length,1));
+		hauptPanel.setLayout(new GridLayout(infoPanels.length,1,5,15));
+		hauptPanel.setOpaque(false);
 		for(int i=0; i<infoPanels.length; i++){
 			hauptPanel.add(infoPanels[i]);
 			infoPanels[i].addMouseListener(new PanelMouseAdapter(i));
