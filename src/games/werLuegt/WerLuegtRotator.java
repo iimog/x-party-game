@@ -15,7 +15,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 
 public class WerLuegtRotator extends Rotator {
