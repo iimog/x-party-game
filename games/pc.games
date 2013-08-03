@@ -12,3 +12,4 @@ Buchstabensalat	games.buchstabensalat.BuchstabenSalat	5	30	Behältst du den Übe
 Stimmts?	games.stimmts.Stimmts	5	31	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)\n\nSpieler 1: D->wahr F->falsch, Spieler 2: K->wahr L->falsch, \nSpieler 3: B->wahr N->falsch, Spieler 4: Z->wahr U->falsch \n\nEselsbrücken: F->Falsch, L->Lüge, N->Nichtwahr, U->Unwahr	
 Wer lügt?	games.werLuegt.WerLuegt	5	30	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)
 Reaktionszeit	games.reaktionszeit.ReaktionsZeit	5	30	Wessen Schrecksekunde ist länger?
+Spiegelschrift	games.spiegelschrift.SpiegelSchrift	5	30	Hier wird dir ganz schön der Kopf verdreht!

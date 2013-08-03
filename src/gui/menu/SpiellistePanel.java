@@ -3,6 +3,7 @@ package gui.menu;
 import games.Modus;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
+import start.X;
 import util.SpielListen;
 
 public class SpiellistePanel extends JPanel {
@@ -35,6 +37,7 @@ public class SpiellistePanel extends JPanel {
 	private JPanel obenPanel;
 	private JButton alleWaehlenButton;
 	private boolean alleGewaehlt;
+	private JScrollPane scrollPanel;
 	
 	public SpiellistePanel(StartMatch startMatch){
 		this.startMatch = startMatch;
@@ -52,7 +55,10 @@ public class SpiellistePanel extends JPanel {
 		obenPanel.add(alleWaehlenButton, BorderLayout.WEST);
 		this.add(obenPanel, BorderLayout.NORTH);
 		initListPanel();
-		this.add(new JScrollPane(listePanel), BorderLayout.CENTER);
+		scrollPanel = new JScrollPane(listePanel);
+		scrollPanel.setPreferredSize(new Dimension(scrollPanel.getPreferredSize().width, X.getInstance().getHeight()-350));
+		scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(scrollPanel, BorderLayout.CENTER);
 	}
 
 	private void initAlleWaehlenButton() {

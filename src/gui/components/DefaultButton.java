@@ -19,6 +19,7 @@ public class DefaultButton extends RoundedCornerButton {
 		setForeground(Color.LIGHT_GRAY);
 		setFocusPainted(false);
 		setFont(X.buttonFont);
+		setActionColor(Color.BLACK);
 	}
 
 }

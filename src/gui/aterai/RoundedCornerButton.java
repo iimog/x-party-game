@@ -13,14 +13,19 @@ import javax.swing.DefaultButtonModel;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
+/**
+ * 
+ * @author 
+ *
+ */
 public class RoundedCornerButton extends JButton {
 	private static final long serialVersionUID = 1L;
 	private static final float arcwidth  = 16.0f;
     private static final float archeight = 16.0f;
     protected static final int focusstroke = 2;
-    protected final Color fc = new Color(100,150,255,200);
-    protected final Color ac = new Color(230,230,230);
-    protected final Color rc = Color.ORANGE;
+    protected Color fc = new Color(100,150,255,200);
+	protected Color actionColor = new Color(230,230,230);
+    protected Color rc = Color.ORANGE;
     protected Shape shape;
     protected Shape border;
     protected Shape base;
@@ -67,7 +72,7 @@ public class RoundedCornerButton extends JButton {
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         if(getModel().isArmed()) {
-            g2.setColor(ac);
+            g2.setColor(actionColor);
             g2.fill(shape);
         }else if(isRolloverEnabled() && getModel().isRollover()) {
             paintFocusAndRollover(g2, rc);
@@ -92,5 +97,23 @@ public class RoundedCornerButton extends JButton {
     @Override public boolean contains(int x, int y) {
         initShape();
         return shape.contains(x, y);
+    }
+    public Color getFc() {
+    	return fc;
+    }
+    public void setFc(Color fc) {
+    	this.fc = fc;
+    }
+    public Color getActionColor() {
+    	return actionColor;
+    }
+    public void setActionColor(Color ac) {
+    	this.actionColor = ac;
+    }
+    public Color getRc() {
+    	return rc;
+    }
+    public void setRc(Color rc) {
+    	this.rc = rc;
     }
 }
