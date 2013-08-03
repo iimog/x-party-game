@@ -142,7 +142,9 @@ public class MatchCredits extends Anzeige {
 			playedGamesPanel.setOpaque(false);
 			{
 				for (int i = 0; i < numOfGames; i++) {
-					played[i] = new DefaultButton("" + (i + 1));
+					played[i] = new JButton("" + (i + 1));
+					played[i].setBackground(Color.DARK_GRAY);
+					played[i].setForeground(Color.WHITE);
 					playedGamesPanel.add(played[i]);
 					played[i].setEnabled(false);
 				}

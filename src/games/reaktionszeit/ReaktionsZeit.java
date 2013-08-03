@@ -30,6 +30,7 @@ public class ReaktionsZeit extends Game {
 	private int currentIndex;
 	private HashSet<Integer> winnerIDs;
 	private int rotationTime = 1;
+	private List<String> allAnswers;
 
 	public ReaktionsZeit(Player[] player, Modus modus,
 			int globalGameID) {
@@ -54,6 +55,7 @@ public class ReaktionsZeit extends Game {
 		queryRotator.setForeground(Color.WHITE);
 		queryRotator.setFont(Game.STANDARD_FONT.deriveFont(50f));
 		queryRotator.setRotationTime(rotationTime);
+		queryRotator.maskComponent();
 		queryPanel.add(queryRotator);
 	}
 
@@ -76,9 +78,10 @@ public class ReaktionsZeit extends Game {
 	}
 
 	private void nextRound() {
-		List<String> strings = queryRotator.getStringList();
-		targetIndex = new Random().nextInt(strings.size());
-		target.setText(strings.get(targetIndex));
+		queryRotator.maskComponent();
+		allAnswers = queryRotator.getStringList();
+		targetIndex = new Random().nextInt(allAnswers.size());
+		target.setText(allAnswers.get(targetIndex));
 		queryRotator.start();
 		setBuzzerActive(true);
 	}
@@ -86,6 +89,7 @@ public class ReaktionsZeit extends Game {
 	@Override
 	public void buzzeredBy(int whoBuzz){
 		queryRotator.pause();
+		setBuzzerActive(false);
 		currentIndex = queryRotator.getCurrentIndex();
 		winnerIDs = new HashSet<Integer>();	
 		if(currentIndex != targetIndex){
@@ -147,7 +151,30 @@ public class ReaktionsZeit extends Game {
 	
 	@Override
 	public void openDetailsDialog(){
-	//	instance.showDialog(new ReaktionsZeitDetailsDialog(this));
+		instance.showDialog(new ReaktionsZeitDetailsDialog(this));
+	}
+	
+	public String getCurrent(){
+		return allAnswers.get(currentIndex);
+	}
+	
+	public String getTarget(){
+		return allAnswers.get(targetIndex);
+	}
+	
+	@Override
+	public void pause(){
+		super.pause();
+		setBuzzerActive(false);
+		queryRotator.pause();
+		queryRotator.maskComponent();
+	}
+	
+	@Override
+	public void resume(){
+		super.resume();
+		queryRotator.start();
+		setBuzzerActive(true);
 	}
 
 }
