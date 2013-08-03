@@ -15,16 +15,20 @@ import util.ChangeManager;
 
 public abstract class Rotator extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private int rotationTime = 5;
+	private int rotationTime = 5000;
 	ArrayList<ChangeManager> cMs = new ArrayList<ChangeManager>();
 	private Timer timer;
 
 	public int getRotationTime() {
-		return rotationTime;
+		return rotationTime/1000;
 	}
 
 	public void setRotationTime(int rotationTime) {
-		this.rotationTime = rotationTime;
+		this.rotationTime = rotationTime*1000;
+	}
+	
+	public void setRotationTime_ms(int rotationTime_ms) {
+		this.rotationTime = rotationTime_ms;
 	}
 
 	public Rotator() {
@@ -36,13 +40,13 @@ public abstract class Rotator extends JPanel {
 	}
 
 	public void start() {
-		timer = new Timer(rotationTime * 1000, new ActionListener() {			
+		timer = new Timer(rotationTime, new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				changeComponent();
 			}
 		});
-		timer.setInitialDelay(rotationTime * 1000);
+		timer.setInitialDelay(rotationTime);
 		timer.start();
 	}
 

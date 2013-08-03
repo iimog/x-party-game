@@ -61,6 +61,8 @@ public abstract class Game extends Anzeige {
 	public Modus modus;
 
 	public boolean stechen = false;
+	
+	private boolean buzzerActive = false;
 
 	public static final int[] standardBuzz = new int[4];
 	{
@@ -162,6 +164,7 @@ public abstract class Game extends Anzeige {
 						playerLabel[i] = new JLabel();
 						playerPanel[i].add(playerLabel[i]);
 						playerLabel[i].setText(myPlayer[i].name);
+						playerLabel[i].setToolTipText(KeyEvent.getKeyText(myPlayer[i].getKey()));
 						playerLabel[i].setFont(PLAYER_FONT);
 						playerLabel[i]
 								.setHorizontalAlignment(SwingConstants.CENTER);
@@ -587,5 +590,13 @@ public abstract class Game extends Anzeige {
 				numOfRounds = Integer.parseInt(rounds);
 			}
 		}
+	}
+
+	public boolean isBuzzerActive() {
+		return buzzerActive;
+	}
+
+	public void setBuzzerActive(boolean buzzerActive) {
+		this.buzzerActive = buzzerActive;
 	}
 }

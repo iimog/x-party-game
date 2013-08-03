@@ -1,6 +1,8 @@
 package gui.components.rotator;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,24 +18,25 @@ public class StringRotator extends Rotator {
 	private static final long serialVersionUID = 1L;
 	List<String> strings;
 	private JLabel textLabel;
-	
-	
-	public StringRotator(File stringFile){
+	private int currentIndex;
+
+	public StringRotator(File stringFile) {
 		super();
 		strings = getStringsFromFile(stringFile);
 		initGUI();
 	}
-	
-	private void initGUI(){
+
+	private void initGUI() {
 		textLabel = new JLabel("bla");
+		textLabel.setHorizontalAlignment(JLabel.CENTER);
 		add(textLabel, BorderLayout.CENTER);
 	}
 
 	private List<String> getStringsFromFile(File file) {
-		if(!file.exists())
+		if (!file.exists())
 			return null;
 		List<String> myStrings = new ArrayList<String>();
-		
+
 		try {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
@@ -45,18 +48,22 @@ public class StringRotator extends Rotator {
 			br.close();
 			fr.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Datei: " + file
-					+ " nicht gefunden");
+			System.out.println("Datei: " + file + " nicht gefunden");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return myStrings;
 	}
 
 	@Override
 	public void changeComponent() {
-		textLabel.setText(strings.get(nextRandom(strings.size())));
+		currentIndex = nextRandom(strings.size());
+		textLabel.setText(strings.get(currentIndex));
+	}
+
+	public int getCurrentIndex() {
+		return currentIndex;
 	}
 
 	public String getDeckName() {
@@ -70,5 +77,22 @@ public class StringRotator extends Rotator {
 	@Override
 	public void maskComponent() {
 		textLabel.setText("");
+	}
+
+	@Override
+	public void setForeground(Color fg) {
+		super.setForeground(fg);
+		if (textLabel != null)
+			textLabel.setForeground(fg);
+	}
+
+	public void setFont(Font font) {
+		super.setFont(font);
+		if (textLabel != null)
+			textLabel.setFont(font);
+	}
+	
+	public List<String> getStringList(){
+		return strings;
 	}
 }
