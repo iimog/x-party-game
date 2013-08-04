@@ -3,12 +3,12 @@ package games.reaktionszeit;
 import games.Game;
 import games.Modus;
 import games.dialogeGUIs.RoundDialog;
-import gui.components.rotator.StringRotator;
+import games.memory.MemorySettingsDialog;
+import gui.components.Bildschirm;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -18,19 +18,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import player.Player;
-import start.X;
 
 public class ReaktionsZeit extends Game {
 	private static final long serialVersionUID = 1L;
 	private JPanel hauptbereichPanel;
-	private JLabel target;
+	private JLabel targetLabel;
+	private Bildschirm targetBildschirm;
 	private JPanel queryPanel;
-	private StringRotator queryRotator;
+	private ReaktionsZeitRotator queryRotator;
 	private int targetIndex;
 	private int currentIndex;
 	private HashSet<Integer> winnerIDs;
 	private int rotationTime = 1;
 	private List<String> allAnswers;
+	private List<ReaktionsZeitDeck> reaktionszeitDecks;
+	private int currentDeck = 0;
 
 	public ReaktionsZeit(Player[] player, Modus modus,
 			int globalGameID) {
@@ -43,14 +45,16 @@ public class ReaktionsZeit extends Game {
 		hauptbereichPanel.setLayout(new BorderLayout());
 		hauptbereichPanel.setOpaque(false);
 		spielBereichPanel.add(hauptbereichPanel);
+		currentDeck = new Random().nextInt(reaktionszeitDecks.size());
 		addQuery();
-		addTarget();
+		setTarget();
+		settingsChanged();
 	}
 
 	private void addQuery() {
 		queryPanel = new JPanel(new GridLayout(1,1));
 		hauptbereichPanel.add(queryPanel, BorderLayout.CENTER);
-		queryRotator = new StringRotator(new File(X.getMainDir() + "games/pc/reaktionszeit/small_words.deck"));
+		queryRotator = new ReaktionsZeitRotator(reaktionszeitDecks.get(currentDeck));
 		queryRotator.setBackground(Color.BLACK);
 		queryRotator.setForeground(Color.WHITE);
 		queryRotator.setFont(Game.STANDARD_FONT.deriveFont(50f));
@@ -59,17 +63,36 @@ public class ReaktionsZeit extends Game {
 		queryPanel.add(queryRotator);
 	}
 
-	private void addTarget() {
-		target = new JLabel("X");
-		target.setFont(Game.STANDARD_FONT.deriveFont(70f));
-		target.setBackground(Color.WHITE);
-		hauptbereichPanel.add(target, BorderLayout.NORTH);
+	private void setTarget() {
+		if(reaktionszeitDecks.get(currentDeck).getDeckType().equals(ReaktionsZeitDeck.STRING)){
+			targetLabel = new JLabel("X");
+			targetLabel.setFont(Game.STANDARD_FONT.deriveFont(70f));
+			targetLabel.setBackground(Color.WHITE);
+			hauptbereichPanel.add(targetLabel, BorderLayout.NORTH);
+		}
+		else if(reaktionszeitDecks.get(currentDeck).getDeckType().equals(ReaktionsZeitDeck.PICTURE)){
+			targetBildschirm = new Bildschirm(reaktionszeitDecks.get(currentDeck).getElements().get(0));
+			targetBildschirm.hidePic(true);
+			hauptbereichPanel.add(targetBildschirm, BorderLayout.NORTH);
+		}
 	}
 
 	@Override
 	public void settingsChanged() {
-		// TODO Auto-generated method stub
+		propertiesToSettings();
+		updateCreds();
+		if(queryRotator != null)
+			queryRotator.setRotationTime(rotationTime);
+	}
 
+	private void propertiesToSettings() {
+		if(customSettings == null){
+			return;
+		}
+		numOfRounds = Integer.parseInt(customSettings.getProperty(MemorySettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
+		String rotationTimeString = customSettings.getProperty(ReaktionsZeitSettingsDialog.ROTATION_TIME);
+		if(rotationTimeString != null)
+			rotationTime = Integer.parseInt(rotationTimeString);
 	}
 
 	@Override
@@ -79,9 +102,15 @@ public class ReaktionsZeit extends Game {
 
 	private void nextRound() {
 		queryRotator.maskComponent();
-		allAnswers = queryRotator.getStringList();
+		allAnswers = reaktionszeitDecks.get(currentDeck).getElements();
 		targetIndex = new Random().nextInt(allAnswers.size());
-		target.setText(allAnswers.get(targetIndex));
+		if(reaktionszeitDecks.get(currentDeck).getDeckType().equals(ReaktionsZeitDeck.STRING)){
+			targetLabel.setText(allAnswers.get(targetIndex));
+		}
+		else if(reaktionszeitDecks.get(currentDeck).getDeckType().equals(ReaktionsZeitDeck.PICTURE)){
+			targetBildschirm.changePic(allAnswers.get(targetIndex));
+			targetBildschirm.hidePic(false);
+		}
 		queryRotator.start();
 		setBuzzerActive(true);
 	}
@@ -132,6 +161,10 @@ public class ReaktionsZeit extends Game {
 		return winner;
 	}
 	
+	public void nowVisible(){
+		instance.changeBackground("media/reaktionszeit/reaktionszeit.jpg");
+	}
+	
 	@Override
 	public void openRoundDialog(String winner){
 		RoundDialog rd = new RoundDialog(this, winner);
@@ -146,7 +179,7 @@ public class ReaktionsZeit extends Game {
 
 	@Override
 	public void openSettingsDialog(){
-	//	instance.showDialog(new ReaktionsZeitSettingsDialog(this));
+		instance.showDialog(new ReaktionsZeitSettingsDialog(this));
 	}
 	
 	@Override
@@ -175,6 +208,20 @@ public class ReaktionsZeit extends Game {
 		super.resume();
 		queryRotator.start();
 		setBuzzerActive(true);
+	}
+	
+	@Override
+	public void loadProperties(){
+		reaktionszeitDecks = ReaktionsZeitDeckLoader.loadReaktionsZeitDecks();
+//		selectedDeck = MemoryDeck.getRandomDeck(memDecks);
+//		while(selectedDeck.getPictures().size() < numOfPairs){
+//			selectedDeck = MemoryDeck.getRandomDeck(memDecks);
+//		}
+//		backsides = MemoryDeckLoader.loadMemoryBacksides();
+	}
+
+	public int getRotationTime() {
+		return rotationTime;
 	}
 
 }

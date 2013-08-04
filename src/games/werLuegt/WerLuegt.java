@@ -876,7 +876,6 @@ public class WerLuegt extends Game implements PC {
 	}
 	
 	public void nowVisible(){
-		// TODO background einrichten
 		instance.changeBackground("media/wer_luegt/wer_luegt.jpg");
 	}
 	

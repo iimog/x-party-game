@@ -73,16 +73,21 @@ public abstract class Rotator extends JPanel {
 	public HashSet<Integer> schonWeg = new HashSet<Integer>();
 
 	public int nextRandom(int numOfQuests) {
+		return nextRandom(numOfQuests, false);
+	}
+	
+	public int nextRandom(int numOfQuests, boolean repeatEarly) {
 		if (schonWeg.size() == numOfQuests) {
 			fireChange();
 			schonWeg = new HashSet<Integer>();
 		}
 		Random r = new Random();
 		int ret = r.nextInt(numOfQuests);
-		while (schonWeg.add(ret) == false) {
-			ret = r.nextInt(numOfQuests);
+		if(!repeatEarly){			
+			while (schonWeg.add(ret) == false) {
+				ret = r.nextInt(numOfQuests);
+			}
 		}
 		return ret;
-
 	}
 }
