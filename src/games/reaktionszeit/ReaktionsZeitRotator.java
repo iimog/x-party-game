@@ -32,7 +32,7 @@ public class ReaktionsZeitRotator extends Rotator {
 			add(textLabel, BorderLayout.CENTER);
 		}
 		else if(reaktionsZeitDeck.getDeckType().equals(ReaktionsZeitDeck.PICTURE)){
-			bildschirm = new Bildschirm(elements.get(0));
+			bildschirm = new Bildschirm(elements.get(0), true);
 			add(bildschirm, BorderLayout.CENTER);
 		}
 		else{
