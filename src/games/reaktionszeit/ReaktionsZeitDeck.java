@@ -59,4 +59,8 @@ public class ReaktionsZeitDeck {
 	public List<String> getElements() {
 		return elements;
 	}
+	
+	public String toString(){
+		return deckName + " (" + deckType + ")";
+	}
 }

@@ -267,19 +267,19 @@ public class X extends javax.swing.JFrame {
             }
             if(action.equals("buzzer0")){
             	if(currentGame != null)
-            		currentGame.buzzeredBy(0);
+            		currentGame.triggerBuzzerEvent(0);
             }
             if(action.equals("buzzer1")){
             	if(currentGame != null && currentGame.spielerZahl>1)
-            		currentGame.buzzeredBy(1);
+            		currentGame.triggerBuzzerEvent(1);
             }
             if(action.equals("buzzer2")){
             	if(currentGame != null && currentGame.spielerZahl>2)
-            		currentGame.buzzeredBy(2);
+            		currentGame.triggerBuzzerEvent(2);
             }
             if(action.equals("buzzer3")){
             	if(currentGame != null && currentGame.spielerZahl>3)
-            		currentGame.buzzeredBy(3);
+            		currentGame.triggerBuzzerEvent(3);
             }
         }
     }

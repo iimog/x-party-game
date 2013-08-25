@@ -253,6 +253,12 @@ public abstract class Game extends Anzeige {
 	private int automaticallyPaused = 0;
 	protected boolean unstoppable = false;
 	
+	public void triggerBuzzerEvent(int whoBuzz){
+		if(buzzerActive){
+			buzzeredBy(whoBuzz);
+		}
+	}
+	
 	public void buzzeredBy(int whoBuzz){
 		
 	}

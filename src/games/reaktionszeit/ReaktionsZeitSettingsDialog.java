@@ -2,14 +2,19 @@ package games.reaktionszeit;
 
 import games.dialogeGUIs.GameSettingsDialog;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
 public class ReaktionsZeitSettingsDialog extends GameSettingsDialog {
 	private static final long serialVersionUID = 1L;
 	public static final String ROTATION_TIME = "Rotationtime";
+	public static final String DECK = "Deck";
 	private ReaktionsZeit reaktionsZeit;
 	private JSlider rotationTimeSlider;
+	private JComboBox deckComboBox;
 
 	public ReaktionsZeitSettingsDialog(ReaktionsZeit reaktionsZeit) {
 		this(reaktionsZeit, false);
@@ -36,12 +41,21 @@ public class ReaktionsZeitSettingsDialog extends GameSettingsDialog {
 			rotationTimeSlider.setPaintLabels(true);
 			addSettingsComponent("Rotationszeit", rotationTimeSlider);
 		}
+		{
+			ComboBoxModel deckComboBoxModel =
+					new DefaultComboBoxModel(reaktionsZeit.getReaktionszeitDecks().toArray(new ReaktionsZeitDeck[1]));
+				
+			deckComboBox = new JComboBox();
+			deckComboBox.setModel(deckComboBoxModel);	
+			addSettingsComponent("Deck", deckComboBox);
+		}
 	}
 	
 	@Override
 	public void settingsToProperties(){
 		super.settingsToProperties();
 		settings.setProperty(ROTATION_TIME, ""+rotationTimeSlider.getValue());
+		settings.setProperty(DECK, ""+deckComboBox.getSelectedItem().toString());
 	}
 	
 	@Override
@@ -57,6 +71,14 @@ public class ReaktionsZeitSettingsDialog extends GameSettingsDialog {
 		String rotationTime = settings.getProperty(ROTATION_TIME);
 		if(rotationTime != null && rotationTimeSlider != null){
 			rotationTimeSlider.setValue(Integer.parseInt(rotationTime));
+		}
+		String deck = settings.getProperty(DECK, "");
+		if(deckComboBox != null){
+			for(int i=0; i<deckComboBox.getItemCount(); i++){
+				if(deckComboBox.getItemAt(i).toString().equals(deck)){
+					deckComboBox.setSelectedIndex(i);
+				}
+			}
 		}
 	}
 	
