@@ -38,6 +38,7 @@ public class ReaktionsZeit extends Game {
 	}
 
 	private int currentDeck = 0;
+	private JPanel targetPanel;
 
 	public ReaktionsZeit(Player[] player, Modus modus, int globalGameID) {
 		super(player, 5, modus, globalGameID);
@@ -51,6 +52,8 @@ public class ReaktionsZeit extends Game {
 		spielBereichPanel.add(hauptbereichPanel);
 		currentDeck = new Random().nextInt(reaktionszeitDecks.size());
 		addQuery();
+		targetPanel = new JPanel();
+		hauptbereichPanel.add(targetPanel, BorderLayout.NORTH);
 		setTarget();
 		settingsChanged();
 	}
@@ -58,6 +61,11 @@ public class ReaktionsZeit extends Game {
 	private void addQuery() {
 		queryPanel = new JPanel(new GridLayout(1, 1));
 		hauptbereichPanel.add(queryPanel, BorderLayout.CENTER);
+		updateQuery();
+	}
+	
+	private void updateQuery(){	
+		queryPanel.removeAll();
 		queryRotator = new ReaktionsZeitRotator(
 				reaktionszeitDecks.get(currentDeck));
 		queryRotator.setBackground(Color.BLACK);
@@ -66,22 +74,27 @@ public class ReaktionsZeit extends Game {
 		queryRotator.setRotationTime(rotationTime);
 		queryRotator.maskComponent();
 		queryPanel.add(queryRotator);
+		revalidate();
+		repaint();
 	}
 
 	private void setTarget() {
+		targetPanel.removeAll();
 		if (reaktionszeitDecks.get(currentDeck).getDeckType()
 				.equals(ReaktionsZeitDeck.STRING)) {
 			targetLabel = new JLabel("X");
 			targetLabel.setFont(Game.STANDARD_FONT.deriveFont(70f));
 			targetLabel.setBackground(Color.WHITE);
-			hauptbereichPanel.add(targetLabel, BorderLayout.NORTH);
+			targetPanel.add(targetLabel, BorderLayout.NORTH);
 		} else if (reaktionszeitDecks.get(currentDeck).getDeckType()
 				.equals(ReaktionsZeitDeck.PICTURE)) {
 			targetBildschirm = new Bildschirm(reaktionszeitDecks
-					.get(currentDeck).getElements().get(0));
+					.get(currentDeck).getElements().get(0), true);
 			targetBildschirm.hidePic(true);
-			hauptbereichPanel.add(targetBildschirm, BorderLayout.NORTH);
+			targetPanel.add(targetBildschirm, BorderLayout.NORTH);
 		}
+		revalidate();
+		repaint();
 	}
 
 	@Override
@@ -108,6 +121,8 @@ public class ReaktionsZeit extends Game {
 		for (int i = 0; i < reaktionszeitDecks.size(); i++) {
 			if (reaktionszeitDecks.get(i).toString().equals(deck)) {
 				currentDeck = i;
+				updateQuery();
+				setTarget();
 			}
 		}
 	}
