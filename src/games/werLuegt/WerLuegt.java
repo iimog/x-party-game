@@ -27,7 +27,7 @@ public class WerLuegt extends Game implements PC {
 	private static final long serialVersionUID = 1L;
 	private static String gameName = "Wer lügt";
 	static Font standardFont = new JLabel().getFont().deriveFont(40f);
-	static Font labelFont = X.buttonFont.deriveFont(50f);
+	static Font labelFont = X.BUTTON_FONT.deriveFont(50f);
 	
 	private static int defaultNumOfRounds = 5;
 	

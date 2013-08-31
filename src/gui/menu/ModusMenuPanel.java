@@ -47,7 +47,7 @@ public class ModusMenuPanel extends Anzeige {
 			{
 				anweisungLabel = new JLabel("Modus wählen...");
 				anweisungPanel.add(anweisungLabel);
-				Font grosserFont = X.buttonFont.deriveFont(X.buttonFont.getSize()*3.0f);
+				Font grosserFont = X.BUTTON_FONT.deriveFont(X.BUTTON_FONT.getSize()*3.0f);
 				anweisungLabel.setFont(grosserFont);
 				anweisungLabel.setForeground(Color.WHITE);
 			}

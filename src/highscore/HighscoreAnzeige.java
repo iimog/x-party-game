@@ -78,7 +78,7 @@ public class HighscoreAnzeige extends Anzeige {
 
 	private void initSpielListe() {
 		spielListe = new JList();
-		spielListe.setFont(X.buttonFont);
+		spielListe.setFont(X.BUTTON_FONT);
 		highscores = HighscoreFileHandler.getGameHighscores();
 		int highscoreZahl = 0;
 		if(highscores != null)highscoreZahl = highscores.length;
@@ -128,7 +128,7 @@ public class HighscoreAnzeige extends Anzeige {
 		add(buttonPanel, BorderLayout.SOUTH);
 		{
 			hauptMenuButton = new DefaultButton("Hauptmenü");
-			hauptMenuButton.setFont(X.buttonFont);
+			hauptMenuButton.setFont(X.BUTTON_FONT);
 			hauptMenuButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {

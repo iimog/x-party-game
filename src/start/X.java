@@ -1,4 +1,5 @@
 package start;
+
 import games.Game;
 import gui.Anzeige;
 import gui.AnzeigeDialog;
@@ -38,20 +39,15 @@ import javax.swing.SwingUtilities;
 import settings.MainSettings;
 import util.ConfirmListener;
 
-
-
-
 /**
- * This code was edited or generated using CloudGarden's Jigloo
- * SWT/Swing GUI Builder, which is free for non-commercial
- * use. If Jigloo is being used commercially (ie, by a corporation,
- * company or business for any purpose whatever) then you
- * should purchase a license for each developer using Jigloo.
- * Please visit www.cloudgarden.com for details.
- * Use of Jigloo implies acceptance of these licensing terms.
- * A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
- * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
- * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
+ * Builder, which is free for non-commercial use. If Jigloo is being used
+ * commercially (ie, by a corporation, company or business for any purpose
+ * whatever) then you should purchase a license for each developer using Jigloo.
+ * Please visit www.cloudgarden.com for details. Use of Jigloo implies
+ * acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN
+ * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
+ * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class X extends javax.swing.JFrame {
 
@@ -61,47 +57,62 @@ public class X extends javax.swing.JFrame {
 	private static final long serialVersionUID = 6180786189305572480L;
 
 	private static X instance;
-	public static Font buttonFont = new Font("Comic Sans MS",0,22);
+	public static final Font BUTTON_FONT = getStandardFont().deriveFont(22f);
 
 	private static String currentAudioFile;
+
+	private static Font standardFont;
 	private MainSettings mainSettings = MainSettings.getMainSettings();
 
-	public static String getDataDir(){
-		return System.getProperty("user.home")+"/.xpartygame/";
+	public static String getDataDir() {
+		return System.getProperty("user.home") + "/.xpartygame/";
 	}
 
-	public static X getInstance(){
-		if(instance == null){
+	public static X getInstance() {
+		if (instance == null) {
 			return new X();
-		}
-		else{
+		} else {
 			return instance;
 		}
 	}
 
-	public static String getMainDir(){
+	public static Font getStandardFont() {
+		if (standardFont == null) {
+			try {
+				standardFont = Font
+						.createFont(Font.TRUETYPE_FONT, new File(getMainDir()
+								+ "media/ablauf/fonts/freemetto/freemetto.ttf"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return standardFont;
+	}
+
+	public static String getMainDir() {
 		String classPath = System.getProperty("java.class.path");
 		String filsSeparator = System.getProperty("file.separator");
-		if(classPath.endsWith("X.jar")){
-			return (new File(classPath).getParent()+filsSeparator);
-		}
-		else{
+		if (classPath.endsWith("X.jar")) {
+			return (new File(classPath).getParent() + filsSeparator);
+		} else {
 			return "";
 		}
 	}
-	
-	public static void playAudioFile(String filename){
-		if(!MainSettings.getMainSettings().isSoundOn())return;
+
+	public static void playAudioFile(String filename) {
+		if (!MainSettings.getMainSettings().isSoundOn())
+			return;
 		currentAudioFile = filename;
-		new Thread(){
+		new Thread() {
 			@Override
-			public void run(){
-				File audioFile = new File(X.getMainDir()+currentAudioFile);
+			public void run() {
+				File audioFile = new File(X.getMainDir() + currentAudioFile);
 				try {
-					AudioInputStream ais = AudioSystem.getAudioInputStream(audioFile);
+					AudioInputStream ais = AudioSystem
+							.getAudioInputStream(audioFile);
 					AudioFormat format = ais.getFormat();
 					DataLine.Info info = new DataLine.Info(Clip.class, format);
-					Clip clip = (Clip)AudioSystem.getLine(info);
+					Clip clip = (Clip) AudioSystem.getLine(info);
 					clip.open(ais);
 					clip.start();
 				} catch (Exception e) {
@@ -110,7 +121,7 @@ public class X extends javax.swing.JFrame {
 			}
 		}.start();
 	}
-	
+
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -120,6 +131,7 @@ public class X extends javax.swing.JFrame {
 			}
 		});
 	}
+
 	private Bildschirm hintergrundBild;
 
 	private Anzeige currentAnzeige;
@@ -137,7 +149,7 @@ public class X extends javax.swing.JFrame {
 		initGUI();
 	}
 
-	public void changeAnzeige(Anzeige a){
+	public void changeAnzeige(Anzeige a) {
 		currentAnzeige.destroy();
 		hintergrundBild.removeAll();
 		currentAnzeige = a;
@@ -146,42 +158,45 @@ public class X extends javax.swing.JFrame {
 		hintergrundBild.repaint();
 		a.nowVisible();
 	}
-	public void changeBackground(String bild){
+
+	public void changeBackground(String bild) {
 		hintergrundBild.changePic(bild);
 	}
-	public void close(){
-		if(currentGame != null){
+
+	public void close() {
+		if (currentGame != null) {
 			currentGame.autoPause();
 		}
-		EasyDialog.showConfirm("Wirklich beenden?", null, new ConfirmListener() {
-			@Override
-			public void confirmOptionPerformed(int optionType) {
-				if(optionType == YES_OPTION){
-					dispose();
-					System.exit(0);	
-				}
-				else{
-					if(currentGame != null){
-						currentGame.autoResume();
+		EasyDialog.showConfirm("Wirklich beenden?", null,
+				new ConfirmListener() {
+					@Override
+					public void confirmOptionPerformed(int optionType) {
+						if (optionType == YES_OPTION) {
+							dispose();
+							System.exit(0);
+						} else {
+							if (currentGame != null) {
+								currentGame.autoResume();
+							}
+							instance.closeDialog();
+						}
 					}
-					instance.closeDialog();
-				}
-			}
-		});		
+				});
 	}
-	public void closeDialog(){
+
+	public void closeDialog() {
 		currentDialogs.pop().destroy();
 		hintergrundBild.removeAll();
-		if(currentDialogs.empty()){
+		if (currentDialogs.empty()) {
 			hintergrundBild.add(currentAnzeige, BorderLayout.CENTER);
 			hintergrundBild.revalidate();
 			hintergrundBild.repaint();
 			currentAnzeige.nowVisible();
-		}
-		else{
+		} else {
 			showDialog(currentDialogs.pop());
 		}
 	}
+
 	private void initGUI() {
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
@@ -190,22 +205,23 @@ public class X extends javax.swing.JFrame {
 				close();
 			}
 		});
-		try{
-			Image img = Toolkit.getDefaultToolkit().getImage(getMainDir()+"media/ablauf/X.png");
+		try {
+			Image img = Toolkit.getDefaultToolkit().getImage(
+					getMainDir() + "media/ablauf/X.png");
 			ImageIcon bild1 = new ImageIcon(img);
 			setIconImage(bild1.getImage());
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			// nichts
 		}
 		try {
-			if(mainSettings.isFullscreen()){
+			if (mainSettings.isFullscreen()) {
 				setUndecorated(true);
 			}
-			//setResizable(false);
+			// setResizable(false);
 			this.setTitle("X");
 			{
-				hintergrundBild = new gui.components.Bildschirm("media/ablauf/iceBG.jpg", true);
+				hintergrundBild = new gui.components.Bildschirm(
+						"media/ablauf/iceBG.jpg", true);
 				getContentPane().add(hintergrundBild, BorderLayout.CENTER);
 				hintergrundBild.setLayout(new BorderLayout());
 				hintergrundBild.centerMe(true);
@@ -217,12 +233,14 @@ public class X extends javax.swing.JFrame {
 			pack();
 			setLocationRelativeTo(null);
 			setVisible(true);
-			GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+			GraphicsDevice gd = GraphicsEnvironment
+					.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 			gd.setFullScreenWindow(this);
-			if(!mainSettings.isFullscreen()){
+			if (!mainSettings.isFullscreen()) {
 				gd.setFullScreenWindow(null);
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				setSize(screenSize.width, screenSize.height-50);
+				Dimension screenSize = Toolkit.getDefaultToolkit()
+						.getScreenSize();
+				setSize(screenSize.width, screenSize.height - 50);
 				invalidate();
 			}
 			setBasicKeystrokes();
@@ -230,61 +248,64 @@ public class X extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
+
 	private void setBasicKeystrokes() {
 		JPanel content = (JPanel) this.getContentPane();
-        content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(
-                KeyEvent.VK_ESCAPE, 0), "pause");
-            content.getActionMap().put("pause", new ButtonPressed("pause"));
+		content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+				KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "pause");
+		content.getActionMap().put("pause", new ButtonPressed("pause"));
 	}
-	
-	public void addBuzzer(int playerID, int keyCode){
+
+	public void addBuzzer(int playerID, int keyCode) {
 		JRootPane rootPane = this.getRootPane();
-		rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(keyCode, 0), "buzzer"+playerID);
-		rootPane.getActionMap().put("buzzer"+playerID, new ButtonPressed("buzzer"+playerID));
+		rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+				KeyStroke.getKeyStroke(keyCode, 0), "buzzer" + playerID);
+		rootPane.getActionMap().put("buzzer" + playerID,
+				new ButtonPressed("buzzer" + playerID));
 		registeredBuzzers.add(KeyStroke.getKeyStroke(keyCode, 0));
 	}
-	
-	public void forgetBuzzers(){
+
+	public void forgetBuzzers() {
 		JPanel content = (JPanel) this.getContentPane();
-		for(KeyStroke ks : registeredBuzzers){			
+		for (KeyStroke ks : registeredBuzzers) {
 			content.getInputMap().put(ks, "none");
 		}
 	}
-	
-    private class ButtonPressed extends AbstractAction {
+
+	private class ButtonPressed extends AbstractAction {
 		private static final long serialVersionUID = 1L;
 		String action;
-    	
-        public ButtonPressed(String action) {
-            this.action = action;
-        }
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(action.equals("pause")){
-            	if(currentGame != null)
-            		currentGame.togglePause();
-            }
-            if(action.equals("buzzer0")){
-            	if(currentGame != null)
-            		currentGame.triggerBuzzerEvent(0);
-            }
-            if(action.equals("buzzer1")){
-            	if(currentGame != null && currentGame.spielerZahl>1)
-            		currentGame.triggerBuzzerEvent(1);
-            }
-            if(action.equals("buzzer2")){
-            	if(currentGame != null && currentGame.spielerZahl>2)
-            		currentGame.triggerBuzzerEvent(2);
-            }
-            if(action.equals("buzzer3")){
-            	if(currentGame != null && currentGame.spielerZahl>3)
-            		currentGame.triggerBuzzerEvent(3);
-            }
-        }
-    }
+		public ButtonPressed(String action) {
+			this.action = action;
+		}
 
-	public void showDialog(AnzeigeDialog dialog){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (action.equals("pause")) {
+				if (currentGame != null)
+					currentGame.togglePause();
+			}
+			if (action.equals("buzzer0")) {
+				if (currentGame != null)
+					currentGame.triggerBuzzerEvent(0);
+			}
+			if (action.equals("buzzer1")) {
+				if (currentGame != null && currentGame.spielerZahl > 1)
+					currentGame.triggerBuzzerEvent(1);
+			}
+			if (action.equals("buzzer2")) {
+				if (currentGame != null && currentGame.spielerZahl > 2)
+					currentGame.triggerBuzzerEvent(2);
+			}
+			if (action.equals("buzzer3")) {
+				if (currentGame != null && currentGame.spielerZahl > 3)
+					currentGame.triggerBuzzerEvent(3);
+			}
+		}
+	}
+
+	public void showDialog(AnzeigeDialog dialog) {
 		hintergrundBild.removeAll();
 		hintergrundBild.add(currentDialogs.push(dialog), BorderLayout.CENTER);
 		hintergrundBild.revalidate();

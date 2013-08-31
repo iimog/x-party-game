@@ -45,7 +45,7 @@ public class GameHighscorePanel extends JPanel {
 		String firstLetter = gameName.substring(0, 1).toUpperCase();
 		gameName = firstLetter + gameName.substring(1);
 		gameNameLabel = new JLabel(gameName);
-		gameNameLabel.setFont(X.buttonFont);
+		gameNameLabel.setFont(X.BUTTON_FONT);
 		gameNameLabel.setHorizontalAlignment(JLabel.CENTER);
 	}
 

@@ -60,7 +60,7 @@ public class WerLuegtDetailsDialog extends AnzeigeDialog {
 					spielerLabel.setText(werLuegt.myPlayer[werLuegt.whoBuzzed].name);
 				}
 				spielerLabel.setOpaque(true);
-				spielerLabel.setFont(X.buttonFont);
+				spielerLabel.setFont(X.BUTTON_FONT);
 				spielerLabel.setForeground(Color.RED);
 				spielerLabel.setHorizontalAlignment(JLabel.CENTER);
 				if(werLuegt.winnerIDs.contains(werLuegt.whoBuzzed))spielerLabel.setForeground(Color.GREEN);

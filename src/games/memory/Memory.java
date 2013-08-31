@@ -215,7 +215,7 @@ public class Memory extends games.Game implements PC {
 		{
 			deckLabel = new JLabel();
 			deckLabel.setOpaque(false);
-			deckLabel.setFont(X.buttonFont);
+			deckLabel.setFont(X.BUTTON_FONT);
 			deckLabel.setText(selectedDeck.getDeckName());
 			deckLabel.setHorizontalAlignment(JLabel.CENTER);
 			spielBereichPanel.add(deckLabel, BorderLayout.NORTH);

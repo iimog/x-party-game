@@ -46,7 +46,7 @@ public class MatchListe extends JPanel {
 		if(infoPanels.length==0){
 			hauptPanel.setLayout(new GridLayout(1,1));
 			JLabel keineSpielstaendeLabel = new JLabel("Keine gespeicherten Spielstände vorhanden!");
-			keineSpielstaendeLabel.setFont(X.buttonFont);
+			keineSpielstaendeLabel.setFont(X.BUTTON_FONT);
 			hauptPanel.add(keineSpielstaendeLabel);
 		}
 		this.add(hauptPanel);

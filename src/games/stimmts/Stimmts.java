@@ -567,7 +567,7 @@ public class Stimmts extends Game implements PC {
 
 	private void addAussageLabel() {
 		aussageLabel = new JLabel("Aussagee");
-		aussageLabel.setFont(X.buttonFont);
+		aussageLabel.setFont(X.BUTTON_FONT);
 		aussageLabel.setHorizontalAlignment(JLabel.CENTER);
 		hauptbereichPanel.add(aussageLabel, BorderLayout.CENTER);
 	}

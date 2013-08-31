@@ -43,9 +43,8 @@ import ablauf.MatchCredits;
 @SuppressWarnings("serial")
 public abstract class Game extends Anzeige {
 
-	public static final Font STANDARD_FONT = new Font("Sergeo UI", 0, 16);
-	public static final Font PLAYER_FONT = new java.awt.Font("Comic Sans MS",
-			1, 26);
+	public static final Font STANDARD_FONT = X.getStandardFont().deriveFont(16f);
+	public static final Font PLAYER_FONT = X.getStandardFont().deriveFont(26f).deriveFont(Font.BOLD);
 	public String gameName;
 	public player.Player[] myPlayer;
 	private Team[] myTeam = new Team[2];
@@ -245,7 +244,7 @@ public abstract class Game extends Anzeige {
 
 	private void initPauseLabel() {
 		pauseLabel = new JLabel("PAUSE");
-		pauseLabel.setFont(X.buttonFont.deriveFont(100f).deriveFont(Font.BOLD));
+		pauseLabel.setFont(X.BUTTON_FONT.deriveFont(100f).deriveFont(Font.BOLD));
 		pauseLabel.setForeground(Color.RED);
 	}
 

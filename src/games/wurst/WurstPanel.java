@@ -111,7 +111,7 @@ public class WurstPanel extends JPanel {
 			if(player.isRobot())abdeckLabel.setText(abdeckLabel.getText()+" (Fertig)");
 			abdeckLabel.setForeground(player.farbe);
 			abdeckLabel.setHorizontalAlignment(JLabel.CENTER);
-			abdeckLabel.setFont(X.buttonFont);
+			abdeckLabel.setFont(X.BUTTON_FONT);
 			abdeckPanel.add(abdeckLabel);
 			abdeckPanel.addMouseListener(new MouseAdapter() {				
 				@Override
@@ -142,16 +142,16 @@ public class WurstPanel extends JPanel {
 			playerLabel = new JLabel(player.name);
 			playerLabel.setForeground(player.farbe);
 			playerLabel.setHorizontalAlignment(JLabel.CENTER);
-			playerLabel.setFont(X.buttonFont);
+			playerLabel.setFont(X.BUTTON_FONT);
 			hauptbereichPanel.add(playerLabel);
 			restPanel = new JPanel();
 			restPanel.setLayout(new GridLayout(1,2));
 			hauptbereichPanel.add(restPanel);
 			restTextLabel = new JLabel("Rest: ");
-			restTextLabel.setFont(X.buttonFont);
+			restTextLabel.setFont(X.BUTTON_FONT);
 			restPanel.add(restTextLabel);
 			restZahlLabel = new JLabel(rest+"g");
-			restZahlLabel.setFont(X.buttonFont);
+			restZahlLabel.setFont(X.BUTTON_FONT);
 			restPanel.add(restZahlLabel);
 			restAnzeige = new WurstStatusAnzeigePanel(this);
 			hauptbereichPanel.add(restAnzeige);
@@ -159,10 +159,10 @@ public class WurstPanel extends JPanel {
 			abgebenPanel.setLayout(new GridLayout(1,2));
 			hauptbereichPanel.add(abgebenPanel);
 			abgebenLabel = new JLabel("Abgeben: ");
-			abgebenLabel.setFont(X.buttonFont);
+			abgebenLabel.setFont(X.BUTTON_FONT);
 			abgebenPanel.add(abgebenLabel);
 			abgebenTextField = new JTextField("0");
-			abgebenTextField.setFont(X.buttonFont);
+			abgebenTextField.setFont(X.BUTTON_FONT);
 			abgebenTextField.addKeyListener(new KeyAdapter() {				
 				@Override
 				public void keyReleased(KeyEvent e) {
@@ -171,7 +171,7 @@ public class WurstPanel extends JPanel {
 			});
 			abgebenPanel.add(abgebenTextField);
 			fertigButton = new JButton("Fertig");
-			fertigButton.setFont(X.buttonFont);
+			fertigButton.setFont(X.BUTTON_FONT);
 			fertigButton.addActionListener(new ActionListener() {				
 				@Override
 				public void actionPerformed(ActionEvent e) {

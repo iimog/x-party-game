@@ -149,7 +149,7 @@ public class StartMatch extends Anzeige {
 						spielmodusPanel.setOpaque(false);
 						{
 							spielmodusLabel = new JLabel();
-							spielmodusLabel.setFont(X.buttonFont);
+							spielmodusLabel.setFont(X.BUTTON_FONT);
 							spielmodusPanel.add(spielmodusLabel);
 							spielmodusLabel.setText(modus.toString()+"modus");
 							spielmodusLabel.setForeground(Color.WHITE);
@@ -161,7 +161,7 @@ public class StartMatch extends Anzeige {
 						spielerPanel.setOpaque(false);
 						{
 							spielerButton = new DefaultButton();
-							spielerButton.setFont(X.buttonFont);
+							spielerButton.setFont(X.BUTTON_FONT);
 							spielerPanel.add(spielerButton);
 							if(modus != Modus.TEAM){
 								spielerButton.setText("Spieler");
@@ -237,7 +237,7 @@ public class StartMatch extends Anzeige {
 						spielePanel.setOpaque(false);
 						{
 							spieleButton = new DefaultButton();
-							spieleButton.setFont(X.buttonFont);
+							spieleButton.setFont(X.BUTTON_FONT);
 							spielePanel.add(spieleButton);
 							spieleButton.setText("Spiele");
 							spieleButton.setForeground(new java.awt.Color(58,185,222));
@@ -255,7 +255,7 @@ public class StartMatch extends Anzeige {
 						einstellungenPanel.setOpaque(false);
 						{
 							einstellungenButton = new DefaultButton();
-							einstellungenButton.setFont(X.buttonFont);
+							einstellungenButton.setFont(X.BUTTON_FONT);
 							einstellungenPanel.add(einstellungenButton);
 							einstellungenButton.setText("Einstellungen");
 							einstellungenButton.setForeground(new java.awt.Color(58,185,222));
@@ -273,7 +273,7 @@ public class StartMatch extends Anzeige {
 						startPanel.setOpaque(false);
 						{
 							startButton = new DefaultButton();
-							startButton.setFont(X.buttonFont);
+							startButton.setFont(X.BUTTON_FONT);
 							startPanel.add(startButton);
 							startButton.setText("Start");
 							startButton.setForeground(new java.awt.Color(58,185,222));
@@ -303,7 +303,7 @@ public class StartMatch extends Anzeige {
 				add(bottomPanel, BorderLayout.SOUTH);
 				{
 					hauptMenuButton = new DefaultButton("Hauptmenü");
-					hauptMenuButton.setFont(X.buttonFont);
+					hauptMenuButton.setFont(X.BUTTON_FONT);
 					hauptMenuButton.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent arg0) {

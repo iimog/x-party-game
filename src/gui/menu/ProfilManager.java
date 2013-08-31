@@ -66,7 +66,7 @@ public class ProfilManager extends AnzeigeDialog {
 	
 	private void initProfilListe() {
 		profilListe = new JList();
-		profilListe.setFont(X.buttonFont);
+		profilListe.setFont(X.BUTTON_FONT);
 		updateProfiles();
 	}
 	private void initButtonPanel() {

@@ -32,7 +32,7 @@ public class GameHighscoreElementPanel extends JPanel {
 
 	private void initGUI() {
 		this.setLayout(new GridLayout(1,5,10,0));
-		Font schriftFont = X.buttonFont;
+		Font schriftFont = X.BUTTON_FONT;
 		platzLabel = new JLabel();
 		platzLabel.setFont(schriftFont);
 		nameLabel = new JLabel(highscoreElement.getName());

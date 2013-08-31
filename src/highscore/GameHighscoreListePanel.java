@@ -45,7 +45,7 @@ public class GameHighscoreListePanel extends JPanel {
 		else{
 			JLabel keineDatenLabel = new JLabel("Für den "+modus+"-Modus sind noch keine Daten vorhanden.");
 			keineDatenLabel.setHorizontalAlignment(JLabel.CENTER);
-			keineDatenLabel.setFont(X.buttonFont);
+			keineDatenLabel.setFont(X.BUTTON_FONT);
 			this.add(keineDatenLabel);
 		}
 		for(GameHighscoreElementPanel ghep: highscorePanels){

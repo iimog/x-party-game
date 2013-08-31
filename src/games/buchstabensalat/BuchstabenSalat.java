@@ -439,7 +439,7 @@ public class BuchstabenSalat extends Game implements PC {
 
 	private void addKategorieLabel() {
 		kategorieLabel = new JLabel("Kategorie");
-		kategorieLabel.setFont(X.buttonFont);
+		kategorieLabel.setFont(X.BUTTON_FONT);
 		kategorieLabel.setHorizontalAlignment(JLabel.CENTER);
 		hauptbereichPanel.add(kategorieLabel, BorderLayout.NORTH);
 	}
