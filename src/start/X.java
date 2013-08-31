@@ -81,7 +81,7 @@ public class X extends javax.swing.JFrame {
 			try {
 				standardFont = Font
 						.createFont(Font.TRUETYPE_FONT, new File(getMainDir()
-								+ "media/ablauf/fonts/freemetto/freemetto.ttf"));
+								+ "media/ablauf/fonts/freemetto.ttf"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
