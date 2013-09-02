@@ -229,6 +229,10 @@ public class ReaktionsZeit extends Game {
 	public String getTarget() {
 		return allAnswers.get(targetIndex);
 	}
+	
+	public String getDeckType(){
+		return reaktionszeitDecks.get(currentDeck).getDeckType();
+	}
 
 	@Override
 	public void pause() {

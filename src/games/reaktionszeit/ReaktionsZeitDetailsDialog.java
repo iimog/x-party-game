@@ -2,6 +2,7 @@ package games.reaktionszeit;
 
 import games.Game;
 import gui.AnzeigeDialog;
+import gui.components.Bildschirm;
 import gui.components.DefaultButton;
 
 import java.awt.BorderLayout;
@@ -12,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -23,6 +25,9 @@ public class ReaktionsZeitDetailsDialog extends AnzeigeDialog {
 	private JPanel hauptbereichPanel;
 	private JPanel buttonPanel;
 	private DefaultButton okButton;
+	private Bildschirm targetBildschirm;
+	private Font labelFont;
+	private Bildschirm currentBildschirm;
 	
 	public ReaktionsZeitDetailsDialog(ReaktionsZeit reaktionsZeit) {
 		this.reaktionsZeit = reaktionsZeit;
@@ -34,23 +39,9 @@ public class ReaktionsZeitDetailsDialog extends AnzeigeDialog {
 		hauptbereichPanel = new JPanel(new GridLayout(2,1));
 		hauptbereichPanel.setBackground(Color.DARK_GRAY);
 		dialogPane.add(hauptbereichPanel, BorderLayout.CENTER);
-		targetLabel = new JLabel(reaktionsZeit.getTarget());
-		Font labelFont = Game.STANDARD_FONT.deriveFont(50f);
+		labelFont = Game.STANDARD_FONT.deriveFont(50f);
 		labelFont = labelFont.deriveFont(Font.BOLD);
-		targetLabel.setFont(labelFont);
-		targetLabel.setForeground(Color.WHITE);
-		targetLabel.setHorizontalAlignment(JLabel.CENTER);
-		hauptbereichPanel.add(targetLabel);
-		currentLabel = new JLabel(reaktionsZeit.getCurrent());
-		currentLabel.setFont(labelFont);
-		currentLabel.setHorizontalAlignment(JLabel.CENTER);
-		hauptbereichPanel.add(currentLabel);
-		if(reaktionsZeit.getTarget().equals(reaktionsZeit.getCurrent())){
-			currentLabel.setForeground(Color.GREEN);
-		}
-		else{
-			currentLabel.setForeground(Color.RED);
-		}
+		setTargetAndCurrent();
 		buttonPanel = new JPanel(new FlowLayout());
 		buttonPanel.setBackground(Color.DARK_GRAY);
 		dialogPane.add(buttonPanel, BorderLayout.SOUTH);
@@ -62,6 +53,54 @@ public class ReaktionsZeitDetailsDialog extends AnzeigeDialog {
 			}
 		});
 		buttonPanel.add(okButton);
+	}
+
+	private void setTargetAndCurrent() {
+		if(reaktionsZeit.getDeckType().equals(ReaktionsZeitDeck.STRING)){
+			setStringTarget();
+			setStringCurrent();
+		}
+		else if(reaktionsZeit.getDeckType().equals(ReaktionsZeitDeck.PICTURE)){
+			setPictureTarget();
+			setPictureCurrent();
+		}
+	}
+
+	private void setStringTarget() {
+		targetLabel = new JLabel(reaktionsZeit.getTarget());
+		targetLabel.setFont(labelFont);
+		targetLabel.setForeground(Color.WHITE);
+		targetLabel.setHorizontalAlignment(JLabel.CENTER);
+		hauptbereichPanel.add(targetLabel);
+	}
+
+	private void setPictureTarget() {
+		targetBildschirm = new Bildschirm(reaktionsZeit.getTarget());
+		hauptbereichPanel.add(targetBildschirm);
+	}
+	
+	private void setStringCurrent(){
+		currentLabel = new JLabel(reaktionsZeit.getCurrent());
+		currentLabel.setFont(labelFont);
+		currentLabel.setHorizontalAlignment(JLabel.CENTER);
+		hauptbereichPanel.add(currentLabel);
+		if(reaktionsZeit.getTarget().equals(reaktionsZeit.getCurrent())){
+			currentLabel.setForeground(Color.GREEN);
+		}
+		else{
+			currentLabel.setForeground(Color.RED);
+		}
+	}
+	
+	private void setPictureCurrent() {
+		currentBildschirm = new Bildschirm(reaktionsZeit.getCurrent());
+		if(reaktionsZeit.getTarget().equals(reaktionsZeit.getCurrent())){
+			currentBildschirm.setBorder(BorderFactory.createLineBorder(Color.GREEN, 5));
+		}
+		else{
+			currentBildschirm.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
+		}
+		hauptbereichPanel.add(currentBildschirm);
 	}
 	
 }
