@@ -32,6 +32,7 @@ public class ReaktionsZeit extends Game {
 	private int rotationTime = 1;
 	private List<String> allAnswers;
 	private List<ReaktionsZeitDeck> reaktionszeitDecks;
+	private boolean inRound = false;
 
 	public List<ReaktionsZeitDeck> getReaktionszeitDecks() {
 		return reaktionszeitDecks;
@@ -145,12 +146,14 @@ public class ReaktionsZeit extends Game {
 			targetBildschirm.hidePic(false);
 		}
 		queryRotator.start();
+		inRound = true;
 		setBuzzerActive(true);
 	}
 
 	@Override
 	public void buzzeredBy(int whoBuzz) {
 		queryRotator.pause();
+		inRound = false;
 		setBuzzerActive(false);
 		currentIndex = queryRotator.getCurrentIndex();
 		winnerIDs = new HashSet<Integer>();
@@ -238,15 +241,19 @@ public class ReaktionsZeit extends Game {
 	public void pause() {
 		super.pause();
 		setBuzzerActive(false);
-		queryRotator.pause();
-		queryRotator.maskComponent();
+		if(inRound){
+			queryRotator.pause();
+			queryRotator.maskComponent();
+		}
 	}
 
 	@Override
 	public void resume() {
 		super.resume();
-		queryRotator.start();
-		setBuzzerActive(true);
+		if(inRound){
+			queryRotator.start();
+			setBuzzerActive(true);
+		}
 	}
 
 	@Override

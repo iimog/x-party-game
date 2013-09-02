@@ -18,6 +18,7 @@ public abstract class Rotator extends JPanel {
 	private int rotationTime = 5000;
 	ArrayList<ChangeManager> cMs = new ArrayList<ChangeManager>();
 	private Timer timer;
+	private boolean running = false;
 
 	public int getRotationTime() {
 		return rotationTime/1000;
@@ -47,6 +48,7 @@ public abstract class Rotator extends JPanel {
 			}
 		});
 		timer.setInitialDelay(rotationTime);
+		running = true;
 		timer.start();
 	}
 
@@ -55,8 +57,10 @@ public abstract class Rotator extends JPanel {
 	public abstract void changeComponent();
 
 	public void pause() {
-		if (timer != null)
+		if (timer != null){
+			running = false;
 			timer.stop();
+		}
 	}
 
 	private void fireChange() {
@@ -89,5 +93,9 @@ public abstract class Rotator extends JPanel {
 			}
 		}
 		return ret;
+	}
+
+	public boolean isRunning() {
+		return running;
 	}
 }
