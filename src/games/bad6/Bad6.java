@@ -197,7 +197,7 @@ public class Bad6 extends games.Game implements PC {
 		}
 	}
 	private void throwFinish(){
-		currentNum = Integer.parseInt(dice[whosTurn].getText());
+		currentNum = dice[whosTurn].getZahl();
 		if(currentNum==6){
 			playAudioFile(lache);
 			roundCredit=0;

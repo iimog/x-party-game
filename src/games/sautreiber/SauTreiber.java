@@ -177,23 +177,23 @@ public class SauTreiber extends Game implements PC {
 			roundCred[whosTurn].setText(roundCredit+"");
 		}
 		else{
-			if (d.getText().equals("0"))return;
-			if (mehrAlsDrei[Integer.parseInt(d.getText()) - 1]) {
+			if (d.getZahl()==0)return;
+			if (mehrAlsDrei[d.getZahl() - 1]) {
 				d.setBackground(myPlayer[whosTurn].farbe);
 				d.disable(true);
-				if (d.getText().equals("1")) {
-					roundCredit += Integer.parseInt(d.getText()) * 1000;
-					if(bestaetig)bestaetigCredit += Integer.parseInt(d.getText()) * 1000;
+				if (d.getZahl()==1) {
+					roundCredit += d.getZahl() * 1000;
+					if(bestaetig)bestaetigCredit += d.getZahl() * 1000;
 				} else {
-					roundCredit += Integer.parseInt(d.getText()) * 100;
-					if(bestaetig)bestaetigCredit += Integer.parseInt(d.getText()) * 100;
+					roundCredit += d.getZahl() * 100;
+					if(bestaetig)bestaetigCredit += d.getZahl() * 100;
 				}
 				int a = 0;
 				for (int i = 0; i < 6; i++) {
 					if (a >= 2)
 						break;
 					if (!wuerfel[i].isDisabled()
-							&& wuerfel[i].getText().equals(d.getText())) {
+							&& wuerfel[i].getZahl()==d.getZahl()) {
 						wuerfel[i].setBackground(myPlayer[whosTurn].farbe);
 						wuerfel[i].disable(true);
 						a++;
@@ -204,27 +204,27 @@ public class SauTreiber extends Game implements PC {
 				weiterButton.setEnabled(true);
 				aufhoerenButton.setText("Aufhören");
 				roundCred[whosTurn].setText(roundCredit+"");
-				if(haeufigkeit[Integer.parseInt(d.getText()) - 1]<6){	// gilt nur wenn nicht 6 gleiche Zahlen
-					mehrAlsDrei[Integer.parseInt(d.getText()) - 1] = false;
+				if(haeufigkeit[d.getZahl() - 1]<6){	// gilt nur wenn nicht 6 gleiche Zahlen
+					mehrAlsDrei[d.getZahl() - 1] = false;
 				}
 			} else {
-				if (d.getText().equals("1") || d.getText().equals("5")) {
+				if (d.getZahl() == 1 || d.getZahl()==5) {
 					d.setBackground(myPlayer[whosTurn].farbe);
 					d.disable(true);
-					if (d.getText().equals("1")){
+					if (d.getZahl()==1){
 						roundCredit += 100;
 						if(bestaetig)bestaetigCredit += 100;
 					}
-					if (d.getText().equals("5")){
+					if (d.getZahl()==5){
 						if(haeufigkeit[5-1]==2){
 							roundCredit+=50;
 							if(bestaetig)bestaetigCredit += 50;
 							for (int i = 0; i < 6; i++) {
 								if (!wuerfel[i].isDisabled()
-										&& wuerfel[i].getText().equals("5")) {
-									wuerfel[i].setText("0");
+										&& wuerfel[i].getZahl()==5) {
+									wuerfel[i].setZahl(0);
 								}}
-							d.setText("1");
+							d.setZahl(1);
 						}
 						roundCredit += 50;
 						if(bestaetig)bestaetigCredit += 50;
@@ -372,7 +372,7 @@ public class SauTreiber extends Game implements PC {
 		}
 		for (int i = 0; i < 6; i++) {
 			if (!wuerfel[i].isDisabled()) {
-				haeufigkeit[Integer.parseInt(wuerfel[i].getText()) - 1]++;
+				haeufigkeit[wuerfel[i].getZahl() - 1]++;
 			}
 		}
 		strasse = true;

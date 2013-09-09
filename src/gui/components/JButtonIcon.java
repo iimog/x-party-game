@@ -13,6 +13,8 @@ public class JButtonIcon extends DefaultButton {
 	private static final long serialVersionUID = -5447642185291377872L;
 
 	ImageIcon icon;
+
+	private ImageIcon disabledIcon;
 	public JButtonIcon(String icon, String alternativ){
 		super();
 		try{
@@ -35,6 +37,37 @@ public class JButtonIcon extends DefaultButton {
 		}
 		else {
 			return super.getPreferredSize();
+		}
+	}
+	
+	public void changeIcon(String icon, String alternativ){
+		changeIcon(icon, alternativ, false);
+	}
+	
+	public void changeIcon(String icon, String alternativ, boolean alsoDisabledIcon){
+		try{
+			this.icon = new ImageIcon(getToolkit().getImage(X.getMainDir()+icon));
+			this.setIcon(this.icon);
+			if(alsoDisabledIcon){
+				setDisabledIcon(icon);
+			}
+		}
+		catch(Exception e){
+			this.setText(alternativ);
+		}
+		if(this.icon.getIconHeight()<0 || this.icon.getIconWidth()<0){
+			this.icon = null;
+			this.setText(alternativ);
+		}
+	}
+	
+	public void setDisabledIcon(String icon){
+		try{
+			disabledIcon = new ImageIcon(getToolkit().getImage(X.getMainDir()+icon));
+			this.setDisabledIcon(disabledIcon);
+		}
+		catch(Exception e){
+			System.out.println("Fehler beim setzen des disabledIcons: "+disabledIcon);
 		}
 	}
 }
