@@ -63,12 +63,17 @@ public abstract class Game extends Anzeige {
 	
 	private boolean buzzerActive = false;
 
-	public static final int[] standardBuzz = new int[4];
-	{
-		standardBuzz[0] = KeyEvent.VK_A;
-		standardBuzz[1] = KeyEvent.VK_L;
-		standardBuzz[2] = KeyEvent.VK_C;
-		standardBuzz[3] = KeyEvent.VK_N;
+	public static int[] getStandardBuzz(){	
+		int[] standardBuzz = new int[8];
+			standardBuzz[0] = KeyEvent.VK_A;
+			standardBuzz[1] = KeyEvent.VK_L;
+			standardBuzz[2] = KeyEvent.VK_C;
+			standardBuzz[3] = KeyEvent.VK_N;
+			standardBuzz[4] = KeyEvent.VK_U;
+			standardBuzz[5] = KeyEvent.VK_R;
+			standardBuzz[6] = KeyEvent.VK_Q;
+			standardBuzz[7] = KeyEvent.VK_P;
+		return standardBuzz;
 	}
 	public HashSet<Integer> schonWeg = new HashSet<Integer>(); // Hilfsstruktur
 																// um doppelte

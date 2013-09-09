@@ -145,11 +145,12 @@ public class Spielablauf implements GameListener, Ablauf {
 			}
 		}
 		if (neueZuweisen.size() > 0) {
+			int[] standardBuzz = Game.getStandardBuzz();
 			int c = 0;
 			for (int i = 0; i < neueZuweisen.size(); i++) {
 				int buzz = 0;
 				do {
-					buzz = Game.standardBuzz[c];
+					buzz = standardBuzz[c];
 					pl[neueZuweisen.get(i)].setKey(buzz);
 					c++;
 				} while (!verbrauchteBuzzer.add(buzz));

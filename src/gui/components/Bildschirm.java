@@ -222,5 +222,12 @@ public class Bildschirm extends JPanel {
 
 		repaint();
 	}
+	
+	public void scalePic(int width, int height){
+		bild = bild.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		setPreferredSize(new Dimension(width, height));
+		revalidate();
+		repaint();
+	}
 
 }

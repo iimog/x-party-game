@@ -34,6 +34,7 @@ public class MatchInfoPanel extends JPanel {
 		this.setLayout(new BorderLayout(15,0));
 		this.setOpaque(false);
 		modusIcon = new Bildschirm("media/modus/"+matchInfo.getModus()+".png");
+		modusIcon.scalePic(100, 70);
 		modusIcon.setToolTipText(matchInfo.getModus()+"");
 		this.add(modusIcon, BorderLayout.WEST);
 		spielerLabel = getSpielerLabel();
