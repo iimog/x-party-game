@@ -5,6 +5,7 @@ import gui.components.DefaultButton;
 import gui.menu.ProfilManager;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +44,7 @@ public class MainSettingsDialog  extends gui.AnzeigeDialog {
 			hauptbereichPanelLayout.setColumns(2);
 			hauptbereichPanelLayout.setRows(3);
 			hauptbereichPanel.setLayout(hauptbereichPanelLayout);
+			hauptbereichPanel.setOpaque(false);
 			dialogPane.add(hauptbereichPanel, BorderLayout.CENTER);
 			initFullscreenOption();
 			initSoundOption();
@@ -50,6 +52,7 @@ public class MainSettingsDialog  extends gui.AnzeigeDialog {
 		}
 		{
 			buttonPanel = new JPanel();
+			buttonPanel.setOpaque(false);
 			dialogPane.add(buttonPanel, BorderLayout.SOUTH);
 			{
 				speichernButton = new DefaultButton();
@@ -76,7 +79,9 @@ public class MainSettingsDialog  extends gui.AnzeigeDialog {
 
 	private void initProfilOption() {
 		{
-			profilLabel = new JLabel("Spiel Einstellungs Profile");
+			profilLabel = new JLabel("Profile");
+			profilLabel.setFont(X.BUTTON_FONT);
+			profilLabel.setForeground(Color.WHITE);
 			hauptbereichPanel.add(profilLabel);
 		}
 		{
@@ -94,11 +99,16 @@ public class MainSettingsDialog  extends gui.AnzeigeDialog {
 	private void initSoundOption() {
 		{
 			soundLabel = new JLabel();
+			soundLabel.setFont(X.BUTTON_FONT);
+			soundLabel.setForeground(Color.white);
 			hauptbereichPanel.add(soundLabel);
 			soundLabel.setText("Sound");
 		}
 		{
 			soundCheckBox = new JCheckBox();
+			soundCheckBox.setOpaque(false);
+			soundCheckBox.setFont(X.BUTTON_FONT);
+			soundCheckBox.setForeground(Color.white);
 			setSoundCheckBoxSelected(ms.isSoundOn());
 			soundCheckBox.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
@@ -112,11 +122,16 @@ public class MainSettingsDialog  extends gui.AnzeigeDialog {
 	private void initFullscreenOption() {
 		{
 			fullscreenLabel = new JLabel();
+			fullscreenLabel.setFont(X.BUTTON_FONT);
+			fullscreenLabel.setForeground(Color.white);
 			hauptbereichPanel.add(fullscreenLabel);
 			fullscreenLabel.setText("Fullscreen Modus");
 		}
 		{
 			fullscreenCheckBox = new JCheckBox();
+			fullscreenCheckBox.setOpaque(false);
+			fullscreenCheckBox.setFont(X.BUTTON_FONT);
+			fullscreenCheckBox.setForeground(Color.white);
 			boolean full = ms.isFullscreen();
 			setFullscreenCheckboxSelected(full);
 			fullscreenCheckBox.addActionListener(new ActionListener() {
