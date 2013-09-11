@@ -207,7 +207,7 @@ public class X extends javax.swing.JFrame {
 		});
 		try {
 			Image img = Toolkit.getDefaultToolkit().getImage(
-					getMainDir() + "media/ablauf/X.jpg");
+					getMainDir() + "media/ablauf/Xicon.png");
 			ImageIcon bild1 = new ImageIcon(img);
 			setIconImage(bild1.getImage());
 		} catch (Exception e) {

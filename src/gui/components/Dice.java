@@ -39,7 +39,7 @@ public class Dice extends JButtonIcon {
 	}
 	public void setZahl(int zahl) {
 		this.zahl = zahl;
-		changeIcon(numberToIcon.get(zahl) ,zahl+"", true);
+		changeIcon(numberToIcon.get(zahl) ,zahl+"");
 	}
 	public Color farbe;
 	public int a; // speed coefficient
@@ -102,7 +102,7 @@ public class Dice extends JButtonIcon {
 			Random r = new Random();
 			for(int i=1; i<=20; i++){
 				zahl = r.nextInt(6)+1;
-				changeIcon(numberToIcon.get(zahl) ,zahl+"", true);
+				changeIcon(numberToIcon.get(zahl) ,zahl+"");
 				try {
 					Thread.sleep(a*50);
 				} catch (InterruptedException e) {

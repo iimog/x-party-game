@@ -69,8 +69,8 @@ public class HauptMenu extends Anzeige {
 			this.add(logoPanel, BorderLayout.NORTH);
 			logoPanel.setOpaque(false);
 			{
-				logoBildschirm = new Bildschirm("media/ablauf/X_logo4.jpg");
-				logoBildschirm.scalePic(500, 250);
+				logoBildschirm = new Bildschirm("media/ablauf/Xmenu.png");
+				logoBildschirm.scalePic(400, 400);
 				logoPanel.add(logoBildschirm);
 			}
 		}
