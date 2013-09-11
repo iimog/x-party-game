@@ -140,7 +140,7 @@ public abstract class Game extends Anzeige {
 		addCreds();
 		{
 			controlPane = new JPanel();
-			controlPane.setBackground(Color.darkGray);
+			controlPane.setOpaque(false);
 			this.add(controlPane, BorderLayout.SOUTH);
 			{
 				playerBereichPanel = new JPanel();
@@ -148,20 +148,22 @@ public abstract class Game extends Anzeige {
 				playerBereichPanelLayout.setHgap(5);
 				playerBereichPanelLayout.setVgap(5);
 				playerBereichPanelLayout.setColumns(spielerZahl);
+				playerBereichPanel.setOpaque(false);
 				controlPane.add(playerBereichPanel);
 				playerBereichPanel.setLayout(playerBereichPanelLayout);
 				for (int i = 0; i < spielerZahl; i++) {
 					playerPanel[i] = new JPanel();
+					playerPanel[i].setBackground(Color.DARK_GRAY);
 					FlowLayout playerPanelLayout = new FlowLayout();
 					playerBereichPanel.add(playerPanel[i]);
-					playerBereichPanel.setBorder(BorderFactory
+					playerPanel[i].setBorder(BorderFactory
 							.createEtchedBorder(EtchedBorder.RAISED));
 					playerPanel[i].setLayout(playerPanelLayout);
 					if (modus == Modus.TEAM) {
 						activePlayerLabel[i] = new JLabel();
 						activePlayerLabel[i].setText(myTeam[i].nextMember());
-						activePlayerLabel[i].setFont(new java.awt.Font(
-								"Comic Sans MS", 0, 20));
+						activePlayerLabel[i].setFont(X.getStandardFont().deriveFont(20f));
+						activePlayerLabel[i].setForeground(Color.WHITE);
 						playerPanel[i].add(activePlayerLabel[i]);
 					}
 					{
@@ -170,6 +172,7 @@ public abstract class Game extends Anzeige {
 						playerLabel[i].setText(myPlayer[i].name);
 						playerLabel[i].setToolTipText(KeyEvent.getKeyText(myPlayer[i].getKey()));
 						playerLabel[i].setFont(PLAYER_FONT);
+						playerLabel[i].setForeground(Color.WHITE);
 						playerLabel[i]
 								.setHorizontalAlignment(SwingConstants.CENTER);
 					}
@@ -177,9 +180,8 @@ public abstract class Game extends Anzeige {
 						matchCredLabel[i] = new JLabel();
 						playerPanel[i].add(matchCredLabel[i]);
 						matchCredLabel[i].setText(myPlayer[i].matchCredit + "");
-						matchCredLabel[i].setBorder(BorderFactory
-								.createEtchedBorder(BevelBorder.LOWERED));
 						matchCredLabel[i].setFont(PLAYER_FONT);
+						matchCredLabel[i].setForeground(Color.WHITE);
 						matchCredLabel[i]
 								.setHorizontalAlignment(SwingConstants.CENTER);
 						matchCredLabel[i].setToolTipText("Match Punkte von "
@@ -540,7 +542,7 @@ public abstract class Game extends Anzeige {
 	}
 
 	public void turnOver() {
-		playerLabel[whosTurn].setForeground(Color.black);
+		playerLabel[whosTurn].setForeground(Color.WHITE);
 		playerLabel[whosTurn].setBorder(null);
 		if (modus == Modus.TEAM) {
 			activePlayerLabel[whosTurn].setText(myTeam[whosTurn].nextMember());

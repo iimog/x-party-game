@@ -3,7 +3,7 @@ Säutreiber	games.sautreiber.SauTreiber	3	30	Ein spannendes Würfelspiel. Sammle
 Schätz mal	games.guess.Guess	5	31	Das ist ein Ratespiel. Wer näher an die richtige Antwort kommt gewinnt.
 Fehlerteufel	games.difference.Difference	4	31	Finde den Fehler im linken Bild - bevor es dein Gegner tut.
 Memory	games.memory.Memory	5	31	Das klassische Merkspiel.
-Wo?	games.world.World	4	31	Kennst du die Erde wie deine Westentasche?
+Wo?	games.world.World	4	0	Kennst du die Erde wie deine Westentasche?
 Uhr	games.innereUhr.InnereUhr	5	31	Es geht darum seine innere Uhr zu nutzen um zur richtigen Zeit den Buzzer zu drücken.
 Geister	games.ghosts.Ghosts	2	18	Ein Strategiespiel. Es geht darum zu bluffen, den Gegner zu täuschen aber ihn selbst richtig einzuschätzen. Wer ist der bessere Menschenkenner?
 Tron	games.tron.Tron	5	30	Verbaue deinem Gegner den Weg aber fahr nicht gegen die Wand.
