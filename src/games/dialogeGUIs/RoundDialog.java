@@ -4,6 +4,7 @@ import games.Game;
 import gui.components.JButtonIcon;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -69,7 +70,7 @@ public class RoundDialog extends gui.AnzeigeDialog {
 				dialogPane.add(jLabel1, BorderLayout.NORTH);
 				jLabel1.setText("Diese Runde geht an");
 				jLabel1.setFont(new java.awt.Font("Segoe UI",1,22));
-				jLabel1.setForeground(new java.awt.Color(0,0,0));
+				jLabel1.setForeground(Color.WHITE);
 				jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
 			}
 			{
@@ -87,6 +88,7 @@ public class RoundDialog extends gui.AnzeigeDialog {
 				dialogPane.add(schaltflaechenPanel, BorderLayout.SOUTH);
 				// schaltflaechenPanel.setPreferredSize(new java.awt.Dimension(359, 55));
 				schaltflaechenPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+				schaltflaechenPanel.setOpaque(false);
 				{
 					infoButton = new JButtonIcon("media/ablauf/info.png","Info");
 					schaltflaechenPanel.add(infoButton);

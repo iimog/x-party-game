@@ -1,5 +1,6 @@
 package games.buchstabensalat;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -22,6 +23,7 @@ public class LoesungsWortPanel extends JPanel {
 	private void initGUI() {
 		myLayout = new GridLayout(1,1);
 		this.setLayout(myLayout);
+		this.setOpaque(false);
 		add(new JLabel());
 	}
 
@@ -34,6 +36,7 @@ public class LoesungsWortPanel extends JPanel {
 			lables[i].setHorizontalAlignment(JLabel.CENTER);
 			lables[i].setText(" ");
 			lables[i].setFont(BuchstabenSalat.standardFont);
+			lables[i].setForeground(Color.WHITE);
 			add(lables[i]);
 		}
 		revalidate();

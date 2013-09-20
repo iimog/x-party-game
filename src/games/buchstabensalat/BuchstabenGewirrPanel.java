@@ -1,5 +1,6 @@
 package games.buchstabensalat;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.HashSet;
 import java.util.Random;
@@ -26,6 +27,7 @@ public class BuchstabenGewirrPanel extends JPanel {
 	private void initGUI() {
 		myLayout = new GridLayout(1,1);
 		this.setLayout(myLayout);
+		this.setOpaque(false);
 		add(new JLabel());
 	}
 
@@ -39,6 +41,7 @@ public class BuchstabenGewirrPanel extends JPanel {
 			lables[i].setHorizontalAlignment(JLabel.CENTER);
 			lables[i].setText(wort.substring(scrambledPositions[i],scrambledPositions[i]+1));
 			lables[i].setFont(BuchstabenSalat.standardFont);
+			lables[i].setForeground(Color.WHITE);
 			add(lables[i]);
 		}
 		revalidate();
@@ -60,7 +63,7 @@ public class BuchstabenGewirrPanel extends JPanel {
 	}
 
 	public void hideLetterAt(int position) {
-		lables[position].setForeground(lables[position].getBackground());
+		lables[position].setForeground(Color.black);
 	}
 
 	public String getLetterAt(int position) {

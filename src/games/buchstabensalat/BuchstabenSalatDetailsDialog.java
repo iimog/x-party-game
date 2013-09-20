@@ -1,6 +1,7 @@
 package games.buchstabensalat;
 
 import gui.AnzeigeDialog;
+import gui.components.DefaultButton;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -33,6 +34,7 @@ public class BuchstabenSalatDetailsDialog extends AnzeigeDialog {
 		{
 			hauptbereichPanel = new JPanel();
 			hauptbereichPanel.setLayout(new GridLayout(3,1));
+			hauptbereichPanel.setOpaque(false);
 			dialogPane.add(hauptbereichPanel, BorderLayout.CENTER);
 			{
 				scatteredWordLabel = new JLabel();
@@ -57,9 +59,10 @@ public class BuchstabenSalatDetailsDialog extends AnzeigeDialog {
 		}
 		{
 			schaltflaechenPanel = new JPanel();
+			schaltflaechenPanel.setOpaque(false);
 			dialogPane.add(schaltflaechenPanel, BorderLayout.SOUTH);
 			{
-				okButton = new JButton();
+				okButton = new DefaultButton();
 				schaltflaechenPanel.add(okButton);
 				okButton.setText("OK");
 				okButton.addActionListener(new ActionListener() {

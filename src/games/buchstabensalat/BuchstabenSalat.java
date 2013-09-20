@@ -8,6 +8,7 @@ import gui.EasyDialog;
 import gui.components.Countdown;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -431,6 +432,7 @@ public class BuchstabenSalat extends Game implements PC {
 	private void initGUI() {
 		hauptbereichPanel = new JPanel();
 		hauptbereichPanel.setLayout(new BorderLayout());
+		hauptbereichPanel.setBackground(Color.BLACK);
 		spielBereichPanel.add(hauptbereichPanel);
 		addKategorieLabel();
 		addSalatPanel();
@@ -439,6 +441,7 @@ public class BuchstabenSalat extends Game implements PC {
 
 	private void addKategorieLabel() {
 		kategorieLabel = new JLabel("Kategorie");
+		kategorieLabel.setForeground(Color.LIGHT_GRAY);
 		kategorieLabel.setFont(X.BUTTON_FONT);
 		kategorieLabel.setHorizontalAlignment(JLabel.CENTER);
 		hauptbereichPanel.add(kategorieLabel, BorderLayout.NORTH);
@@ -466,6 +469,7 @@ public class BuchstabenSalat extends Game implements PC {
 
 	private void addSalatPanel() {
 		salatPanel = new JPanel();
+		salatPanel.setOpaque(false);
 		salatPanel.setLayout(new GridLayout(2, 1));
 		hauptbereichPanel.add(salatPanel, BorderLayout.CENTER);
 		buchstabenGewirrPanel = new BuchstabenGewirrPanel(this);
@@ -531,6 +535,8 @@ public class BuchstabenSalat extends Game implements PC {
 		hauptbereichPanel.add(untenPanel, BorderLayout.SOUTH);
 		antwortTextField = new JTextField();
 		antwortTextField.setFont(standardFont);
+		antwortTextField.setForeground(Color.WHITE);
+		antwortTextField.setBackground(Color.black);
 		untenPanel.add(antwortTextField);
 		antwortTextField.setEditable(false);
 		antwortTextField.addActionListener(new ActionListener() {
