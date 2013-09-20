@@ -580,8 +580,20 @@ public class BuchstabenSalat extends Game implements PC {
 
 	@Override
 	public void settingsChanged() {
+		propertiesToSettings();
 		updateCreds();
+	}
+
+	private void propertiesToSettings() {
+		if(customSettings == null){
+			return;
+		}
+		numOfRounds = Integer.parseInt(customSettings.getProperty(BuchstabenSalatSettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
+		String zeitNachBuzzer = customSettings.getProperty(BuchstabenSalatSettingsDialog.BUZZER_ZEIT, "10");
+		timeAfterBuzzer = Integer.parseInt(zeitNachBuzzer);
 		countdown.setSecs(timeAfterBuzzer);
+		String zeitProBuchstabe = customSettings.getProperty(BuchstabenSalatSettingsDialog.BUCHSTABE_ZEIT, "3");
+		timePerLetter = Integer.parseInt(zeitProBuchstabe)*1000;
 	}
 
 	@Override
@@ -668,7 +680,8 @@ public class BuchstabenSalat extends Game implements PC {
 	@Override
 	public void pause() {
 		super.pause();
-		aufdecker.interrupt();
+		if(aufdecker != null)
+			aufdecker.interrupt();
 	}
 
 	@Override

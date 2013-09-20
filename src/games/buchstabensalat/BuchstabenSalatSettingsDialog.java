@@ -2,43 +2,25 @@ package games.buchstabensalat;
 
 import games.dialogeGUIs.GameSettingsDialog;
 
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
 public class BuchstabenSalatSettingsDialog extends GameSettingsDialog {
 	private static final long serialVersionUID = 1L;
+	public static final String BUZZER_ZEIT = "Zeit nach buzzern";
+	public static final String BUCHSTABE_ZEIT = "Zeit pro Buchstabe";
 	private BuchstabenSalat salat;
-	private GridLayout settingsPanelLayout;
-	private JLabel rundenzahlLabel;
-	private JSlider rundenzahlSlider;
-	private JLabel zeitNachBuzzerLabel;
 	private JSlider zeitNachBuzzerSlider;
-	private JLabel zeitProBuchstabeLabel;
 	private JSlider zeitProBuchstabeSlider;
 
 	public BuchstabenSalatSettingsDialog(BuchstabenSalat salat) {
 		super(salat);
 		this.salat = salat;
 		initGUI();
+		propertiesToSettings();
 		}
 
 		private void initGUI(){
-			settingsPanelLayout = new GridLayout(3,2);
-			settingsPanel.setLayout(settingsPanelLayout);
-			rundenzahlLabel = new JLabel("Siegpunktzahl");
-			settingsPanel.add(rundenzahlLabel);
-			rundenzahlSlider = new JSlider(SwingConstants.HORIZONTAL,1,10,salat.numOfRounds);
-			rundenzahlSlider.setMajorTickSpacing(1);
-			rundenzahlSlider.setMinorTickSpacing(1);
-			rundenzahlSlider.setSnapToTicks(true);
-			rundenzahlSlider.setPaintTicks(true);
-			rundenzahlSlider.setPaintLabels(true);
-			settingsPanel.add(rundenzahlSlider);
-			zeitNachBuzzerLabel = new JLabel("Zeit nach buzzern:");
-			settingsPanel.add(zeitNachBuzzerLabel);
 			/*if(salat.modus == Modus.SOLO){
 				zeitBisVerlorenSlider = new JSlider(SwingConstants.HORIZONTAL,0,100,dif.getCdTime());
 				zeitBisVerlorenSlider.setMajorTickSpacing(10);
@@ -50,7 +32,7 @@ public class BuchstabenSalatSettingsDialog extends GameSettingsDialog {
 			zeitNachBuzzerSlider.setSnapToTicks(true);
 			zeitNachBuzzerSlider.setPaintTicks(true);
 			zeitNachBuzzerSlider.setPaintLabels(true);
-			settingsPanel.add(zeitNachBuzzerSlider);
+			addSettingsComponent("Zeit nach buzzern:", zeitNachBuzzerSlider);
 			/*if(dif.modus != Modus.SOLO){
 				settingsPanelLayout.setRows(3);
 				bildVerschwindenLabel = new JLabel("Bild nach buzzern ausblenden?");
@@ -59,24 +41,38 @@ public class BuchstabenSalatSettingsDialog extends GameSettingsDialog {
 				bildVerschwindenCheckBox.setSelected(dif.bildAusblenden);
 				settingsPanel.add(bildVerschwindenCheckBox);
 			}*/
-			zeitProBuchstabeLabel = new JLabel("Zeit pro Buchstabe:");
-			settingsPanel.add(zeitProBuchstabeLabel);
 			zeitProBuchstabeSlider = new JSlider(SwingConstants.HORIZONTAL,1,10,(int)salat.timePerLetter/1000);
 			zeitProBuchstabeSlider.setMajorTickSpacing(1);
 			zeitProBuchstabeSlider.setMinorTickSpacing(1);
 			zeitProBuchstabeSlider.setSnapToTicks(true);
 			zeitProBuchstabeSlider.setPaintTicks(true);
 			zeitProBuchstabeSlider.setPaintLabels(true);
-			settingsPanel.add(zeitProBuchstabeSlider);
+			addSettingsComponent("Zeit pro Buchstabe:", zeitProBuchstabeSlider);
 		}
 
 		@Override
 		public void speichern(){
-			salat.numOfRounds = rundenzahlSlider.getValue();
+			super.speichern();
 			int zeit = zeitNachBuzzerSlider.getValue();
 			salat.timeAfterBuzzer = zeit;
 			salat.timePerLetter = zeitProBuchstabeSlider.getValue()*1000;
 			/*if(dif.modus != Modus.SOLO)dif.bildAusblenden = bildVerschwindenCheckBox.isSelected();*/
-			super.speichern();
+		}
+		
+		public void settingsToProperties(){
+			super.settingsToProperties();
+			settings.setProperty(BUCHSTABE_ZEIT, ""+zeitProBuchstabeSlider.getValue());
+			settings.setProperty(BUZZER_ZEIT, ""+zeitNachBuzzerSlider.getValue());
+		}
+		
+		public void propertiesToSettings(){
+			super.propertiesToSettings();
+			if(settings == null || zeitNachBuzzerSlider == null){
+				return;
+			}
+			String zeitNachBuzzer = settings.getProperty(BUZZER_ZEIT, "10");
+			zeitNachBuzzerSlider.setValue(Integer.parseInt(zeitNachBuzzer));
+			String zeitProBuchstabe = settings.getProperty(BUCHSTABE_ZEIT, "3");
+			zeitProBuchstabeSlider.setValue(Integer.parseInt(zeitProBuchstabe));
 		}
 }

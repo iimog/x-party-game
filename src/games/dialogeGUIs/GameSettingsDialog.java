@@ -1,9 +1,10 @@
 package games.dialogeGUIs;
 import games.Game;
 import gui.AnzeigeDialog;
+import gui.components.DefaultButton;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,12 +13,14 @@ import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
 import settings.SettingsFileHandler;
+import start.X;
 
 public class GameSettingsDialog extends AnzeigeDialog {
 	public static final String NUM_OF_ROUNDS = "Rundenzahl";
@@ -68,14 +71,20 @@ public class GameSettingsDialog extends AnzeigeDialog {
 			{
 				settingsPanelLayout = new GridLayout(1, 2);
 				settingsPanel = new JPanel(settingsPanelLayout);
+				settingsPanel.setOpaque(false);
 				dialogPane.add(settingsPanel, BorderLayout.CENTER);
 			}
 			{
 				rundenzahlLabel = new JLabel("Siegpunktzahl");
+				rundenzahlLabel.setFont(X.BUTTON_FONT);
+				rundenzahlLabel.setForeground(Color.WHITE);
 				settingsPanel.add(rundenzahlLabel);
 			}
 			{
 				rundenzahlSlider = new JSlider(SwingConstants.HORIZONTAL,1,maxRunden,numOfRounds);
+				rundenzahlSlider.setOpaque(false);
+				rundenzahlSlider.setForeground(Color.white);
+				rundenzahlSlider.setFont(X.BUTTON_FONT);
 				rundenzahlSlider.setMajorTickSpacing(1);
 				rundenzahlSlider.setMinorTickSpacing(1);
 				rundenzahlSlider.setSnapToTicks(true);
@@ -88,17 +97,22 @@ public class GameSettingsDialog extends AnzeigeDialog {
 			}
 			{
 				controlPanel = new JPanel(new GridLayout(2,1));
+				controlPanel.setOpaque(false);
 				defaultSettingsCheckbox = new JCheckBox("Als Standard speichern");
+				defaultSettingsCheckbox.setFont(X.BUTTON_FONT.deriveFont(15f));
+				defaultSettingsCheckbox.setForeground(Color.WHITE);
+				defaultSettingsCheckbox.setOpaque(false);
 				controlPanel.add(defaultSettingsCheckbox);
 				dialogPane.add(controlPanel, BorderLayout.SOUTH);
 			}
 			{
 				buttonPanel = new JPanel();
+				buttonPanel.setOpaque(false);
 				FlowLayout buttonPanelLayout = new FlowLayout();
 				controlPanel.add(buttonPanel, BorderLayout.SOUTH);
 				buttonPanel.setLayout(buttonPanelLayout);
 				{
-					speichernButton = new JButton();
+					speichernButton = new DefaultButton();
 					buttonPanel.add(speichernButton);
 					speichernButton.setText("Speichern");
 					speichernButton.addActionListener(new ActionListener() {
@@ -108,7 +122,7 @@ public class GameSettingsDialog extends AnzeigeDialog {
 					});
 				}
 				{
-					verwerfenButton = new JButton();
+					verwerfenButton = new DefaultButton();
 					buttonPanel.add(verwerfenButton);
 					verwerfenButton.setText("Verwerfen");
 					verwerfenButton.addActionListener(new ActionListener() {
@@ -151,13 +165,22 @@ public class GameSettingsDialog extends AnzeigeDialog {
 		settings.setProperty(NUM_OF_ROUNDS, rundenzahlSlider.getValue()+"");
 	}
 	
-	public void addSettingsComponent(String beschreibung, Component komponente){
+	public void addSettingsComponent(String beschreibung, JComponent komponente, boolean adjustStyle){
+		if(adjustStyle){
+			adjustStyle(komponente);
+		}
 		settingsPanelLayout.setRows(settingsPanelLayout.getRows() + 1);
 		JLabel beschriftungLabel = new JLabel(beschreibung);
+		beschriftungLabel.setFont(X.BUTTON_FONT);
+		beschriftungLabel.setForeground(Color.WHITE);
 		settingsPanel.add(beschriftungLabel);
 		settingsPanel.add(komponente);
 		revalidate();
 		repaint();
+	}
+	
+	public void addSettingsComponent(String beschreibung, JComponent komponente){
+		addSettingsComponent(beschreibung, komponente, true);
 	}
 
 	public boolean isInGame() {
@@ -166,6 +189,12 @@ public class GameSettingsDialog extends AnzeigeDialog {
 
 	public void setInGame(boolean inGame) {
 		this.inGame = inGame;
+	}
+
+	public void adjustStyle(JComponent c) {
+		c.setOpaque(false);
+		c.setForeground(Color.WHITE);
+		c.setFont(X.BUTTON_FONT);
 	}
 
 }
