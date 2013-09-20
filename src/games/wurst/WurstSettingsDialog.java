@@ -3,46 +3,43 @@ package games.wurst;
 import games.dialogeGUIs.GameSettingsDialog;
 import gui.EasyDialog;
 
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JSlider;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 public class WurstSettingsDialog extends GameSettingsDialog {
 	private static final long serialVersionUID = 1L;
+	public static final String ANFANGS_WERT = "Anfangswert";
 	private Wurst wurst;
-	private JLabel rundenzahlLabel;
-	private JSlider rundenzahlSlider;
-	private JLabel startGewichtLabel;
 	private JTextField startGewichtTextField;
 
 	public WurstSettingsDialog(Wurst wurst) {
 		super(wurst);
 		this.wurst = wurst;
 		initGUI();
+		propertiesToSettings();
 	}
 	
 	private void initGUI(){
-		settingsPanel.setLayout(new GridLayout(2,2));
-		rundenzahlLabel = new JLabel("Siegpunktzahl");
-		settingsPanel.add(rundenzahlLabel);
-		rundenzahlSlider = new JSlider(SwingConstants.HORIZONTAL,2,10,wurst.numOfRounds);
-		rundenzahlSlider.setMajorTickSpacing(1);
-		rundenzahlSlider.setMinorTickSpacing(1);
-		rundenzahlSlider.setSnapToTicks(true);
-		rundenzahlSlider.setPaintTicks(true);
-		rundenzahlSlider.setPaintLabels(true);
-		settingsPanel.add(rundenzahlSlider);
-		startGewichtLabel = new JLabel("Startgewicht der Wurst:");
-		settingsPanel.add(startGewichtLabel);
 		startGewichtTextField = new JTextField(wurst.anfangsWert+"");
-		settingsPanel.add(startGewichtTextField);
+		addSettingsComponent("Startgewicht der Wurst:", startGewichtTextField);
 	}
 
 	@Override
 	public void speichern(){
+		settingsToProperties();
+		super.speichern();
+	}
+	
+	public void propertiesToSettings(){
+		super.propertiesToSettings();
+		if(settings == null || startGewichtTextField == null){
+			return;
+		}
+		String anfangsWert = settings.getProperty(ANFANGS_WERT, "500");
+		startGewichtTextField.setText(anfangsWert);
+	}
+	
+	public void settingsToProperties(){
+		super.settingsToProperties();
 		try{
 			String startGewicht = startGewichtTextField.getText();
 			int ausgangsWert = Integer.parseInt(startGewicht);
@@ -50,10 +47,10 @@ public class WurstSettingsDialog extends GameSettingsDialog {
 				throw new Exception("Wert zu klein!");
 			}
 			wurst.anfangsWert = ausgangsWert;
-			wurst.numOfRounds = rundenzahlSlider.getValue();
-			super.speichern();
+			settings.setProperty(ANFANGS_WERT, ""+ausgangsWert);
 		}
 		catch(Exception e){
+			e.printStackTrace();
 			EasyDialog.showMessage("Bitte gib ins Textfeld einen sinnvollen Wert (Zahl >9) ein");
 		}
 	}

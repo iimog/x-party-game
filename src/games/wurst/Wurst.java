@@ -3,6 +3,7 @@ package games.wurst;
 import games.Game;
 import games.Modus;
 import games.PC;
+import games.buchstabensalat.BuchstabenSalatSettingsDialog;
 import gui.EasyDialog;
 
 import java.awt.GridLayout;
@@ -112,7 +113,16 @@ public class Wurst extends Game implements PC{
 
 	@Override
 	public void settingsChanged() {
+		propertiesToSettings();
 		updateCreds();
+	}
+
+	private void propertiesToSettings() {
+		if(customSettings == null){
+			return;
+		}
+		numOfRounds = Integer.parseInt(customSettings.getProperty(BuchstabenSalatSettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
+		anfangsWert = Integer.parseInt(customSettings.getProperty(WurstSettingsDialog.ANFANGS_WERT, "500"));
 		for(int i=0; i<spielerZahl; i++){
 			wurstPanel[i].setAnfangsWert(anfangsWert);
 		}

@@ -1,8 +1,11 @@
 package games.wurst;
 
 import gui.EasyDialog;
+import gui.components.DefaultButton;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -107,6 +110,8 @@ public class WurstPanel extends JPanel {
 		if(abdeckPanel == null){
 			abdeckPanel = new JPanel();
 			abdeckPanel.setLayout(new BorderLayout());
+			abdeckPanel.setBackground(Color.DARK_GRAY);
+			abdeckPanel.setMinimumSize(new Dimension(100,50));
 			abdeckLabel = new JLabel(player.getName());
 			if(player.isRobot())abdeckLabel.setText(abdeckLabel.getText()+" (Fertig)");
 			abdeckLabel.setForeground(player.farbe);
@@ -139,30 +144,38 @@ public class WurstPanel extends JPanel {
 		if(hauptbereichPanel == null){
 			hauptbereichPanel = new JPanel();
 			hauptbereichPanel.setLayout(new GridLayout(5,1));
+			hauptbereichPanel.setBackground(Color.DARK_GRAY);
 			playerLabel = new JLabel(player.name);
 			playerLabel.setForeground(player.farbe);
 			playerLabel.setHorizontalAlignment(JLabel.CENTER);
 			playerLabel.setFont(X.BUTTON_FONT);
 			hauptbereichPanel.add(playerLabel);
 			restPanel = new JPanel();
+			restPanel.setOpaque(false);
 			restPanel.setLayout(new GridLayout(1,2));
 			hauptbereichPanel.add(restPanel);
 			restTextLabel = new JLabel("Rest: ");
 			restTextLabel.setFont(X.BUTTON_FONT);
+			restTextLabel.setForeground(Color.WHITE);
 			restPanel.add(restTextLabel);
 			restZahlLabel = new JLabel(rest+"g");
 			restZahlLabel.setFont(X.BUTTON_FONT);
+			restZahlLabel.setForeground(Color.WHITE);
 			restPanel.add(restZahlLabel);
 			restAnzeige = new WurstStatusAnzeigePanel(this);
 			hauptbereichPanel.add(restAnzeige);
 			abgebenPanel = new JPanel();
+			abgebenPanel.setOpaque(false);
 			abgebenPanel.setLayout(new GridLayout(1,2));
 			hauptbereichPanel.add(abgebenPanel);
 			abgebenLabel = new JLabel("Abgeben: ");
 			abgebenLabel.setFont(X.BUTTON_FONT);
+			abgebenLabel.setForeground(Color.WHITE);
 			abgebenPanel.add(abgebenLabel);
 			abgebenTextField = new JTextField("0");
+			abgebenTextField.setBackground(Color.DARK_GRAY);
 			abgebenTextField.setFont(X.BUTTON_FONT);
+			abgebenTextField.setForeground(Color.WHITE);
 			abgebenTextField.addKeyListener(new KeyAdapter() {				
 				@Override
 				public void keyReleased(KeyEvent e) {
@@ -170,7 +183,7 @@ public class WurstPanel extends JPanel {
 				}
 			});
 			abgebenPanel.add(abgebenTextField);
-			fertigButton = new JButton("Fertig");
+			fertigButton = new DefaultButton("Fertig");
 			fertigButton.setFont(X.BUTTON_FONT);
 			fertigButton.addActionListener(new ActionListener() {				
 				@Override
