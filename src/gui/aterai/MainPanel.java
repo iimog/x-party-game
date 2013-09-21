@@ -7,7 +7,6 @@ import java.awt.EventQueue;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;

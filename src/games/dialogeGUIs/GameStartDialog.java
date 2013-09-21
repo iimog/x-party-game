@@ -53,6 +53,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 	private String shortInfo;
 	private Game game;
 	private JButton highscoreButton;
+	private JButtonIcon skipButton;
 
 	public GameStartDialog(Game game) {
 		GameInfo gi = SpielListen.getSpieleMap().get(game.getGlobalGameID());
@@ -80,6 +81,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 					mainPane.add(schaltflaechenPanel, BorderLayout.SOUTH);
 					{
 						anleitungButton = new JButtonIcon("media/ablauf/hilfe.png","Anleitung");
+						anleitungButton.setToolTipText("Anleitung");
 						schaltflaechenPanel.add(anleitungButton);
 						anleitungButton.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) {
@@ -89,6 +91,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 					}
 					{
 						settingsButton = new JButtonIcon("media/ablauf/settings2.png","Einstellungen");
+						settingsButton.setToolTipText("Einstellungen");
 						schaltflaechenPanel.add(settingsButton);
 						settingsButton.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) {
@@ -98,6 +101,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 					}
 					{
 						highscoreButton = new JButtonIcon("media/ablauf/highscore.png","Highscore");
+						highscoreButton.setToolTipText("Highscore");
 						schaltflaechenPanel.add(highscoreButton);
 						highscoreButton.addActionListener(new ActionListener() {
 							@Override
@@ -107,7 +111,18 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 						});
 					}
 					{
+						skipButton = new JButtonIcon("media/ablauf/skip.png","Spiel überspringen");
+						skipButton.setToolTipText("Spiel überspringen");
+						schaltflaechenPanel.add(skipButton);
+						skipButton.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent evt) {
+								skipButtonActionPerformed(evt);
+							}
+						});
+					}
+					{
 						startButton = new JButtonIcon("media/ablauf/rightarrow.png","Spiel starten");
+						startButton.setToolTipText("Spiel starten");
 						schaltflaechenPanel.add(startButton);
 						startButton.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) {
@@ -147,6 +162,11 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	protected void skipButtonActionPerformed(ActionEvent evt) {
+		game.abbruch();
+		instance.closeDialog();
 	}
 
 	private void highscoreButtonActionPerformed(ActionEvent e) {

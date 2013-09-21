@@ -1,13 +1,11 @@
 package gui.menu;
 
 import gui.Anzeige;
-import gui.aterai.RoundedCornerButton;
 import gui.components.Bildschirm;
 import gui.components.DefaultButton;
 import highscore.HighscoreAnzeige;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -17,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import settings.MainSettingsDialog;
-import start.X;
 
 
 /**
@@ -70,7 +67,6 @@ public class HauptMenu extends Anzeige {
 			logoPanel.setOpaque(false);
 			{
 				logoBildschirm = new Bildschirm("media/ablauf/Xmenu.png");
-				logoBildschirm.scalePic(400, 400);
 				logoPanel.add(logoBildschirm);
 			}
 		}
