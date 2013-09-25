@@ -6,28 +6,28 @@ import gui.components.DefaultButton;
 import highscore.HighscoreAnzeige;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import settings.MainSettingsDialog;
-
+import util.Update;
 
 /**
- * This code was edited or generated using CloudGarden's Jigloo
- * SWT/Swing GUI Builder, which is free for non-commercial
- * use. If Jigloo is being used commercially (ie, by a corporation,
- * company or business for any purpose whatever) then you
- * should purchase a license for each developer using Jigloo.
- * Please visit www.cloudgarden.com for details.
- * Use of Jigloo implies acceptance of these licensing terms.
- * A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
- * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
- * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
+ * Builder, which is free for non-commercial use. If Jigloo is being used
+ * commercially (ie, by a corporation, company or business for any purpose
+ * whatever) then you should purchase a license for each developer using Jigloo.
+ * Please visit www.cloudgarden.com for details. Use of Jigloo implies
+ * acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN
+ * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
+ * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class HauptMenu extends Anzeige {
 	/**
@@ -48,8 +48,10 @@ public class HauptMenu extends Anzeige {
 	private JPanel beendenPanel;
 	private JButton beendenButton;
 	private JPanel menuPanel;
+	private JPanel updatePanel;
+	private JLabel updateInfoLabel;
 
-	public HauptMenu(){
+	public HauptMenu() {
 		GridLayout myLayout = new GridLayout(6, 1);
 		myLayout.setHgap(5);
 		myLayout.setVgap(5);
@@ -141,39 +143,67 @@ public class HauptMenu extends Anzeige {
 			}
 		}
 		setButtonSizes();
+		{
+			updatePanel = new JPanel();
+			updatePanel.setOpaque(false);
+			this.add(updatePanel, BorderLayout.SOUTH);
+			updateInfoLabel = new JLabel();
+			Update u = instance.getUpdate();
+			updateInfoLabel.setText(u.getVersionInfoText());
+			updateInfoLabel.setForeground(u.isUpToDate() ? Color.WHITE : Color.RED);
+			updatePanel.add(updateInfoLabel);
+		}
 		logoBildschirm.requestFocusInWindow();
 	}
 
 	private void setButtonSizes() {
 		int buttonHeight = 0;
 		int buttonWidth = 0;
-		buttonHeight = Math.max(buttonHeight, neuesSpielButton.getPreferredSize().height);
-		buttonHeight = Math.max(buttonHeight, spielLadenButton.getPreferredSize().height);
-		buttonHeight = Math.max(buttonHeight, einstellungenButton.getPreferredSize().height);
-		buttonHeight = Math.max(buttonHeight, highscoreButton.getPreferredSize().height);
-		buttonHeight = Math.max(buttonHeight, beendenButton.getPreferredSize().height);
-		buttonWidth = Math.max(buttonWidth, neuesSpielButton.getPreferredSize().width);
-		buttonWidth = Math.max(buttonWidth, spielLadenButton.getPreferredSize().width);
-		buttonWidth = Math.max(buttonWidth, einstellungenButton.getPreferredSize().width);
-		buttonWidth = Math.max(buttonWidth, highscoreButton.getPreferredSize().width);
-		buttonWidth = Math.max(buttonWidth, beendenButton.getPreferredSize().width);
-		neuesSpielButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-		spielLadenButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-		einstellungenButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-		highscoreButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-		beendenButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+		buttonHeight = Math.max(buttonHeight,
+				neuesSpielButton.getPreferredSize().height);
+		buttonHeight = Math.max(buttonHeight,
+				spielLadenButton.getPreferredSize().height);
+		buttonHeight = Math.max(buttonHeight,
+				einstellungenButton.getPreferredSize().height);
+		buttonHeight = Math.max(buttonHeight,
+				highscoreButton.getPreferredSize().height);
+		buttonHeight = Math.max(buttonHeight,
+				beendenButton.getPreferredSize().height);
+		buttonWidth = Math.max(buttonWidth,
+				neuesSpielButton.getPreferredSize().width);
+		buttonWidth = Math.max(buttonWidth,
+				spielLadenButton.getPreferredSize().width);
+		buttonWidth = Math.max(buttonWidth,
+				einstellungenButton.getPreferredSize().width);
+		buttonWidth = Math.max(buttonWidth,
+				highscoreButton.getPreferredSize().width);
+		buttonWidth = Math.max(buttonWidth,
+				beendenButton.getPreferredSize().width);
+		neuesSpielButton.setPreferredSize(new Dimension(buttonWidth,
+				buttonHeight));
+		spielLadenButton.setPreferredSize(new Dimension(buttonWidth,
+				buttonHeight));
+		einstellungenButton.setPreferredSize(new Dimension(buttonWidth,
+				buttonHeight));
+		highscoreButton.setPreferredSize(new Dimension(buttonWidth,
+				buttonHeight));
+		beendenButton
+				.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
 	}
 
 	protected void beendenButtonActionPerformed(ActionEvent evt) {
 		instance.close();
 	}
+
 	protected void einstellungenButtonActionPerformed(ActionEvent evt) {
 		instance.showDialog(new MainSettingsDialog());
 	}
 
 	protected void highscoreButtonActionPerformed(ActionEvent evt) {
-		//GameHighscorePanel ghp = new GameHighscorePanel(HighscoreFileHandler.loadGameHighscore(new File(X.getDataDir() + "Highscore/Games/guess.ghs")));
-		//EasyDialog.showMessage("",ghp);
+		// GameHighscorePanel ghp = new
+		// GameHighscorePanel(HighscoreFileHandler.loadGameHighscore(new
+		// File(X.getDataDir() + "Highscore/Games/guess.ghs")));
+		// EasyDialog.showMessage("",ghp);
 		instance.changeAnzeige(new HighscoreAnzeige());
 	}
 
@@ -182,7 +212,7 @@ public class HauptMenu extends Anzeige {
 	}
 
 	@Override
-	public void nowVisible(){
+	public void nowVisible() {
 		instance.changeBackground(myBackground);
 	}
 
