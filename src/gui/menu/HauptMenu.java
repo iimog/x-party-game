@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import settings.MainSettingsDialog;
+import start.X;
 import util.Update;
 
 /**
@@ -50,6 +51,9 @@ public class HauptMenu extends Anzeige {
 	private JPanel menuPanel;
 	private JPanel updatePanel;
 	private JLabel updateInfoLabel;
+	private DefaultButton downloadButton;
+	private Update update;
+	private DefaultButton installButton;
 
 	public HauptMenu() {
 		GridLayout myLayout = new GridLayout(6, 1);
@@ -147,13 +151,51 @@ public class HauptMenu extends Anzeige {
 			updatePanel = new JPanel();
 			updatePanel.setOpaque(false);
 			this.add(updatePanel, BorderLayout.SOUTH);
+			update = instance.getUpdate();
 			updateInfoLabel = new JLabel();
-			Update u = instance.getUpdate();
-			updateInfoLabel.setText(u.getVersionInfoText());
-			updateInfoLabel.setForeground(u.isUpToDate() ? Color.WHITE : Color.RED);
-			updatePanel.add(updateInfoLabel);
+			updateInfoLabel.setText(update.getVersionInfoText());
+			updateInfoLabel.setForeground(update.isUpToDate() ? Color.WHITE : Color.RED);
+			updatePanel.add(updateInfoLabel);			
+			if(!update.isUpToDate()){
+				installButton = new DefaultButton("Installieren");
+				installButton.addActionListener(new ActionListener() {					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						installButtonActionPerformed();
+					}
+				});
+				downloadButton = new DefaultButton("Download");
+				downloadButton.addActionListener(new ActionListener() {					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						downloadButtonActionPerformed();
+					}
+				});
+				if(update.isUpdateFilePresent()){
+					updatePanel.add(installButton);
+				}
+				else{					
+					updatePanel.add(downloadButton);
+				}
+			}
 		}
 		logoBildschirm.requestFocusInWindow();
+	}
+
+	protected void installButtonActionPerformed() {
+		update.installUpdate();
+		X.getInstance().dispose();
+		System.exit(0);
+	}
+
+	protected void downloadButtonActionPerformed() {
+		boolean success = update.downloadUpdateFile();
+		if(success){
+			updatePanel.remove(downloadButton);
+			updatePanel.add(installButton);
+			revalidate();
+			repaint();
+		}
 	}
 
 	private void setButtonSizes() {

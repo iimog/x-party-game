@@ -1,11 +1,19 @@
 package util;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.util.HashMap;
+
+import start.X;
 
 public class Update {
 	private HashMap<String, String> response;
@@ -76,5 +84,40 @@ public class Update {
 	
 	public boolean isUpToDate(){
 		return currentVersion >= latestVersion;
+	}
+	
+	public boolean downloadUpdateFile(){
+		boolean success = false;
+		try {
+			URL website = new URL(getDownload());
+			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+			File updateFile = getUpdateFile();
+			updateFile.getParentFile().mkdirs();
+			FileOutputStream fos = new FileOutputStream(updateFile);
+			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+			fos.close();
+			success = true;
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		return success;
+	}
+	
+	public void installUpdate(){
+		try {
+			Desktop.getDesktop().open(getUpdateFile());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean isUpdateFilePresent(){
+		return getUpdateFile().exists();
+	}
+	
+	public File getUpdateFile(){
+		File updateFile = new File(X.getDataDir()+"update/X_version"+getLatestVersion()+".html");
+		return updateFile;
 	}
 }
