@@ -177,6 +177,7 @@ public class InnereUhr extends games.Game implements PC {
 
 	private void roundEnd(){
 		isRunning=false;
+		setBuzzerActive(false);
 		rWinner = roundWinner();
 		if(rWinner==-1){
 			openRoundDialog("keinen");
@@ -226,6 +227,7 @@ public class InnereUhr extends games.Game implements PC {
 		startButton.setEnabled(false);
 		unstoppable = true;
 		isRunning = true;
+		setBuzzerActive(true);
 		for(int i=0; i<spielerZahl; i++){
 			statusLabel[i].setText(KeyEvent.getKeyText(myPlayer[i].getKey())+" drücken");
 		}

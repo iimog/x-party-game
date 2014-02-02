@@ -786,6 +786,7 @@ public class WerLuegt extends Game implements PC {
 	
 	@Override
 	public void buzzeredBy(int playerID){
+		setBuzzerActive(false);
 		aktuelleAntwortRotator.pause();
 		roundEnd(playerID);
 	}
@@ -848,6 +849,7 @@ public class WerLuegt extends Game implements PC {
 			// TODO besser handhaben!
 		}
 		else{
+			setBuzzerActive(true);
 			aktuelleAntwortRotator.changeDeck(aussageFileListe.get(current));
 			aussageLabel.setText(aktuelleAntwortRotator.getDeckName());
 			aktuelleAntwortRotator.start();
