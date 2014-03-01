@@ -72,15 +72,19 @@ public class WerLuegtDetailsDialog extends AnzeigeDialog {
 				antwortenPanel = new JPanel();
 				Map<String, Boolean> correctAnswers = werLuegt.getCorrectAnswers(); 
 				List<String> verlauf = werLuegt.getVerlauf();
-//				List<Integer> verlauf = aussage.getVerlauf();
 				antwortenPanel.setLayout(new GridLayout(verlauf.size(),1));
 				for(int i=0; i<verlauf.size(); i++){
 					JLabel antwortLabel = new JLabel(verlauf.get(i));
 					antwortLabel.setOpaque(true);
 					antwortLabel.setBackground(Color.RED);
 					antwortLabel.setHorizontalAlignment(JLabel.CENTER);
-					if(correctAnswers.get(verlauf.get(i)))
+					try{
+						if(correctAnswers.get(verlauf.get(i)))
 							antwortLabel.setBackground(Color.GREEN);
+					}
+					catch(Exception e){
+						e.printStackTrace();
+					}
 					antwortenPanel.add(antwortLabel);
 				}
 				hauptbereichPanel.add(antwortenPanel, BorderLayout.SOUTH);

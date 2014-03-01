@@ -65,191 +65,7 @@ public class WerLuegt extends Game implements PC {
 				}
 			}
 		}
-	/*
-		String aussage = "Ich bin Land mit dem Euro als Währung";
-		String info = "Die Engländer haben ihre Währung damals behalten.";
-		List<String> richtig = new ArrayList<String>();
-		List<String> falsch = new ArrayList<String>();
-		richtig.add("Deutschland");
-		richtig.add("Griechenland");
-		richtig.add("Frankreich");
-		richtig.add("Italien");
-		richtig.add("Spanien");
-		richtig.add("Finnland");
-		richtig.add("Belgien");
-		richtig.add("Estland");
-		richtig.add("Irland");
-		richtig.add("Finnland");
-		richtig.add("Malta");
-		richtig.add("Niederlande");
-		richtig.add("Österreich");
-		richtig.add("Portugal");
-		richtig.add("Slowakei");
-		richtig.add("Slowenien");
-		richtig.add("Zypern");
-		falsch.add("England");
-		falsch.add("Tschechien");
-		falsch.add("Schweden");
-		falsch.add("Wales");
-		falsch.add("Lettland");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-		
-		aussage = "Ich bin ein American Football Team (nfl)";
-		info = "Schau dir 'nfl.com' an";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("New Orleans Saints");
-		richtig.add("San Diego Chargers");
-		richtig.add("Baltimor Ravens");
-		richtig.add("Houston Texans");
-		richtig.add("San Francisco 49ers");
-		richtig.add("Tampa Bay Buccaneers");
-		richtig.add("Cleveland Browns");
-		richtig.add("Cincinatti Bangels");
-		richtig.add("Denver Broncos");
-		richtig.add("Tennessee Titans");
-		falsch.add("San Francisco Giants");
-		falsch.add("New York Yankees");
-		falsch.add("Berlin Adler");
-		falsch.add("Orlando Magic");
-		falsch.add("Dallas Mavericks");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-		
-		aussage = "Ich habe schon die Fußballweltmeisterschaft gewonnen";
-		info = "wikipedia.org";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("Deutschland");
-		richtig.add("Frankreich");
-		richtig.add("Italien");
-		richtig.add("Spanien");
-		richtig.add("England");
-		richtig.add("Brasilien");
-		richtig.add("Argentinien");
-		richtig.add("Uruguay");
-		falsch.add("Tschechien");
-		falsch.add("USA");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-		
-		aussage = "Ich war deutscher Bundeskanzler";
-		info = "";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("Konrad Adenauer");
-		richtig.add("Ludwig Erhard");
-		richtig.add("Kurt Georg Kiesinger");
-		richtig.add("Willy Brandt");
-		richtig.add("Helmut Schmidt");
-		richtig.add("Helmut Kohl");
-		richtig.add("Gerhard Schröder");
-		richtig.add("Angela Merkel");
-		falsch.add("Edmund Stoiber");
-		falsch.add("Theodor Heuss");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-		
-		aussage = "Ich bin/war James Bond";
-		info = "wikipedia.org";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("Sean Connery");
-		richtig.add("George Lazenby");
-		richtig.add("Roger Moore");
-		richtig.add("Timothy Dalton");
-		richtig.add("Pierce Brosnan");
-		richtig.add("Daniel Craig");
-		falsch.add("Marc Forster");
-		falsch.add("Tom Cruise");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-
-		aussage = "Ich wohne in Entenhausen";
-		info = "";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("Donald Duck");
-		richtig.add("Gustav Gans");
-		richtig.add("Daisy Duck");
-		richtig.add("Dagobert Duck");
-		richtig.add("Mickey Maus");
-		richtig.add("Tick Trick und Track");
-		richtig.add("Goofy");
-		richtig.add("Pluto");
-		falsch.add("Gundula Gause");
-		falsch.add("Gargamel");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-		
-		aussage = "Ich war Spieler des FC Bayern München";
-		info = "";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("Lukas Podolski");
-		richtig.add("Giovanne Elber");
-		richtig.add("Mario Basler");
-		richtig.add("Stefan Effenberg");
-		richtig.add("Klaus Augenthaler");
-		richtig.add("Dieter Hoeneß");
-		richtig.add("Lothar Matthäus");
-		richtig.add("Andreas Brehme");
-		richtig.add("Alexander Zickler");
-		richtig.add("Sebastian Deisler");
-		richtig.add("Phillip Lahm");
-		falsch.add("Fritz Walter");
-		falsch.add("Jupp Heynckes");
-		falsch.add("Stefan Kuntz");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-		
-		aussage = "Ich bin eine Millionenstadt";
-		info = "";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("Barcelona");
-		richtig.add("Melbourne");
-		richtig.add("Mailand");
-		richtig.add("Sydney");
-		richtig.add("Hong Kong");
-		richtig.add("Paris");
-		richtig.add("Köln");
-		richtig.add("Los Angeles");
-		richtig.add("Prag");
-		richtig.add("Budapest");
-		richtig.add("La Paz");
-		falsch.add("San Francisco");
-		falsch.add("Marseille");
-		falsch.add("Stockholm");
-		falsch.add("Ottawa");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-		
-		aussage = "Ich bin ein Tanz";
-		info = "";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("Mambo");
-		richtig.add("Fandango");
-		richtig.add("Mazurka");
-		richtig.add("Lambada");
-		richtig.add("Bolero");
-		richtig.add("Siciliano");
-		richtig.add("Tarantella");
-		richtig.add("Twist");
-		falsch.add("Lumumba");
-		falsch.add("Daiquiri");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
-		
-		aussage = "Ich bin ein Lied der Beatles";
-		info = "";
-		richtig = new ArrayList<String>();
-		falsch = new ArrayList<String>();
-		richtig.add("Help!");
-		richtig.add("I’ve Got a Feeling");
-		richtig.add("Yellow Submarine");
-		richtig.add("Let It Be");
-		richtig.add("Yesterday");
-		richtig.add("Maggie Mae");
-		richtig.add("Twist and Shout");
-		richtig.add("Please Mr. Postman");
-		falsch.add("Saturday Night Fever");
-		falsch.add("How deep is your love");
-		falsch.add("Forever Young");
-		aussageListe.add(new WerLuegtAussage(aussage,richtig,falsch,info));
+	/*		
 		
 		aussage = "Ich bin eine Region in Frankreich";
 		info = "";
@@ -867,9 +683,17 @@ public class WerLuegt extends Game implements PC {
 	
 	@Override
 	public void settingsChanged() {
+		propertiesToSettings();
 		updateCreds();
 		if(aktuelleAntwortRotator != null)
 			aktuelleAntwortRotator.setRotationTime(timeProAussage);
+	}
+
+	private void propertiesToSettings() {
+		if(customSettings == null)
+			return;
+		String time = customSettings.getProperty(WerLuegtSettingsDialog.AUSSAGEZEIT, "5");
+		timeProAussage = Integer.parseInt(time);
 	}
 
 	@Override
@@ -893,8 +717,8 @@ public class WerLuegt extends Game implements PC {
 	}
 
 	@Override
-	public void openSettingsDialog(){
-		instance.showDialog(new WerLuegtSettingsDialog(this));
+	public void openSettingsDialog(boolean inGame){
+		instance.showDialog(new WerLuegtSettingsDialog(this, inGame));
 	}
 	
 	@Override

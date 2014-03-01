@@ -2,54 +2,56 @@ package games.werLuegt;
 
 import games.dialogeGUIs.GameSettingsDialog;
 
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
 public class WerLuegtSettingsDialog extends GameSettingsDialog {
 	private static final long serialVersionUID = 1L;
-	private WerLuegt stimmts;
-	private GridLayout settingsPanelLayout;
-	private JLabel rundenzahlLabel;
-	private JSlider rundenzahlSlider;
-	private JLabel zeitLabel;
+	public static final String AUSSAGEZEIT = "Zeit pro Aussage";
+	private WerLuegt werLuegt;
 	private JSlider zeitSlider;
 
-	public WerLuegtSettingsDialog(WerLuegt stimmts) {
-		super(stimmts);
-		this.stimmts = stimmts;
+	public WerLuegtSettingsDialog(WerLuegt w, boolean inGame) {
+		super(w, inGame);
+		this.werLuegt = w;
 		initGUI();
-		}
+		propertiesToSettings();
+	}
 
-		private void initGUI(){
-			settingsPanelLayout = new GridLayout(2,2);
-			settingsPanel.setLayout(settingsPanelLayout);
-			rundenzahlLabel = new JLabel("Siegpunktzahl");
-			settingsPanel.add(rundenzahlLabel);
-			rundenzahlSlider = new JSlider(SwingConstants.HORIZONTAL,1,10,stimmts.numOfRounds);
-			rundenzahlSlider.setMajorTickSpacing(1);
-			rundenzahlSlider.setMinorTickSpacing(1);
-			rundenzahlSlider.setSnapToTicks(true);
-			rundenzahlSlider.setPaintTicks(true);
-			rundenzahlSlider.setPaintLabels(true);
-			settingsPanel.add(rundenzahlSlider);
-			zeitLabel = new JLabel("Zeit pro Aussage (s)");
-			settingsPanel.add(zeitLabel);
-			zeitSlider = new JSlider(SwingConstants.HORIZONTAL,3,15,stimmts.numOfRounds);
-			zeitSlider.setMajorTickSpacing(1);
-			zeitSlider.setMinorTickSpacing(1);
-			zeitSlider.setSnapToTicks(true);
-			zeitSlider.setPaintTicks(true);
-			zeitSlider.setPaintLabels(true);
-			settingsPanel.add(zeitSlider);
+	private void initGUI() {
+		zeitSlider = new JSlider(SwingConstants.HORIZONTAL, 3, 15,
+				werLuegt.timeProAussage);
+		zeitSlider.setMajorTickSpacing(1);
+		zeitSlider.setMinorTickSpacing(1);
+		zeitSlider.setSnapToTicks(true);
+		zeitSlider.setPaintTicks(true);
+		zeitSlider.setPaintLabels(true);
+		addSettingsComponent("Zeit pro Aussage (s):", zeitSlider);
+	}
+	
+	@Override
+	public void speichern(){
+		settingsToProperties();
+		super.speichern();
+	}
+	
+	public void propertiesToSettings(){
+		super.propertiesToSettings();
+		if(settings == null || zeitSlider == null){
+			return;
 		}
-
-		@Override
-		public void speichern(){
-			stimmts.numOfRounds = rundenzahlSlider.getValue();
-			stimmts.timeProAussage = zeitSlider.getValue();
-			super.speichern();
+		String timeProAussage = settings.getProperty(AUSSAGEZEIT, "5");
+		zeitSlider.setValue(Integer.parseInt(timeProAussage));
+	}
+	
+	public void settingsToProperties(){
+		super.settingsToProperties();
+		try{
+			String zeit = zeitSlider.getValue()+"";
+			settings.setProperty(AUSSAGEZEIT, zeit);
 		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 }

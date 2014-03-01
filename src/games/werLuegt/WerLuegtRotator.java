@@ -49,6 +49,7 @@ public class WerLuegtRotator extends Rotator {
 		getAussagenFromFile(werLuegtFile);
 		schonWeg = new HashSet<Integer>();
 		aussageLabel.setText(" ");
+		verlauf = new ArrayList<String>();
 	}
 	
 	private void initGUI(){
