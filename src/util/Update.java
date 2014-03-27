@@ -17,11 +17,11 @@ import start.X;
 
 public class Update {
 	private HashMap<String, String> response;
-	private double currentVersion;
-	private double latestVersion;
+	private Version currentVersion;
+	private Version latestVersion;
 	private String downloadURL;
 
-	public Update(double currentVersion) {
+	public Update(Version currentVersion) {
 		this.currentVersion = currentVersion;
 		getDataFromServer();
 	}
@@ -32,14 +32,12 @@ public class Update {
 			// Code to make a webservice HTTP request
 			String responseString = "";
 			String outputString = "";
-			String wsURL = "http://iimog.org/X/ajax/Version";
+			String wsURL = "https://iimog.org/X/ajax/Version";
 			URL url = new URL(wsURL);
 			URLConnection connection = url.openConnection();
 			HttpURLConnection httpConn = (HttpURLConnection) connection;
 
-			String SOAPAction = "http://litwinconsulting.com/webservices/GetWeather";
 			// Set the appropriate HTTP parameters.
-			httpConn.setRequestProperty("SOAPAction", SOAPAction);
 			httpConn.setRequestMethod("POST");
 			httpConn.setDoInput(true);
 
@@ -56,14 +54,14 @@ public class Update {
 						responseString.split("\t")[1]);
 				outputString = outputString + responseString;
 			}
-			latestVersion = Double.parseDouble(response.get("Version"));
+			latestVersion = new Version(response.get("Version"));
 			downloadURL = response.get("Download");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public double getLatestVersion() {
+	public Version getLatestVersion() {
 		return latestVersion;
 	}
 
@@ -83,7 +81,7 @@ public class Update {
 	}
 	
 	public boolean isUpToDate(){
-		return currentVersion >= latestVersion;
+		return !currentVersion.is_older_than(latestVersion);
 	}
 	
 	public boolean downloadUpdateFile(){
