@@ -87,6 +87,7 @@ public class X extends javax.swing.JFrame {
 								+ "media/ablauf/fonts/freemetto.ttf"));
 			} catch (Exception e) {
 				e.printStackTrace();
+				// TODO set standard Font to default
 			}
 		}
 		return standardFont;
