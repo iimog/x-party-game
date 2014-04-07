@@ -96,7 +96,11 @@ public class X extends javax.swing.JFrame {
 		String classPath = System.getProperty("java.class.path");
 		String filsSeparator = System.getProperty("file.separator");
 		if (classPath.endsWith("X.jar")) {
-			return (new File(classPath).getParent() + filsSeparator);
+			String parent = new File(classPath).getParent();
+			if(parent != null)
+				return parent + filsSeparator;
+			else
+				return "." + filsSeparator;
 		} else {
 			return "";
 		}
