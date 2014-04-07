@@ -3,16 +3,16 @@
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
     <target name="create_run_jar">
-        <jar destfile="/home/markus/WS_Java/X/X.jar">
+        <jar destfile="./X.jar">
             <manifest>
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
                 <attribute name="Rsrc-Main-Class" value="start.X"/>
                 <attribute name="Class-Path" value="."/>
                 <attribute name="Rsrc-Class-Path" value="./"/>
             </manifest>
-            <zipfileset src="jar-in-jar-loader.zip"/>
-            <fileset dir="/home/markus/WS_Java/X/bin"/>
-        	<fileset dir="/home/markus/WS_Java/X/" includes="media/**"/>
+            <zipfileset src="./lib/jar-in-jar-loader.zip"/>
+            <fileset dir="./bin"/>
+        	<fileset dir="./" includes="media/**"/>
         </jar>
     </target>
 </project>
