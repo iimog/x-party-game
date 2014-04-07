@@ -30,6 +30,10 @@ public class Version {
 	}
 
 	public boolean is_older_than(Version version) {
+		if(version == null){
+			System.err.println("There was an error checking the Version!");
+			return false;
+		}
 		return is_older_than(version.getMajor(), version.getMinor());
 	}
 
