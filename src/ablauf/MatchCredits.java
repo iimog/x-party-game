@@ -329,7 +329,7 @@ public class MatchCredits extends Anzeige {
 				topPanel.setBackground(Color.BLACK);
 				add(topPanel, BorderLayout.NORTH);
 				{
-					quitButton = new JButtonIcon("media/ablauf/quit.png","Quit");
+					quitButton = new JButtonIcon("/media/ablauf/quit.png","Quit");
 					quitButton.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent evt){
 							quitButtonActionPerformed(evt);

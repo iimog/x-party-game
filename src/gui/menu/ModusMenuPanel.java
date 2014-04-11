@@ -18,7 +18,7 @@ import start.X;
 
 public class ModusMenuPanel extends Anzeige {
 	private static final long serialVersionUID = 1L;
-	private static String myBackground = "media/ablauf/iceBG3.jpg";
+	private static String myBackground = "/media/ablauf/iceBG3.jpg";
 	private JPanel soloPanel;
 	private JButton soloButton;
 	private JPanel duellPanel;
@@ -57,7 +57,7 @@ public class ModusMenuPanel extends Anzeige {
 			add(soloPanel);
 			soloPanel.setOpaque(false);
 			{
-				soloButton = new JButtonIcon("media/modus/"+Modus.SOLO+".png", Modus.SOLO.toString());
+				soloButton = new JButtonIcon("/media/modus/"+Modus.SOLO+".png", Modus.SOLO.toString());
 				soloPanel.add(soloButton);
 				soloButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -71,7 +71,7 @@ public class ModusMenuPanel extends Anzeige {
 			add(duellPanel);
 			duellPanel.setOpaque(false);
 			{
-				duellButton = new JButtonIcon("media/modus/"+Modus.DUELL+".png", Modus.DUELL.toString());
+				duellButton = new JButtonIcon("/media/modus/"+Modus.DUELL+".png", Modus.DUELL.toString());
 				duellPanel.add(duellButton);
 				duellButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -85,7 +85,7 @@ public class ModusMenuPanel extends Anzeige {
 			add(teamPanel);
 			teamPanel.setOpaque(false);
 			{
-				teamButton = new JButtonIcon("media/modus/"+Modus.TEAM+".png", Modus.TEAM.toString());
+				teamButton = new JButtonIcon("/media/modus/"+Modus.TEAM+".png", Modus.TEAM.toString());
 				teamPanel.add(teamButton);
 				teamButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -99,7 +99,7 @@ public class ModusMenuPanel extends Anzeige {
 			add(tripplePanel);
 			tripplePanel.setOpaque(false);
 			{
-				trippleButton = new JButtonIcon("media/modus/"+Modus.TRIPPLE+".png", Modus.TRIPPLE.toString());
+				trippleButton = new JButtonIcon("/media/modus/"+Modus.TRIPPLE+".png", Modus.TRIPPLE.toString());
 				tripplePanel.add(trippleButton);
 				trippleButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -113,7 +113,7 @@ public class ModusMenuPanel extends Anzeige {
 			add(viererPanel);
 			viererPanel.setOpaque(false);
 			{
-				viererButton = new JButtonIcon("media/modus/"+Modus.VIERER+".png", Modus.VIERER.toString());
+				viererButton = new JButtonIcon("/media/modus/"+Modus.VIERER+".png", Modus.VIERER.toString());
 				viererPanel.add(viererButton);
 				viererButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -126,7 +126,7 @@ public class ModusMenuPanel extends Anzeige {
 
 	protected void viererButtonActionPerformed(ActionEvent evt) {
 		//EasyDialog.showMessage("Der Vierspielermodus ist noch in Bearbeitung", 
-		//		new Bildschirm("media/ablauf/baustelle.jpg"));
+		//		new Bildschirm("/media/ablauf/baustelle.jpg"));
 		instance.changeAnzeige(new StartMatch(Modus.VIERER));
 	}
 	protected void teamButtonActionPerformed(ActionEvent evt) {
@@ -135,13 +135,13 @@ public class ModusMenuPanel extends Anzeige {
 
 	protected void trippleButtonActionPerformed(ActionEvent evt) {
 		//EasyDialog.showMessage("Der Dreispielermodus ist noch in Bearbeitung", 
-		//		new Bildschirm("media/ablauf/baustelle2.jpg"));
+		//		new Bildschirm("/media/ablauf/baustelle2.jpg"));
 		instance.changeAnzeige(new StartMatch(Modus.TRIPPLE));
 	}
 
 	protected void soloButtonActionPerformed(ActionEvent evt) {
 		//EasyDialog.showMessage("Der Einzelspielermodus befindet sich noch in Bearbeitung", 
-		//		new Bildschirm("media/ablauf/baustelle3.jpg"));
+		//		new Bildschirm("/media/ablauf/baustelle3.jpg"));
 		instance.changeAnzeige(new StartMatch(Modus.SOLO));
 	}
 

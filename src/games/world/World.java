@@ -63,7 +63,7 @@ public class World extends Game implements PC{
 	public String[] question = new String[numOfPics];
 	public Point[] answer = new Point[numOfPics];
 	public String[] info = new String[numOfPics];
-	private String path = "media/wo/";
+	private String path = "/media/wo/";
 	String erdeSmall = path + "erde.jpg";
 	String erdeBig = path + "erdeB.jpg";
 	{
@@ -367,7 +367,7 @@ public class World extends Game implements PC{
 	}
 	@Override
 	public void nowVisible(){
-		instance.changeBackground("media/wo/Flaggen.jpg");
+		instance.changeBackground("/media/wo/Flaggen.jpg");
 	}
 
 	@Override

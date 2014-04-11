@@ -14,7 +14,7 @@ public class Player {
 
 	private int key;			// Buzzertaste
 
-	public static String standardSound = "media/sounds/sirene.wav";
+	public static String standardSound = "/media/sounds/sirene.wav";
 
 	public String sound;
 	public int playerID;

@@ -309,7 +309,7 @@ public class SauTreiber extends Game implements PC {
 
 	@Override
 	public void nowVisible(){
-		instance.changeBackground("media/säutreiber/3_schweine.jpg");
+		instance.changeBackground("/media/säutreiber/3_schweine.jpg");
 	}
 
 	@Override

@@ -49,7 +49,7 @@ public class Bad6 extends games.Game implements PC {
 	private JPanel schaltflaechenPanel;
 	private int currentNum;
 	private int roundCredit=0;
-	private String lache = "media/sounds/lache.wav";
+	private String lache = "/media/sounds/lache.wav";
 	private Bad6Robot myRobot;
 
 	public Bad6(Player[] myPlayer, Modus modus, int globalGameID) {
@@ -160,7 +160,7 @@ public class Bad6 extends games.Game implements PC {
 
 	@Override
 	public void nowVisible(){
-		instance.changeBackground("media/bad6/schlange.jpg");
+		instance.changeBackground("/media/bad6/schlange.jpg");
 	}
 
 	@Override

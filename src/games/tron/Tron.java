@@ -307,6 +307,6 @@ public class Tron extends Game implements PC{
 	}
 	
 	public void nowVisible(){
-		instance.changeBackground("media/tron/Tron.jpg");
+		instance.changeBackground("/media/tron/Tron.jpg");
 	}
 }

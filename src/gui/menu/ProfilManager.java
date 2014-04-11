@@ -154,7 +154,7 @@ public class ProfilManager extends AnzeigeDialog {
 	
 	protected void bearbeitenButtonActionPerformed() {
 		EasyDialog.showMessage("Der Bearbeiten Button ist noch in Bearbeitung", 
-				new Bildschirm("media/ablauf/baustelle2.jpg"));
+				new Bildschirm("/media/ablauf/baustelle2.jpg"));
 	}
 	protected void umbenennenDurchfuehren(String newName) {
 		int index = profilListe.getSelectedIndex();

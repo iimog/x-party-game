@@ -48,7 +48,7 @@ public class StartMatch extends Anzeige {
 	 */
 	private static final long serialVersionUID = 823521784957645300L;
 
-	private static String background = "media/ablauf/iceBG2.png";
+	private static String background = "/media/ablauf/iceBG2.png";
 	private Dimension buttonSize = new Dimension(250,50);
 	public Player[] myPlayer;
 	private int prefNumOfGames=15;
@@ -321,7 +321,7 @@ public class StartMatch extends Anzeige {
 				topPanel.setOpaque(false);
 				add(topPanel, BorderLayout.NORTH);
 				{
-					quitButton = new JButtonIcon("media/ablauf/quit.png","Quit");
+					quitButton = new JButtonIcon("/media/ablauf/quit.png","Quit");
 					quitButton.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent evt){
 							quitButtonActionPerformed(evt);

@@ -199,7 +199,7 @@ public class ReaktionsZeit extends Game {
 	}
 
 	public void nowVisible() {
-		instance.changeBackground("media/reaktionszeit/reaktionszeit.jpg");
+		instance.changeBackground("/media/reaktionszeit/reaktionszeit.jpg");
 	}
 
 	@Override

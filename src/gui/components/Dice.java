@@ -54,7 +54,7 @@ public class Dice extends JButtonIcon {
 		this(farbe, 2);
 	}
 	public Dice(Color farbe, int speed){
-		super(X.getMainDir()+"media/ablauf/dice/dice0.png", "0");
+		super(X.getMainDir()+"/media/ablauf/dice/dice0.png", "0");
 		//setText("0");
 		this.farbe = farbe;
 		a = speed;
@@ -66,13 +66,13 @@ public class Dice extends JButtonIcon {
 	}
 	private void initNumberToIcon() {
 		numberToIcon = new HashMap<Integer, String>();
-		numberToIcon.put(0, "media/ablauf/dice/dice0.png");
-		numberToIcon.put(1, "media/ablauf/dice/dice1.png");
-		numberToIcon.put(2, "media/ablauf/dice/dice2.png");
-		numberToIcon.put(3, "media/ablauf/dice/dice3.png");
-		numberToIcon.put(4, "media/ablauf/dice/dice4.png");
-		numberToIcon.put(5, "media/ablauf/dice/dice5.png");
-		numberToIcon.put(6, "media/ablauf/dice/dice6.png");
+		numberToIcon.put(0, "/media/ablauf/dice/dice0.png");
+		numberToIcon.put(1, "/media/ablauf/dice/dice1.png");
+		numberToIcon.put(2, "/media/ablauf/dice/dice2.png");
+		numberToIcon.put(3, "/media/ablauf/dice/dice3.png");
+		numberToIcon.put(4, "/media/ablauf/dice/dice4.png");
+		numberToIcon.put(5, "/media/ablauf/dice/dice5.png");
+		numberToIcon.put(6, "/media/ablauf/dice/dice6.png");
 	}
 	public void addChangeManager(ChangeManager cm){
 		myCM.add(cm);

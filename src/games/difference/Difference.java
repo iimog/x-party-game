@@ -69,7 +69,7 @@ public class Difference extends Game implements PC {
 	int okDist = 15;		// Zulässige Entfernung vom Fehlermittelpunkt
 
 	int distance;
-	private String path = "media/difference/";			// Standardpfad
+	private String path = "/media/difference/";			// Standardpfad
 	private int numOfPics = 23;							// Anzahl der Fehlerbilder
 	private String[] pics = new String[numOfPics];		// Dateiname der richtigen Bilder
 	String[] ePics = new String[numOfPics];		// Dateiname der Fehlerbilder
@@ -339,7 +339,7 @@ public class Difference extends Game implements PC {
 		if(nextPicButton!=null){
 			nextPicButton.requestFocus();
 		}
-		instance.changeBackground("media/difference/blue.jpg");
+		instance.changeBackground("/media/difference/blue.jpg");
 	}
 
 	@Override

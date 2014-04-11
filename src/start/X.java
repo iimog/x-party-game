@@ -68,7 +68,7 @@ public class X extends javax.swing.JFrame {
 	private MainSettings mainSettings = MainSettings.getMainSettings();
 
 	public static String getMainDir() {
-		return "";
+		return "/";
 	}
 	
 	public static String getDataDir() {
@@ -223,7 +223,7 @@ public class X extends javax.swing.JFrame {
 			this.setTitle("X");
 			{
 				hintergrundBild = new gui.components.Bildschirm(
-						"media/ablauf/iceBG.jpg", true);
+						"/media/ablauf/iceBG.jpg", true);
 				getContentPane().add(hintergrundBild, BorderLayout.CENTER);
 				hintergrundBild.setLayout(new BorderLayout());
 				hintergrundBild.centerMe(true);

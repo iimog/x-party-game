@@ -109,7 +109,7 @@ public class HighscoreAnzeige extends Anzeige {
 		topPanel.setOpaque(false);
 		add(topPanel, BorderLayout.NORTH);
 		{
-			quitButton = new JButtonIcon("media/ablauf/quit.png","Quit");
+			quitButton = new JButtonIcon("/media/ablauf/quit.png","Quit");
 			quitButton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent evt){
 					quitButtonActionPerformed(evt);
@@ -146,6 +146,6 @@ public class HighscoreAnzeige extends Anzeige {
 	}
 
 	public void nowVisible(){
-		instance.changeBackground("media/highscore/highscore.png");
+		instance.changeBackground("/media/highscore/highscore.png");
 	}
 }

@@ -16,8 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import start.X;
-
 @SuppressWarnings("serial")
 public class Bildschirm extends JPanel {
 	private static final String DEFAULT_BACKGROUND = "/media/ablauf/whitenoise.png";
@@ -191,15 +189,16 @@ public class Bildschirm extends JPanel {
 	}
 
 	private void setPic(String bildname, boolean autoSize) {
-		bild = getToolkit().getImage(getClass().getResource(X.getMainDir() + bildname));
+		bild = getToolkit().getImage(getClass().getResource(bildname));
 		MediaTracker mt = new MediaTracker(this);
 		mt.addImage(bild, 0);
 		try {
-			mt.waitForAll();
+			mt.waitForAll(2000);
 			if(mt.isErrorAny()){
 				System.out.println("Fehler beim laden von " + bildname);
 			}
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
+			System.out.println("Fehler beim laden von " + bildname);
 			e.printStackTrace();
 		}
 		if (autoSize) {

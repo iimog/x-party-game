@@ -50,8 +50,8 @@ public class Memory extends games.Game implements PC {
 		this.schwierigkeit = schwierigkeit;
 	}
 
-	private String path = "media/memory/";
-	private String backside = path + "optisch.jpg";
+	private String path = "/media/memory/";
+	private String backside = path + "/optisch.jpg";
 	public synchronized String getBackside() {
 		return backside;
 	}
@@ -158,7 +158,7 @@ public class Memory extends games.Game implements PC {
 
 	@Override
 	public void nowVisible(){
-		instance.changeBackground("media/memory/blue.jpg");
+		instance.changeBackground("/media/memory/blue.jpg");
 	}
 
 	@Override

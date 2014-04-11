@@ -91,7 +91,7 @@ public class MatchSettingsDialog extends JPanel {
 		tabbedPane.add(spielliste, "Spielliste");
 		if(modus == Modus.TEAM){
 			teamPanel = new JPanel();
-			teamPanel.add(new Bildschirm("media/ablauf/baustelle3.jpg"));
+			teamPanel.add(new Bildschirm("/media/ablauf/baustelle3.jpg"));
 			tabbedPane.add(teamPanel, "Team");
 		}
 	}

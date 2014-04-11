@@ -672,7 +672,7 @@ public class Stimmts extends Game implements PC {
 	}
 
 	public void nowVisible() {
-		instance.changeBackground("media/stimmts/stimmts.jpg");
+		instance.changeBackground("/media/stimmts/stimmts.jpg");
 	}
 
 	@Override

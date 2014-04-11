@@ -80,7 +80,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 					schaltflaechenPanel.setOpaque(false);
 					mainPane.add(schaltflaechenPanel, BorderLayout.SOUTH);
 					{
-						anleitungButton = new JButtonIcon("media/ablauf/hilfe.png","Anleitung");
+						anleitungButton = new JButtonIcon("/media/ablauf/hilfe.png","Anleitung");
 						anleitungButton.setToolTipText("Anleitung");
 						schaltflaechenPanel.add(anleitungButton);
 						anleitungButton.addActionListener(new ActionListener() {
@@ -90,7 +90,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 						});
 					}
 					{
-						settingsButton = new JButtonIcon("media/ablauf/settings2.png","Einstellungen");
+						settingsButton = new JButtonIcon("/media/ablauf/settings2.png","Einstellungen");
 						settingsButton.setToolTipText("Einstellungen");
 						schaltflaechenPanel.add(settingsButton);
 						settingsButton.addActionListener(new ActionListener() {
@@ -100,7 +100,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 						});
 					}
 					{
-						highscoreButton = new JButtonIcon("media/ablauf/highscore.png","Highscore");
+						highscoreButton = new JButtonIcon("/media/ablauf/highscore.png","Highscore");
 						highscoreButton.setToolTipText("Highscore");
 						schaltflaechenPanel.add(highscoreButton);
 						highscoreButton.addActionListener(new ActionListener() {
@@ -111,7 +111,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 						});
 					}
 					{
-						skipButton = new JButtonIcon("media/ablauf/skip.png","Spiel überspringen");
+						skipButton = new JButtonIcon("/media/ablauf/skip.png","Spiel überspringen");
 						skipButton.setToolTipText("Spiel überspringen");
 						schaltflaechenPanel.add(skipButton);
 						skipButton.addActionListener(new ActionListener() {
@@ -121,7 +121,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 						});
 					}
 					{
-						startButton = new JButtonIcon("media/ablauf/rightarrow.png","Spiel starten");
+						startButton = new JButtonIcon("/media/ablauf/rightarrow.png","Spiel starten");
 						startButton.setToolTipText("Spiel starten");
 						schaltflaechenPanel.add(startButton);
 						startButton.addActionListener(new ActionListener() {

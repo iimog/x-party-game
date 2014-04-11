@@ -33,11 +33,11 @@ public class Geist {
 		team = whichTeam;
 		livingGood[whichTeam]++;
 		if(team==0){
-			Image image = Toolkit.getDefaultToolkit().getImage(X.getMainDir()+"media/ghosts/geist3.png");
+			Image image = Toolkit.getDefaultToolkit().getImage(X.getMainDir()+"/media/ghosts/geist3.png");
 			img = new ImageIcon(image);
 		}
 		if(team==1){
-			Image image = Toolkit.getDefaultToolkit().getImage(X.getMainDir()+"media/ghosts/geist4.png");
+			Image image = Toolkit.getDefaultToolkit().getImage(X.getMainDir()+"/media/ghosts/geist4.png");
 			img = new ImageIcon(image);
 		}
 		position = pos;
@@ -50,11 +50,11 @@ public class Geist {
 		Bildschirm b;
 		String boese;
 		if(bad){
-			b = new Bildschirm("media/ghosts/Teufel.jpg");
+			b = new Bildschirm("/media/ghosts/Teufel.jpg");
 			boese = "BÖSE";
 		}
 		else{
-			b = new Bildschirm("media/ghosts/engel.jpg");
+			b = new Bildschirm("/media/ghosts/engel.jpg");
 			boese = "GUT";
 		}
 		gui.EasyDialog.showMessage("Dieser Geist ist... "+boese,b);

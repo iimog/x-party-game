@@ -135,7 +135,7 @@ public class Wurst extends Game implements PC{
 	}
 	
 	public void nowVisible(){
-		instance.changeBackground("media/wurst/wurst.jpg");
+		instance.changeBackground("/media/wurst/wurst.jpg");
 	}
 
 	public void openRoundDialog(String winner){

@@ -27,7 +27,7 @@ import ablauf.Spielablauf;
 
 public class MatchLaden extends Anzeige {
 	private static final long serialVersionUID = 1L;
-	private static String myBackground = "media/ablauf/fire.jpg";
+	private static String myBackground = "/media/ablauf/fire.jpg";
 	private File[] spielstaende;
 	
 	private MatchListe matchListe;

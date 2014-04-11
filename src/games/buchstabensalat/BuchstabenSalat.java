@@ -608,7 +608,7 @@ public class BuchstabenSalat extends Game implements PC {
 	}
 
 	public void nowVisible() {
-		instance.changeBackground("media/buchstabensalat/letters.jpg");
+		instance.changeBackground("/media/buchstabensalat/letters.jpg");
 	}
 
 	int aufgedeckteBuchstaben = 0;

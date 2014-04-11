@@ -198,7 +198,7 @@ public abstract class Game extends Anzeige {
 			menuPane.setLayout(menuPaneLayout);
 			this.add(menuPane, BorderLayout.NORTH);
 			{
-				settingsButton = new JButtonIcon("media/ablauf/settings2.png",
+				settingsButton = new JButtonIcon("/media/ablauf/settings2.png",
 						"Einstellungen");
 				settingsButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -209,7 +209,7 @@ public abstract class Game extends Anzeige {
 				menuPane.add(settingsButton);
 			}
 			{
-				anleitungButton = new JButtonIcon("media/ablauf/hilfe.png",
+				anleitungButton = new JButtonIcon("/media/ablauf/hilfe.png",
 						"Anleitung");
 				anleitungButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -219,7 +219,7 @@ public abstract class Game extends Anzeige {
 				menuPane.add(anleitungButton);
 			}
 			{
-				quitButton = new JButtonIcon("media/ablauf/quit.png", "Quit");
+				quitButton = new JButtonIcon("/media/ablauf/quit.png", "Quit");
 				quitButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						quitButtonActionPerformed(evt);

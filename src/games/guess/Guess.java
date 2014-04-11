@@ -128,7 +128,7 @@ public class Guess extends Game implements PC {
 	public double toleranz = 0.95;
 	public boolean toleranzOn = true;
 	// the following part should get moved to an external file
-	String noPic = "media/guess/noPic.jpg";
+	String noPic = "/media/guess/noPic.jpg";
 	String noInfo = "Zu dieser Frage sind leider keine zusätzlichen Informationen vorhanden";
 	int numOfPics = 40;
 	public String[] picture = new String[numOfPics];
@@ -139,12 +139,12 @@ public class Guess extends Game implements PC {
 	{
 		question[0] = "Wie viele Gummibärchen befinden sich im Glas?";
 		answer[0] 	= 52;
-		picture[0]	= "media/guess/Gummibärchen.jpg";
+		picture[0]	= "/media/guess/Gummibärchen.jpg";
 		info[0] 	= noInfo;
 
 		question[1] = "Wie viele Blatt Klopapier hat diese Klopapierschlange?";
 		answer[1] = 145;
-		picture[1] = "media/guess/Klopapier.jpg";
+		picture[1] = "/media/guess/Klopapier.jpg";
 		info[1] = noInfo;
 
 		question[2] = "Wie viele Tasten hat ein \"normales\" Klavier?";
@@ -154,7 +154,7 @@ public class Guess extends Game implements PC {
 
 		question[3] = "Wie viele Einwohner hat die euch sicherlich bekannte Stadt Harare?";
 		answer[3] = 1903510;
-		picture[3] = "media/guess/harare.jpg";
+		picture[3] = "/media/guess/harare.jpg";
 		info[3] = "Harare ist die größte Stadt Simbabwes und gleichzeitig auch noch die Hauptstadt.";
 
 		question[4] = "Zu wie viel Prozent besteht das menschliche Gehirn aus Wasser?";
@@ -174,12 +174,12 @@ public class Guess extends Game implements PC {
 
 		question[7] = "Wie lang ist das Great Barrier Reef? (in km)  ";
 		answer[7] = 2300;
-		picture[7] = "media/guess/GreatBarrierReef.jpg";
+		picture[7] = "/media/guess/GreatBarrierReef.jpg";
 		info[7] = "Das Great Barrier Reef vor der Küste Australiens ist das größte Korallenriff der Erde. Im Jahre 1981 wurde es von der UNESCO zum Weltnaturerbe erklärt und wird manchmal als eines der sieben Weltwunder der Natur bezeichnet.";
 
 		question[8] = "Wie viel wiegt der größte Schmetterling? (in Gramm)";
 		answer[8] = 25;
-		picture[8] = "media/guess/schmetterling.jpg";
+		picture[8] = "/media/guess/schmetterling.jpg";
 		info[8] = noInfo;
 
 		question[9] = "Wie alt wurde der älteste Affe?";
@@ -199,7 +199,7 @@ public class Guess extends Game implements PC {
 
 		question[12] = "Den schnellsten Flügelschlag der Welt hat der Kolibri! Wie viele Flügelschläge schafft er pro Sekunde?";
 		answer[12] = 90;
-		picture[12] = "media/guess/kolibri.jpg";
+		picture[12] = "/media/guess/kolibri.jpg";
 		info[12] = noInfo;
 
 		question[13] = "Wann etwa haben die ersten Dinosaurier gelebt? (in mio Jahren)";
@@ -219,7 +219,7 @@ public class Guess extends Game implements PC {
 
 		question[16] = "Die Transsibirische Eisenbahn ist die längste Bahnstrecke der Welt wie lang ist sie? (in km)";
 		answer[16] = 9299;
-		picture[16] = "media/guess/transsibirische-eisenbahn.jpg";
+		picture[16] = "/media/guess/transsibirische-eisenbahn.jpg";
 		info[16] = noInfo;
 
 		question[17] = "Wie lang ist die Tour de France? (in km)";
@@ -229,7 +229,7 @@ public class Guess extends Game implements PC {
 
 		question[18] = "Die größte Düne Europas befindet sich an der Atlantikküste Frankreichs. Wie hoch ist sie? (in m)";
 		answer[18] = 114;
-		picture[18] = "media/guess/Düne.jpg";
+		picture[18] = "/media/guess/Düne.jpg";
 		info[18] = noInfo;
 
 		question[19] = "Wie viele Seen gibt es in Finnland? ";
@@ -239,7 +239,7 @@ public class Guess extends Game implements PC {
 
 		question[20] = "Die Rallye Paris- Dakar ist die härteste der Welt. Wie viele Todesopfer hat sie bereits gefordert?";
 		answer[20] = 60;
-		picture[20] = "media/guess/Dakar.jpg";
+		picture[20] = "/media/guess/Dakar.jpg";
 		info[20] = "Quelle: http://www.zeit.de/politik/2011-01/rallye-dakar-umwelt-tote";
 
 		question[21] = "Wie lang ist der längste Eisenbahntunnel der Erde? (in km)";
@@ -259,17 +259,17 @@ public class Guess extends Game implements PC {
 
 		question[24] = "Wie lang ist die Golden-Gate-Bridge? (in m)";
 		answer[24] = 2150;
-		picture[24] = "media/guess/golden-gate-bridge.jpg";
+		picture[24] = "/media/guess/golden-gate-bridge.jpg";
 		info[24] = noInfo;
 
 		question[25] = "Wie viele ml Wasser bekommt dieser junge Mann in seinen Mund?";
 		answer[25] = 100;
-		picture[25] = "media/guess/Drink.jpg";
+		picture[25] = "/media/guess/Drink.jpg";
 		info[25] = noInfo;
 
 		question[26] = "Wie viele Schirmchen hatte diese Pusteblume?";
 		answer[26] = 146;
-		picture [26] = "media/guess/Pusteblume.jpg";
+		picture [26] = "/media/guess/Pusteblume.jpg";
 		info[26] = noInfo;
 
 		question[27] = "Wie viel Kohlendioxid wurde im Jahr 2009 in die Erdatmosphäre geblasen?Angabe in Milliarden Tonnen!";
@@ -279,27 +279,27 @@ public class Guess extends Game implements PC {
 
 		question[28] = "Wieviele Gehirne von Ameisen braucht man, um das Gehirn eines Menschen aufzuwiegen?";
 		answer[28] = 13000000;
-		picture[28] = "media/guess/Ameise.png";
+		picture[28] = "/media/guess/Ameise.png";
 		info[28] = "Eine Ameise wiegt etwa 10mg, davon entfallen ca. 0,1mg auf das Gehirn (1Million Nervenzellen). Ein durchschnittliches menschliches Gehirn wiegt 1,3kg";
 
 		question[29] = "Wie alt ist das Gestein des Ayers Rock? In mio. Jahren!";
 		answer[29] = 500;
-		picture[29] = "media/guess/Uluru.jpg";
+		picture[29] = "/media/guess/Uluru.jpg";
 		info[29] = "Der Uluru ( Schatten spendender Platz), auch Ayers Rock, ist ein großer Inselberg aus Sandstein in der zentralaustralischen Wüste im Northern Territory.";
 
 		question[30] = "Wie viele Inseln umfasst der Inselstaat Fidschi?";
 		answer[30] = 332;
-		picture[30] = "media/guess/fidschi.jpg";
+		picture[30] = "/media/guess/fidschi.jpg";
 		info[30] = "Fidschi (engl.: Fiji Islands) ist ein Inselstaat im Südpazifik nördlich von Neuseeland und östlich von Australien. Fidschi ist seit 1970 unabhängig und seit 1987 eine Republik mit der Hauptstadt Suva auf der Insel Viti Levu.";
 
 		question[31] = "Wie viele Liter fasst der Bodensee durchschnittlich? Angabe in Miliarden Litern";
 		answer[31] = 50000;
-		picture[31] = "media/guess/bodensee.jpg";
+		picture[31] = "/media/guess/bodensee.jpg";
 		info[31] = "Unter der Bezeichnung Bodensee fasst man die drei im nördlichen Alpenvorland liegenden Gewässereinheiten Obersee, Untersee und Seerhein zusammen. Es handelt sich also um zwei selbständige Seen (Stillgewässer) und einen sie verbindenden Fluss (Fließgewässer).";
 
 		question[32] = "Wie viele PS kann ein trainiertes Pferd kurzzeitig leisten?";
 		answer[32] = 20;
-		picture[32] = "media/guess/pferd.jpg";
+		picture[32] = "/media/guess/pferd.jpg";
 		info[32] = "Ein Arbeitspferd leistet im Tagesdurchschnitt 1 PS.";
 
 		question[33] = "Wie viele Olivenbäume wachsen in Tunesien? Angabe in Millionen.";
@@ -309,32 +309,32 @@ public class Guess extends Game implements PC {
 
 		question[34] = "Wie viel Prozent der tunesischen Landfläche werden von der Sahara bedeckt?";
 		answer[34] = 33;
-		picture [34] = "media/guess/sahara.jpg";
+		picture [34] = "/media/guess/sahara.jpg";
 		info[34] = "Die Sahara ist die trockenste Sandwüste der Welt.";
 
 		question[35] = "Wie viel Prozent der tunesischen Bevölkerung leben ca. in der Hauptstadt, Tunis?";
 		answer[35] = 23;
-		picture [35] = "media/guess/tunis.jpg";
+		picture [35] = "/media/guess/tunis.jpg";
 		info[35] = "Tunis hat 2380500 Einwohner, demnach hat Tunesien 10.276.158 Einwohner was grob 25% entspricht.";   //TODO neu formulieren
 
 		question[36] = "Es führt eine Treppe zum Gipfel des Berges Sinai, wie viele Stufen sind es?";
 		answer[36] 	= 4000;
-		picture[36]	= "media/guess/Sinai.jpg";
+		picture[36]	= "/media/guess/Sinai.jpg";
 		info[36] 	= "Auf dem Berg Sinai soll Moses von Gott die Zehn Gebote erhalten haben. Der Berg ist 2285m hoch un die letzten Stufen sind schwindelerregend steil!";
 
 		question[37] = "Jeder kennt 'die Rose', doch gibt es mehr als nur eine Sorte!Wie viele Rosenzüchtungen gibt es Weltweit?";
 		answer[37] 	= 30000;
-		picture[37]	= "media/guess/rosen.jpg";
+		picture[37]	= "/media/guess/rosen.jpg";
 		info[37] 	= "Die Rosenzucht nahm ihren Anfang im 18. Jhd und seitdem über 30000 Rosensorten hervorgebracht!";
 
 		question[38] = "Schnee, mancher liebt ihn die anderen hassen ihn...aber zu wie viel Prozent der Schnee aus Luft besteht wissen die Wenigsten!?";
 		answer[38] 	= 95;
-		picture[38]	= "media/guess/schnee.jpg";
+		picture[38]	= "/media/guess/schnee.jpg";
 		info[38] 	= "Schnee besteht bis zu 95 Przent aus Luft und bildet zwischen den Eiskristallen einer Flocke unzählige Luftkammern";
 
 		question[39] = "Aus wie vielen Ländern besteht die EU?"; // Staaten?
 		answer[39] 	= 27;
-		picture[39]	= "media/guess/EU.jpg";
+		picture[39]	= "/media/guess/EU.jpg";
 		info[39] 	= "Die Europäische Union (EU) ist ein aus 27 europäischen Staaten bestehender Staatenverbund. Seine Bevölkerung umfasst derzeit rund 500 Millionen Einwohner. Der von den EU-Mitgliedstaaten gebildete Europäische Binnenmarkt ist der am Bruttoinlandsprodukt gemessen größte gemeinsame Markt der Welt.";
 	}
 
@@ -386,7 +386,7 @@ public class Guess extends Game implements PC {
 	}
 
 	public void nowVisible(){
-		instance.changeBackground("media/guess/fragezeichen.jpg");
+		instance.changeBackground("/media/guess/fragezeichen.jpg");
 	}
 
 	public void openDetailsDialog(){

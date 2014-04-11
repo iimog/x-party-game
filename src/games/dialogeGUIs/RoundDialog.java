@@ -90,7 +90,7 @@ public class RoundDialog extends gui.AnzeigeDialog {
 				schaltflaechenPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				schaltflaechenPanel.setOpaque(false);
 				{
-					infoButton = new JButtonIcon("media/ablauf/info.png","Info");
+					infoButton = new JButtonIcon("/media/ablauf/info.png","Info");
 					schaltflaechenPanel.add(infoButton);
 					infoButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
@@ -99,7 +99,7 @@ public class RoundDialog extends gui.AnzeigeDialog {
 					});
 				}
 				{
-					detailsButton = new JButtonIcon("media/ablauf/details.png","Details");
+					detailsButton = new JButtonIcon("/media/ablauf/details.png","Details");
 					schaltflaechenPanel.add(detailsButton);
 					detailsButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
@@ -108,7 +108,7 @@ public class RoundDialog extends gui.AnzeigeDialog {
 					});
 				}
 				{
-					okButton = new JButtonIcon("media/ablauf/rightarrow.png","OK");
+					okButton = new JButtonIcon("/media/ablauf/rightarrow.png","OK");
 					schaltflaechenPanel.add(okButton);
 					okButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
