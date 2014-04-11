@@ -380,7 +380,8 @@ public abstract class Game extends Anzeige {
 
 	public void getAnleitung() {
 		try {
-			File anleitungFile = new File(X.getMainDir() + "anleitungen/"
+			// TODO Link to Wiki
+			File anleitungFile = new File("/anleitungen/"
 					+ gameName + ".html");
 			Desktop.getDesktop().open(anleitungFile);
 		} catch (Exception e) {

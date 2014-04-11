@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import start.X;
-
 public class MemoryDeck {
 	private String deckName;
 	private List<String> pictures;
@@ -33,9 +31,9 @@ public class MemoryDeck {
 	public void relativeToAbsolute(){
 		for(int i=0; i<pictures.size(); i++){
 			if(system)
-				pictures.set(i, X.getMainDir() + pictures.get(i));
+				pictures.set(i, pictures.get(i));
 			else
-				pictures.set(i, X.getDataDir() + pictures.get(i));
+				pictures.set(i, pictures.get(i));
 		}
 	}
 	

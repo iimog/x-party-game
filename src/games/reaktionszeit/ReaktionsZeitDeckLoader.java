@@ -6,14 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import start.X;
 
 public class ReaktionsZeitDeckLoader {
-	private static File systemFolder = new File(X.getMainDir() + "games/pc/reaktionszeit/");
+	// TODO systemFolder
+	private static File systemFolder = new File("/games/pc/reaktionszeit/");
 	private static File userFolder = new File(X.getDataDir() + "games/pc/reaktionszeit/");
 
 	public static List<ReaktionsZeitDeck> loadReaktionsZeitDecks() {

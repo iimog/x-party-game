@@ -20,7 +20,8 @@ public class NonPCGameFileHandler {
 	public static StandardNonPC loadGame(int globalGameID, Player[] players, Modus modus){
 		GameInfo gi = SpielListen.getSpieleMap().get(globalGameID);
 		String fileName = gi.getPath();
-		String prefix = (gi.isSystem() ? X.getMainDir() : X.getDataDir());
+		// TODO MainDir
+		String prefix = (gi.isSystem() ? "" : X.getDataDir());
 		/*
 		Properties p = new Properties();
 		try {

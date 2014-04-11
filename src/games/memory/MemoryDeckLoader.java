@@ -13,7 +13,8 @@ import java.util.Map;
 import start.X;
 
 public class MemoryDeckLoader {
-	private static File systemFolder = new File(X.getMainDir() + "games/pc/memory/");
+	// TODO systemFolder
+	private static File systemFolder = new File("/games/pc/memory/");
 	private static File userFolder = new File(X.getDataDir() + "games/pc/memory/");
 
 	public static List<MemoryDeck> loadMemoryDecks() {
@@ -84,7 +85,7 @@ public class MemoryDeckLoader {
 				String picture = elements[1];
 				String prefix = X.getDataDir();
 				if(system)
-					prefix = X.getMainDir();
+					prefix = "";
 				backsides.put(name, prefix+picture);
 			}
 			br.close();

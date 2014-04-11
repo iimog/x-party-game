@@ -46,7 +46,8 @@ public class WerLuegt extends Game implements PC {
 	int whoBuzzed;
 	Set<Integer> winnerIDs;
 	private JPanel aktuelleAntwortPanel;
-	private static File systemFolder = new File(X.getMainDir() + "games/pc/werLuegt/");
+	// TODO SystemFolder
+	private static File systemFolder = new File("/games/pc/werLuegt/");
 	private static File userFolder = new File(X.getDataDir() + "games/pc/werLuegt/");
 	
 	private void initAussagen(){

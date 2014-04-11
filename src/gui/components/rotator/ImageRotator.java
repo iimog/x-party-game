@@ -42,7 +42,7 @@ public class ImageRotator extends Rotator {
 				String line = br.readLine();
 				String prefix = X.getDataDir();
 				if(system)
-					prefix = X.getMainDir();
+					prefix = "";
 				bildPfade.add(prefix+line);
 			}
 			br.close();

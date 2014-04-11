@@ -8,8 +8,6 @@ import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 
-import start.X;
-
 public class Geist {
 
 	public static int[] livingGood = new int[2];
@@ -33,11 +31,11 @@ public class Geist {
 		team = whichTeam;
 		livingGood[whichTeam]++;
 		if(team==0){
-			Image image = Toolkit.getDefaultToolkit().getImage(X.getMainDir()+"/media/ghosts/geist3.png");
+			Image image = Toolkit.getDefaultToolkit().getImage("/media/ghosts/geist3.png");
 			img = new ImageIcon(image);
 		}
 		if(team==1){
-			Image image = Toolkit.getDefaultToolkit().getImage(X.getMainDir()+"/media/ghosts/geist4.png");
+			Image image = Toolkit.getDefaultToolkit().getImage("/media/ghosts/geist4.png");
 			img = new ImageIcon(image);
 		}
 		position = pos;

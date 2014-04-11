@@ -73,8 +73,8 @@ public class SpielListen {
 		Map<Integer, GameInfo> systemNonPC = new HashMap<Integer, GameInfo>();
 		int counter = 1;
 		try {
-			FileReader fr = new FileReader(X.getMainDir()
-					+ "games/nonPC.games");
+			// TODO read file inside jar
+			FileReader fr = new FileReader("/games/nonPC.games");
 			BufferedReader br = new BufferedReader(fr);
 			while (br.ready()) {
 				String line = br.readLine();
@@ -87,7 +87,7 @@ public class SpielListen {
 			br.close();
 			fr.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Datei: "+X.getMainDir() + "games/nonPC.games nicht gefunden");
+			System.out.println("Datei: /games/nonPC.games nicht gefunden");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -102,8 +102,8 @@ public class SpielListen {
 		Map<Integer, GameInfo> systemPC = new HashMap<Integer, GameInfo>();
 		int counter = 1;
 		try {
-			FileReader fr = new FileReader(X.getMainDir()
-					+ "games/pc.games");
+			// TODO read file inside jar
+			FileReader fr = new FileReader("/games/pc.games");
 			BufferedReader br = new BufferedReader(fr);
 			while (br.ready()) {
 				String line = br.readLine();
@@ -116,7 +116,7 @@ public class SpielListen {
 			br.close();
 			fr.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Datei: "+X.getMainDir() + "games/pc.games nicht gefunden");
+			System.out.println("Datei: /games/pc.games nicht gefunden");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

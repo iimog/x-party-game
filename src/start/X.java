@@ -66,10 +66,6 @@ public class X extends javax.swing.JFrame {
 
 	private static Font standardFont;
 	private MainSettings mainSettings = MainSettings.getMainSettings();
-
-	public static String getMainDir() {
-		return "/";
-	}
 	
 	public static String getDataDir() {
 		return System.getProperty("user.home") + "/.xpartygame/";

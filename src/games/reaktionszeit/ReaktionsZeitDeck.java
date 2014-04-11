@@ -37,7 +37,7 @@ public class ReaktionsZeitDeck {
 			return;
 		for(int i=0; i<elements.size(); i++){
 			if(system)
-				elements.set(i, X.getMainDir() + elements.get(i));
+				elements.set(i, elements.get(i));
 			else
 				elements.set(i, X.getDataDir() + elements.get(i));
 		}
