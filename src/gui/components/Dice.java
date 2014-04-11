@@ -14,7 +14,6 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
-import start.X;
 import util.ChangeManager;
 
 
@@ -54,7 +53,7 @@ public class Dice extends JButtonIcon {
 		this(farbe, 2);
 	}
 	public Dice(Color farbe, int speed){
-		super(X.getMainDir()+"/media/ablauf/dice/dice0.png", "0");
+		super("/media/ablauf/dice/dice0.png", "0");
 		//setText("0");
 		this.farbe = farbe;
 		a = speed;
