@@ -89,7 +89,7 @@ public class PlayerFactory extends javax.swing.JPanel {
 	public boolean abgebrochen;
 	private JColorChooser colorChooser;
 	private HashMap<String, String> soundMap = new HashMap<String, String>();
-	private String path = "media/sounds/";
+	private String path = "/media/sounds/";
 	private GridLayout hauptbereichPanelLayout;
 	private JLabel soundLabel;
 	private JButtonIcon soundButton;

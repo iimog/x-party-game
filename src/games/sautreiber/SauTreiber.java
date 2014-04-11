@@ -256,7 +256,7 @@ public class SauTreiber extends Game implements PC {
 			playerCred[whosTurn].setText("" + myPlayer[whosTurn].gameCredit);
 		}
 		else{
-			playAudioFile("media/sounds/pig.wav");
+			playAudioFile("/media/sounds/pig.wav");
 		}
 		bestaetig = false;
 		if (isOver()) {
