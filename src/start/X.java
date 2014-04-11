@@ -213,7 +213,7 @@ public class X extends javax.swing.JFrame {
 			ImageIcon bild1 = new ImageIcon(img);
 			setIconImage(bild1.getImage());
 		} catch (Exception e) {
-			// nichts
+			e.printStackTrace();
 		}
 		try {
 			if (mainSettings.isFullscreen()) {
