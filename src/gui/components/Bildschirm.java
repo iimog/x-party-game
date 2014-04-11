@@ -20,7 +20,7 @@ import start.X;
 
 @SuppressWarnings("serial")
 public class Bildschirm extends JPanel {
-	private static final String DEFAULT_BACKGROUND = "media/ablauf/whitenoise.png";
+	private static final String DEFAULT_BACKGROUND = "/media/ablauf/whitenoise.png";
 	public Image bild;
 	private Image defaultBild;
 	private boolean drawDefaultBackground = false;
@@ -73,7 +73,7 @@ public class Bildschirm extends JPanel {
 	}
 	
 	private void drawDefaultBackground(){
-		defaultBild = getToolkit().getImage(X.getMainDir() + DEFAULT_BACKGROUND);
+		defaultBild = getToolkit().getImage(getClass().getResource(DEFAULT_BACKGROUND));
 		MediaTracker mt = new MediaTracker(this);
 		mt.addImage(defaultBild, 0);
 		try {
@@ -191,7 +191,7 @@ public class Bildschirm extends JPanel {
 	}
 
 	private void setPic(String bildname, boolean autoSize) {
-		bild = getToolkit().getImage(X.getMainDir() + bildname);
+		bild = getToolkit().getImage(getClass().getResource(X.getMainDir() + bildname));
 		MediaTracker mt = new MediaTracker(this);
 		mt.addImage(bild, 0);
 		try {
