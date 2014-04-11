@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -67,6 +67,10 @@ public class X extends javax.swing.JFrame {
 	private static Font standardFont;
 	private MainSettings mainSettings = MainSettings.getMainSettings();
 
+	public static String getMainDir() {
+		return "";
+	}
+	
 	public static String getDataDir() {
 		return System.getProperty("user.home") + "/.xpartygame/";
 	}
@@ -83,28 +87,13 @@ public class X extends javax.swing.JFrame {
 		if (standardFont == null) {
 			try {
 				standardFont = Font
-						.createFont(Font.TRUETYPE_FONT, new File(getMainDir()
-								+ "media/ablauf/fonts/freemetto.ttf"));
+						.createFont(Font.TRUETYPE_FONT, X.class.getResourceAsStream("/media/ablauf/fonts/freemetto.ttf"));
 			} catch (Exception e) {
 				e.printStackTrace();
 				// TODO set standard Font to default
 			}
 		}
 		return standardFont;
-	}
-
-	public static String getMainDir() {
-		String classPath = System.getProperty("java.class.path");
-		String filsSeparator = System.getProperty("file.separator");
-		if (classPath.endsWith("X.jar")) {
-			String parent = new File(classPath).getParent();
-			if(parent != null)
-				return parent + filsSeparator;
-			else
-				return "." + filsSeparator;
-		} else {
-			return "";
-		}
 	}
 
 	public static void playAudioFile(String filename) {
@@ -114,7 +103,7 @@ public class X extends javax.swing.JFrame {
 		new Thread() {
 			@Override
 			public void run() {
-				File audioFile = new File(X.getMainDir() + currentAudioFile);
+				URL audioFile = X.class.getResource(currentAudioFile);
 				try {
 					AudioInputStream ais = AudioSystem
 							.getAudioInputStream(audioFile);
@@ -220,8 +209,7 @@ public class X extends javax.swing.JFrame {
 			}
 		});
 		try {
-			Image img = Toolkit.getDefaultToolkit().getImage(
-					getMainDir() + "media/ablauf/Xicon.png");
+			Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/media/ablauf/Xicon.png"));
 			ImageIcon bild1 = new ImageIcon(img);
 			setIconImage(bild1.getImage());
 		} catch (Exception e) {
