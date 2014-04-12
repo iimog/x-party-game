@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -74,7 +75,7 @@ public class SpielListen {
 		int counter = 1;
 		try {
 			// TODO read file inside jar
-			FileReader fr = new FileReader("/games/nonPC.games");
+			InputStreamReader fr = new InputStreamReader(SpielListen.class.getResourceAsStream("/conf/nonPC.games"));
 			BufferedReader br = new BufferedReader(fr);
 			while (br.ready()) {
 				String line = br.readLine();
@@ -103,7 +104,7 @@ public class SpielListen {
 		int counter = 1;
 		try {
 			// TODO read file inside jar
-			FileReader fr = new FileReader("/games/pc.games");
+			InputStreamReader fr = new InputStreamReader(SpielListen.class.getResourceAsStream("/conf/pc.games"));
 			BufferedReader br = new BufferedReader(fr);
 			while (br.ready()) {
 				String line = br.readLine();
