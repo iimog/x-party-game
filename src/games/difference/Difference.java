@@ -172,12 +172,12 @@ public class Difference extends Game implements PC {
 		coords[22] = new Point(277,47);
 	}
 
-	public Difference(Player[] player, Modus modus, int globalGameID){
-		this(player, 5, modus, globalGameID);
+	public Difference(Player[] player, Modus modus, String background, int globalGameID){
+		this(player, 5, modus, background, globalGameID);
 	}
 
-	public Difference(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
-		super(player, numOfRounds, modus, globalGameID);
+	public Difference(Player[] player, int numOfRounds, Modus modus, String background, int globalGameID) {
+		super(player, numOfRounds, modus, background, globalGameID);
 		this.numOfRounds = numOfRounds;
 		uebersprungeneBilder = Collections.synchronizedList(new ArrayList<Integer>());
 		current = nextRandom(numOfPics);

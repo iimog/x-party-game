@@ -519,8 +519,8 @@ public class Stimmts extends Game implements PC {
 						"Der älteste Elefant lebte im Zoo von Taipeh und wurde „nur“ 86 Jahre alt."));
 	}
 
-	public Stimmts(Player[] player, Modus modus, int globalGameID) {
-		super(player, defaultNumOfRounds, modus, globalGameID);
+	public Stimmts(Player[] player, Modus modus, String background, int globalGameID) {
+		super(player, defaultNumOfRounds, modus, background, globalGameID);
 		initAussagen();
 		vermutung = new boolean[player.length];
 		answerGiven = new boolean[player.length];

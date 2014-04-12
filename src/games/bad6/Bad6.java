@@ -52,12 +52,12 @@ public class Bad6 extends games.Game implements PC {
 	private String lache = "/media/sounds/lache.wav";
 	private Bad6Robot myRobot;
 
-	public Bad6(Player[] myPlayer, Modus modus, int globalGameID) {
-		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
+	public Bad6(Player[] myPlayer, Modus modus, String background, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, background, globalGameID);
 	}
 
-	public Bad6(player.Player[] myPlayer, int numOfRounds, Modus modus, int globalGameID) {
-		super(myPlayer, 10 * numOfRounds, modus, globalGameID);
+	public Bad6(player.Player[] myPlayer, int numOfRounds, Modus modus, String background, int globalGameID) {
+		super(myPlayer, 10 * numOfRounds, modus, background, globalGameID);
 		if(modus == Modus.SOLO){
 			myRobot = new Bad6Robot(this);
 		}

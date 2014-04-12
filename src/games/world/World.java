@@ -190,11 +190,11 @@ public class World extends Game implements PC{
 		info[29] = 		"Im Jahre 1959 floh der gegenwärtige Dalai Lama am 17. März während des Tibetaufstands ins indische Exil nach Dharamsala.";
 	}
 
-	public World(Player[] myPlayer, Modus modus, int globalGameID) {
-		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
+	public World(Player[] myPlayer, Modus modus, String background, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, background, globalGameID);
 	}
-	public World(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
-		super(player, numOfRounds, modus, globalGameID);
+	public World(Player[] player, int numOfRounds, Modus modus, String background, int globalGameID) {
+		super(player, numOfRounds, modus, background, globalGameID);
 		if(modus == Modus.SOLO){
 			spielerZahl--;
 			toleranzOn = true;

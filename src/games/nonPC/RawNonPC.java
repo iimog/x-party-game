@@ -6,16 +6,15 @@ import player.Player;
 public class RawNonPC extends StandardNonPC {
 	private static final long serialVersionUID = 1L;
 
-	public String background;
+	private String background;
 	
 	public RawNonPC(Player[] player, int numOfRounds, Modus modus, String background, int globalGameID) {
-		super(player, numOfRounds, modus, globalGameID);
+		super(player, numOfRounds, modus, background, globalGameID);
 		this.background = background;
 	}
 	
 	@Override
 	public void nowVisible(){
-		System.out.println(background);
 		instance.changeBackground(background);
 	}
 

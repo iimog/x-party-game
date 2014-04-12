@@ -57,12 +57,12 @@ public class InnereUhr extends games.Game implements PC {
 
 	int rWinner;				// playerID des Rundensiegers
 
-	public InnereUhr(Player[] myPlayer, Modus modus, int globalGameID) {
-		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
+	public InnereUhr(Player[] myPlayer, Modus modus, String background, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, background, globalGameID);
 	}
 
-	public InnereUhr(Player[] myPlayer, int numOfRounds, Modus modus, int globalGameID) {
-		super(myPlayer, numOfRounds, modus, globalGameID);
+	public InnereUhr(Player[] myPlayer, int numOfRounds, Modus modus, String background, int globalGameID) {
+		super(myPlayer, numOfRounds, modus, background, globalGameID);
 		if(modus == Modus.SOLO){
 			spielerZahl--;
 			toleranz = 2000;

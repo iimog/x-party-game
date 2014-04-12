@@ -41,8 +41,8 @@ public class ReaktionsZeit extends Game {
 	private int currentDeck = 0;
 	private JPanel targetPanel;
 
-	public ReaktionsZeit(Player[] player, Modus modus, int globalGameID) {
-		super(player, 5, modus, globalGameID);
+	public ReaktionsZeit(Player[] player, Modus modus, String background, int globalGameID) {
+		super(player, 5, modus, background, globalGameID);
 		initGUI();
 	}
 

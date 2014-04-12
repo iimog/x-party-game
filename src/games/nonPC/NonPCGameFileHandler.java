@@ -33,7 +33,6 @@ public class NonPCGameFileHandler {
 		*/
 		int numOfRounds = gi.getDefaultNumOfRounds();
 		String background = (prefix + fileName);
-		System.out.println(background);
 		RawNonPC game = new RawNonPC(players, numOfRounds, modus, background, globalGameID);
 		return game;
 	}

@@ -112,12 +112,12 @@ public class Memory extends games.Game implements PC {
 	private JLabel deckLabel;
 	private Map<String, String> backsides;
 
-	public Memory(Player[] myPlayer, Modus modus, int globalGameID) {
-		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
+	public Memory(Player[] myPlayer, Modus modus, String background, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, background, globalGameID);
 	}
 
-	public Memory(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
-		super(player, numOfRounds, modus, globalGameID);
+	public Memory(Player[] player, int numOfRounds, Modus modus, String background, int globalGameID) {
+		super(player, numOfRounds, modus, background, globalGameID);
 		if(modus == Modus.SOLO){
 			memoryRobot = new MemoryRobot(this);
 			memoryRobot.setGrenzWert(schwierigkeit*10);

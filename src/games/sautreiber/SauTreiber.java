@@ -57,12 +57,12 @@ public class SauTreiber extends Game implements PC {
 	int bestaetigCredit = 0;
 	int bestaetigCount = 0;
 	boolean strasse = false;
-	public SauTreiber(Player[] myPlayer, Modus modus, int globalGameID) {
-		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
+	public SauTreiber(Player[] myPlayer, Modus modus, String background, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, background, globalGameID);
 	}
 
-	public SauTreiber(player.Player[] pl, int numOfRounds, Modus modus, int globalGameID) {
-		super(pl, numOfRounds * 1000, modus, globalGameID);
+	public SauTreiber(player.Player[] pl, int numOfRounds, Modus modus, String background, int globalGameID) {
+		super(pl, numOfRounds * 1000, modus, background, globalGameID);
 		initElements();
 		{
 			hauptbereichPanel = new JPanel();

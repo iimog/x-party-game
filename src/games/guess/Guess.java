@@ -351,12 +351,12 @@ public class Guess extends Game implements PC {
 	JPasswordField[] eingabe;
 	JButton finish = new JButton("OK");
 
-	public Guess(Player[] player, Modus modus, int globalGameID){
-		this(player, 5, modus, globalGameID);
+	public Guess(Player[] player, Modus modus, String background, int globalGameID){
+		this(player, 5, modus, background, globalGameID);
 	}
 
-	public Guess(Player[] players, int numOfRounds, Modus modus, int globalGameID){
-		super(players, numOfRounds, modus, globalGameID);
+	public Guess(Player[] players, int numOfRounds, Modus modus, String background, int globalGameID){
+		super(players, numOfRounds, modus, background, globalGameID);
 		// numOfPlayers = players.length; --> if there are more than two Players
 		this.numOfRounds = numOfRounds;
 		if(modus == Modus.SOLO){

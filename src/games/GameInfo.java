@@ -4,10 +4,11 @@ public class GameInfo {
 	private int ID;
 	private String gameName;
 	private String path;
+	private String background;
 	private String shortInfo;
 	private int modi;
 	private int defaultNumOfRounds;
-	public GameInfo(int iD, String gameName, String path, int defaultNumOfRounds, int modi, String shortInfo) {
+	public GameInfo(int iD, String gameName, String path, int defaultNumOfRounds, int modi, String shortInfo, String background) {
 		super();
 		ID = iD;
 		this.gameName = gameName;
@@ -15,6 +16,7 @@ public class GameInfo {
 		this.defaultNumOfRounds = defaultNumOfRounds;
 		this.modi = modi;
 		this.shortInfo = shortInfo;
+		this.background = background;
 }
 	public int getID() {
 		return ID;
@@ -24,6 +26,9 @@ public class GameInfo {
 	}
 	public String getPath() {
 		return path;
+	}
+	public String getBackground() {
+		return background;
 	}
 	public boolean isPC() {
 		return ID%2 == 0;

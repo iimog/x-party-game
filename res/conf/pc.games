@@ -1,15 +1,15 @@
-Böse 6	games.bad6.Bad6	5	31	Lass dich nicht verführen!
-Säutreiber	games.sautreiber.SauTreiber	3	30	Ein spannendes Würfelspiel. Sammle Punkte, aber wer zu viel riskiert verliert alles.
-Schätz mal	games.guess.Guess	5	31	Das ist ein Ratespiel. Wer näher an die richtige Antwort kommt gewinnt.
-Fehlerteufel	games.difference.Difference	4	31	Finde den Fehler im linken Bild - bevor es dein Gegner tut.
-Memory	games.memory.Memory	5	31	Das klassische Merkspiel.
-Wo?	games.world.World	4	0	Kennst du die Erde wie deine Westentasche?
-Uhr	games.innereUhr.InnereUhr	5	31	Es geht darum seine innere Uhr zu nutzen um zur richtigen Zeit den Buzzer zu drücken.
-Geister	games.ghosts.Ghosts	2	18	Ein Strategiespiel. Es geht darum zu bluffen, den Gegner zu täuschen aber ihn selbst richtig einzuschätzen. Wer ist der bessere Menschenkenner?
-Tron	games.tron.Tron	5	30	Verbaue deinem Gegner den Weg aber fahr nicht gegen die Wand.
-Wurst	games.wurst.Wurst	5	31	Wer mehr auf die Waage bringt gewinnt - aber gib nicht alles auf einmal aus.
-Buchstabensalat	games.buchstabensalat.BuchstabenSalat	5	30	Behältst du den Überblick im Buchstabengewirr?
-Stimmts?	games.stimmts.Stimmts	5	31	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)\n\nSpieler 1: D->wahr F->falsch, Spieler 2: K->wahr L->falsch, \nSpieler 3: B->wahr N->falsch, Spieler 4: Z->wahr U->falsch \n\nEselsbrücken: F->Falsch, L->Lüge, N->Nichtwahr, U->Unwahr	
-Wer lügt?	games.werLuegt.WerLuegt	5	30	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)
-Reaktionszeit	games.reaktionszeit.ReaktionsZeit	5	30	Wessen Schrecksekunde ist länger?
-Spiegelschrift	games.spiegelschrift.SpiegelSchrift	5	30	Hier wird dir ganz schön der Kopf verdreht!
+Böse 6	games.bad6.Bad6	5	31	Lass dich nicht verführen!	/media/bad6/schlange.jpg
+Säutreiber	games.sautreiber.SauTreiber	3	30	Ein spannendes Würfelspiel. Sammle Punkte, aber wer zu viel riskiert verliert alles.	/media/bad6/schlange.jpg
+Schätz mal	games.guess.Guess	5	31	Das ist ein Ratespiel. Wer näher an die richtige Antwort kommt gewinnt.	/media/bad6/schlange.jpg
+Fehlerteufel	games.difference.Difference	4	31	Finde den Fehler im linken Bild - bevor es dein Gegner tut.	/media/bad6/schlange.jpg
+Memory	games.memory.Memory	5	31	Das klassische Merkspiel.	/media/bad6/schlange.jpg
+Wo?	games.world.World	4	0	Kennst du die Erde wie deine Westentasche?	/media/bad6/schlange.jpg
+Uhr	games.innereUhr.InnereUhr	5	31	Es geht darum seine innere Uhr zu nutzen um zur richtigen Zeit den Buzzer zu drücken.	/media/bad6/schlange.jpg
+Geister	games.ghosts.Ghosts	2	18	Ein Strategiespiel. Es geht darum zu bluffen, den Gegner zu täuschen aber ihn selbst richtig einzuschätzen. Wer ist der bessere Menschenkenner?	/media/bad6/schlange.jpg
+Tron	games.tron.Tron	5	30	Verbaue deinem Gegner den Weg aber fahr nicht gegen die Wand.	/media/bad6/schlange.jpg
+Wurst	games.wurst.Wurst	5	31	Wer mehr auf die Waage bringt gewinnt - aber gib nicht alles auf einmal aus.	/media/bad6/schlange.jpg
+Buchstabensalat	games.buchstabensalat.BuchstabenSalat	5	30	Behältst du den Überblick im Buchstabengewirr?	/media/bad6/schlange.jpg
+Stimmts?	games.stimmts.Stimmts	5	31	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)\n\nSpieler 1: D->wahr F->falsch, Spieler 2: K->wahr L->falsch, \nSpieler 3: B->wahr N->falsch, Spieler 4: Z->wahr U->falsch \n\nEselsbrücken: F->Falsch, L->Lüge, N->Nichtwahr, U->Unwahr	/media/bad6/schlange.jpg	
+Wer lügt?	games.werLuegt.WerLuegt	5	30	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)	/media/bad6/schlange.jpg
+Reaktionszeit	games.reaktionszeit.ReaktionsZeit	5	30	Wessen Schrecksekunde ist länger?	/media/bad6/schlange.jpg
+Spiegelschrift	games.spiegelschrift.SpiegelSchrift	5	30	Hier wird dir ganz schön der Kopf verdreht!	/media/bad6/schlange.jpg

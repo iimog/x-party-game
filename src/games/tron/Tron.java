@@ -67,11 +67,11 @@ public class Tron extends Game implements PC{
 		spielfeld.showGitter(gitterVisible);
 	}
 
-	public Tron(Player[] player, Modus modus, int globalGameID) {
-		this(player, defaultNumOfRounds, modus, globalGameID);
+	public Tron(Player[] player, Modus modus, String background, int globalGameID) {
+		this(player, defaultNumOfRounds, modus, background, globalGameID);
 	}
-	public Tron(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
-		super(player, numOfRounds, modus, globalGameID);
+	public Tron(Player[] player, int numOfRounds, Modus modus, String background, int globalGameID) {
+		super(player, numOfRounds, modus, background, globalGameID);
 		colums = defaultColums;
 		rows = defaultRows;
 		initArrays();

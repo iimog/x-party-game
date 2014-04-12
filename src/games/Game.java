@@ -99,11 +99,13 @@ public abstract class Game extends Anzeige {
 	private JPanel centeredPanel;
 	protected Properties customSettings;
 	private JButtonIcon settingsButton;
+	private String background;
 
 	public Game(player.Player[] player, int numOfRounds,
-			Modus modus, int globalGameID) {
+			Modus modus, String background, int globalGameID) {
 		gameName = SpielListen.getSpieleMap().get(globalGameID).getGameName();
 		myPlayer = player;
+		this.background = background;
 		if (modus == Modus.TEAM) {
 			myTeam[0] = (Team) myPlayer[0];
 			myTeam[1] = (Team) myPlayer[1];
@@ -611,5 +613,10 @@ public abstract class Game extends Anzeige {
 
 	public void setBuzzerActive(boolean buzzerActive) {
 		this.buzzerActive = buzzerActive;
+	}
+	
+	@Override
+	public void nowVisible(){
+		instance.changeBackground(background);
 	}
 }

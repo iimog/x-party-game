@@ -557,8 +557,8 @@ public class WerLuegt extends Game implements PC {
 	*/
 	}
 	
-	public WerLuegt(Player[] player, Modus modus, int globalGameID) {
-		super(player, defaultNumOfRounds, modus, globalGameID);
+	public WerLuegt(Player[] player, Modus modus, String background, int globalGameID) {
+		super(player, defaultNumOfRounds, modus, background, globalGameID);
 		initAussagen();	
 		initGUI();
 	}

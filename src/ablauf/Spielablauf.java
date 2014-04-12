@@ -190,14 +190,16 @@ public class Spielablauf implements GameListener, Ablauf {
 
 	private Game startPCGame(int iD) {
 		Game game = null;
-		Class<?>[] formparas = new Class[3];
+		Class<?>[] formparas = new Class[4];
 		formparas[0] = Player[].class;
 		formparas[1] = Modus.class;
-		formparas[2] = Integer.TYPE;
+		formparas[2] = String.class;
+		formparas[3] = Integer.TYPE;
 		try {
 			Class<?> c = Class.forName(SpielListen.getSpieleMap().get(iD).getPath());
+			String background = SpielListen.getSpieleMap().get(iD).getBackground();
 			Constructor<?> con = c.getConstructor(formparas);
-			game = (Game) con.newInstance(new Object[] { myPlayer, modus, iD });
+			game = (Game) con.newInstance(new Object[] { myPlayer, modus, background, iD });
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

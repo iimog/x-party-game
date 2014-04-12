@@ -17,9 +17,9 @@ public class SpiegelSchrift extends Game {
 	private MirrorText mirrorTextField;
 	private Font mirrorFont;
 
-	public SpiegelSchrift(Player[] player, Modus modus,
+	public SpiegelSchrift(Player[] player, Modus modus, String background,
 			int globalGameID) {
-		super(player, 5, modus, globalGameID);
+		super(player, 5, modus, background, globalGameID);
 		initGUI();
 	}
 	

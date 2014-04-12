@@ -29,7 +29,7 @@ public class SpielListen {
 	public static HashMap<Integer, GameInfo> getSpieleMap() {
 		if(spieleMap == null){
 			spieleMap = new HashMap<Integer, GameInfo>();
-			spieleMap.put(RANDOM_GAME, new GameInfo(0, "Zufallsspiel", "", 5, 31, "Ein zufällig ausgewähltes Spiel"));
+			spieleMap.put(RANDOM_GAME, new GameInfo(0, "Zufallsspiel", "", 5, 31, "Ein zufällig ausgewähltes Spiel", "/media/ablauf/iceBG.jpg"));
 			spieleMap.putAll(loadSystemPCGames());
 			spieleMap.putAll(loadSystemNonPCGames());
 			spieleMap.putAll(loadUserNonPCGames());
@@ -53,7 +53,7 @@ public class SpielListen {
 				String[] elements = line.split("\t");
 				userNonPC.put(counter * 4 + 3,
 						new GameInfo(counter * 4 + 3, elements[0], elements[1],
-								Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), elements[4]));
+								Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), elements[4], elements[5]));
 				counter++;
 			}
 			br.close();
@@ -82,7 +82,7 @@ public class SpielListen {
 				String[] elements = line.split("\t");
 				systemNonPC.put(counter * 4 + 1,
 						new GameInfo(counter * 4 + 1, elements[0], elements[1],
-								Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), elements[4]));
+								Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), elements[4], elements[5]));
 				counter++;
 			}
 			br.close();
@@ -111,7 +111,7 @@ public class SpielListen {
 				String[] elements = line.split("\t");
 				systemPC.put(counter * 4,
 						new GameInfo(counter * 4, elements[0], elements[1],
-								Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), elements[4]));
+								Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), elements[4], elements[5]));
 				counter++;
 			}
 			br.close();

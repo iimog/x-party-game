@@ -424,8 +424,8 @@ public class BuchstabenSalat extends Game implements PC {
 		kategorie[123] = "Tier";
 	}
 
-	public BuchstabenSalat(Player[] player, Modus modus, int globalGameID) {
-		super(player, defaultNumOfRounds, modus, globalGameID);
+	public BuchstabenSalat(Player[] player, Modus modus, String background, int globalGameID) {
+		super(player, defaultNumOfRounds, modus, background, globalGameID);
 		initGUI();
 	}
 

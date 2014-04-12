@@ -28,8 +28,8 @@ public class Wurst extends Game implements PC{
 	boolean schonEinsOffen = false;
 	private int[] abgabe;
 
-	public Wurst(Player[] player, Modus modus, int globalGameID) {
-		super(player, defaultNumOfRounds, modus, globalGameID);
+	public Wurst(Player[] player, Modus modus, String background, int globalGameID) {
+		super(player, defaultNumOfRounds, modus, background, globalGameID);
 		wurstPanel = new WurstPanel[spielerZahl];
 		abgabe = new int[spielerZahl];
 		initGUI();

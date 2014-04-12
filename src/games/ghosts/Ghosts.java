@@ -65,12 +65,12 @@ public class Ghosts extends Game implements PC {
 	private JButton fertigButton;
 	private Container hauptbereichPanel;
 	
-	public Ghosts(Player[] myPlayer, Modus modus, int globalGameID) {
-		this(myPlayer, defaultNumOfRounds, modus, globalGameID);
+	public Ghosts(Player[] myPlayer, Modus modus, String background, int globalGameID) {
+		this(myPlayer, defaultNumOfRounds, modus, background, globalGameID);
 	}
 
-	public Ghosts(Player[] player, int numOfRounds, Modus modus, int globalGameID) {
-		super(player, numOfRounds, modus, globalGameID);
+	public Ghosts(Player[] player, int numOfRounds, Modus modus, String background, int globalGameID) {
+		super(player, numOfRounds, modus, background, globalGameID);
 		initGUI();
 	}
 
