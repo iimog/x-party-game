@@ -15,6 +15,7 @@ public class RawNonPC extends StandardNonPC {
 	
 	@Override
 	public void nowVisible(){
+		System.out.println(background);
 		instance.changeBackground(background);
 	}
 

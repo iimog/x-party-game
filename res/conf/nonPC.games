@@ -1,8 +1,8 @@
-Münzschnipsen	games/nonPC/Muenzschnipsen.game	4	30	Schnipps die Münze durch die Tore um zu siegen.
-Einbein	games/nonPC/EinBein.game	2	30	Wer ist der bessere Flamingo?
-Krug	games/nonPC/KrugHalten.game	2	30	Wessen Arm wird früher schwer?
-Mundfangen	games/nonPC/MundFangen.game	5	30	Es geht darum Gummibären (oder Erdnüsse) mit dem Mund aufzufangen \nGeworfen wird nacheinander, wenn ein Team fängt und das andere nicht bekommt es einen Punkt
-Münzwurf	games/nonPC/MuenzWurf.game	5	30	Schnackel die Münze ins Glas
-Weitergeben	games/nonPC/Weitergeben.game	3	30	Gib die Orange mit der Schulter weiter
-Apfelwasser	games/nonPC/ApfelImWasser.game	2	30	Hole einen Apfel nur mit deinem Mund aus einer Schüssel Wasser/Sangria!
-Schnick Schnack Schnuck	games/nonPC/Schnick.game	5	30	Besiege den Gegner mit Schere, Stein oder Papier
+Münzschnipsen	/media/nonPC/Muenzschnipsen.png	4	30	Schnipps die Münze durch die Tore um zu siegen.
+Einbein	/media/nonPC/EinBein.png	2	30	Wer ist der bessere Flamingo?
+Krug	/media/nonPC/KrugHalten.png	2	30	Wessen Arm wird früher schwer?
+Mundfangen	/media/nonPC/MundFangen.png	5	30	Es geht darum Gummibären (oder Erdnüsse) mit dem Mund aufzufangen \nGeworfen wird nacheinander, wenn ein Team fängt und das andere nicht bekommt es einen Punkt
+Münzwurf	/media/nonPC/MuenzWurf.png	5	30	Schnackel die Münze ins Glas
+Weitergeben	/media/nonPC/Weitergeben.png	3	30	Gib die Orange mit der Schulter weiter
+Apfelwasser	/media/nonPC/ApfelImWasser.png	2	30	Hole einen Apfel nur mit deinem Mund aus einer Schüssel Wasser/Sangria!
+Schnick Schnack Schnuck	/media/nonPC/Schnick.png	5	30	Besiege den Gegner mit Schere, Stein oder Papier

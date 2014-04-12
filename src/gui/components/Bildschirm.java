@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Point;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -189,7 +190,10 @@ public class Bildschirm extends JPanel {
 	}
 
 	private void setPic(String bildname, boolean autoSize) {
-		bild = getToolkit().getImage(getClass().getResource(bildname));
+		URL bildURL = getClass().getResource(bildname);
+		if(bildURL == null)
+			return;
+		bild = getToolkit().getImage(bildURL);
 		MediaTracker mt = new MediaTracker(this);
 		mt.addImage(bild, 0);
 		try {

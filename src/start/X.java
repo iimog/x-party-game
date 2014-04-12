@@ -159,6 +159,17 @@ public class X extends javax.swing.JFrame {
 	}
 
 	public void changeBackground(String bild) {
+		try{
+			URL bildURL = X.class.getResource(bild);
+			if(bildURL == null){
+				System.err.println("Hintergrundbild "+bild+" nicht gefunden.");
+				return;
+			}
+		}catch (Exception e){
+			System.err.println("Hintergrundbild "+bild+" nicht gefunden.");
+			return;
+		}
+			
 		hintergrundBild.changePic(bild);
 	}
 
