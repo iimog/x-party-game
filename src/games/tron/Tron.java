@@ -305,8 +305,4 @@ public class Tron extends Game implements PC{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public void nowVisible(){
-		instance.changeBackground("/media/tron/Tron.jpg");
-	}
 }

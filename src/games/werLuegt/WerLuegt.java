@@ -702,10 +702,6 @@ public class WerLuegt extends Game implements PC {
 		nextRound();
 	}
 	
-	public void nowVisible(){
-		instance.changeBackground("/media/wer_luegt/wer_luegt.jpg");
-	}
-	
 	@Override
 	public void openRoundDialog(String winner){
 		RoundDialog rd = new RoundDialog(this, winner);

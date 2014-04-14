@@ -365,10 +365,6 @@ public class World extends Game implements PC{
 		}
 		
 	}
-	@Override
-	public void nowVisible(){
-		instance.changeBackground("/media/wo/Flaggen.jpg");
-	}
 
 	@Override
 	public void openDetailsDialog(){

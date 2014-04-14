@@ -385,10 +385,6 @@ public class Guess extends Game implements PC {
 		finish.addActionListener(new Action());
 	}
 
-	public void nowVisible(){
-		instance.changeBackground("/media/guess/fragezeichen.jpg");
-	}
-
 	public void openDetailsDialog(){
 		instance.showDialog(new GuessDetailsDialog(this));
 	}

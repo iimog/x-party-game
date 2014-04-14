@@ -159,11 +159,6 @@ public class Bad6 extends games.Game implements PC {
 	}
 
 	@Override
-	public void nowVisible(){
-		instance.changeBackground("/media/bad6/schlange.jpg");
-	}
-
-	@Override
 	public void openSettingsDialog(){
 		instance.showDialog(new Bad6SettingsDialog(this));
 	}

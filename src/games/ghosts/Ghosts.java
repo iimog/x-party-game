@@ -225,11 +225,6 @@ public class Ghosts extends Game implements PC {
 	}
 
 	@Override
-	public void nowVisible(){
-		instance.changeBackground("/media/ghosts/nebel.jpg");
-	}
-
-	@Override
 	public void openDetailsDialog(){
 		String text="";
 		if(winningReason == DURCH){

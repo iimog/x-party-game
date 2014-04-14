@@ -198,10 +198,6 @@ public class ReaktionsZeit extends Game {
 		return winner;
 	}
 
-	public void nowVisible() {
-		instance.changeBackground("/media/reaktionszeit/reaktionszeit.jpg");
-	}
-
 	@Override
 	public void openRoundDialog(String winner) {
 		RoundDialog rd = new RoundDialog(this, winner);

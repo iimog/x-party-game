@@ -157,11 +157,6 @@ public class Memory extends games.Game implements PC {
 	}
 
 	@Override
-	public void nowVisible(){
-		instance.changeBackground("/media/memory/blue.jpg");
-	}
-
-	@Override
 	public void openSettingsDialog(boolean inGame){
 		instance.showDialog(new MemorySettingsDialog(this, inGame));
 	}

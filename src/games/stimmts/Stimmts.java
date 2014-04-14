@@ -670,11 +670,7 @@ public class Stimmts extends Game implements PC {
 	public void start() {
 		nextRound();
 	}
-
-	public void nowVisible() {
-		instance.changeBackground("/media/stimmts/stimmts.jpg");
-	}
-
+	
 	@Override
 	public void openRoundDialog(String winner) {
 		RoundDialog rd = new RoundDialog(this, winner);

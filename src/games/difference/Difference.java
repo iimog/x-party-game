@@ -339,7 +339,6 @@ public class Difference extends Game implements PC {
 		if(nextPicButton!=null){
 			nextPicButton.requestFocus();
 		}
-		instance.changeBackground("/media/difference/blue.jpg");
 	}
 
 	@Override

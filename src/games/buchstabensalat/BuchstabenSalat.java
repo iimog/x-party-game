@@ -607,10 +607,6 @@ public class BuchstabenSalat extends Game implements PC {
 		nextRound();
 	}
 
-	public void nowVisible() {
-		instance.changeBackground("/media/buchstabensalat/letters.jpg");
-	}
-
 	int aufgedeckteBuchstaben = 0;
 
 	class Aufdecker extends Thread {

@@ -150,11 +150,6 @@ public class InnereUhr extends games.Game implements PC {
 	}
 
 	@Override
-	public void nowVisible(){
-		instance.changeBackground("/media/innereuhr/Sanduhr.jpg");
-	}
-
-	@Override
 	public void openDetailsDialog(){
 		instance.showDialog(new InnereUhrDetailsDialog(this));
 	}
