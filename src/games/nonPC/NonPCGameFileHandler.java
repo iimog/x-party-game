@@ -16,8 +16,7 @@ public class NonPCGameFileHandler {
 	
 	public static StandardNonPC loadGame(int globalGameID, Player[] players, Modus modus){
 		GameInfo gi = SpielListen.getSpieleMap().get(globalGameID);
-		String fileName = gi.getPath();
-		// TODO MainDir
+		//String fileName = gi.getPath();
 		String prefix = (gi.isSystem() ? "" : X.getDataDir());
 		/*
 		Properties p = new Properties();
@@ -32,7 +31,7 @@ public class NonPCGameFileHandler {
 		String gameNumOfRounds = p.getProperty(NUMOFROUNDS);
 		*/
 		int numOfRounds = gi.getDefaultNumOfRounds();
-		String background = (prefix + fileName);
+		String background = (prefix + gi.getBackground());
 		RawNonPC game = new RawNonPC(players, numOfRounds, modus, background, globalGameID);
 		return game;
 	}
