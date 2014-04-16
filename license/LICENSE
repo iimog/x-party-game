@@ -1,0 +1,12 @@
+This project is distributed under an open license.
+It utilizes many other open resources, some of them come with their own licenses.
+Here is a list of licenses and a mapping of resource to license (including author)
+
+Licenses:
+#Abbreviation	Text	Full
+CPOL	license/CPOL.htm	Code Project Open License
+
+Resources:
+#Resource	License	Author	Source	Derived
+src/util/ResourceURLFilter	CPOL	Doron Barak	http://www.codeproject.com/Articles/512501/Recursive-Resource-Gathering-in-Java	no
+src/util/ResourceList	CPOL	Doron Barak	http://www.codeproject.com/Articles/512501/Recursive-Resource-Gathering-in-Java	yes
