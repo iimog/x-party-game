@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,6 +23,7 @@ import javax.swing.JLabel;
 public class WerLuegtRotator extends Rotator {
 	private static final long serialVersionUID = 1L;
 	private Map<String, Boolean> correctAnswers;
+
 	public Map<String, Boolean> getCorrectAnswers() {
 		return correctAnswers;
 	}
@@ -34,38 +38,60 @@ public class WerLuegtRotator extends Rotator {
 		return verlauf;
 	}
 
-	public WerLuegtRotator(){
+	public WerLuegtRotator() {
 		super();
 		initGUI();
 	}
-	
+
 	public WerLuegtRotator(File werLuegtFile) {
 		this();
-		changeDeck(werLuegtFile);
+		changeDeckToFile(werLuegtFile);
 	}
-	
-	public void changeDeck(File werLuegtFile){
+
+	public void changeDeckToFile(File werLuegtFile) {
+		resetVars();
+		try {
+			FileReader fr = new FileReader(werLuegtFile);
+			BufferedReader br = new BufferedReader(fr);
+			getAussagenFromBufferedReader(br);
+			fr.close();
+			br.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Datei: " + werLuegtFile + " nicht gefunden");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void resetVars() {
 		correctAnswers = new HashMap<String, Boolean>();
-		getAussagenFromFile(werLuegtFile);
 		schonWeg = new HashSet<Integer>();
 		aussageLabel.setText(" ");
 		verlauf = new ArrayList<String>();
 	}
-	
-	private void initGUI(){
+
+	public void changeDeckToResource(URL url) {
+		resetVars();
+		try {
+			InputStream is = url.openStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			getAussagenFromBufferedReader(br);
+			br.close();
+			is.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void initGUI() {
 		aussageLabel = new JLabel("blub blub");
 		aussageLabel.setFont(Game.STANDARD_FONT.deriveFont(30f));
 		aussageLabel.setHorizontalAlignment(JLabel.CENTER);
 		add(aussageLabel, BorderLayout.CENTER);
 	}
 
-	private void getAussagenFromFile(File file) {
-		if (!file.exists())
-			return;
-		
+	private void getAussagenFromBufferedReader(BufferedReader br) {
 		try {
-			FileReader fr = new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);
 			setDeckName(br.readLine());
 			deckInfo = br.readLine();
 			while (br.ready()) {
@@ -80,9 +106,6 @@ public class WerLuegtRotator extends Rotator {
 						.put(statement, Boolean.parseBoolean(correctness));
 			}
 			br.close();
-			fr.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("Datei: " + file + " nicht gefunden");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -99,7 +122,7 @@ public class WerLuegtRotator extends Rotator {
 	@Override
 	public void changeComponent() {
 		int nextIndex = nextRandom(correctAnswers.size());
-		currentAussage = (String)correctAnswers.keySet().toArray()[nextIndex];
+		currentAussage = (String) correctAnswers.keySet().toArray()[nextIndex];
 		aussageLabel.setText(currentAussage);
 		verlauf.add(currentAussage);
 		validate();
