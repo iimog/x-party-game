@@ -32,7 +32,7 @@ public class Update {
 			// Code to make a webservice HTTP request
 			String responseString = "";
 			String outputString = "";
-			String wsURL = "https://iimog.org/X/ajax/Version";
+			String wsURL = "https://iimog.org/X/ajax/Version.php";
 			URL url = new URL(wsURL);
 			URLConnection connection = url.openConnection();
 			HttpURLConnection httpConn = (HttpURLConnection) connection;
