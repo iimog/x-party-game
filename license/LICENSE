@@ -5,8 +5,15 @@ Here is a list of licenses and a mapping of resource to license (including autho
 Licenses:
 #Abbreviation	Text	Full
 CPOL	license/CPOL.htm	Code Project Open License
+pixelio.de red.kom.	license/pixelio_lizenzvertrag_redaktionell_und_kommerziell.pdf	pixelio.de - Lizenzvertrag zwischen Urheber und Nutzer (redaktionelle und kommerzielle Nutzung)
 
 Resources:
-#Resource	License	Author	Source	Derived
-src/util/ResourceURLFilter	CPOL	Doron Barak	http://www.codeproject.com/Articles/512501/Recursive-Resource-Gathering-in-Java	no
-src/util/ResourceList	CPOL	Doron Barak	http://www.codeproject.com/Articles/512501/Recursive-Resource-Gathering-in-Java	yes
+
+#Code
+#Resource	License	Author	Source	Date	Derived
+src/util/ResourceURLFilter	CPOL	Doron Barak	http://www.codeproject.com/Articles/512501/Recursive-Resource-Gathering-in-Java	2014-04-16	no
+src/util/ResourceList	CPOL	Doron Barak	http://www.codeproject.com/Articles/512501/Recursive-Resource-Gathering-in-Java	2014-04-16	yes
+
+#Pictures
+#Resource	License	Author	Source	Date	Derived
+media/ablauf/iceBG.jpg	pixelio.de red.kom.	Wilhelmine Wulff	http://www.pixelio.de/media/653458	2014-05-03	yes
