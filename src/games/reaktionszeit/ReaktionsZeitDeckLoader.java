@@ -56,15 +56,7 @@ public class ReaktionsZeitDeckLoader {
 		try {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
-			newDeck = new ReaktionsZeitDeck(system);
-			String deckName = br.readLine();
-			newDeck.setDeckName(deckName);
-			String deckType = br.readLine();
-			newDeck.setDeckType(deckType);
-			while (br.ready()) {
-				String element = br.readLine();
-				newDeck.addElement(element);
-			}
+			newDeck = bufferedReaderToDeck(br, system);
 			br.close();
 			fr.close();
 			newDeck.relativeToAbsolute();
@@ -82,23 +74,25 @@ public class ReaktionsZeitDeckLoader {
 		try {
 			InputStream is = url.openStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-			newDeck = new ReaktionsZeitDeck(true);
-			String deckName = br.readLine();
-			newDeck.setDeckName(deckName);
-			String deckType = br.readLine();
-			newDeck.setDeckType(deckType);
-			while (br.ready()) {
-				String element = br.readLine();
-				newDeck.addElement(element);
-			}
+			newDeck = bufferedReaderToDeck(br, true);
 			br.close();
 			is.close();
 			newDeck.relativeToAbsolute();
-		} catch (FileNotFoundException e) {
-			System.out.println("URL: " + url
-					+ " nicht gefunden");
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		return newDeck;
+	}
+	
+	private static ReaktionsZeitDeck bufferedReaderToDeck(BufferedReader br, boolean system) throws IOException{
+		ReaktionsZeitDeck newDeck = new ReaktionsZeitDeck(system);
+		String deckName = br.readLine();
+		newDeck.setDeckName(deckName);
+		String deckType = br.readLine();
+		newDeck.setDeckType(deckType);
+		while (br.ready()) {
+			String element = br.readLine();
+			newDeck.addElement(element);
 		}
 		return newDeck;
 	}
