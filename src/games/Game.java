@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -618,5 +619,53 @@ public abstract class Game extends Anzeige {
 	@Override
 	public void nowVisible(){
 		instance.changeBackground(background);
+	}
+	
+	/**
+	 * Set the winner of this round to playerID (or all others) give credits and open round dialog
+	 * @param playerID
+	 * @param revert
+	 */
+	public void winnerIs(int playerID, boolean revert){
+		Set<Integer> winnerIDs = new HashSet<Integer>();
+		if (revert) {
+			for (int i = 0; i < spielerZahl; i++) {
+				if (i != playerID)
+					winnerIDs.add(i);
+			}
+		} else {
+			winnerIDs.add(playerID);
+		}
+		verbuchePunkte(winnerIDs);
+		winner = getWinnerText(winnerIDs);
+		openRoundDialog(winner);
+	}
+
+	private void verbuchePunkte(Set<Integer> winnerIDs) {
+		if (winnerIDs.size() < myPlayer.length) {
+			for (int id : winnerIDs) {
+				creds[id].earnsCredit(1);
+				myPlayer[id].gameCredit++;
+			}
+		}
+	}
+
+	private String getWinnerText(Set<Integer> winnerIDs) {
+		String winner = "";
+		if (winnerIDs.size() >= myPlayer.length || winnerIDs.size() == 0) {
+			winner = "niemanden";
+		} else {
+			int c = 0;
+			for (int id : winnerIDs) {
+				String trenner = "";
+				if (c == winnerIDs.size() - 3)
+					trenner = ", ";
+				if (c == winnerIDs.size() - 2)
+					trenner = " und ";
+				winner += myPlayer[id].name + trenner;
+				c++;
+			}
+		}
+		return winner;
 	}
 }
