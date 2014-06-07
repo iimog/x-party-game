@@ -562,6 +562,7 @@ public class BuchstabenSalat extends Game implements PC {
 		setBuzzerActive(true);
 		if (modus == Modus.TEAM)
 			changeActivePlayers();
+		playerLabel[whoBuzzered].setForeground(Color.WHITE);
 		answer = "";
 		unstoppable = false;
 		wortErraten = false;

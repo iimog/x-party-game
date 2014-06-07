@@ -88,6 +88,8 @@ public class Skel extends Game {
 		// handle buzzer events
 		// eg end this round and determine winner or activate response field for
 		// the one who buzzered
+		if(!isBuzzerActive())
+			return;
 		inRound = false;
 		setBuzzerActive(false);
 		// winnerIs(whoBuzz, false);
