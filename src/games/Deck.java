@@ -54,4 +54,12 @@ public class Deck {
 			return deckName;
 		return deckName + " (" + deckType + ")";
 	}
+	
+	public int getSize(){
+		return elements.size();
+	}
+	
+	public String getElement(int index){
+		return elements.get(index);
+	}
 }
