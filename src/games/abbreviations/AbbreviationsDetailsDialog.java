@@ -1,8 +1,8 @@
 package games.abbreviations;
 
 import games.Game;
-import games.buchstabensalat.BuchstabenSalat;
 import gui.AnzeigeDialog;
+import gui.components.Bildschirm;
 import gui.components.DefaultButton;
 
 import java.awt.BorderLayout;
@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 	private static final long serialVersionUID = 1L;
@@ -26,6 +27,9 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 	private JLabel rightWordLabel;
 	private JLabel answerLabel;
 	private JLabel abbreviationLabel;
+	private Bildschirm abbreviationPanel;
+	private Bildschirm rightWordPanel;
+	private Bildschirm answerPanel;
 	
 	public AbbreviationsDetailsDialog(Abbreviations abbreviations) {
 		this.abbreviations = abbreviations;
@@ -34,7 +38,7 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 
 	private void initGUI(){
 		dialogPane.setLayout(new BorderLayout());
-		hauptbereichPanel = new JPanel(new GridLayout(3,1));
+		hauptbereichPanel = new JPanel(new BorderLayout(3,1));
 		hauptbereichPanel.setBackground(Color.DARK_GRAY);
 		dialogPane.add(hauptbereichPanel, BorderLayout.CENTER);
 		labelFont = Game.STANDARD_FONT.deriveFont(50f);
@@ -55,27 +59,38 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 
 	private void showAnswerAndSolution() {
 		{
+			abbreviationPanel = new Bildschirm("/media/abbreviations/nummernschild.png");
+			abbreviationPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 23, -5));
+			hauptbereichPanel.add(abbreviationPanel, BorderLayout.NORTH);
 			abbreviationLabel = new JLabel();
-			abbreviationLabel.setFont(Abbreviations.standardFont);
+			abbreviationLabel.setFont(Abbreviations.standardFont.deriveFont(70f));
 			abbreviationLabel.setText(abbreviations.getCurrentAbbreviation());
-			abbreviationLabel.setForeground(Color.WHITE);
-			hauptbereichPanel.add(abbreviationLabel);
+			abbreviationLabel.setForeground(Color.BLACK);
+			abbreviationPanel.add(abbreviationLabel);
 		}
 		{
+			rightWordPanel = new Bildschirm("/media/abbreviations/ortsschild.png");
+			hauptbereichPanel.add(rightWordPanel,BorderLayout.CENTER);
 			rightWordLabel = new JLabel();
 			rightWordLabel.setFont(Abbreviations.standardFont);
 			rightWordLabel.setText(abbreviations.getCurrentFullWord());
-			rightWordLabel.setForeground(Color.WHITE);
-			hauptbereichPanel.add(rightWordLabel);
+			rightWordLabel.setForeground(Color.BLACK);
+			rightWordLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			rightWordPanel.add(rightWordLabel);
 		}
 		{
+			answerPanel = new Bildschirm("/media/abbreviations/ortsschild_out.png");
+			hauptbereichPanel.add(answerPanel,BorderLayout.SOUTH);
 			answerLabel = new JLabel();
 			answerLabel.setFont(Abbreviations.standardFont);
 			answerLabel.setText(abbreviations.getAnswer());
-			answerLabel.setForeground(Color.RED);
-			if(abbreviations.getCurrentFullWord().equalsIgnoreCase(abbreviations.getAnswer()))
-				answerLabel.setForeground(Color.GREEN);
-			hauptbereichPanel.add(answerLabel);
+			answerLabel.setForeground(Color.DARK_GRAY);
+			answerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			if(abbreviations.getCurrentFullWord().equalsIgnoreCase(abbreviations.getAnswer())){
+				answerLabel.setForeground(Color.BLACK);
+				answerPanel.changePic("/media/abbreviations/ortsschild.png");
+			}
+			answerPanel.add(answerLabel);
 		}
 	}
 }

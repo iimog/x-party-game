@@ -6,13 +6,14 @@ import games.Game;
 import games.Modus;
 import games.dialogeGUIs.RoundDialog;
 import gui.EasyDialog;
+import gui.components.Bildschirm;
 import gui.components.Countdown;
 import gui.components.JButtonIcon;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -61,12 +62,13 @@ public class Abbreviations extends Game {
 		hauptbereichPanel.setOpaque(false);
 		spielBereichPanel.add(hauptbereichPanel);
 		currentDeck = new AbbreviationsDeck(abbreviationsDecks.get(new Random().nextInt(abbreviationsDecks.size())));
-		currentTargetPanel = new JPanel();
-		currentTargetPanel.setOpaque(false);
+		currentTargetPanel = new Bildschirm("/media/abbreviations/nummernschild.png");
+		currentTargetPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 23, -5));
 		hauptbereichPanel.add(currentTargetPanel, BorderLayout.CENTER);
 		currentTargetLabel = new JLabel("Placeholder");
-		currentTargetLabel.setFont(Abbreviations.standardFont);
-		currentTargetLabel.setHorizontalAlignment(JLabel.CENTER);
+		currentTargetLabel.setFont(Abbreviations.standardFont.deriveFont(70f));
+		currentTargetLabel.setForeground(Color.BLACK);
+		currentTargetLabel.setHorizontalAlignment(JLabel.LEFT);
 		currentTargetPanel.add(currentTargetLabel);
 		addUntenPanel();
 		settingsChanged();
@@ -76,7 +78,7 @@ public class Abbreviations extends Game {
 		untenPanel = new JPanel();
 		untenPanel.setLayout(new BorderLayout());
 		hauptbereichPanel.add(untenPanel, BorderLayout.SOUTH);
-		antwortTextField = new JTextField("",20);
+		antwortTextField = new JTextField();
 		antwortTextField.setFont(Abbreviations.standardFont);
 		antwortTextField.setForeground(Color.WHITE);
 		antwortTextField.setBackground(Color.black);
@@ -165,8 +167,7 @@ public class Abbreviations extends Game {
 		currentIndex = nextRandom(currentDeck.getSize());
 		if (currentIndex == -1) {
 			EasyDialog
-					.showMessage("Es wurden alle vorhandenen Nummernschilder in diesem Deck gespielt, das Spiel wird abgebrochen und mit dem aktuellen Spielstand gewertet.");
-			abbruch();
+					.showMessage("Es wurden alle vorhandenen Nummernschilder in diesem Deck gespielt, das Spiel wird abgebrochen.");
 		} else {
 			currentTargetLabel.setText(currentDeck.getAbbreviation(currentIndex));
 			antwortTextField.setText("");
