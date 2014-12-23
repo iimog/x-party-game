@@ -15,6 +15,9 @@ The winner of each mini game earns points for the final rating.
 The mini games are intended to be short (a couple of minutes each) and fun.
 There are mini games that are played with the computer and others that are played in the real world. 
 
+** Language
+Currently the game is completely in German.
+An english translation is planned but not yet in progress.
 ** A general note
 
 I started developing this game years ago to get some experience in java programming.
