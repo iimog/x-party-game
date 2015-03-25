@@ -84,3 +84,7 @@ hesitate to contact us. Either report [[https://github.com/iimog/x-party-game/is
 #+LaTeX_HEADER: \setlength{\parindent}{0pt}
 #+LaTeX_HEADER: \setlength{\parskip}{1.5ex}
 #+LATEX_HEADER: \renewcommand{\familydefault}{\sfdefault}
+
+
+  #+ATTR_HTML: title="Join the chat at https://gitter.im/iimog/x-party-game"
+  [[https://gitter.im/iimog/x-party-game?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge][file:https://badges.gitter.im/Join%20Chat.svg]]
