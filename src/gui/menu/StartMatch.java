@@ -48,7 +48,7 @@ public class StartMatch extends Anzeige {
 	 */
 	private static final long serialVersionUID = 823521784957645300L;
 
-	private static String background = "/media/ablauf/iceBG2.png";
+	private static String background = "/media/ablauf/iceBG2.jpg";
 	private Dimension buttonSize = new Dimension(250,50);
 	public Player[] myPlayer;
 	private int prefNumOfGames=15;
