@@ -17,8 +17,8 @@ public class TotenAnzeige extends JPanel {
 	public int status;
 	private Bildschirm[] flaeche = new Bildschirm[4];
 	private String[] icon = new String[2];{
-		icon[0] = "/media/ghosts/littleEngel.jpg";
-		icon[1] = "/media/ghosts/littleTeufel.jpg";
+		icon[0] = "/media/ghosts/littleEngel.png";
+		icon[1] = "/media/ghosts/littleTeufel.png";
 	}
 	private int gone = 0;
 
