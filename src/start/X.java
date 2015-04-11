@@ -83,7 +83,7 @@ public class X extends javax.swing.JFrame {
 		if (standardFont == null) {
 			try {
 				standardFont = Font
-						.createFont(Font.TRUETYPE_FONT, X.class.getResourceAsStream("/media/ablauf/fonts/freemetto.ttf"));
+						.createFont(Font.TRUETYPE_FONT, X.class.getResourceAsStream("/media/ablauf/fonts/monitorica/OT-tt/Monitorica-Bd.ttf"));
 			} catch (Exception e) {
 				e.printStackTrace();
 				// TODO set standard Font to default
