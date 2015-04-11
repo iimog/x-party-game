@@ -48,11 +48,11 @@ public class Geist {
 		Bildschirm b;
 		String boese;
 		if(bad){
-			b = new Bildschirm("/media/ghosts/Teufel.jpg");
+			b = new Bildschirm("/media/ghosts/Teufel.png");
 			boese = "BÖSE";
 		}
 		else{
-			b = new Bildschirm("/media/ghosts/engel.jpg");
+			b = new Bildschirm("/media/ghosts/Engel.png");
 			boese = "GUT";
 		}
 		gui.EasyDialog.showMessage("Dieser Geist ist... "+boese,b);

@@ -406,7 +406,7 @@ public class PlayerFactory extends javax.swing.JPanel {
 			soundLabel.setText("Sound:");
 			soundLabel.setFont(standardFont);
 			soundPanel.add(soundLabel);
-			soundButton = new JButtonIcon("/media/ablauf/sound.jpg", "abspielen");
+			soundButton = new JButtonIcon("/media/ablauf/sound.png", "abspielen");
 			soundPanel.add(soundButton);
 			soundButton.addActionListener(new ActionListener() {				
 				@Override
