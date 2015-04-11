@@ -9,7 +9,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -69,7 +68,7 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 			abbreviationPanel.add(abbreviationLabel);
 		}
 		{
-			rightWordPanel = new Bildschirm("/media/abbreviations/ortsschild.png");
+			rightWordPanel = new Bildschirm("/media/abbreviations/ortseingang.png");
 			hauptbereichPanel.add(rightWordPanel,BorderLayout.CENTER);
 			rightWordLabel = new JLabel();
 			rightWordLabel.setFont(Abbreviations.standardFont);
@@ -79,7 +78,7 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 			rightWordPanel.add(rightWordLabel);
 		}
 		{
-			answerPanel = new Bildschirm("/media/abbreviations/ortsschild_out.png");
+			answerPanel = new Bildschirm("/media/abbreviations/ortsausgang.png");
 			hauptbereichPanel.add(answerPanel,BorderLayout.SOUTH);
 			answerLabel = new JLabel();
 			answerLabel.setFont(Abbreviations.standardFont);
@@ -88,7 +87,7 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 			answerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			if(abbreviations.getCurrentFullWord().equalsIgnoreCase(abbreviations.getAnswer())){
 				answerLabel.setForeground(Color.BLACK);
-				answerPanel.changePic("/media/abbreviations/ortsschild.png");
+				answerPanel.changePic("/media/abbreviations/ortseingang.png");
 			}
 			answerPanel.add(answerLabel);
 		}

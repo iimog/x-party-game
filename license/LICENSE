@@ -18,6 +18,12 @@ src/util/ResourceList	CPOL	Doron Barak	http://www.codeproject.com/Articles/51250
 #Resource	License	Author	Source	Date	Derived
 media/ablauf/iceBG.jpg	pixelio.de red.kom.	Wilhelmine Wulff	http://www.pixelio.de/media/653458	2014-05-03	yes
 media/abbreviations/roadBG.jpg	pixelio.de red.kom.	Katharina Wieland Müller	http://www.pixelio.de/media/570717	2014-06-07	yes
+media/abbreviations/ortseingang.png	Public Domain	Tobias Ankenbrand	self-creation	2015-04-11	no
+media/abbreviations/ortsausgang.png	Public Domain	Tobias Ankenbrand	self-creation	2015-04-11	no
+media/abbreviations/nummernschild.png	Public Domain	Tobias Ankenbrand	self-creation	2015-04-11	no
+media/abbreviations/landeseingang.png	Public Domain	Tobias Ankenbrand	self-creation	2015-04-11	no
+media/abbreviations/landesausgang.png	Public Domain	Tobias Ankenbrand	self-creation	2015-04-11	no
+media/abbreviations/international.png	Public Domain	Tobias Ankenbrand	self-creation	2015-04-11	no
 
 
 #Fonts
