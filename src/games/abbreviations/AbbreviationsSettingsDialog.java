@@ -1,5 +1,7 @@
 package games.abbreviations;
 
+import java.awt.Color;
+
 import games.Deck;
 import games.dialogeGUIs.GameSettingsDialog;
 
@@ -45,6 +47,7 @@ public class AbbreviationsSettingsDialog extends GameSettingsDialog {
 					new DefaultComboBoxModel(abbreviations.getAbbreviationsDecks().toArray(new Deck[1]));
 				
 			deckComboBox = new JComboBox();
+			deckComboBox.setBackground(Color.DARK_GRAY);
 			deckComboBox.setModel(deckComboBoxModel);	
 			addSettingsComponent("Deck", deckComboBox);
 		}
