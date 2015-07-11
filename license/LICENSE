@@ -15,6 +15,7 @@ src/util/ResourceURLFilter	CPOL	Doron Barak	http://www.codeproject.com/Articles/
 src/util/ResourceList	CPOL	Doron Barak	http://www.codeproject.com/Articles/512501/Recursive-Resource-Gathering-in-Java	2014-04-16	yes
 
 #Pictures
+# The license info for the images of memory decks are listed separately in media/memory/license.txt
 #Resource	License	Author	Source	Date	Derived
 media/ablauf/iceBG.jpg	pixelio.de red.kom.	Wilhelmine Wulff	http://www.pixelio.de/media/653458	2014-05-03	yes
 media/ablauf/iceBG1.png	pixelio.de red.kom.	Wilhelmine Wulff	http://www.pixelio.de/media/653458	2014-05-03	yes
@@ -75,6 +76,7 @@ media/sautreiber/3_schweine.jpg	red.kom.	Stefan Schwarz	http://www.pixelio.de/me
 media/stimmts/stimmts.jpg	red.kom.	Rainer Sturm	http://www.pixelio.de/media/636607	2015-04-13	no
 media/tron/Tron.jpg	red.kom.	Rainer Sturm	http://www.pixelio.de/media/648318	2015-04-13	no
 media/wurst/wurst.jpg	red.kom.	Klaus Steves	http://www.pixelio.de/media/640944	2015-04-13	no
+media/memory/blue.jpg	red.kom.	Joujou	http://www.pixelio.de/media/545055	2015-07-11	no
 
 #Icons
 #All icons are taken from the Public Domain package of the openiconlibrary (http://sourceforge.net/projects/openiconlibrary/) version 0.11 
