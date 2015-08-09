@@ -136,3 +136,6 @@ media/sounds/lache.wav	Attribution License	acekasbo	freesound.org	2013-07-05	yes
 
 #Fonts
 media/ablauf/fonts/monitorica	CC-BY	Sergiy S. Tkachenko	http://openfontlibrary.org/en/font/monitorica	2015-04-11	no
+
+#Code
+gui/aterai/*	GitHub.com MIT (LICENSE-aterai)	TERAI Atsuhiro (aterai)	https://github.com/aterai/java-swing-tips	2015-08-09	yes
