@@ -12,7 +12,6 @@
             </manifest>
             <zipfileset src="./lib/jar-in-jar-loader.zip"/>
             <fileset dir="./bin"/>
-        	<fileset dir="./" includes="media/**"/>
         </jar>
     </target>
 </project>
