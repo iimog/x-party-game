@@ -191,9 +191,13 @@ public class Bildschirm extends JPanel {
 
 	private void setPic(String bildname, boolean autoSize) {
 		URL bildURL = getClass().getResource(bildname);
-		if(bildURL == null)
+		if(bildURL != null){
+			bild = getToolkit().getImage(bildURL);
+		} else {
+			//TODO code to load from (absolut) file if URL fails
+			noPicFound();
 			return;
-		bild = getToolkit().getImage(bildURL);
+		}
 		MediaTracker mt = new MediaTracker(this);
 		mt.addImage(bild, 0);
 		try {
