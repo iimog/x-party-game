@@ -10,9 +10,11 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Point;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -194,9 +196,13 @@ public class Bildschirm extends JPanel {
 		if(bildURL != null){
 			bild = getToolkit().getImage(bildURL);
 		} else {
-			//TODO code to load from (absolut) file if URL fails
-			noPicFound();
-			return;
+			try {
+				bild = ImageIO.read(new URL("file://"+bildname));
+			} catch (Exception e) {
+				e.printStackTrace();
+				noPicFound();
+				return;
+			}
 		}
 		MediaTracker mt = new MediaTracker(this);
 		mt.addImage(bild, 0);
