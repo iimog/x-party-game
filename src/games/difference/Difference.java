@@ -479,6 +479,14 @@ public class Difference extends Game implements PC {
 		String deck = customSettings.getProperty(MemorySettingsDialog.DECK);
 		if(deck != null)	
 			setSelectedDeck(deck);
+		String answerTime = customSettings.getProperty(DifferenceSettingsDialog.ANSWERTIME);
+		int tta = Integer.parseInt(answerTime);
+		if(tta==0)tta++;
+		setCdTime(tta);
+		if(this.modus == Modus.SOLO){
+			String hide = customSettings.getProperty(DifferenceSettingsDialog.HIDE);
+			bildAusblenden = hide.equals("TRUE");
+		}
 	}
 	
 	public void setSelectedDeck(String deckName){
