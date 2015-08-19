@@ -45,7 +45,6 @@ public class Difference extends Game implements PC {
 	}
 	boolean bildAusblenden = true;
 	private JButton nextPicButton;
-	private boolean buzzerable = true;		// Doppelbuzzern verhindern
 	private int current;		// Zufallszahl für aktuelles Bild
 	int last;
 	Point lastClick;
@@ -217,10 +216,10 @@ public class Difference extends Game implements PC {
 
 	@Override
 	public void buzzeredBy(int player){
-		if(!buzzerable)return;
+		if(!isBuzzerActive())return;
 		unstoppable = true;
 		clickable = true;
-		buzzerable = false;		// am Rundenende wieder buzzerable setzen
+		setBuzzerActive(false);
 		if(modus == Modus.SOLO){
 			wrongPic.hidePic(false);
 		}
@@ -303,7 +302,7 @@ public class Difference extends Game implements PC {
 
 	private void nextPicButtonActionPerformed(ActionEvent evt) {
 		uebersprungeneBilder.add(current);
-		if(buzzerable){
+		if(isBuzzerActive()){
 			if(!isOver())nextRound();
 		}
 	}
@@ -355,7 +354,7 @@ public class Difference extends Game implements PC {
 			wrongPic.setSize(wrongPic.getPreferredSize());
 			revalidate();
 			repaint();
-			buzzerable = true;
+			setBuzzerActive(true);
 			count.stop();
 			for(JLabel l : super.playerLabel){
 				l.setForeground(Color.black);
@@ -368,6 +367,7 @@ public class Difference extends Game implements PC {
 		if(nextPicButton!=null){
 			nextPicButton.requestFocus();
 		}
+		setBuzzerActive(true);
 	}
 
 	@Override
