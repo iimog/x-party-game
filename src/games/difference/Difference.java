@@ -1,10 +1,4 @@
 package games.difference;
-import games.Game;
-import games.Modus;
-import games.PC;
-import games.dialogeGUIs.RoundDialog;
-import gui.EasyDialog;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -15,15 +9,23 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ablauf.MatchCredits;
+import games.Game;
+import games.Modus;
+import games.PC;
+import games.dialogeGUIs.RoundDialog;
+import games.memory.MemorySettingsDialog;
+import gui.EasyDialog;
 import player.Player;
 import util.ConfirmListener;
-import ablauf.MatchCredits;
 
 public class Difference extends Game implements PC {
 	private static final long serialVersionUID = -6078006638537351232L;
@@ -57,16 +59,14 @@ public class Difference extends Game implements PC {
 	int okDist = 15;		// Zulässige Entfernung vom Fehlermittelpunkt
 
 	int distance;
-	private String path = "/media/difference/";			// Standardpfad
-	private int numOfPics = 23;							// Anzahl der Fehlerbilder
-	private String[] pics = new String[numOfPics];		// Dateiname der richtigen Bilder
-	String[] ePics = new String[numOfPics];		// Dateiname der Fehlerbilder
-	Point[] coords = new Point[numOfPics];		// Ort des Fehlers
 	private gui.components.Bildschirm rightPic;
 	private gui.components.Bildschirm wrongPic;
 	private List<Integer> uebersprungeneBilder;
 	public boolean timeOver;
-	{
+	private HashMap<String, DifferenceDeck> deckMap;
+	private List<DifferenceDeck> difDecks;
+	private DifferenceDeck selectedDeck;
+/*	{
 		pics[0] = path + "villa2.jpg";
 		ePics[0] = path + "villa2E.jpg";
 		coords[0] = new Point(3,250);
@@ -159,6 +159,46 @@ public class Difference extends Game implements PC {
 		ePics[22] = path + "serpentineE.jpg";
 		coords[22] = new Point(277,47);
 	}
+	*/
+	
+	/**
+	 * Gibt eine Liste mit Decknamen zurück. Pseudonamen sind "Zufall" und  "Alle"
+	 * @param withPseudoNames
+	 * @return Liste der Decknamen
+	 */
+	public List<String> getDeckNames(boolean withPseudoNames) {
+		List<String> deckNames = new ArrayList<String>();
+		if(withPseudoNames){
+			deckNames.add("Zufall");
+			deckNames.add("Alles");
+		}
+		deckNames.addAll(getDeckMap().keySet());
+		return deckNames;
+	}
+	
+	public Map<String,DifferenceDeck> getDeckMap() {
+		if(deckMap == null){
+			deckMap = new HashMap<String,DifferenceDeck>();
+			for(DifferenceDeck dd : difDecks){
+				deckMap.put(dd.getDeckName(), dd);
+			}
+		}
+		return deckMap;
+	}
+		
+	public DifferenceDeck getSelectedDeck(){
+		return selectedDeck;
+	}
+	
+	@Override
+	public void loadProperties(){
+		difDecks = DifferenceDeckLoader.loadDifferenceDecks();
+		selectedDeck = DifferenceDeck.getRandomDeck(difDecks);
+	}
+
+	public List<DifferenceDeck> getDecks() {
+		return difDecks;
+	}
 
 	public Difference(Player[] player, Modus modus, String background, int globalGameID){
 		this(player, 5, modus, background, globalGameID);
@@ -168,7 +208,7 @@ public class Difference extends Game implements PC {
 		super(player, numOfRounds, modus, background, globalGameID);
 		this.numOfRounds = numOfRounds;
 		uebersprungeneBilder = Collections.synchronizedList(new ArrayList<Integer>());
-		current = nextRandom(numOfPics);
+		current = nextRandom(selectedDeck.size());
 		if(modus == Modus.SOLO){
 			cdTime = 30;
 		}
@@ -208,11 +248,12 @@ public class Difference extends Game implements PC {
 					spielBereichPanel.add(darstellungPanel, BorderLayout.CENTER);
 					darstellungPanel.setLayout(darstellungPanelLayout);
 					{
-						rightPic = new gui.components.Bildschirm(pics[current]);
+						rightPic = new gui.components.Bildschirm(selectedDeck.getPictures().get(current).getCorrectPic());
+						System.out.println(selectedDeck.getPictures().get(current).getCorrectPic());
 						darstellungPanel.add(rightPic);
 					}
 					{
-						wrongPic = new gui.components.Bildschirm(ePics[current]);
+						wrongPic = new gui.components.Bildschirm(selectedDeck.getPictures().get(current).getWrongPic());
 						darstellungPanel.add(wrongPic);
 						if(modus == Modus.SOLO)wrongPic.hidePic(true);
 						wrongPic.addMouseListener(new MouseAdapter() {
@@ -271,7 +312,7 @@ public class Difference extends Game implements PC {
 		timeOver = false;
 		unstoppable = false;
 		last = current;
-		current = nextRandom(numOfPics);
+		current = nextRandom(selectedDeck.getPictures().size());
 		if(current==-1){
 			if(uebersprungeneBilder.size()==0){
 				EasyDialog.showConfirm("Es sind leider keine Fehlerbilder mehr vorhanden, " +
@@ -305,8 +346,8 @@ public class Difference extends Game implements PC {
 			if(modus == Modus.TEAM){
 				changeActivePlayers();
 			}
-			rightPic.changePic(pics[current]);
-			wrongPic.changePic(ePics[current]);
+			rightPic.changePic(selectedDeck.getPictures().get(current).getCorrectPic());
+			wrongPic.changePic(selectedDeck.getPictures().get(current).getWrongPic());
 			if(modus == Modus.SOLO){
 				wrongPic.hidePic(true);
 			}
@@ -348,7 +389,7 @@ public class Difference extends Game implements PC {
 
 	@Override
 	public void openSettingsDialog(){
-		instance.showDialog(new DifferenceSettingsDialog(this));
+		instance.showDialog(new DifferenceSettingsDialog(this, false));
 	}
 	private void roundEnd(){
 		if(whoBuzz>=0 && whoBuzz<=spielerZahl){
@@ -409,6 +450,7 @@ public class Difference extends Game implements PC {
 
 	@Override
 	public void settingsChanged(){
+		propertiesToSettings();
 		updateCreds();
 		count.setSecs(cdTime);
 	}
@@ -420,12 +462,34 @@ public class Difference extends Game implements PC {
 		if(!clickable)return;
 		clickable = false;
 		lastClick = evt.getPoint();
-		distance = (int)Math.round(lastClick.distance(coords[current]));
+		distance = (int)Math.round(lastClick.distance(selectedDeck.getPictures().get(current).getErrorCoordinates()));
 		roundEnd();
 	}
 	@Override
 	public void abbruch(){
 		count.stop();
 		super.abbruch();
+	}
+	
+	private void propertiesToSettings(){
+		if(customSettings == null){
+			return;
+		}
+		numOfRounds = Integer.parseInt(customSettings.getProperty(DifferenceSettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
+		String deck = customSettings.getProperty(MemorySettingsDialog.DECK);
+		if(deck != null)	
+			setSelectedDeck(deck);
+	}
+	
+	public void setSelectedDeck(String deckName){
+		if(deckName.equals("Zufall")){
+			selectedDeck = DifferenceDeck.getRandomDeck(difDecks);
+		}
+		else if(deckName.equals("Alles")){
+			selectedDeck = DifferenceDeck.getFullDeck(difDecks);
+		}
+		else{			
+			selectedDeck = getDeckMap().get(deckName);
+		}
 	}
 }
