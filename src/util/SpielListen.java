@@ -33,6 +33,7 @@ public class SpielListen {
 			spieleMap.putAll(loadSystemPCGames());
 			spieleMap.putAll(loadSystemNonPCGames());
 			spieleMap.putAll(loadUserNonPCGames());
+			spieleMap.putAll(loadUserPCGames());
 		}
 		return spieleMap;
 	}
@@ -64,6 +65,34 @@ public class SpielListen {
 			e.printStackTrace();
 		}
 		return userNonPC;
+	}
+	
+	/**
+	 * Diese Methode lädt die PC Liste aus dem Benutzerverzeichnis
+	 * @return userPC
+	 */
+	private static Map<Integer, GameInfo> loadUserPCGames() {
+		Map<Integer, GameInfo> userPC = new HashMap<Integer, GameInfo>();
+		int counter = 1;
+		try {
+			FileReader fr = new FileReader(X.getDataDir() + "games/pc.games");
+			BufferedReader br = new BufferedReader(fr);
+			while (br.ready()) {
+				String line = br.readLine();
+				String[] elements = line.split("\t");
+				userPC.put(counter * 4 + 2,
+						new GameInfo(counter * 4 + 2, elements[0], elements[1],
+								Integer.parseInt(elements[2]), Integer.parseInt(elements[3]), elements[4], elements[5]));
+				counter++;
+			}
+			br.close();
+			fr.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Datei: "+X.getDataDir() + "games/pc.games nicht gefunden");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return userPC;
 	}
 
 	/**
