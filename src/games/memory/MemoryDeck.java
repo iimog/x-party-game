@@ -7,10 +7,8 @@ import java.util.Random;
 public class MemoryDeck {
 	private String deckName;
 	private List<String> pictures;
-	private boolean system;
 	
-	public MemoryDeck(boolean system){
-		this.system = system;
+	public MemoryDeck(){
 		pictures = new ArrayList<String>();
 	}
 	public String getDeckName() {
@@ -25,22 +23,11 @@ public class MemoryDeck {
 	public void addPicture(String picture) {
 		pictures.add(picture);
 	}
-	/**
-	 * Converts the relative paths of pictures to absolute ones, depending on system/user
-	 */
-	public void relativeToAbsolute(){
-		for(int i=0; i<pictures.size(); i++){
-			if(system)
-				pictures.set(i, pictures.get(i));
-			else
-				pictures.set(i, pictures.get(i));
-		}
-	}
 	
 	public static MemoryDeck getFullDeck(List<MemoryDeck> deckList){
 		// Da sich dieses Memory Deck aus unterschiedlichen bereits fertigen Decks 
 		// (mit absoluten Pfaden) zusammensetzt ist es egal ob system oder nicht.
-		MemoryDeck md = new MemoryDeck(true);
+		MemoryDeck md = new MemoryDeck();
 		md.setDeckName("Alles");
 		for(MemoryDeck deck : deckList){
 			for(String pic : deck.getPictures()){				

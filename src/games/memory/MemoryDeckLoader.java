@@ -58,7 +58,7 @@ public class MemoryDeckLoader {
 		try {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
-			newDeck = new MemoryDeck(system);
+			newDeck = new MemoryDeck();
 			String deckName = br.readLine();
 			newDeck.setDeckName(deckName);
 			while (br.ready()) {
@@ -67,7 +67,6 @@ public class MemoryDeckLoader {
 			}
 			br.close();
 			fr.close();
-			newDeck.relativeToAbsolute();
 		} catch (FileNotFoundException e) {
 			System.out.println("Datei: " + file
 					+ " nicht gefunden");
@@ -82,7 +81,7 @@ public class MemoryDeckLoader {
 		try {
 			InputStream is = url.openStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-			newDeck = new MemoryDeck(true);
+			newDeck = new MemoryDeck();
 			String deckName = br.readLine();
 			newDeck.setDeckName(deckName);
 			while (br.ready()) {
@@ -91,7 +90,6 @@ public class MemoryDeckLoader {
 			}
 			br.close();
 			is.close();
-			newDeck.relativeToAbsolute();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
