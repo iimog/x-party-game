@@ -29,7 +29,7 @@ public class DifferenceDetailsDialog extends gui.AnzeigeDialog {
 
 	public DifferenceDetailsDialog(Difference dif) {
 		this.dif = dif;
-		bild = dif.ePics[dif.last];
+		bild = dif.getSelectedDeck().getPictures().get(dif.last).getCorrectPic();
 		initGUI();
 	}
 
@@ -43,7 +43,7 @@ public class DifferenceDetailsDialog extends gui.AnzeigeDialog {
 				{
 					bildschirm1 = new Bildschirm(bild);
 					hauptbereichPanel.add(bildschirm1, BorderLayout.CENTER);
-					bildschirm1.drawCircle(dif.coords[dif.last].x,dif.coords[dif.last].y , dif.okDist);
+					bildschirm1.drawCircle(dif.getSelectedDeck().getPictures().get(dif.last).getErrorCoordinates().x,dif.getSelectedDeck().getPictures().get(dif.last).getErrorCoordinates().y , dif.okDist);
 					bildschirm1.drawDot(dif.lastClick.x, dif.lastClick.y, dif.myPlayer[dif.lastBuzz].farbe);
 				}
 				{
