@@ -10,7 +10,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Point;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -197,7 +196,7 @@ public class Bildschirm extends JPanel {
 			bild = getToolkit().getImage(bildURL);
 		} else {
 			try {
-				bild = ImageIO.read(new URL("file://"+bildname));
+				bild = ImageIO.read(new java.io.File(bildname));
 			} catch (Exception e) {
 				e.printStackTrace();
 				noPicFound();
