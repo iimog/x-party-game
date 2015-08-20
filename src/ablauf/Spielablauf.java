@@ -1,5 +1,16 @@
 package ablauf;
 
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+
 import games.Ergebnis;
 import games.Game;
 import games.GameInfo;
@@ -8,16 +19,6 @@ import games.Modus;
 import games.nonPC.NonPCGameFileHandler;
 import gui.EasyDialog;
 import highscore.HighscoreFileHandler;
-
-import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-
 import player.Player;
 import settings.Profile;
 import start.X;
@@ -196,7 +197,15 @@ public class Spielablauf implements GameListener, Ablauf {
 		formparas[2] = String.class;
 		formparas[3] = Integer.TYPE;
 		try {
-			Class<?> c = Class.forName(SpielListen.getSpieleMap().get(iD).getPath());
+			Class<?> c;
+			if(iD % 4 == 0){
+				c = Class.forName(SpielListen.getSpieleMap().get(iD).getPath());
+			} else {
+				URL[] urls = new URL[]{new URL("file://"+X.getDataDir())};
+				// TODO figure out when to fix ucl to prevent potential resource leak (have to keep it open to find referenced subclasses, etc.)
+				URLClassLoader ucl = new URLClassLoader(urls);
+				c = ucl.loadClass(SpielListen.getSpieleMap().get(iD).getPath());
+			}
 			String background = SpielListen.getSpieleMap().get(iD).getBackground();
 			Constructor<?> con = c.getConstructor(formparas);
 			game = (Game) con.newInstance(new Object[] { myPlayer, modus, background, iD });
