@@ -5,7 +5,6 @@ import games.Game;
 import java.awt.Color;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,7 +33,7 @@ public class GameCredits extends JPanel {
 		Thread.sleep(1000);
 		gc.earnsCredit(1);
 	}
-	private JButton[] creds;
+	private DefaultButton[] creds;
 	private int numOfRounds; // Anzahl der Gewinnsätzen
 	public int getNumOfRounds() {
 		return numOfRounds;
@@ -72,7 +71,7 @@ public class GameCredits extends JPanel {
 
 	public void earnsCredit(int credit) {
 		this.credits += credit;
-		for(JButton b: creds){
+		for(DefaultButton b: creds){
 			if(!b.getText().equals("K.O.") && Integer.parseInt(b.getText())<=credits){
 				b.setBackground(actionCol);
 			}
@@ -89,7 +88,7 @@ public class GameCredits extends JPanel {
 		removeAll();
 		setOpaque(false);
 		setLayout(new GridLayout(numOfRounds+1, 1));
-		creds = new JButton[numOfRounds];
+		creds = new DefaultButton[numOfRounds];
 		creditLabel = new JLabel(credits+"");
 		creditLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		creditLabel.setOpaque(true);
@@ -98,7 +97,7 @@ public class GameCredits extends JPanel {
 		creditLabel.setFont(Game.STANDARD_FONT);
 		add(creditLabel);
 		for (int i = (numOfRounds - 1); i >= 0; i--) {
-			creds[i] = new JButton("" + (i + 1));
+			creds[i] = new DefaultButton("" + (i + 1));
 			creds[i].setEnabled(false);
 			creds[i].setBackground(standardCol);
 			if(i < credits){
