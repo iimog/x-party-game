@@ -60,10 +60,13 @@ public class ResourceList {
 	public static Set<URL> getResourceURLs(ResourceURLFilter filter)
 			throws IOException, URISyntaxException {
 		Set<URL> collectedURLs = new HashSet<>();
-		URLClassLoader ucl = (URLClassLoader) ClassLoader
-				.getSystemClassLoader();
-		for (URL url : ucl.getURLs()) {
-			iterateEntry(new File(url.toURI()), filter, collectedURLs);
+		String pathSeparator = System
+			    .getProperty("path.separator");
+		String[] classPathEntries = System
+		    .getProperty("java.class.path")
+		    .split(pathSeparator);
+		for(String file : classPathEntries) {
+			iterateEntry(new File(file), filter, collectedURLs);
 		}
 		return collectedURLs;
 	}
