@@ -5,6 +5,7 @@ import gui.components.Bildschirm;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 
@@ -31,11 +32,13 @@ public class Geist {
 		team = whichTeam;
 		livingGood[whichTeam]++;
 		if(team==0){
-			Image image = Toolkit.getDefaultToolkit().getImage("/media/ghosts/geist3.png");
+			URL bildURL = getClass().getResource("/media/ghosts/geist3.png");
+			Image image = Toolkit.getDefaultToolkit().getImage(bildURL);
 			img = new ImageIcon(image);
 		}
 		if(team==1){
-			Image image = Toolkit.getDefaultToolkit().getImage("/media/ghosts/geist4.png");
+			URL bildURL = getClass().getResource("/media/ghosts/geist4.png");
+			Image image = Toolkit.getDefaultToolkit().getImage(bildURL);
 			img = new ImageIcon(image);
 		}
 		position = pos;
