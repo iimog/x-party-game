@@ -1,6 +1,6 @@
-Optisch	media/memory/optisch.jpg
-Feuer	media/memory/optisch1.jpg
-Marmor	media/memory/optisch2.jpg
-Deko	media/memory/optisch3.jpg
-Grüner Wirbel	media/memory/optisch4.jpg
-Wallnuss	media/memory/optisch5.jpg
+Optisch	/media/memory/optisch.jpg
+Feuer	/media/memory/optisch1.jpg
+Marmor	/media/memory/optisch2.jpg
+Deko	/media/memory/optisch3.jpg
+Grüner Wirbel	/media/memory/optisch4.jpg
+Wallnuss	/media/memory/optisch5.jpg
