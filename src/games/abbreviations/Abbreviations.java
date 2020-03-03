@@ -33,13 +33,21 @@ public class Abbreviations extends Game {
 	private List<Deck> abbreviationsDecks;
 	private AbbreviationsDeck currentDeck;
 	private boolean inRound = false;
-	private JPanel currentTargetPanel;
+	private Bildschirm currentTargetPanel;
 	private JLabel currentTargetLabel;
 	private JPanel untenPanel;
 	private JTextField antwortTextField;
 	protected boolean durchEnterBeendet;
 	private Countdown countdown;
 	private int timeAfterBuzzer = 10;
+	public int getTimeAfterBuzzer() {
+		return timeAfterBuzzer;
+	}
+
+	public void setTimeAfterBuzzer(int timeAfterBuzzer) {
+		this.timeAfterBuzzer = timeAfterBuzzer;
+	}
+
 	private String answer;
 	private int currentIndex;
 	private int whoBuzzered;
@@ -63,7 +71,8 @@ public class Abbreviations extends Game {
 		spielBereichPanel.add(hauptbereichPanel);
 		currentDeck = new AbbreviationsDeck(abbreviationsDecks.get(new Random().nextInt(abbreviationsDecks.size())));
 		currentTargetPanel = new Bildschirm("/media/abbreviations/nummernschild.png");
-		currentTargetPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 23, -5));
+		currentTargetPanel.scalePic(300, 75);
+		currentTargetPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 23, 5));
 		hauptbereichPanel.add(currentTargetPanel, BorderLayout.CENTER);
 		currentTargetLabel = new JLabel("Placeholder");
 		currentTargetLabel.setFont(Abbreviations.standardFont.deriveFont(70f));
@@ -80,8 +89,7 @@ public class Abbreviations extends Game {
 		hauptbereichPanel.add(untenPanel, BorderLayout.SOUTH);
 		antwortTextField = new JTextField();
 		antwortTextField.setFont(Abbreviations.standardFont);
-		antwortTextField.setForeground(Color.WHITE);
-		antwortTextField.setBackground(Color.black);
+		antwortTextField.setForeground(Color.BLACK);
 		untenPanel.add(antwortTextField, BorderLayout.CENTER);
 		antwortTextField.setEditable(false);
 		antwortTextField.addActionListener(new ActionListener() {
@@ -129,10 +137,9 @@ public class Abbreviations extends Game {
 		}
 		numOfRounds = Integer.parseInt(customSettings.getProperty(
 				AbbreviationsSettingsDialog.NUM_OF_ROUNDS, "" + numOfRounds));
-		// String rotationTimeString = customSettings
-		// .getProperty(AbbreviationsSettingsDialog.ROTATION_TIME);
-		// if (rotationTimeString != null)
-		// rotationTime = Integer.parseInt(rotationTimeString);
+		String timeAfterBuzzerString = customSettings.getProperty(AbbreviationsSettingsDialog.TIME_AFTER_BUZZER);
+		if (timeAfterBuzzerString != null)
+			timeAfterBuzzer = Integer.parseInt(timeAfterBuzzerString);
 		String deck = customSettings.getProperty(AbbreviationsSettingsDialog.DECK, "");
 		for (int i = 0; i < abbreviationsDecks.size(); i++) {
 			if (abbreviationsDecks.get(i).toString().equals(deck)) {

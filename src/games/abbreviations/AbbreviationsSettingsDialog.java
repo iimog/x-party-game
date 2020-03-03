@@ -8,13 +8,15 @@ import games.dialogeGUIs.GameSettingsDialog;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JSlider;
+import javax.swing.SwingConstants;
 
 public class AbbreviationsSettingsDialog extends GameSettingsDialog {
 	private static final long serialVersionUID = 1L;
-	public static final String ROTATION_TIME = "Rotationtime";
+	public static final String TIME_AFTER_BUZZER = "TimeAfterBuzzer";
 	public static final String DECK = "Deck";
 	private Abbreviations abbreviations;
-//	private JSlider rotationTimeSlider;
+	private JSlider rotationTimeSlider;
 	private JComboBox deckComboBox;
 
 	public AbbreviationsSettingsDialog(Abbreviations abbreviations) {
@@ -33,15 +35,15 @@ public class AbbreviationsSettingsDialog extends GameSettingsDialog {
 	}
 	
 	private void addRotationTimeSlider() {
-//		{
-//			rotationTimeSlider = new JSlider(SwingConstants.HORIZONTAL,1,10,abbreviations.getRotationTime());
-//			rotationTimeSlider.setMajorTickSpacing(1);
-//			rotationTimeSlider.setMinorTickSpacing(1);
-//			rotationTimeSlider.setSnapToTicks(true);
-//			rotationTimeSlider.setPaintTicks(true);
-//			rotationTimeSlider.setPaintLabels(true);
-//			addSettingsComponent("Rotationszeit", rotationTimeSlider);
-//		}
+		{
+			rotationTimeSlider = new JSlider(SwingConstants.HORIZONTAL,1,15,abbreviations.getTimeAfterBuzzer());
+			rotationTimeSlider.setMajorTickSpacing(1);
+			rotationTimeSlider.setMinorTickSpacing(1);
+			rotationTimeSlider.setSnapToTicks(true);
+			rotationTimeSlider.setPaintTicks(true);
+			rotationTimeSlider.setPaintLabels(true);
+			addSettingsComponent("Rotationszeit", rotationTimeSlider);
+		}
 		{
 			ComboBoxModel deckComboBoxModel =
 					new DefaultComboBoxModel(abbreviations.getAbbreviationsDecks().toArray(new Deck[1]));
@@ -56,7 +58,7 @@ public class AbbreviationsSettingsDialog extends GameSettingsDialog {
 	@Override
 	public void settingsToProperties(){
 		super.settingsToProperties();
-//		settings.setProperty(ROTATION_TIME, ""+rotationTimeSlider.getValue());
+		settings.setProperty(TIME_AFTER_BUZZER, ""+rotationTimeSlider.getValue());
 		settings.setProperty(DECK, ""+deckComboBox.getSelectedItem().toString());
 	}
 	
@@ -70,10 +72,10 @@ public class AbbreviationsSettingsDialog extends GameSettingsDialog {
 			System.out.println("game ist null");
 			return;
 		}
-//		String rotationTime = settings.getProperty(ROTATION_TIME);
-//		if(rotationTime != null && rotationTimeSlider != null){
-//			rotationTimeSlider.setValue(Integer.parseInt(rotationTime));
-//		}
+		String rotationTime = settings.getProperty(TIME_AFTER_BUZZER);
+		if(rotationTime != null && rotationTimeSlider != null){
+			rotationTimeSlider.setValue(Integer.parseInt(rotationTime));
+		}
 		String deck = settings.getProperty(DECK, "");
 		if(deckComboBox != null){
 			for(int i=0; i<deckComboBox.getItemCount(); i++){

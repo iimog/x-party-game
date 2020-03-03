@@ -59,6 +59,7 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 	private void showAnswerAndSolution() {
 		{
 			abbreviationPanel = new Bildschirm("/media/abbreviations/nummernschild.png");
+			abbreviationPanel.scalePic(300, 75);
 			abbreviationPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 23, -5));
 			hauptbereichPanel.add(abbreviationPanel, BorderLayout.NORTH);
 			abbreviationLabel = new JLabel();
@@ -76,6 +77,7 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 			rightWordLabel.setForeground(Color.BLACK);
 			rightWordLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			rightWordPanel.add(rightWordLabel);
+			rightWordPanel.scalePic(300, 200);
 		}
 		{
 			answerPanel = new Bildschirm("/media/abbreviations/ortsausgang.png");
@@ -89,6 +91,7 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 				answerLabel.setForeground(Color.BLACK);
 				answerPanel.changePic("/media/abbreviations/ortseingang.png");
 			}
+			answerPanel.scalePic(300, 200);
 			answerPanel.add(answerLabel);
 		}
 	}
