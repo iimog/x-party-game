@@ -676,7 +676,8 @@ public class BuchstabenSalat extends Game implements PC {
 	@Override
 	public void abbruch() {
 		countdown.stop();
-		aufdecker.interrupt();
+		if(aufdecker != null)
+			aufdecker.interrupt();
 		super.abbruch();
 	}
 
