@@ -5,7 +5,7 @@ B	Berlin
 C	Chemnitz
 D	Düsseldorf
 E	Essen
-F	Frankfurt
+F	Frankfurt|Frankfurt am Main
 G	Gera
 H	Hannover
 J	Jena
@@ -16,7 +16,7 @@ N	Nürnberg
 P	Potsdam
 R	Regensburg
 S	Stuttgart
-V	Vogtlandkreis
+V	Vogtlandkreis|Vogtland
 W	Wuppertal
 Z	Zwickau
 KA	Karlsruhe
@@ -48,15 +48,16 @@ GE	Gelsenkirchen
 DO	Dortmund
 BI	Bielefeld
 MS	Münster
-HH	Hansestadt Hamburg
-HB	 Hansestadt Bremen
+HH	Hansestadt Hamburg|Hamburg
+HB	Hansestadt Bremen|Bremen
+HRO	Hansestadt Rostock|Rostock
 BS	Braunschweig
 SN	Schwerin
 KI	Kiel
 FL	Flensburg
 PA	Passau
 RO	Rosenheim
-FF	Frankfurt Oder
+FF	Frankfurt Oder|Frankfurt|Frankfurt (Oder)|Frankfurt an der Oder
 MM	Memmingen
 BT	Bayreuth
 BA	Bamberg

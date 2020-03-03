@@ -46,6 +46,9 @@ public class Abbreviations extends Game {
 
 	public void setTimeAfterBuzzer(int timeAfterBuzzer) {
 		this.timeAfterBuzzer = timeAfterBuzzer;
+		if(countdown != null) {
+			countdown.setSecs(timeAfterBuzzer);
+		}
 	}
 
 	private String answer;
@@ -72,7 +75,7 @@ public class Abbreviations extends Game {
 		currentDeck = new AbbreviationsDeck(abbreviationsDecks.get(new Random().nextInt(abbreviationsDecks.size())));
 		currentTargetPanel = new Bildschirm("/media/abbreviations/nummernschild.png");
 		currentTargetPanel.scalePic(300, 75);
-		currentTargetPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 23, 5));
+		currentTargetPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 23, 7));
 		hauptbereichPanel.add(currentTargetPanel, BorderLayout.CENTER);
 		currentTargetLabel = new JLabel("Placeholder");
 		currentTargetLabel.setFont(Abbreviations.standardFont.deriveFont(70f));
@@ -120,8 +123,14 @@ public class Abbreviations extends Game {
 	}
 	
 	public void roundEnd() {
-		answer = antwortTextField.getText().toUpperCase().trim();
-		boolean wortErraten = currentDeck.getFullWord(currentIndex).equalsIgnoreCase(answer);
+		answer = antwortTextField.getText().trim();
+		String[] fullWords = currentDeck.getFullWord(currentIndex).split("\\|");
+		boolean wortErraten = false;
+		for(String word : fullWords) {			
+			if(word.equalsIgnoreCase(answer)) {
+				wortErraten = true;
+			}
+		}
 		winnerIs(whoBuzzered, !wortErraten);
 	}
 
@@ -139,7 +148,7 @@ public class Abbreviations extends Game {
 				AbbreviationsSettingsDialog.NUM_OF_ROUNDS, "" + numOfRounds));
 		String timeAfterBuzzerString = customSettings.getProperty(AbbreviationsSettingsDialog.TIME_AFTER_BUZZER);
 		if (timeAfterBuzzerString != null)
-			timeAfterBuzzer = Integer.parseInt(timeAfterBuzzerString);
+			setTimeAfterBuzzer(Integer.parseInt(timeAfterBuzzerString));
 		String deck = customSettings.getProperty(AbbreviationsSettingsDialog.DECK, "");
 		for (int i = 0; i < abbreviationsDecks.size(); i++) {
 			if (abbreviationsDecks.get(i).toString().equals(deck)) {

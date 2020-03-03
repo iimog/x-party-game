@@ -36,7 +36,7 @@ public class AbbreviationsSettingsDialog extends GameSettingsDialog {
 	
 	private void addRotationTimeSlider() {
 		{
-			rotationTimeSlider = new JSlider(SwingConstants.HORIZONTAL,1,15,abbreviations.getTimeAfterBuzzer());
+			rotationTimeSlider = new JSlider(SwingConstants.HORIZONTAL,5,15,abbreviations.getTimeAfterBuzzer());
 			rotationTimeSlider.setMajorTickSpacing(1);
 			rotationTimeSlider.setMinorTickSpacing(1);
 			rotationTimeSlider.setSnapToTicks(true);

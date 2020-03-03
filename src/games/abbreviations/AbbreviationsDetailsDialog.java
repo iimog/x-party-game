@@ -57,10 +57,17 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 	}
 
 	private void showAnswerAndSolution() {
+		String[] fullWords = abbreviations.getCurrentFullWord().split("\\|");
+		boolean wortErraten = false;
+		for(String word : fullWords) {			
+			if(word.equalsIgnoreCase(abbreviations.getAnswer())) {
+				wortErraten = true;
+			}
+		}
 		{
 			abbreviationPanel = new Bildschirm("/media/abbreviations/nummernschild.png");
 			abbreviationPanel.scalePic(300, 75);
-			abbreviationPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 23, -5));
+			abbreviationPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 23, 7));
 			hauptbereichPanel.add(abbreviationPanel, BorderLayout.NORTH);
 			abbreviationLabel = new JLabel();
 			abbreviationLabel.setFont(Abbreviations.standardFont.deriveFont(70f));
@@ -73,7 +80,7 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 			hauptbereichPanel.add(rightWordPanel,BorderLayout.CENTER);
 			rightWordLabel = new JLabel();
 			rightWordLabel.setFont(Abbreviations.standardFont);
-			rightWordLabel.setText(abbreviations.getCurrentFullWord());
+			rightWordLabel.setText(fullWords[0]);
 			rightWordLabel.setForeground(Color.BLACK);
 			rightWordLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			rightWordPanel.add(rightWordLabel);
@@ -87,7 +94,7 @@ public class AbbreviationsDetailsDialog extends AnzeigeDialog {
 			answerLabel.setText(abbreviations.getAnswer());
 			answerLabel.setForeground(Color.DARK_GRAY);
 			answerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			if(abbreviations.getCurrentFullWord().equalsIgnoreCase(abbreviations.getAnswer())){
+			if(wortErraten){
 				answerLabel.setForeground(Color.BLACK);
 				answerPanel.changePic("/media/abbreviations/ortseingang.png");
 			}
