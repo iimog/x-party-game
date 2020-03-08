@@ -46,8 +46,8 @@ public class ReaktionsZeitSettingsDialog extends GameSettingsDialog {
 					new DefaultComboBoxModel(reaktionsZeit.getReaktionszeitDecks().toArray(new ReaktionsZeitDeck[1]));
 				
 			deckComboBox = new JComboBox();
-			deckComboBox.setModel(deckComboBoxModel);	
-			addSettingsComponent("Deck", deckComboBox);
+			deckComboBox.setModel(deckComboBoxModel);
+			addSettingsComponent("Deck", deckComboBox, false);
 		}
 	}
 	

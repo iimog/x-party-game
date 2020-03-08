@@ -39,8 +39,8 @@ public class MatchSettingsDialog extends JPanel {
 	private JButton UebernehmenButton;
 	private JPanel teamPanel;
 	private JPanel profilPanel;
-	private DefaultComboBoxModel profilComboBoxModel;
-	private JComboBox profilComboBox;
+	private DefaultComboBoxModel<String> profilComboBoxModel;
+	private JComboBox<String> profilComboBox;
 	private JButton profilManagerButton;
 	private JButton profilSpeichernButton;
 	private Profile currentProfile;
@@ -102,7 +102,7 @@ public class MatchSettingsDialog extends JPanel {
 		profilPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		JLabel profilLabel = new JLabel("Profil");
 		profilPanel.add(profilLabel);
-		profilComboBox = new JComboBox();
+		profilComboBox = new JComboBox<String>();
 		setProfileComboBoxModel();
 		profilComboBox.addActionListener(new ActionListener() {			
 			@Override
@@ -138,7 +138,7 @@ public class MatchSettingsDialog extends JPanel {
 		for(int i=0; i<profilzahl; i++){
 			profileNames[i+1] = profiles[i].getName().substring(0, profiles[i].getName().length() - 5);
 		}
-		profilComboBoxModel = new DefaultComboBoxModel(profileNames);
+		profilComboBoxModel = new DefaultComboBoxModel<String>(profileNames);
 		profilComboBox.setModel(profilComboBoxModel);
 	}
 

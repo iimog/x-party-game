@@ -142,6 +142,7 @@ public class HauptMenu extends Anzeige {
 			updatePanel.add(updateInfoLabel);
 		}
 		logoBildschirm.requestFocusInWindow();
+		instance.changeBackground(myBackground);
 	}
 
 	private void setButtonSizes() {

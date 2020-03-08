@@ -28,7 +28,7 @@ public class GameChoosePanel extends JPanel {
 
 	public int numOfGames;
 	public ArrayList<JLabel> labelList = new ArrayList<JLabel>(30);
-	public ArrayList<JComboBox> comboBoxList = new ArrayList<JComboBox>(30);
+	public ArrayList<JComboBox<String>> comboBoxList = new ArrayList<JComboBox<String>>(30);
 	public ArrayList<Integer> gameList = new ArrayList<Integer>(30);
 	public StartMatch startMatch;
 
@@ -43,10 +43,10 @@ public class GameChoosePanel extends JPanel {
 			lab.setForeground(Color.white);
 			lab.setHorizontalAlignment(SwingConstants.RIGHT);
 			labelList.add(lab);
-			JComboBox combo = new JComboBox();
-			combo.setForeground(Color.WHITE);
-			combo.setBackground(Color.DARK_GRAY);
-			ComboBoxModel model = new DefaultComboBoxModel(erwuenschteSpiele.toArray());
+			JComboBox<String> combo = new JComboBox<String>();
+			combo.setForeground(Color.DARK_GRAY);
+			combo.setBackground(Color.WHITE);
+			ComboBoxModel<String> model = new DefaultComboBoxModel<String>(erwuenschteSpiele.toArray(new String[0]));
 			model.setSelectedItem(SpielListen.getGameName(gameList.get(i)));
 			combo.setModel(model);
 			combo.setEditable(false);

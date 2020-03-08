@@ -18,7 +18,7 @@ import start.X;
 
 public class ModusMenuPanel extends Anzeige {
 	private static final long serialVersionUID = 1L;
-	private static String myBackground = "/media/ablauf/iceBG3.jpg";
+	private static String myBackground = "/media/ablauf/iceBG.jpg";
 	private JPanel soloPanel;
 	private JButton soloButton;
 	private JPanel duellPanel;

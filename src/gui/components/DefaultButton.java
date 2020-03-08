@@ -2,11 +2,13 @@ package gui.components;
 
 import java.awt.Color;
 
+import javax.swing.JButton;
+
 import start.X;
 
-import gui.aterai.RoundedCornerButton;
+import gui.aterai.RoundedCornerButtonUI;
 
-public class DefaultButton extends RoundedCornerButton {
+public class DefaultButton extends JButton {
 	private static final long serialVersionUID = 1L;
 	
 	public DefaultButton(){
@@ -15,11 +17,11 @@ public class DefaultButton extends RoundedCornerButton {
 	
 	public DefaultButton(String text){
 		super(text);
-		setBackground(Color.DARK_GRAY);
-		setForeground(Color.LIGHT_GRAY);
+		setBackground(Color.WHITE);
+		setForeground(Color.DARK_GRAY);
 		setFocusPainted(false);
 		setFont(X.BUTTON_FONT);
-		setActionColor(Color.BLACK);
+		setUI(new RoundedCornerButtonUI());
 	}
 
 }
