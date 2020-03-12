@@ -205,6 +205,7 @@ public class Spielablauf implements GameListener, Ablauf {
 				// TODO figure out when to fix ucl to prevent potential resource leak (have to keep it open to find referenced subclasses, etc.)
 				URLClassLoader ucl = new URLClassLoader(urls);
 				c = ucl.loadClass(SpielListen.getSpieleMap().get(iD).getPath());
+				ucl.close();
 			}
 			String background = SpielListen.getSpieleMap().get(iD).getBackground();
 			Constructor<?> con = c.getConstructor(formparas);

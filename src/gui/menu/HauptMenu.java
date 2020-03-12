@@ -34,6 +34,8 @@ public class HauptMenu extends Anzeige {
 	private JButton einstellungenButton;
 	private JPanel highscorePanel;
 	private JButton highscoreButton;
+	private JPanel quickGamePanel;
+	private JButton quickGameButton;
 	private JPanel beendenPanel;
 	private JButton beendenButton;
 	private JPanel menuPanel;
@@ -76,6 +78,20 @@ public class HauptMenu extends Anzeige {
 			}
 		}
 		{
+			quickGamePanel = new JPanel();
+			menuPanel.add(quickGamePanel);
+			quickGamePanel.setOpaque(false);
+			{
+				quickGameButton = new DefaultButton("Quick Game");
+				quickGamePanel.add(quickGameButton);
+				quickGameButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						quickGameButtonActionPerformed(evt);
+					}
+				});
+			}
+		}
+		{
 			spielLadenPanel = new JPanel();
 			menuPanel.add(spielLadenPanel);
 			spielLadenPanel.setOpaque(false);
@@ -105,7 +121,7 @@ public class HauptMenu extends Anzeige {
 		}
 		{
 			highscorePanel = new JPanel();
-			menuPanel.add(highscorePanel);
+			//menuPanel.add(highscorePanel);
 			highscorePanel.setOpaque(false);
 			{
 				highscoreButton = new DefaultButton("Highscore");
@@ -158,6 +174,8 @@ public class HauptMenu extends Anzeige {
 				highscoreButton.getPreferredSize().height);
 		buttonHeight = Math.max(buttonHeight,
 				beendenButton.getPreferredSize().height);
+		buttonHeight = Math.max(buttonHeight,
+				quickGameButton.getPreferredSize().height);
 		buttonWidth = Math.max(buttonWidth,
 				neuesSpielButton.getPreferredSize().width);
 		buttonWidth = Math.max(buttonWidth,
@@ -168,6 +186,8 @@ public class HauptMenu extends Anzeige {
 				highscoreButton.getPreferredSize().width);
 		buttonWidth = Math.max(buttonWidth,
 				beendenButton.getPreferredSize().width);
+		buttonWidth = Math.max(buttonWidth,
+				quickGameButton.getPreferredSize().width);
 		neuesSpielButton.setPreferredSize(new Dimension(buttonWidth,
 				buttonHeight));
 		spielLadenButton.setPreferredSize(new Dimension(buttonWidth,
@@ -177,6 +197,8 @@ public class HauptMenu extends Anzeige {
 		highscoreButton.setPreferredSize(new Dimension(buttonWidth,
 				buttonHeight));
 		beendenButton
+				.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+		quickGameButton
 				.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
 	}
 
@@ -198,6 +220,10 @@ public class HauptMenu extends Anzeige {
 
 	protected void neuesSpielButtonActionPerformed(ActionEvent evt) {
 		instance.changeAnzeige(new ModusMenuPanel());
+	}
+	
+	protected void quickGameButtonActionPerformed(ActionEvent evt) {
+		instance.changeAnzeige(new QuickStartPanel());
 	}
 
 	@Override
