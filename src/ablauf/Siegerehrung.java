@@ -72,9 +72,6 @@ public class Siegerehrung extends Anzeige {
 		instance.changeAnzeige(new HauptMenu());
 	}
 	public void nowVisible(){
-		instance.changeBackground("/media/sieger/girls.jpg");
-		if(!sieger.male || sieger.name.equals("Frauen")){
-			instance.changeBackground("/media/sieger/sexyman.jpg");
-		}
+		instance.changeBackground("/media/ablauf/iceBG.jpg");
 	}
 }
