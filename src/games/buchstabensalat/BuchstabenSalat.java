@@ -535,8 +535,8 @@ public class BuchstabenSalat extends Game implements PC {
 		hauptbereichPanel.add(untenPanel, BorderLayout.SOUTH);
 		antwortTextField = new JTextField();
 		antwortTextField.setFont(standardFont);
-		antwortTextField.setForeground(Color.WHITE);
-		antwortTextField.setBackground(Color.black);
+		antwortTextField.setForeground(Color.DARK_GRAY);
+		antwortTextField.setBackground(Color.WHITE);
 		untenPanel.add(antwortTextField);
 		antwortTextField.setEditable(false);
 		antwortTextField.addActionListener(new ActionListener() {
