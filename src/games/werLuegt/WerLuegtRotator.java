@@ -30,7 +30,7 @@ public class WerLuegtRotator extends Rotator {
 
 	private String deckInfo;
 	private String deckName;
-	private String currentAussage;
+	private String currentAussage = "";
 	private JLabel aussageLabel;
 	private List<String> verlauf = new ArrayList<String>();
 
@@ -106,6 +106,7 @@ public class WerLuegtRotator extends Rotator {
 						.put(statement, Boolean.parseBoolean(correctness));
 			}
 			br.close();
+			correctAnswers.put("", true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

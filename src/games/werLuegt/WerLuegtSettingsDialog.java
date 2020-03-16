@@ -2,6 +2,8 @@ package games.werLuegt;
 
 import games.dialogeGUIs.GameSettingsDialog;
 
+import java.awt.Color;
+
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
