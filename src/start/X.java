@@ -58,6 +58,8 @@ public class X extends javax.swing.JFrame {
 	public static String getDataDir() {
 		return System.getProperty("user.home") + "/.xpartygame/";
 	}
+	
+	private String[] quickStartPlayers = {"Player 1", "Player 2"};
 
 	public static X getInstance() {
 		if (instance == null) {
@@ -305,5 +307,13 @@ public class X extends javax.swing.JFrame {
 
 	public void setGame(Game game) {
 		this.currentGame = game;
+	}
+
+	public String[] getQuickStartPlayers() {
+		return quickStartPlayers;
+	}
+
+	public void setQuickStartPlayers(String[] quickStartPlayers) {
+		this.quickStartPlayers = quickStartPlayers;
 	}
 }

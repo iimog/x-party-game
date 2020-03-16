@@ -74,10 +74,11 @@ public class QuickStartPanel extends Anzeige {
 		this.add(topPanel, BorderLayout.NORTH);
 		{
 			int columns = 10;
-			player1TextField = new JTextField("Player 1",columns);
+			String[] quickStartPlayers = X.getInstance().getQuickStartPlayers();
+			player1TextField = new JTextField(quickStartPlayers[0],columns);
 			player1TextField.setFont(X.BUTTON_FONT);
 			player1TextField.setForeground(Color.RED);
-			player2TextField = new JTextField("Player 2",columns);
+			player2TextField = new JTextField(quickStartPlayers[1],columns);
 			player2TextField.setFont(X.BUTTON_FONT);
 			player2TextField.setForeground(Color.BLUE);
 			topPanel.add(player1TextField);
@@ -109,6 +110,7 @@ public class QuickStartPanel extends Anzeige {
 				new Player(player1TextField.getText(),true,Color.RED,KeyEvent.VK_A), 
 				new Player(player2TextField.getText(),false,Color.BLUE,KeyEvent.VK_L) 
 			};
+		X.getInstance().setQuickStartPlayers(new String[]{myPlayer[0].getName(), myPlayer[1].getName()});
 		Modus modus = Modus.DUELL;
 		try {
 			Class<?> c = Class.forName(SpielListen.getSpieleMap().get(gameId).getPath());
