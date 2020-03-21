@@ -214,7 +214,9 @@ public class Tron extends Game implements PC{
 			if(kollision[i] == false){
 				spielfeld.faerbeFeld(kopf[i], myPlayer[i].farbe);
 			}
-		}	
+		}
+		// minimize stuttering on linux
+		java.awt.Toolkit.getDefaultToolkit().sync();
 	}
 	protected void pruefeKollision() {
 		for(int i=0; i<spielerZahl; i++)
