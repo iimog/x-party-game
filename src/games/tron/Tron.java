@@ -137,6 +137,9 @@ public class Tron extends Game implements PC{
 	}
 	
 	private void addSpielfeld() {
+		if(spielfeld != null) {
+			hauptbereichPanel.remove(spielfeld);
+		}
 		spielfeld = new TronSpielfeld(colums, rows, feldGroesse);
 		hauptbereichPanel.add(spielfeld, BorderLayout.CENTER);
 		spielfeld.addKeyListener(steuerung);
