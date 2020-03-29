@@ -139,3 +139,5 @@ media/ablauf/fonts/monitorica	CC-BY	Sergiy S. Tkachenko	http://openfontlibrary.o
 
 #Code
 gui/aterai/*	GitHub.com MIT (LICENSE-aterai)	TERAI Atsuhiro (aterai)	https://github.com/aterai/java-swing-tips	2015-08-09	yes
+lib/jxmapviewer/*	GitHub.com LGPL (LICENSE-jxmapviewer)	Martin Steiger (msteiger)	https://github.com/msteiger/jxmapviewer2	2020-03-29	yes
+lib/commons-logging-1.1.3.jar	Apache License	Commons Logging Team (https://commons.apache.org/proper/commons-logging/team-list.html)	https://commons.apache.org/proper/commons-logging/index.html	2020-03-29	no

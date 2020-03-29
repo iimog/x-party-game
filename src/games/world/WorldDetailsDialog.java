@@ -1,15 +1,26 @@
 package games.world;
-import gui.components.Bildschirm;
+import player.Player;
+import sample4_fancy.FancyWaypointRenderer;
+import sample4_fancy.MyWaypoint;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.jxmapviewer.JXMapKit;
+import org.jxmapviewer.VirtualEarthTileFactoryInfo;
+import org.jxmapviewer.viewer.DefaultTileFactory;
+import org.jxmapviewer.viewer.GeoPosition;
+import org.jxmapviewer.viewer.WaypointPainter;
 
 public class WorldDetailsDialog extends gui.AnzeigeDialog {
 
@@ -21,10 +32,11 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 	private JPanel hauptbereichPanel;
 	private JLabel[] playerLabel;
 	private JPanel anzeigenPanel;
-	private Bildschirm bildschirm1;
 	private JButton okButton;
 	private JPanel schaltflaechenPanel;
 	private JLabel[] distanceLabel;
+	private JXMapKit mapViewer;
+	private HashSet<GeoPosition> positions;
 	/**
 	 * Auto-generated main method to display this JDialog
 	 */
@@ -45,17 +57,35 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 				hauptbereichPanel.setLayout(hauptbereichPanelLayout);
 				dialogPane.add(hauptbereichPanel, BorderLayout.CENTER);
 				{
-					bildschirm1 = new Bildschirm("");
-					bildschirm1.setPreferredSize(new Dimension(400,300));
-					bildschirm1.showPicPart(world.erdeBig, world.answer[world.last]);
-					bildschirm1.drawEpi(200, 150, 9);
-					if(world.toleranzOn)bildschirm1.drawCircle(200, 150, world.toleranz);
-					for(int i=0; i<world.spielerZahl; i++){
-						int x = world.guess[i].x - world.answer[world.last].x + 200;
-						int y = world.guess[i].y - world.answer[world.last].y + 150;
-						bildschirm1.addDot(x, y, world.myPlayer[i].farbe);
-					}
-					hauptbereichPanel.add(bildschirm1, BorderLayout.CENTER);
+					mapViewer = new JXMapKit();
+					VirtualEarthTileFactoryInfo info = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.SATELLITE);
+					info.setDefaultZoomLevel(15);
+			        DefaultTileFactory tileFactory = new DefaultTileFactory(info);
+			        mapViewer.setTileFactory(tileFactory);
+			        mapViewer.getMainMap().setMinimumSize(new Dimension(1024,528));
+			        //mapViewer.setZoom(17);
+			        //mapViewer.setAddressLocationShown(false);
+			        Set<MyWaypoint> waypoints = new HashSet<MyWaypoint>();
+			        positions = new HashSet<GeoPosition>();
+			        for(int i=0; i<world.spielerZahl; i++) {
+			        	Player p = world.myPlayer[i];
+			        	GeoPosition place = world.guess[i];
+			        	positions.add(place);
+			        	long dist = Math.round(world.distance[i]);
+			        	waypoints.add(new MyWaypoint(dist+"km", p.farbe, place));
+			        }
+			        GeoPosition answer = world.answer[world.last];
+			        positions.add(answer);
+			        waypoints.add(new MyWaypoint("Ziel", Color.WHITE, answer));
+		            
+		            //crate a WaypointPainter to draw the points
+		            WaypointPainter<MyWaypoint> painter = new WaypointPainter<MyWaypoint>();
+		            painter.setRenderer(new FancyWaypointRenderer());
+		            painter.setWaypoints(waypoints);
+		            mapViewer.getMainMap().setOverlayPainter(painter);
+					hauptbereichPanel.add(mapViewer, BorderLayout.CENTER);
+					hauptbereichPanel.setPreferredSize(new Dimension(1024,528));
+					mapViewer.getMainMap().zoomToBestFit(positions, 1);
 				}
 				{
 					anzeigenPanel = new JPanel();
@@ -77,9 +107,9 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 								a="getroffen";
 							}
 							else{
-								a = Math.round(world.distance[i])+" Pixel";
+								a = Math.round(world.distance[i])+" km";
 							}
-							distanceLabel[i] = new JLabel(a);// TODO Pixel in km umrechnen
+							distanceLabel[i] = new JLabel(a);
 							anzeigenPanel.add(distanceLabel[i]);
 						}
 					}
@@ -95,6 +125,17 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 					okButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							instance.closeDialog();
+						}
+					});
+				}
+				{
+					JButton adjustZoomButton = new JButton("adjust zoom");
+					schaltflaechenPanel.add(adjustZoomButton);
+					adjustZoomButton.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							mapViewer.getMainMap().zoomToBestFit(positions, .7);
 						}
 					});
 				}

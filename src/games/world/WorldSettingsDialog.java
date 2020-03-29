@@ -52,7 +52,7 @@ public class WorldSettingsDialog extends GameSettingsDialog {
 		{
 			toleranzLabel = new JLabel();
 			settingsPanel.add(toleranzLabel);
-			toleranzLabel.setText("Toleranz in Pixeln");
+			toleranzLabel.setText("Toleranz in km");
 		}
 		{
 			toleranzSlider = new JSlider(SwingConstants.HORIZONTAL,0,500,world.toleranz);
