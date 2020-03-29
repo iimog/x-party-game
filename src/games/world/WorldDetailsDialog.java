@@ -82,10 +82,10 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 			        TileFactoryInfo infoMap = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.MAP);
 			        //			        TileFactoryInfo googleInfo = new GoogleMapsTileFactoryInfo("<key>");
 
-			        factories.add(new DefaultTileFactory(infoSat));
-			        factories.add(new DefaultTileFactory(infoHyb));
-			        factories.add(new DefaultTileFactory(infoMap));
-			        factories.add(new DefaultTileFactory(osmInfo));
+			        addFactoryFromInfo(infoSat);
+			        addFactoryFromInfo(infoHyb);
+			        addFactoryFromInfo(infoMap);
+			        addFactoryFromInfo(osmInfo);
 //			        factories.add(new DefaultTileFactory(googleInfo));
 			        labelAttr = new JLabel();
 
@@ -196,6 +196,13 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void addFactoryFromInfo(TileFactoryInfo info) {
+		info.setDefaultZoomLevel(17);
+		DefaultTileFactory factory = new DefaultTileFactory(info);
+		factory.setLocalCache(world.localCache);
+		factories.add(factory);
 	}
 	
 	protected void setTileFactoryIndex(int index)

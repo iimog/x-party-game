@@ -1,9 +1,5 @@
 package games.world;
 
-import games.Game;
-import games.Modus;
-import games.PC;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -12,22 +8,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import org.jxmapviewer.JXMapKit;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.VirtualEarthTileFactoryInfo;
+import org.jxmapviewer.cache.FileBasedLocalCache;
 import org.jxmapviewer.viewer.DefaultTileFactory;
-import org.jxmapviewer.viewer.WaypointPainter;
 import org.jxmapviewer.viewer.GeoPosition;
-import sample4_fancy.FancyWaypointRenderer;
+import org.jxmapviewer.viewer.WaypointPainter;
 
+import games.Game;
+import games.Modus;
+import games.PC;
 import player.Player;
+import sample4_fancy.FancyWaypointRenderer;
 import sample4_fancy.MyWaypoint;
 
 public class World extends Game implements PC{
@@ -49,7 +51,7 @@ public class World extends Game implements PC{
 	private int current;
 	int last;
 	int tol=5; // innerhalb von 5km Pixeln ist der richtige Ort getroffen
-	public int numOfPics=4;
+	public int numOfPics=10;
 	int toleranz = 500;
 	boolean toleranzOn = true;
 
@@ -58,6 +60,7 @@ public class World extends Game implements PC{
 	public String[] info = new String[numOfPics];
 	private JXMapKit mapViewer;
 	private JXMapViewer mainMap;
+	protected FileBasedLocalCache localCache;
 	{
 		question[0] = 	"Wo liegt Berlin?";
 		answer[0] = 	new GeoPosition(52.520008,13.404954);
@@ -75,32 +78,32 @@ public class World extends Game implements PC{
 		answer[3] = 	new GeoPosition(21.374170, -157.932060);
 		info[3] = 		"Das Aloha Stadium liegt auf der Insel Oahu (Hawaii). " +
 		"Hier wird alljährlich der Pro Bowl (American Football) ausgetragen.";
-		/*
+		
 		question[4] = 	"Wo tragen die Arizona Cardinals ihre Heimspiele aus?";
-		answer[4] = 	new GeoPosition(718,494);
+		answer[4] = 	new GeoPosition(33.527080,-112.260610);
 		info[4] = 		"Die Arizona Cardinals sind ein American Football Team aus der " +
 		"Stadt Phoenix.";
-
+		
 		question[5] = 	"Wo befindet sich die sogenannte goldene Stadt?";
-		answer[5] = 	new GeoPosition(1725,328);
+		answer[5] = 	new GeoPosition(50.087811,14.420460);
 		info[5] = 		"Die Stadt Prag in Tschechien wird als goldene Stadt bezeichnet! ";
 
 		question[6] = 	"Wo befindet sich der höchste Berg der Welt?";
-		answer[6] = 	new GeoPosition(2434,533);
+		answer[6] = 	new GeoPosition(27.988121,86.924973);
 		info[6] = 		"Der höchste Berg ist der Mount Everest er liegt im Himalaya und ist 8848 m hoch!";
 
 		question[7] = 	"Wo befindet sich das Wrack der untergegangenen Titanic?";
-		answer[7] = 	new GeoPosition(1189,423);
+		answer[7] = 	new GeoPosition(41.72583043, -49.94082957);
 		info[7] = 		"1912 sinkt die Titanic im atlantischen Ozean und nur jede 3. Person überlebt!";
 
 		question[8] = 	"Wo wurde Deutschland 1990 Fußballweltmeister?";
-		answer[8] = 	new GeoPosition(1727,406);
+		answer[8] = 	new GeoPosition(41.9338861, 12.4547861);
 		info[8] = 		"Austragungsort des Finals war das Stadio Olympico, das in Rom steht!";
 
 		question[9] = 	"Wo befindet sich die Insel Mauritius?";
-		answer[9] = 	new GeoPosition(2134,1076);
+		answer[9] = 	new GeoPosition(-20.244959, 57.561768);
 		info[9] = 		"Mauritius ist ein Urlaubsparadies im indischen Ozean östlich von Madagaskar!";
-
+		/*
 		question[10] = 	"Wo befindet sich der nördlichste Teil des Baikalsee - Die Perle Sibiriens?";
 		answer[10] = 	new GeoPosition(2326,277);
 		info[10] = 		"Der Baikalsee ist der größte See der Erde und ist erstreckt sich vom Norden nach Süden mit einer Länge, die mit der Deutschlands vergleichbar ist! P.s Punkt für MO ";
@@ -230,7 +233,7 @@ public class World extends Game implements PC{
 	
 	private void resetMapView() {
 		mapViewer.setZoom(17);
-		mapViewer.setAddressLocation(new GeoPosition(0, 0));
+		mapViewer.setAddressLocation(new GeoPosition(20, 0));
 	}
 	
 	class ButtonListener implements ActionListener{
@@ -259,6 +262,10 @@ public class World extends Game implements PC{
 							VirtualEarthTileFactoryInfo.SATELLITE, 10, 17);
 					info.setDefaultZoomLevel(17);
 			        DefaultTileFactory tileFactory = new DefaultTileFactory(info);
+			        // Setup local file cache
+			        File cacheDir = new File(System.getProperty("user.home") + File.separator + ".jxmapviewer2");
+			        localCache = new FileBasedLocalCache(cacheDir, false);
+			        tileFactory.setLocalCache(localCache);
 			        mapViewer.setTileFactory(tileFactory);
 			        mapViewer.setMinimumSize(new Dimension(1024,528));
 			        mapViewer.setAddressLocation(new GeoPosition(20, 0));
@@ -281,9 +288,10 @@ public class World extends Game implements PC{
 				}
 				{
 					frageLabel = new JLabel();
+					frageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 					hauptbereichPanel.add(frageLabel, BorderLayout.NORTH);
 					frageLabel.setText("Frage...");
-					frageLabel.setFont(STANDARD_FONT);
+					frageLabel.setFont(STANDARD_FONT.deriveFont((float) 36.0));
 				}
 				{
 					schalterPanel = new JPanel();
@@ -424,8 +432,23 @@ public class World extends Game implements PC{
 	}
 	@Override
 	public void settingsChanged(){
+		propertiesToSettings();
 		updateCreds();
 	}
+	
+	private void propertiesToSettings() {
+		if(customSettings == null){
+			return;
+		}
+		numOfRounds = Integer.parseInt(customSettings.getProperty(WorldSettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
+		String tolOn = customSettings.getProperty(WorldSettingsDialog.TOLERANZ_ON, "true");
+		if(modus != Modus.SOLO) {
+			toleranzOn = Boolean.parseBoolean(tolOn);
+		}
+		String toleranzKm = customSettings.getProperty(WorldSettingsDialog.TOLERANZ_KM, "500");
+		toleranz = Integer.parseInt(toleranzKm);
+	}
+	
 	@Override
 	public void start(){
 		// Code zum Spielstart-Handling
