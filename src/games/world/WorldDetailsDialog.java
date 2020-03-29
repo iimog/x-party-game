@@ -9,17 +9,26 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.jxmapviewer.JXMapKit;
+import org.jxmapviewer.JXMapViewer;
+import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.VirtualEarthTileFactoryInfo;
 import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
+import org.jxmapviewer.viewer.TileFactory;
+import org.jxmapviewer.viewer.TileFactoryInfo;
 import org.jxmapviewer.viewer.WaypointPainter;
 
 public class WorldDetailsDialog extends gui.AnzeigeDialog {
@@ -37,6 +46,8 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 	private JLabel[] distanceLabel;
 	private JXMapKit mapViewer;
 	private HashSet<GeoPosition> positions;
+	private JLabel labelAttr;
+	private List<TileFactory> factories;
 	/**
 	 * Auto-generated main method to display this JDialog
 	 */
@@ -46,6 +57,12 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 		playerLabel = new JLabel[world.spielerZahl];
 		distanceLabel = new JLabel[world.spielerZahl];
 		initGUI();
+	}
+	
+	@Override
+	public void nowVisible() {
+		super.nowVisible();
+		zoomToBestFit();
 	}
 
 	private void initGUI() {
@@ -57,13 +74,27 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 				hauptbereichPanel.setLayout(hauptbereichPanelLayout);
 				dialogPane.add(hauptbereichPanel, BorderLayout.CENTER);
 				{
+					factories = new ArrayList<TileFactory>();
+
+			        TileFactoryInfo osmInfo = new OSMTileFactoryInfo();
+			        TileFactoryInfo infoSat = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.SATELLITE);
+			        TileFactoryInfo infoHyb = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.HYBRID);
+			        TileFactoryInfo infoMap = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.MAP);
+			        //			        TileFactoryInfo googleInfo = new GoogleMapsTileFactoryInfo("<key>");
+
+			        factories.add(new DefaultTileFactory(infoSat));
+			        factories.add(new DefaultTileFactory(infoHyb));
+			        factories.add(new DefaultTileFactory(infoMap));
+			        factories.add(new DefaultTileFactory(osmInfo));
+//			        factories.add(new DefaultTileFactory(googleInfo));
+			        labelAttr = new JLabel();
+
 					mapViewer = new JXMapKit();
-					VirtualEarthTileFactoryInfo info = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.SATELLITE);
-					info.setDefaultZoomLevel(15);
-			        DefaultTileFactory tileFactory = new DefaultTileFactory(info);
-			        mapViewer.setTileFactory(tileFactory);
-			        mapViewer.getMainMap().setMinimumSize(new Dimension(1024,528));
-			        //mapViewer.setZoom(17);
+					JXMapViewer mainMap = mapViewer.getMainMap();
+					mainMap.setLayout(new BorderLayout());
+					mainMap.add(labelAttr, BorderLayout.SOUTH);
+			        mainMap.setMinimumSize(new Dimension(1024,528));
+			        //mapViewer.setZoom(15);
 			        //mapViewer.setAddressLocationShown(false);
 			        Set<MyWaypoint> waypoints = new HashSet<MyWaypoint>();
 			        positions = new HashSet<GeoPosition>();
@@ -85,7 +116,7 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 		            mapViewer.getMainMap().setOverlayPainter(painter);
 					hauptbereichPanel.add(mapViewer, BorderLayout.CENTER);
 					hauptbereichPanel.setPreferredSize(new Dimension(1024,528));
-					mapViewer.getMainMap().zoomToBestFit(positions, 1);
+					setTileFactoryIndex(0);
 				}
 				{
 					anzeigenPanel = new JPanel();
@@ -139,9 +170,45 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 						}
 					});
 				}
+				{
+					String[] tfLabels = new String[factories.size()];
+			        for (int i = 0; i < factories.size(); i++)
+			        {
+			        	TileFactoryInfo info = factories.get(i).getInfo();
+			            tfLabels[i] = info.getName();
+			            if(info instanceof VirtualEarthTileFactoryInfo) {
+			            	tfLabels[i] += " - " + ((VirtualEarthTileFactoryInfo) info).getModeName();
+			            }
+			        }
+
+			        final JComboBox<String> combo = new JComboBox<String>(tfLabels);
+			        combo.addItemListener(new ItemListener()
+			        {
+			            @Override
+			            public void itemStateChanged(ItemEvent e)
+			            {
+			                setTileFactoryIndex(combo.getSelectedIndex());
+			            }
+			        });
+			        schaltflaechenPanel.add(combo);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	protected void setTileFactoryIndex(int index)
+    {
+        TileFactory factory = factories.get(index);
+        TileFactoryInfo info = factory.getInfo();
+        mapViewer.setTileFactory(factory);
+        labelAttr.setText(info.getAttribution() + " - " + info.getLicense());
+        zoomToBestFit();
+    }
+	
+	protected void zoomToBestFit() {
+		if(mapViewer != null && positions != null)
+			mapViewer.getMainMap().zoomToBestFit(positions, .7);
 	}
 }

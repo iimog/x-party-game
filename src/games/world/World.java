@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.jxmapviewer.JXMapKit;
+import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.VirtualEarthTileFactoryInfo;
 import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.WaypointPainter;
@@ -56,6 +57,7 @@ public class World extends Game implements PC{
 	public GeoPosition[] answer = new GeoPosition[numOfPics];
 	public String[] info = new String[numOfPics];
 	private JXMapKit mapViewer;
+	private JXMapViewer mainMap;
 	{
 		question[0] = 	"Wo liegt Berlin?";
 		answer[0] = 	new GeoPosition(52.520008,13.404954);
@@ -253,19 +255,26 @@ public class World extends Game implements PC{
 				hauptbereichPanel.setLayout(hauptbereichPanelLayout);
 				{
 					mapViewer = new JXMapKit();
-					VirtualEarthTileFactoryInfo info = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.SATELLITE);
+					VirtualEarthTileFactoryInfo info = new VirtualEarthTileFactoryInfo(
+							VirtualEarthTileFactoryInfo.SATELLITE, 10, 17);
 					info.setDefaultZoomLevel(17);
 			        DefaultTileFactory tileFactory = new DefaultTileFactory(info);
 			        mapViewer.setTileFactory(tileFactory);
 			        mapViewer.setMinimumSize(new Dimension(1024,528));
+			        mapViewer.setAddressLocation(new GeoPosition(20, 0));
 			        //mapViewer.setZoom(17);
 			        mapViewer.setAddressLocationShown(false);
+			        mainMap = mapViewer.getMainMap();
 			        mapViewer.getMainMap().addMouseListener(new MouseAdapter() {
 			        	@Override
 			        	public void mouseClicked(MouseEvent e) {
 			                mapMouseClicked(e);
 			        	}
 					});
+			        final JLabel labelAttr = new JLabel();
+			        mainMap.setLayout(new BorderLayout());
+			        mainMap.add(labelAttr, BorderLayout.SOUTH);
+			        labelAttr.setText(tileFactory.getInfo().getAttribution() + " - " + tileFactory.getInfo().getLicense());
 			        hauptbereichPanel.add(mapViewer, BorderLayout.CENTER);
 			        hauptbereichPanel.setPreferredSize(new Dimension(1024,528));
 			        
