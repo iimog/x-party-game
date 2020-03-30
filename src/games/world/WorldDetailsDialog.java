@@ -105,7 +105,7 @@ public class WorldDetailsDialog extends gui.AnzeigeDialog {
 			        	long dist = Math.round(world.distance[i]);
 			        	waypoints.add(new MyWaypoint(dist+"km", p.farbe, place));
 			        }
-			        GeoPosition answer = world.answer[world.last];
+			        GeoPosition answer = world.currentDeck.getAnswer(world.last);
 			        positions.add(answer);
 			        waypoints.add(new MyWaypoint("Ziel", Color.WHITE, answer));
 		            
