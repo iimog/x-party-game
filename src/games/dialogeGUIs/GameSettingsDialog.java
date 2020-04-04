@@ -71,19 +71,19 @@ public class GameSettingsDialog extends AnzeigeDialog {
 			{
 				settingsPanelLayout = new GridLayout(1, 2);
 				settingsPanel = new JPanel(settingsPanelLayout);
-				settingsPanel.setOpaque(false);
+				settingsPanel.setOpaque(true);
 				dialogPane.add(settingsPanel, BorderLayout.CENTER);
 			}
 			{
 				rundenzahlLabel = new JLabel("Siegpunktzahl");
 				rundenzahlLabel.setFont(X.BUTTON_FONT);
-				rundenzahlLabel.setForeground(Color.WHITE);
+				rundenzahlLabel.setForeground(Color.BLACK);
 				settingsPanel.add(rundenzahlLabel);
 			}
 			{
 				rundenzahlSlider = new JSlider(SwingConstants.HORIZONTAL,1,maxRunden,numOfRounds);
 				rundenzahlSlider.setOpaque(false);
-				rundenzahlSlider.setForeground(Color.white);
+				rundenzahlSlider.setForeground(Color.BLACK);
 				rundenzahlSlider.setFont(X.BUTTON_FONT);
 				rundenzahlSlider.setMajorTickSpacing(1);
 				rundenzahlSlider.setMinorTickSpacing(1);
@@ -172,7 +172,7 @@ public class GameSettingsDialog extends AnzeigeDialog {
 		settingsPanelLayout.setRows(settingsPanelLayout.getRows() + 1);
 		JLabel beschriftungLabel = new JLabel(beschreibung);
 		beschriftungLabel.setFont(X.BUTTON_FONT);
-		beschriftungLabel.setForeground(Color.WHITE);
+		beschriftungLabel.setForeground(Color.BLACK);
 		settingsPanel.add(beschriftungLabel);
 		settingsPanel.add(komponente);
 		revalidate();
@@ -193,7 +193,7 @@ public class GameSettingsDialog extends AnzeigeDialog {
 
 	public void adjustStyle(JComponent c) {
 		c.setOpaque(false);
-		c.setForeground(Color.WHITE);
+		c.setForeground(Color.BLACK);
 		c.setFont(X.BUTTON_FONT);
 	}
 

@@ -66,17 +66,19 @@ public class WorldSettingsDialog extends GameSettingsDialog {
 		}
 		{
 			maxZoomSlider = new JSlider(SwingConstants.HORIZONTAL,2,17,world.maxZoomLevel);
+			maxZoomSlider.setMajorTickSpacing(2);
+			maxZoomSlider.setMinorTickSpacing(1);
 			maxZoomSlider.setSnapToTicks(true);
 			maxZoomSlider.setPaintTicks(true);
 			maxZoomSlider.setPaintLabels(true);
-			addSettingsComponent("Max Zoom (2: extrem, 17: kein Zoom)", maxZoomSlider, false);
+			addSettingsComponent("Max Zoom (2: extrem, 17: kein Zoom)", maxZoomSlider);
 		}
 		{
 			ComboBoxModel<Deck> deckComboBoxModel =
 					new DefaultComboBoxModel<Deck>(world.getWorldDecks().toArray(new Deck[1]));
 
 			deckComboBox = new JComboBox<Deck>();
-			deckComboBox.setBackground(Color.DARK_GRAY);
+			//deckComboBox.setBackground(Color.DARK_GRAY);
 			deckComboBox.setModel(deckComboBoxModel);
 			addSettingsComponent("Deck", deckComboBox);
 		}
