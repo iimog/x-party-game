@@ -68,6 +68,7 @@ public class World extends Game implements PC{
 	}
 	public WorldDeck currentDeck;
 	private DefaultTileFactory tileFactory;
+	private JLabel categoryLabel;
 
 	public World(Player[] myPlayer, Modus modus, String background, int globalGameID) {
 		this(myPlayer, defaultNumOfRounds, modus, background, globalGameID);
@@ -172,9 +173,16 @@ public class World extends Game implements PC{
 			        
 				}
 				{
+					JPanel topPanel = new JPanel();
+					topPanel.setLayout(new BorderLayout());
+					categoryLabel = new JLabel(currentDeck.getDeckName());
+					categoryLabel.setFont(STANDARD_FONT);
+					categoryLabel.setHorizontalAlignment(SwingConstants.CENTER);
+					hauptbereichPanel.add(topPanel, BorderLayout.NORTH);
+					topPanel.add(categoryLabel, BorderLayout.NORTH);
 					frageLabel = new JLabel();
 					frageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-					hauptbereichPanel.add(frageLabel, BorderLayout.NORTH);
+					topPanel.add(frageLabel, BorderLayout.CENTER);
 					frageLabel.setText("Frage...");
 					frageLabel.setFont(STANDARD_FONT.deriveFont((float) 36.0));
 				}
