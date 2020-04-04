@@ -57,12 +57,17 @@ public class World extends Game implements PC{
 	int tol=5; // innerhalb von 5km Pixeln ist der richtige Ort getroffen
 	int toleranz = 500;
 	boolean toleranzOn = true;
+	int maxZoomLevel = 10;
 
 	private JXMapKit mapViewer;
 	private JXMapViewer mainMap;
 	protected FileBasedLocalCache localCache;
 	private List<Deck> worldDecks;
+	public List<Deck> getWorldDecks() {
+		return worldDecks;
+	}
 	public WorldDeck currentDeck;
+	private DefaultTileFactory tileFactory;
 
 	public World(Player[] myPlayer, Modus modus, String background, int globalGameID) {
 		this(myPlayer, defaultNumOfRounds, modus, background, globalGameID);
@@ -76,6 +81,7 @@ public class World extends Game implements PC{
 		}
 		initArrays();
 		initGUI();
+		settingsChanged();
 		nextRound();
 	}
 
@@ -140,7 +146,7 @@ public class World extends Game implements PC{
 					VirtualEarthTileFactoryInfo info = new VirtualEarthTileFactoryInfo(
 							VirtualEarthTileFactoryInfo.SATELLITE, 10, 17);
 					info.setDefaultZoomLevel(17);
-			        DefaultTileFactory tileFactory = new DefaultTileFactory(info);
+			        tileFactory = new DefaultTileFactory(info);
 			        // Setup local file cache
 			        File cacheDir = new File(System.getProperty("user.home") + File.separator + ".jxmapviewer2");
 			        localCache = new FileBasedLocalCache(cacheDir, false);
@@ -326,6 +332,17 @@ public class World extends Game implements PC{
 		}
 		String toleranzKm = customSettings.getProperty(WorldSettingsDialog.TOLERANZ_KM, "500");
 		toleranz = Integer.parseInt(toleranzKm);
+		String zoomLevel = customSettings.getProperty(WorldSettingsDialog.MAX_ZOOM_LEVEL, "10");
+		maxZoomLevel = Integer.parseInt(zoomLevel);
+		// different interpretation of minimum and maximum zoom (a small number (so minimum) corresponds to a large zoom (so maximum))
+		tileFactory.getInfo().setMinimumZoomLevel(maxZoomLevel);
+		String deck = customSettings.getProperty(WorldSettingsDialog.DECK, "");
+		for (int i = 0; i < worldDecks.size(); i++) {
+			if (worldDecks.get(i).toString().equals(deck)) {
+				currentDeck = new WorldDeck(worldDecks.get(i));
+				// set up game to use this deck
+			}
+		}
 	}
 	
 	@Override

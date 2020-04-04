@@ -1,12 +1,17 @@
 package games.world;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
+import games.Deck;
 import games.Modus;
 import games.dialogeGUIs.GameSettingsDialog;
 
@@ -18,12 +23,16 @@ public class WorldSettingsDialog extends GameSettingsDialog {
 	private static final long serialVersionUID = 1L;
 	public static final String TOLERANZ_ON = "Toleranz aktiviert";
 	public static final String TOLERANZ_KM = "Toleranz in km";
+	public static final String MAX_ZOOM_LEVEL = "Max Zoom Level";
+	public static final String DECK = "Deck";
 
 	private World world;
 
 	private JSlider toleranzSlider;
 
 	private JCheckBox toleranzCheckBox;
+	private JComboBox<Deck> deckComboBox;
+	private JSlider maxZoomSlider;
 	public WorldSettingsDialog(World world) {
 		super(world);
 		this.world = world;
@@ -55,6 +64,22 @@ public class WorldSettingsDialog extends GameSettingsDialog {
 			});
 			addSettingsComponent("Toleranz anschalten", toleranzCheckBox);
 		}
+		{
+			maxZoomSlider = new JSlider(SwingConstants.HORIZONTAL,2,17,world.maxZoomLevel);
+			maxZoomSlider.setSnapToTicks(true);
+			maxZoomSlider.setPaintTicks(true);
+			maxZoomSlider.setPaintLabels(true);
+			addSettingsComponent("Max Zoom (2: extrem, 17: kein Zoom)", maxZoomSlider, false);
+		}
+		{
+			ComboBoxModel<Deck> deckComboBoxModel =
+					new DefaultComboBoxModel<Deck>(world.getWorldDecks().toArray(new Deck[1]));
+
+			deckComboBox = new JComboBox<Deck>();
+			deckComboBox.setBackground(Color.DARK_GRAY);
+			deckComboBox.setModel(deckComboBoxModel);
+			addSettingsComponent("Deck", deckComboBox);
+		}
 	}
 	
 	private void toleranzCheckBoxActionPerformed(ActionEvent evt) {
@@ -65,6 +90,8 @@ public class WorldSettingsDialog extends GameSettingsDialog {
 		super.settingsToProperties();
 		settings.setProperty(TOLERANZ_ON, ""+toleranzCheckBox.isSelected());
 		settings.setProperty(TOLERANZ_KM, ""+toleranzSlider.getValue());
+		settings.setProperty(MAX_ZOOM_LEVEL, ""+maxZoomSlider.getValue());
+		settings.setProperty(DECK, ""+deckComboBox.getSelectedItem().toString());
 	}
 	
 	public void propertiesToSettings(){
@@ -78,12 +105,21 @@ public class WorldSettingsDialog extends GameSettingsDialog {
 		}
 		String toleranzKm = settings.getProperty(TOLERANZ_KM, "500");
 		toleranzSlider.setValue(Integer.parseInt(toleranzKm));
+		String maxZoomString = settings.getProperty(MAX_ZOOM_LEVEL, "10");
+		maxZoomSlider.setValue(Integer.parseInt(maxZoomString));
+		String deck = settings.getProperty(DECK, "");
+		if(deckComboBox != null){
+			for(int i=0; i<deckComboBox.getItemCount(); i++){
+				if(deckComboBox.getItemAt(i).toString().equals(deck)){
+					deckComboBox.setSelectedIndex(i);
+				}
+			}
+		}
 	}
 
 	@Override
 	public void speichern(){
+		settingsToProperties();
 		super.speichern();
-		world.toleranzOn = toleranzCheckBox.isSelected();
-		world.toleranz = toleranzSlider.getValue();
 	}
 }

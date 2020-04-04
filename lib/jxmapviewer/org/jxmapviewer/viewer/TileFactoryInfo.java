@@ -157,9 +157,9 @@ public class TileFactoryInfo
         return minimumZoomLevel;
     }
 
-    // public void setMinimumZoomLevel(int minimumZoomLevel) {
-    // this.minimumZoomLevel = minimumZoomLevel;
-    // }
+    public void setMinimumZoomLevel(int minimumZoomLevel) {
+    	this.minimumZoomLevel = minimumZoomLevel;
+    }
 
     /**
      * @return the maximum zoom level
