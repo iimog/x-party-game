@@ -1,14 +1,16 @@
 package gui.components;
 
-import games.Game;
-
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import games.Game;
 
 public class GameCredits extends JPanel {
 
@@ -33,7 +35,7 @@ public class GameCredits extends JPanel {
 		Thread.sleep(1000);
 		gc.earnsCredit(1);
 	}
-	private DefaultButton[] creds;
+	private GameCreditPart[] creds;
 	private int numOfRounds; // Anzahl der Gewinnsätzen
 	public int getNumOfRounds() {
 		return numOfRounds;
@@ -71,9 +73,9 @@ public class GameCredits extends JPanel {
 
 	public void earnsCredit(int credit) {
 		this.credits += credit;
-		for(DefaultButton b: creds){
-			if(!b.getText().equals("K.O.") && Integer.parseInt(b.getText())<=credits){
-				b.setBackground(actionCol);
+		for(GameCreditPart b: creds){
+			if(!b.isKO() && b.getNumber()<=credits){
+				b.activate();
 			}
 		}
 		creditLabel.setText(credits+"");
@@ -88,22 +90,69 @@ public class GameCredits extends JPanel {
 		removeAll();
 		setOpaque(false);
 		setLayout(new GridLayout(numOfRounds+1, 1));
-		creds = new DefaultButton[numOfRounds];
+		creds = new GameCreditPart[numOfRounds];
 		creditLabel = new JLabel(credits+"");
 		creditLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		creditLabel.setOpaque(true);
 		creditLabel.setBackground(Color.darkGray);
 		creditLabel.setForeground(actionCol);
-		creditLabel.setFont(Game.STANDARD_FONT);
+		creditLabel.setFont(Game.STANDARD_FONT.deriveFont((float) 32.0));
 		add(creditLabel);
 		for (int i = (numOfRounds - 1); i >= 0; i--) {
-			creds[i] = new DefaultButton("" + (i + 1));
-			creds[i].setEnabled(false);
-			creds[i].setBackground(standardCol);
+			creds[i] = new GameCreditPart(i + 1);
 			if(i < credits){
-				creds[i].setBackground(actionCol);
+				creds[i].activate();
 			}
 			add(creds[i]);
+		}
+	}
+	
+	public class GameCreditPart extends JPanel {
+		private static final long serialVersionUID = 1L;
+		private JLabel label;
+		private int number;
+		private boolean ko = false;
+		
+		GameCreditPart(int number){
+			super();
+			this.number = number;
+			label = new JLabel(""+number);
+			label.setHorizontalAlignment(SwingConstants.CENTER);
+			setLayout(new BorderLayout());
+			add(this.label, BorderLayout.CENTER);
+			setOpaque(true);
+			setBackground(standardCol);
+			setPreferredSize(new Dimension(40, 40));
+			
+			label.setForeground(actionCol);
+		}
+		
+		public void activate() {
+			setBackground(actionCol);
+			label.setForeground(standardCol);
+		}
+		
+		public void deactivate() {
+			setBackground(standardCol);
+			label.setForeground(actionCol);
+		}
+		
+		public int getNumber() {
+			return number;
+		}
+		
+		public void multiply(int factor) {
+			number *= factor;
+			label.setText(number+"");
+		}
+		
+		public void setKO() {
+			ko = true;
+			label.setText("K.O.");
+		}
+		
+		public boolean isKO() {
+			return ko;
 		}
 	}
 
@@ -113,13 +162,12 @@ public class GameCredits extends JPanel {
 
 	public void ko() {
 		setStechen(true);
-		creds[numOfRounds - 1].setBackground(Color.BLACK);
-		creds[numOfRounds - 1].setText("K.O.");
+		creds[numOfRounds - 1].setKO();
 	}
 
 	public void multiply(int factor){
 		for(int i=0; i<creds.length; i++){
-			creds[i].setText(Integer.parseInt(creds[i].getText())*factor+"");
+			creds[i].multiply(factor);
 		}
 	}
 
