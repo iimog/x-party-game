@@ -350,10 +350,13 @@ public class World extends Game implements PC{
 		// different interpretation of minimum and maximum zoom (a small number (so minimum) corresponds to a large zoom (so maximum))
 		tileFactory.getInfo().setMinimumZoomLevel(maxZoomLevel);
 		String deck = customSettings.getProperty(WorldSettingsDialog.DECK, "");
+		if(deck.equals("Zufall")) {
+			System.out.println("Select random Deck");
+			currentDeck = new WorldDeck(worldDecks.get(new Random().nextInt(worldDecks.size())));
+		}
 		for (int i = 0; i < worldDecks.size(); i++) {
 			if (worldDecks.get(i).toString().equals(deck)) {
 				currentDeck = new WorldDeck(worldDecks.get(i));
-				// set up game to use this deck
 			}
 		}
 	}

@@ -2,6 +2,8 @@ package games.world;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -73,8 +75,13 @@ public class WorldSettingsDialog extends GameSettingsDialog {
 			addSettingsComponent("Max Zoom (2: extrem, 17: kein Zoom)", maxZoomSlider);
 		}
 		{
+			List<Deck> worldDecks = new ArrayList<Deck>(world.getWorldDecks());
+			Deck randomDeckDummy = new Deck(true);
+			randomDeckDummy.setDeckName("Zufall");
+			randomDeckDummy.setDeckType("");
+			worldDecks.add(0, randomDeckDummy);
 			ComboBoxModel<Deck> deckComboBoxModel =
-					new DefaultComboBoxModel<Deck>(world.getWorldDecks().toArray(new Deck[1]));
+					new DefaultComboBoxModel<Deck>(worldDecks.toArray(new Deck[1]));
 
 			deckComboBox = new JComboBox<Deck>();
 			//deckComboBox.setBackground(Color.DARK_GRAY);
