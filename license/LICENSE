@@ -17,6 +17,7 @@ src/util/ResourceList	CPOL	Doron Barak	http://www.codeproject.com/Articles/51250
 #Pictures
 # The license info for the images of memory decks are listed separately in media/memory/license.txt
 #Resource	License	Author	Source	Date	Derived
+media/world/world.jpg	https://unsplash.com/license	Марьян Блан @marjanblan	https://unsplash.com/photos/6bXvYyAYVrE	2020-04-10	no
 media/ablauf/iceBG.jpg	https://unsplash.com/license	Jeremy Bishop	https://unsplash.com/photos/G9i_plbfDgk	2020-03-08	no
 media/ablauf/iceBG1.png	pixelio.de red.kom.	Wilhelmine Wulff	http://www.pixelio.de/media/653458	2014-05-03	yes
 media/ablauf/iceBG2.jpg	pixelio.de red.kom.	Wilhelmine Wulff	http://www.pixelio.de/media/653458	2014-05-03	yes
