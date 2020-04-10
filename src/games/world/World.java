@@ -208,7 +208,7 @@ public class World extends Game implements PC{
 			{
 				zoomButton = new JButton();
 				spielBereichPanel.add(zoomButton, BorderLayout.SOUTH);
-				zoomButton.setText("Vollbild");
+				zoomButton.setText("Reset Zoom");
 				zoomButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						zoomButtonActionPerformed(evt);
