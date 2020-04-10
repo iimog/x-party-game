@@ -59,6 +59,7 @@ public class InnereUhr extends games.Game implements PC {
 		distance = new long[spielerZahl];
 		finished = new boolean[spielerZahl];
 		initGUI();
+		settingsChanged();
 	}
 
 	private void initGUI() {
@@ -153,8 +154,29 @@ public class InnereUhr extends games.Game implements PC {
 		instance.showDialog(new InnereUhrSettingsDialog(this));
 	}
 	
+	@Override
 	public void settingsChanged(){
+		propertiesToSettings();
 		updateCreds();
+		nextRound();
+	}
+	
+	@Override
+	protected void propertiesToSettings() {
+		super.propertiesToSettings();
+		if(customSettings == null){
+			return;
+		}
+		String tolOn = customSettings.getProperty(InnereUhrSettingsDialog.TOLERANZ_ON, "true");
+		if(modus != Modus.SOLO) {
+			toleranzOn = Boolean.parseBoolean(tolOn);
+		}
+		String toleranzS = customSettings.getProperty(InnereUhrSettingsDialog.TOLERANZ_S, "10");
+		toleranz = Integer.parseInt(toleranzS)*1000;
+		String maxGT = customSettings.getProperty(InnereUhrSettingsDialog.MAX_GUESS_TIME, "20");
+		maxGuessTime = Integer.parseInt(maxGT);
+		String minGT = customSettings.getProperty(InnereUhrSettingsDialog.MIN_GUESS_TIME, "5");
+		minGuessTime = Integer.parseInt(minGT);
 	}
 
 	private void roundEnd(){
