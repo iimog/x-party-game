@@ -53,6 +53,7 @@ public class Bad6 extends games.Game implements PC {
 		}
 		dice = new Dice[spielerZahl];
 		initGUI();
+		settingsChanged();
 	}
 
 	private void againButtonActionPerformed(ActionEvent evt) {
@@ -127,10 +128,7 @@ public class Bad6 extends games.Game implements PC {
 					}
 				}
 			}
-			for(int i=0; i<spielerZahl; i++){
-				creds[i].setNumOfRounds(numOfRounds/10);
-				creds[i].multiply(10);
-			}
+			updateCreds(10);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -155,10 +153,14 @@ public class Bad6 extends games.Game implements PC {
 
 	@Override
 	public void settingsChanged(){
-		for(int i=0; i<spielerZahl; i++){
-			creds[i].setNumOfRounds(numOfRounds/10);
-			creds[i].multiply(10);
+		propertiesToSettings();
+		updateCreds(10);
+	}
+	private void propertiesToSettings() {
+		if(customSettings == null){
+			return;
 		}
+		numOfRounds = Integer.parseInt(customSettings.getProperty(Bad6SettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
 	}
 	@Override
 	public void start(){

@@ -2,12 +2,6 @@ package games.bad6;
 
 import games.dialogeGUIs.GameSettingsDialog;
 
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JSlider;
-import javax.swing.SwingConstants;
-
 
 public class Bad6SettingsDialog extends GameSettingsDialog {
 
@@ -18,9 +12,6 @@ public class Bad6SettingsDialog extends GameSettingsDialog {
 
 	private Bad6 boese;
 
-	private JLabel rundenzahlLabel;
-
-	private JSlider rundenzahlSlider;
 	public Bad6SettingsDialog(Bad6 bad) {
 		super(bad);
 		boese = bad;
@@ -28,16 +19,15 @@ public class Bad6SettingsDialog extends GameSettingsDialog {
 	}
 
 	private void initGUI(){
-		settingsPanel.setLayout(new GridLayout(1,2));
-		rundenzahlLabel = new JLabel("Siegpunktzahl");
-		settingsPanel.add(rundenzahlLabel);
-		rundenzahlSlider = new JSlider(SwingConstants.HORIZONTAL,10,100,boese.numOfRounds);
-		rundenzahlSlider.setMajorTickSpacing(10);
+		setMaxRunden(100);
+		rundenzahlSlider.setPaintLabels(false);
+		rundenzahlSlider.setLabelTable(rundenzahlSlider.createStandardLabels(30, 10));
+		rundenzahlSlider.setMinimum(10);
+		rundenzahlSlider.setValue(boese.numOfRounds);
 		rundenzahlSlider.setMinorTickSpacing(10);
-		rundenzahlSlider.setSnapToTicks(true);
-		rundenzahlSlider.setPaintTicks(true);
+		rundenzahlSlider.setMajorTickSpacing(30);
 		rundenzahlSlider.setPaintLabels(true);
-		settingsPanel.add(rundenzahlSlider);
+		propertiesToSettings();
 	}
 
 	@Override

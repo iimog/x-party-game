@@ -38,7 +38,7 @@ public class GameSettingsDialog extends AnzeigeDialog {
 	private JCheckBox defaultSettingsCheckbox;
 	private GridLayout settingsPanelLayout;
 	private JLabel rundenzahlLabel;
-	private JSlider rundenzahlSlider;
+	protected JSlider rundenzahlSlider;
 	private int maxRunden = 10;
 	protected int numOfRounds = 5;
 	private boolean inGame;

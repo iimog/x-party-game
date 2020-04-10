@@ -140,8 +140,8 @@ public class SauTreiber extends Game implements PC {
 			}
 		}
 		for(int i=0; i<spielerZahl; i++){
-			creds[i].setNumOfRounds(this.numOfRounds/500);
-			creds[i].multiply(500);
+			creds[i].setNumOfRounds(this.numOfRounds);
+			creds[i].setLabelDistance(500);
 		}
 	}
 
@@ -305,8 +305,8 @@ public class SauTreiber extends Game implements PC {
 	@Override
 	public void settingsChanged(){
 		for(int i=0; i<spielerZahl; i++){
-			creds[i].setNumOfRounds(numOfRounds/500);
-			creds[i].multiply(500);
+			creds[i].setNumOfRounds(numOfRounds);
+			creds[i].setLabelDistance(500);
 		}
 	}
 

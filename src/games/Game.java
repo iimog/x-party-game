@@ -576,10 +576,15 @@ public abstract class Game extends Anzeige {
 		return -1;
 	}
 
-	protected void updateCreds() {
+	protected void updateCreds(int labelDistance) {
 		for (int i = 0; i < spielerZahl; i++) {
 			creds[i].setNumOfRounds(numOfRounds);
+			creds[i].setLabelDistance(labelDistance);
 		}
+	}
+
+	protected void updateCreds() {
+		updateCreds(1);
 	}
 
 	public boolean isPaused() {
