@@ -2,12 +2,6 @@ package games.sautreiber;
 
 import games.dialogeGUIs.GameSettingsDialog;
 
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JSlider;
-import javax.swing.SwingConstants;
-
 
 public class SauTreiberSettingsDialog extends GameSettingsDialog {
 	/**
@@ -17,9 +11,6 @@ public class SauTreiberSettingsDialog extends GameSettingsDialog {
 
 	private SauTreiber sau;
 
-	private JLabel rundenzahlLabel;
-
-	private JSlider rundenzahlSlider;
 	public SauTreiberSettingsDialog(SauTreiber sau) {
 		super(sau);
 		this.sau = sau;
@@ -27,21 +18,20 @@ public class SauTreiberSettingsDialog extends GameSettingsDialog {
 	}
 
 	private void initGUI(){
-		settingsPanel.setLayout(new GridLayout(1,2));
-		rundenzahlLabel = new JLabel("Siegpunktzahl (x100)");
-		settingsPanel.add(rundenzahlLabel);
-		rundenzahlSlider = new JSlider(SwingConstants.HORIZONTAL,5,50,sau.numOfRounds/100);
-		rundenzahlSlider.setMajorTickSpacing(5);
-		rundenzahlSlider.setMinorTickSpacing(5);
-		rundenzahlSlider.setSnapToTicks(true);
-		rundenzahlSlider.setPaintTicks(true);
+		setMaxRunden(5000);
+		rundenzahlSlider.setPaintLabels(false);
+		rundenzahlSlider.setMinimum(500);
+		rundenzahlSlider.setValue(sau.numOfRounds);
+		rundenzahlSlider.setMinorTickSpacing(500);
+		rundenzahlSlider.setMajorTickSpacing(1500);
+		rundenzahlSlider.setLabelTable(rundenzahlSlider.createStandardLabels(1500, 500));
 		rundenzahlSlider.setPaintLabels(true);
-		settingsPanel.add(rundenzahlSlider);
+		propertiesToSettings();
 	}
 
 	@Override
 	public void speichern(){
-		sau.numOfRounds = rundenzahlSlider.getValue()*100;
+		sau.numOfRounds = rundenzahlSlider.getValue();
 		super.speichern();
 	}
 }

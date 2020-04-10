@@ -7,6 +7,7 @@ import gui.components.Dice;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import player.Player;
+import start.X;
 import util.ChangeManager;
 
 // TODO Alle Würfel verbraucht
@@ -63,7 +65,7 @@ public class SauTreiber extends Game implements PC {
 			{
 				buttonPanel = new JPanel();
 				buttonPanel.setLayout(new GridLayout(1,2));
-				hauptbereichPanel.add(buttonPanel,BorderLayout.CENTER);
+				hauptbereichPanel.add(buttonPanel,BorderLayout.SOUTH);
 				{
 					weiterButton = new JButton();
 					buttonPanel.add(weiterButton);
@@ -87,11 +89,22 @@ public class SauTreiber extends Game implements PC {
 				}
 			}
 			{
+				JPanel explanationPanel = new JPanel(new GridLayout(2,1));
+				hauptbereichPanel.add(explanationPanel, BorderLayout.WEST);
+				Font emoFont = X.getEmojiFont().deriveFont(32f);
+				JLabel roundLabel = new JLabel("🔓");
+				roundLabel.setFont(emoFont);
+				JLabel totalLabel = new JLabel("🔒");
+				totalLabel.setFont(emoFont);
+				explanationPanel.add(roundLabel);
+				explanationPanel.add(totalLabel);
+			}
+			{
 				anzeigePanel = new JPanel();
 				GridLayout anzeigePanelLayout = new GridLayout(2, spielerZahl);
 				anzeigePanelLayout.setHgap(5);
 				anzeigePanelLayout.setVgap(5);
-				hauptbereichPanel.add(anzeigePanel, BorderLayout.SOUTH);
+				hauptbereichPanel.add(anzeigePanel, BorderLayout.CENTER);
 				anzeigePanel.setLayout(anzeigePanelLayout);
 				
 				for(int i=0; i<spielerZahl; i++){
@@ -99,12 +112,14 @@ public class SauTreiber extends Game implements PC {
 					roundCred[i].setHorizontalAlignment(SwingConstants.CENTER);
 					anzeigePanel.add(roundCred[i]);
 					roundCred[i].setText("0");
+					roundCred[i].setFont(STANDARD_FONT.deriveFont(24f));
 				}
 				for(int i=0; i<spielerZahl; i++){
 					playerCred[i] = new JLabel();
 					anzeigePanel.add(playerCred[i]);
 					playerCred[i].setText("0");
 					playerCred[i].setHorizontalAlignment(SwingConstants.CENTER);
+					playerCred[i].setFont(STANDARD_FONT.deriveFont(32f));
 				}
 			}
 			{
@@ -139,10 +154,8 @@ public class SauTreiber extends Game implements PC {
 				}
 			}
 		}
-		for(int i=0; i<spielerZahl; i++){
-			creds[i].setNumOfRounds(this.numOfRounds);
-			creds[i].setLabelDistance(500);
-		}
+		updateCreds(500);
+		settingsChanged();
 	}
 
 	private void initElements() {
@@ -304,10 +317,15 @@ public class SauTreiber extends Game implements PC {
 
 	@Override
 	public void settingsChanged(){
-		for(int i=0; i<spielerZahl; i++){
-			creds[i].setNumOfRounds(numOfRounds);
-			creds[i].setLabelDistance(500);
+		propertiesToSettings();
+		updateCreds(500);
+	}
+
+	private void propertiesToSettings() {
+		if(customSettings == null){
+			return;
 		}
+		numOfRounds = Integer.parseInt(customSettings.getProperty(SauTreiberSettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
 	}
 
 	@Override
