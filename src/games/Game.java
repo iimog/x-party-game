@@ -535,6 +535,13 @@ public abstract class Game extends Anzeige {
 
 	public abstract void settingsChanged();
 
+	protected void propertiesToSettings() {
+		if(customSettings == null){
+			return;
+		}
+		numOfRounds = Integer.parseInt(customSettings.getProperty(GameSettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
+	}
+
 	public void showMessage(String message) {
 		EasyDialog.showMessage(message);
 	}

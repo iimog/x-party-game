@@ -107,7 +107,8 @@ public class ReaktionsZeit extends Game {
 
 	}
 
-	private void propertiesToSettings() {
+	@Override
+	protected void propertiesToSettings() {
 		if (customSettings == null) {
 			return;
 		}

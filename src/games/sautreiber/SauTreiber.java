@@ -321,13 +321,6 @@ public class SauTreiber extends Game implements PC {
 		updateCreds(500);
 	}
 
-	private void propertiesToSettings() {
-		if(customSettings == null){
-			return;
-		}
-		numOfRounds = Integer.parseInt(customSettings.getProperty(SauTreiberSettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
-	}
-
 	@Override
 	public void start(){
 		whosTurn = getStartPlayerID(true);

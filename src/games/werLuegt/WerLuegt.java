@@ -488,7 +488,8 @@ public class WerLuegt extends Game implements PC {
 			aktuelleAntwortRotator.setRotationTime(timeProAussage);
 	}
 
-	private void propertiesToSettings() {
+	@Override
+	protected void propertiesToSettings() {
 		if (customSettings == null)
 			return;
 		String time = customSettings.getProperty(

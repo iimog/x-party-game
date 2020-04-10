@@ -471,7 +471,8 @@ public class Difference extends Game implements PC {
 		super.abbruch();
 	}
 	
-	private void propertiesToSettings(){
+	@Override
+	protected void propertiesToSettings(){
 		if(customSettings == null){
 			return;
 		}

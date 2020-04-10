@@ -50,7 +50,7 @@ public class Deck {
 	}
 	
 	public String toString(){
-		if(deckType == null)
+		if(deckType == null || deckType.length()==0)
 			return deckName;
 		return deckName + " (" + deckType + ")";
 	}

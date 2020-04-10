@@ -3,12 +3,6 @@ package games.ghosts;
 import games.Game;
 import games.dialogeGUIs.GameSettingsDialog;
 
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JSlider;
-import javax.swing.SwingConstants;
-
 
 public class GhostsSettingsDialog extends GameSettingsDialog {
 	/**
@@ -18,26 +12,11 @@ public class GhostsSettingsDialog extends GameSettingsDialog {
 
 	private Game ghosts;
 
-	private JLabel rundenzahlLabel;
-
-	private JSlider rundenzahlSlider;
 	public GhostsSettingsDialog(Game ghosts) {
 		super(ghosts);
 		this.ghosts = ghosts;
-		initGUI();
-	}
-
-	private void initGUI(){
-		settingsPanel.setLayout(new GridLayout(1,2));
-		rundenzahlLabel = new JLabel("Siegpunktzahl");
-		settingsPanel.add(rundenzahlLabel);
-		rundenzahlSlider = new JSlider(SwingConstants.HORIZONTAL,1,10,ghosts.numOfRounds);
-		rundenzahlSlider.setMajorTickSpacing(1);
-		rundenzahlSlider.setMinorTickSpacing(1);
-		rundenzahlSlider.setSnapToTicks(true);
-		rundenzahlSlider.setPaintTicks(true);
-		rundenzahlSlider.setPaintLabels(true);
-		settingsPanel.add(rundenzahlSlider);
+		setMaxRunden(5);
+		rundenzahlSlider.setValue(ghosts.numOfRounds);
 	}
 
 	@Override

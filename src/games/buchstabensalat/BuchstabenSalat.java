@@ -591,11 +591,12 @@ public class BuchstabenSalat extends Game implements PC {
 		updateCreds();
 	}
 
-	private void propertiesToSettings() {
+	@Override
+	protected void propertiesToSettings() {
+		super.propertiesToSettings();
 		if(customSettings == null){
 			return;
 		}
-		numOfRounds = Integer.parseInt(customSettings.getProperty(BuchstabenSalatSettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
 		String zeitNachBuzzer = customSettings.getProperty(BuchstabenSalatSettingsDialog.BUZZER_ZEIT, "10");
 		timeAfterBuzzer = Integer.parseInt(zeitNachBuzzer);
 		countdown.setSecs(timeAfterBuzzer);

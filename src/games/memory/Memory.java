@@ -376,7 +376,8 @@ public class Memory extends games.Game implements PC {
 		return backsides;
 	}
 	
-	private void propertiesToSettings(){
+	@Override
+	protected void propertiesToSettings(){
 		if(customSettings == null){
 			return;
 		}

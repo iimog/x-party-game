@@ -61,6 +61,7 @@ public class Ghosts extends Game implements PC {
 	public Ghosts(Player[] player, int numOfRounds, Modus modus, String background, int globalGameID) {
 		super(player, numOfRounds, modus, background, globalGameID);
 		initGUI();
+		settingsChanged();
 	}
 
 	public void activateGeist(Geist g) {
@@ -283,6 +284,7 @@ public class Ghosts extends Game implements PC {
 	}
 	@Override
 	public void settingsChanged(){
+		propertiesToSettings();
 		updateCreds();
 	}
 	private void spielfeldMouseReleased(MouseEvent evt) {

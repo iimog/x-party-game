@@ -147,12 +147,6 @@ public class Bad6 extends games.Game implements PC {
 		propertiesToSettings();
 		updateCreds(10);
 	}
-	private void propertiesToSettings() {
-		if(customSettings == null){
-			return;
-		}
-		numOfRounds = Integer.parseInt(customSettings.getProperty(Bad6SettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
-	}
 	@Override
 	public void start(){
 		whosTurn = getStartPlayerID(true);

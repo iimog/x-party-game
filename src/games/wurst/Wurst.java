@@ -117,7 +117,8 @@ public class Wurst extends Game implements PC{
 		updateCreds();
 	}
 
-	private void propertiesToSettings() {
+	@Override
+	protected void propertiesToSettings() {
 		if(customSettings == null){
 			return;
 		}

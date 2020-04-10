@@ -47,7 +47,8 @@ public class Skel extends Game {
 		updateCreds();
 	}
 
-	private void propertiesToSettings() {
+	@Override
+	protected void propertiesToSettings() {
 		if (customSettings == null) {
 			return;
 		}

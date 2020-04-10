@@ -327,9 +327,14 @@ public class World extends Game implements PC{
 	public void settingsChanged(){
 		propertiesToSettings();
 		updateCreds();
+		categoryLabel.setText(currentDeck.getDeckName());
+		schonWeg = new HashSet<Integer>();
+		current = nextRandom(currentDeck.getSize());
+		frageLabel.setText(currentDeck.getQuestion(current));
 	}
 	
-	private void propertiesToSettings() {
+	@Override
+	protected void propertiesToSettings() {
 		if(customSettings == null){
 			return;
 		}
