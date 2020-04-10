@@ -5,6 +5,7 @@ import games.PC;
 import gui.components.Dice;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import player.Player;
+import start.X;
 import util.ChangeManager;
 
 public class Bad6 extends games.Game implements PC {
@@ -32,7 +34,6 @@ public class Bad6 extends games.Game implements PC {
 	public static int defaultNumOfRounds = 4;	// !!Wird im Constructor mit 10 multipliziert!!
 	private JPanel hauptbereichPanel;
 	JButton stopButton;
-	JButton againButton;
 	Dice[] dice;
 	private JLabel[] rundenPunkteLabel;
 	private JLabel[] punkteLabel;
@@ -41,6 +42,7 @@ public class Bad6 extends games.Game implements PC {
 	private int roundCredit=0;
 	private String lache = "/media/sounds/lache.wav";
 	private Bad6Robot myRobot;
+	private JPanel punktebereichPanel;
 
 	public Bad6(Player[] myPlayer, Modus modus, String background, int globalGameID) {
 		this(myPlayer, defaultNumOfRounds, modus, background, globalGameID);
@@ -56,44 +58,33 @@ public class Bad6 extends games.Game implements PC {
 		settingsChanged();
 	}
 
-	private void againButtonActionPerformed(ActionEvent evt) {
-		dice[whosTurn].setEnabled(true);
-		againButton.setEnabled(false);
-		stopButton.setEnabled(false);
-		dice[whosTurn].doClick();
-	}
-
 	private void initGUI() {
 		try {
 			{
 				BorderLayout thisLayout = new BorderLayout();
 				spielBereichPanel.setLayout(thisLayout);
 				{
-					hauptbereichPanel = new JPanel();
-					GridLayout hauptbereichPanelLayout = new GridLayout(3, 2);
-					hauptbereichPanelLayout.setHgap(5);
-					hauptbereichPanelLayout.setVgap(5);
-					hauptbereichPanelLayout.setColumns(2);
-					hauptbereichPanelLayout.setRows(3);
-					hauptbereichPanel.setLayout(hauptbereichPanelLayout);
-					spielBereichPanel.add(hauptbereichPanel, BorderLayout.CENTER);
-					punkteLabel = new JLabel[spielerZahl];
-					for(int i=0; i<spielerZahl; i++){
-						punkteLabel[i] = new JLabel();
-						hauptbereichPanel.add(punkteLabel[i]);
-						punkteLabel[i].setText("0");
-						punkteLabel[i].setFont(STANDARD_FONT);
-						punkteLabel[i]
-						            .setHorizontalAlignment(SwingConstants.CENTER);
-					}
+					punktebereichPanel = new JPanel(new GridLayout(2, spielerZahl));
+					hauptbereichPanel = new JPanel(new GridLayout(1, spielerZahl));
+					spielBereichPanel.add(punktebereichPanel, BorderLayout.CENTER);
+					spielBereichPanel.add(hauptbereichPanel, BorderLayout.NORTH);
 					rundenPunkteLabel = new JLabel[spielerZahl];
 					for(int i=0; i<spielerZahl; i++){
 						rundenPunkteLabel[i] = new JLabel();
-						hauptbereichPanel.add(rundenPunkteLabel[i]);
+						punktebereichPanel.add(rundenPunkteLabel[i]);
 						rundenPunkteLabel[i].setText("0");
-						rundenPunkteLabel[i].setFont(STANDARD_FONT);
+						rundenPunkteLabel[i].setFont(STANDARD_FONT.deriveFont(24f));
 						rundenPunkteLabel[i]
 						                  .setHorizontalAlignment(SwingConstants.CENTER);
+					}
+					punkteLabel = new JLabel[spielerZahl];
+					for(int i=0; i<spielerZahl; i++){
+						punkteLabel[i] = new JLabel();
+						punktebereichPanel.add(punkteLabel[i]);
+						punkteLabel[i].setText("0");
+						punkteLabel[i].setFont(STANDARD_FONT.deriveFont(32f));
+						punkteLabel[i]
+						            .setHorizontalAlignment(SwingConstants.CENTER);
 					}
 					for(int i=0; i<spielerZahl; i++){
 						dice[i] = new Dice(myPlayer[i].farbe);
@@ -103,19 +94,20 @@ public class Bad6 extends games.Game implements PC {
 					}
 				}
 				{
-					schaltflaechenPanel = new JPanel();
+					JPanel explanationPanel = new JPanel(new GridLayout(2,1));
+					spielBereichPanel.add(explanationPanel, BorderLayout.WEST);
+					Font emoFont = X.getEmojiFont().deriveFont(32f);
+					JLabel roundLabel = new JLabel("🔓");
+					roundLabel.setFont(emoFont);
+					JLabel totalLabel = new JLabel("🔒");
+					totalLabel.setFont(emoFont);
+					explanationPanel.add(roundLabel);
+					explanationPanel.add(totalLabel);
+				}
+				{
+					schaltflaechenPanel = new JPanel(new GridLayout(1,1));
 					spielBereichPanel
 					.add(schaltflaechenPanel, BorderLayout.SOUTH);
-					{
-						againButton = new JButton();
-						schaltflaechenPanel.add(againButton);
-						againButton.setText("Weiter");
-						againButton.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent evt) {
-								againButtonActionPerformed(evt);
-							}
-						});
-					}
 					{
 						stopButton = new JButton();
 						schaltflaechenPanel.add(stopButton);
@@ -139,7 +131,6 @@ public class Bad6 extends games.Game implements PC {
 			dice[i].setEnabled(false);
 		}
 		dice[whosTurn].setEnabled(true);
-		againButton.setEnabled(false);
 		stopButton.setEnabled(false);
 		if(myPlayer[whosTurn].isRobot()){
 			myRobot.startTurn();
@@ -175,9 +166,9 @@ public class Bad6 extends games.Game implements PC {
 		rundenPunkteLabel[whosTurn].setText("0");
 		if(isOver())gameEnd();
 		else{
+			dice[whosTurn].setEnabled(false);
 			turnOver();
 			dice[whosTurn].setEnabled(true);
-			againButton.setEnabled(false);
 			stopButton.setEnabled(false);
 			if(myPlayer[whosTurn].isRobot())
 				myRobot.startTurn();
@@ -192,7 +183,6 @@ public class Bad6 extends games.Game implements PC {
 			rundenPunkteLabel[whosTurn].setText("0");
 			turnOver();
 			dice[whosTurn].setEnabled(true);
-			againButton.setEnabled(false);
 			stopButton.setEnabled(false);
 			if(myPlayer[whosTurn].isRobot())
 				myRobot.startTurn();
@@ -200,8 +190,6 @@ public class Bad6 extends games.Game implements PC {
 		}
 		roundCredit += currentNum;
 		rundenPunkteLabel[whosTurn].setText(roundCredit+"");
-		dice[whosTurn].setEnabled(false);
-		againButton.setEnabled(true);
 		stopButton.setEnabled(true);
 		if(myPlayer[whosTurn].isRobot()){
 			myRobot.continueTurn(currentNum);

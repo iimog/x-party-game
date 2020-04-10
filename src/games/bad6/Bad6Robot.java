@@ -19,7 +19,7 @@ public class Bad6Robot {
 			bad6.stopButton.doClick();
 		}
 		else{
-			bad6.againButton.doClick();
+			bad6.dice[1].doClick();
 		}
 	}
 

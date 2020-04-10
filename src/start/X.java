@@ -53,6 +53,7 @@ public class X extends javax.swing.JFrame {
 	private static String currentAudioFile;
 
 	private static Font standardFont;
+	private static Font emojiFont;
 	private MainSettings mainSettings = MainSettings.getMainSettings();
 	
 	public static String getDataDir() {
@@ -80,6 +81,20 @@ public class X extends javax.swing.JFrame {
 			}
 		}
 		return standardFont;
+	}
+
+	public static Font getEmojiFont() {
+		if (emojiFont == null) {
+			try {
+				emojiFont = Font
+						.createFont(Font.TRUETYPE_FONT, X.class.getResourceAsStream("/media/ablauf/fonts/OpenSansEmoji.ttf"))
+						.deriveFont(16f);
+			} catch (Exception e) {
+				e.printStackTrace();
+				// TODO set standard Font to default
+			}
+		}
+		return emojiFont;
 	}
 
 	public static void playAudioFile(String filename) {
