@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -51,12 +52,13 @@ public class BuchstabenSalat extends Game implements PC {
 	private boolean durchEnterBeendet = false;
 	private Aufdecker aufdecker;
 	protected int whoBuzzered;
-	private List<Deck> buchstabensalatDecks;
+	List<Deck> salatDecks;
 	BuchstabenSalatDeck currentDeck;
+	private JLabel deckNameLabel;
 
 	public BuchstabenSalat(Player[] player, Modus modus, String background, int globalGameID) {
 		super(player, defaultNumOfRounds, modus, background, globalGameID);
-		currentDeck = new BuchstabenSalatDeck(buchstabensalatDecks.get(new Random().nextInt(buchstabensalatDecks.size())));
+		currentDeck = new BuchstabenSalatDeck(salatDecks.get(new Random().nextInt(salatDecks.size())));
 		initGUI();
 	}
 
@@ -71,11 +73,18 @@ public class BuchstabenSalat extends Game implements PC {
 	}
 
 	private void addKategorieLabel() {
+		JPanel labelPanel = new JPanel(new GridLayout(2,1));
+		hauptbereichPanel.add(labelPanel, BorderLayout.NORTH);
+		deckNameLabel = new JLabel("DeckName");
+		deckNameLabel.setForeground(Color.LIGHT_GRAY);
+		deckNameLabel.setFont(X.BUTTON_FONT);
+		deckNameLabel.setHorizontalAlignment(JLabel.CENTER);
+		labelPanel.add(deckNameLabel);
 		kategorieLabel = new JLabel("Kategorie");
 		kategorieLabel.setForeground(Color.LIGHT_GRAY);
 		kategorieLabel.setFont(X.BUTTON_FONT);
 		kategorieLabel.setHorizontalAlignment(JLabel.CENTER);
-		hauptbereichPanel.add(kategorieLabel, BorderLayout.NORTH);
+		labelPanel.add(kategorieLabel);
 	}
 
 	@Override
@@ -220,6 +229,13 @@ public class BuchstabenSalat extends Game implements PC {
 	public void settingsChanged() {
 		propertiesToSettings();
 		updateCreds();
+		schonWeg = new HashSet<Integer>();
+		current = nextRandom(currentDeck.getSize());
+		deckNameLabel.setText(currentDeck.getDeckName());
+		kategorieLabel.setText(currentDeck.getCategory(current));
+		buchstabenGewirrPanel.setWord(currentDeck.getWord(current));
+		antwortTextField.setText("");
+		loesungsWortPanel.setUnsichtbarWord(currentDeck.getWord(current));
 	}
 
 	@Override
@@ -233,6 +249,15 @@ public class BuchstabenSalat extends Game implements PC {
 		countdown.setSecs(timeAfterBuzzer);
 		String zeitProBuchstabe = customSettings.getProperty(BuchstabenSalatSettingsDialog.BUCHSTABE_ZEIT, "3");
 		timePerLetter = Integer.parseInt(zeitProBuchstabe)*1000;
+		String deck = customSettings.getProperty(BuchstabenSalatSettingsDialog.DECK, "");
+		if(deck.equals("Zufall")) {
+			currentDeck = new BuchstabenSalatDeck(salatDecks.get(new Random().nextInt(salatDecks.size())));
+		}
+		for (int i = 0; i < salatDecks.size(); i++) {
+			if (salatDecks.get(i).toString().equals(deck)) {
+				currentDeck = new BuchstabenSalatDeck(salatDecks.get(i));
+			}
+		}
 	}
 
 	@Override
@@ -330,6 +355,6 @@ public class BuchstabenSalat extends Game implements PC {
 	@Override
 	public void loadProperties() {
 		super.loadProperties();
-		buchstabensalatDecks = DeckLoader.loadDecks("buchstabensalat", true);
+		salatDecks = DeckLoader.loadDecks("buchstabensalat", true);
 	}
 }

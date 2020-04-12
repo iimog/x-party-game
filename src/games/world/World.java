@@ -351,7 +351,6 @@ public class World extends Game implements PC{
 		tileFactory.getInfo().setMinimumZoomLevel(maxZoomLevel);
 		String deck = customSettings.getProperty(WorldSettingsDialog.DECK, "");
 		if(deck.equals("Zufall")) {
-			System.out.println("Select random Deck");
 			currentDeck = new WorldDeck(worldDecks.get(new Random().nextInt(worldDecks.size())));
 		}
 		for (int i = 0; i < worldDecks.size(); i++) {
