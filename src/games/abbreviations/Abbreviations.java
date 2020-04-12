@@ -245,7 +245,7 @@ public class Abbreviations extends Game {
 
 	@Override
 	public void loadProperties() {
-		abbreviationsDecks = DeckLoader.loadDecks("abbreviations");
+		abbreviationsDecks = DeckLoader.loadDecks("abbreviations", false);
 	}
 
 	public String getCurrentAbbreviation() {

@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ import util.ResourceList;
 import util.ResourceURLFilter;
 
 public class DeckLoader {
-	public static List<Deck> loadDecks(String game) {
+	public static List<Deck> loadDecks(String game, boolean addAllDummy) {
 		List<Deck> decks = new ArrayList<Deck>();
 		final String systemRoot = "/conf/pc/"+game+"/";
 		File userFolder = new File(X.getDataDir() + "games/pc/"+game+"/");
@@ -47,6 +48,19 @@ public class DeckLoader {
 					decks.add(fileToDeck(userFolder+"/"+file, false));
 				}
 			}
+		}
+		
+		if(addAllDummy) {
+			Deck allDummy = new Deck(false);
+			allDummy.setDeckName("Alles");
+			Set<String> allElements = new HashSet<String>();
+			for(Deck d : decks) {
+				allElements.addAll(d.getElements());
+			}
+			for(String e : allElements) {
+				allDummy.addElement(e);
+			}
+			decks.add(allDummy);
 		}
 		return decks;
 	}

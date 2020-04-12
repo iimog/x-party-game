@@ -135,6 +135,6 @@ public class Skel extends Game {
 
 	@Override
 	public void loadProperties() {
-		skelDecks = DeckLoader.loadDecks("skel");
+		skelDecks = DeckLoader.loadDecks("skel", true);
 	}
 }

@@ -399,6 +399,6 @@ public class World extends Game implements PC{
 	
 	@Override
 	public void loadProperties() {
-		worldDecks = DeckLoader.loadDecks("world");
+		worldDecks = DeckLoader.loadDecks("world", true);
 	}
 }

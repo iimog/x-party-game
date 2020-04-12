@@ -1,11 +1,9 @@
 package games.werLuegt;
 
-import games.dialogeGUIs.GameSettingsDialog;
-
-import java.awt.Color;
-
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
+
+import games.dialogeGUIs.GameSettingsDialog;
 
 public class WerLuegtSettingsDialog extends GameSettingsDialog {
 	private static final long serialVersionUID = 1L;
