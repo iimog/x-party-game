@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Constructor;
 import java.util.List;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -22,11 +23,15 @@ import games.Modus;
 import gui.Anzeige;
 import gui.components.DefaultButton;
 import player.Player;
+import settings.SettingsFileHandler;
 import start.X;
 import util.SpielListen;
 
 public class QuickStartPanel extends Anzeige {
 	private static final long serialVersionUID = 1L;
+	private static final String SETTINGS_NAME = ".quickGamePlayers";
+	private static final String PLAYER1 = "Player 1";
+	private static final String PLAYER2 = "Player 2";
 	private static String myBackground = "/media/ablauf/iceBG.jpg";
 	private List<Integer> spielListe;
 	private List<String> spielNamen;
@@ -74,15 +79,19 @@ public class QuickStartPanel extends Anzeige {
 		this.add(topPanel, BorderLayout.NORTH);
 		{
 			int columns = 10;
-			String[] quickStartPlayers = X.getInstance().getQuickStartPlayers();
-			player1TextField = new JTextField(quickStartPlayers[0],columns);
+			player1TextField = new JTextField("Player 1",columns);
 			player1TextField.setFont(X.BUTTON_FONT);
 			player1TextField.setForeground(Color.RED);
-			player2TextField = new JTextField(quickStartPlayers[1],columns);
+			player2TextField = new JTextField("Player 2",columns);
 			player2TextField.setFont(X.BUTTON_FONT);
 			player2TextField.setForeground(Color.BLUE);
 			topPanel.add(player1TextField);
 			topPanel.add(player2TextField);
+		}
+		Properties playerSettings = SettingsFileHandler.loadSettings(SETTINGS_NAME);
+		if(playerSettings != null) {
+			player1TextField.setText(playerSettings.getProperty(PLAYER1, "Player 1"));
+			player2TextField.setText(playerSettings.getProperty(PLAYER2, "Player 2"));
 		}
 	}
 
@@ -110,7 +119,10 @@ public class QuickStartPanel extends Anzeige {
 				new Player(player1TextField.getText(),true,Color.RED,KeyEvent.VK_A), 
 				new Player(player2TextField.getText(),false,Color.BLUE,KeyEvent.VK_L) 
 			};
-		X.getInstance().setQuickStartPlayers(new String[]{myPlayer[0].getName(), myPlayer[1].getName()});
+		Properties quickgamePlayersProperties = new Properties();
+		quickgamePlayersProperties.setProperty(PLAYER1, player1TextField.getText());
+		quickgamePlayersProperties.setProperty(PLAYER2, player2TextField.getText());
+		SettingsFileHandler.saveSettings(SETTINGS_NAME, quickgamePlayersProperties);
 		Modus modus = Modus.DUELL;
 		try {
 			Class<?> c = Class.forName(SpielListen.getSpieleMap().get(gameId).getPath());

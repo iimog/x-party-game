@@ -60,8 +60,6 @@ public class X extends javax.swing.JFrame {
 		return System.getProperty("user.home") + "/.xpartygame/";
 	}
 	
-	private String[] quickStartPlayers = {"Player 1", "Player 2"};
-
 	public static X getInstance() {
 		if (instance == null) {
 			return new X();
@@ -322,13 +320,5 @@ public class X extends javax.swing.JFrame {
 
 	public void setGame(Game game) {
 		this.currentGame = game;
-	}
-
-	public String[] getQuickStartPlayers() {
-		return quickStartPlayers;
-	}
-
-	public void setQuickStartPlayers(String[] quickStartPlayers) {
-		this.quickStartPlayers = quickStartPlayers;
 	}
 }
