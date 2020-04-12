@@ -35,24 +35,26 @@ public class EasyDialog extends AnzeigeDialog {
 		ed = new EasyDialog(message, icon, CONFIRM_MODE);
 		ed.instance.showDialog(ed);
 		ed.cListener = cLis;
+		ed.requestFocusForMainButton();
 	}
 	public static void showInput(String message, String defText, Component icon, InputListener iLis){
 		ed = new EasyDialog(message, icon, INPUT_MODE);
 		ed.setDefText(defText);
 		ed.instance.showDialog(ed);
 		ed.iListener = iLis;
+		ed.requestFocusForMainButton();
 	}
 	private void setDefText(String defText) {
 		this.defText = defText;
 		if(mode == INPUT_MODE) inputTextField.setText(defText);
 	}
 	public static void showMessage(String message){
-		EasyDialog ed = new EasyDialog(message, null);
-		ed.instance.showDialog(ed);
+		showMessage(message, null);
 	}
 	public static void showMessage(String message, Component icon){
 		EasyDialog ed = new EasyDialog(message, icon);
 		ed.instance.showDialog(ed);
+		ed.requestFocusForMainButton();
 	}
 	
 	private int mode;
@@ -64,6 +66,7 @@ public class EasyDialog extends AnzeigeDialog {
 	private Component icon;
 	private JTextField inputTextField;
 	private String defText = "";
+	private Component preselectedComponent;
 
 	private EasyDialog(String message, Component icon){
 		this(message, icon, MESSAGE_MODE);
@@ -100,6 +103,7 @@ public class EasyDialog extends AnzeigeDialog {
 			}
 		});
 		panel.add(abbrechenButton);
+		preselectedComponent = jaButton;
 		return panel;
 	}
 	private JPanel getMessageButtonPanel(){
@@ -112,6 +116,7 @@ public class EasyDialog extends AnzeigeDialog {
 			}
 		});
 		panel.add(okButton);
+		preselectedComponent = okButton;
 		return panel;
 	}
 	private JPanel getInputButtonPanel(){
@@ -136,6 +141,7 @@ public class EasyDialog extends AnzeigeDialog {
 			}
 		});
 		panel.add(abbrechenButton);
+		preselectedComponent = inputTextField;
 		return hauptpanel;
 	}
 
@@ -170,6 +176,14 @@ public class EasyDialog extends AnzeigeDialog {
 		hauptbereich.add(panel, BorderLayout.SOUTH);
 		dialogPane.add(hauptbereich);
 		dialogPane.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
+	}
+	
+	public boolean requestFocusForMainButton() {
+		boolean reqFoc = false;
+		if(preselectedComponent != null) {
+			reqFoc = preselectedComponent.requestFocusInWindow();
+		}
+		return reqFoc;
 	}
 }
 
