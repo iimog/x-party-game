@@ -75,7 +75,7 @@ public class GuessDetailsDialog extends gui.AnzeigeDialog {
 				{
 					rightAnswer = new JLabel();
 					darstellungPanel.add(rightAnswer);
-					rightAnswer.setText(String.valueOf(guess.answer[guess.last]));
+					rightAnswer.setText(String.valueOf(guess.currentDeck.getAnswer(guess.last)));
 					rightAnswer.setHorizontalAlignment(SwingConstants.CENTER);
 					rightAnswer.setFont(new java.awt.Font("Segoe UI",1,20));
 				}

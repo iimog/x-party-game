@@ -60,6 +60,7 @@ public class BuchstabenSalat extends Game implements PC {
 		super(player, defaultNumOfRounds, modus, background, globalGameID);
 		currentDeck = new BuchstabenSalatDeck(salatDecks.get(new Random().nextInt(salatDecks.size())));
 		initGUI();
+		settingsChanged();
 	}
 
 	private void initGUI() {
