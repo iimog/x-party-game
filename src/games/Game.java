@@ -1,12 +1,5 @@
 package games;
 
-import games.dialogeGUIs.GameSettingsDialog;
-import games.dialogeGUIs.GameStartDialog;
-import gui.Anzeige;
-import gui.EasyDialog;
-import gui.components.GameCredits;
-import gui.components.JButtonIcon;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -31,15 +24,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
+import ablauf.MatchCredits;
+import games.dialogeGUIs.GameSettingsDialog;
+import games.dialogeGUIs.GameStartDialog;
+import gui.Anzeige;
+import gui.EasyDialog;
+import gui.components.GameCredits;
+import gui.components.JButtonIcon;
 import player.Team;
 import settings.SettingsFileHandler;
 import start.X;
 import util.ConfirmListener;
 import util.SpielListen;
-import ablauf.MatchCredits;
 
 @SuppressWarnings("serial")
 public abstract class Game extends Anzeige {
@@ -101,6 +99,7 @@ public abstract class Game extends Anzeige {
 	protected Properties customSettings;
 	private JButtonIcon settingsButton;
 	private String background;
+	private JButton[] buzzerKeyIndicator;
 
 	public Game(player.Player[] player, int numOfRounds,
 			Modus modus, String background, int globalGameID) {
@@ -128,6 +127,7 @@ public abstract class Game extends Anzeige {
 		creds = new GameCredits[spielerZahl];
 		playerLabel = new JLabel[spielerZahl];
 		matchCredLabel = new JLabel[spielerZahl];
+		buzzerKeyIndicator = new JButton[spielerZahl];
 		playerPanel = new JPanel[spielerZahl];
 		customSettings = SettingsFileHandler.loadSettings(gameName);
 		loadProperties();
@@ -157,11 +157,10 @@ public abstract class Game extends Anzeige {
 				for (int i = 0; i < spielerZahl; i++) {
 					playerPanel[i] = new JPanel();
 					playerPanel[i].setBackground(Color.DARK_GRAY);
-					FlowLayout playerPanelLayout = new FlowLayout();
 					playerBereichPanel.add(playerPanel[i]);
 					playerPanel[i].setBorder(BorderFactory
 							.createEtchedBorder(EtchedBorder.RAISED));
-					playerPanel[i].setLayout(playerPanelLayout);
+					playerPanel[i].setLayout(new GridBagLayout());
 					if (modus == Modus.TEAM) {
 						activePlayerLabel[i] = new JLabel();
 						activePlayerLabel[i].setText(myTeam[i].nextMember());
@@ -178,6 +177,17 @@ public abstract class Game extends Anzeige {
 						playerLabel[i].setForeground(Color.WHITE);
 						playerLabel[i]
 								.setHorizontalAlignment(SwingConstants.CENTER);
+					}
+					{
+						buzzerKeyIndicator[i] = new JButton();
+						playerPanel[i].add(buzzerKeyIndicator[i]);
+						buzzerKeyIndicator[i].setText(KeyEvent.getKeyText(myPlayer[i].getKey()));
+						buzzerKeyIndicator[i].addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								showMessage("Dieser Button zeigt nur die Buzzertaste an, er hat sonst keine Funktion");
+							}
+						});
 					}
 					{
 						matchCredLabel[i] = new JLabel();
@@ -554,7 +564,7 @@ public abstract class Game extends Anzeige {
 
 	public void turnOver() {
 		playerLabel[whosTurn].setForeground(Color.WHITE);
-		playerLabel[whosTurn].setBorder(null);
+		playerPanel[whosTurn].setBorder(null);
 		if (modus == Modus.TEAM) {
 			activePlayerLabel[whosTurn].setText(myTeam[whosTurn].nextMember());
 		}
@@ -564,8 +574,8 @@ public abstract class Game extends Anzeige {
 
 	private void hebeAktivenSpielerHervor() {
 		playerLabel[whosTurn].setForeground(myPlayer[whosTurn].farbe);
-		playerLabel[whosTurn].setBorder(BorderFactory
-				.createBevelBorder(BevelBorder.LOWERED));
+		playerPanel[whosTurn].setBorder(BorderFactory
+				.createLineBorder(myPlayer[whosTurn].farbe, 10));
 	}
 
 	/**
