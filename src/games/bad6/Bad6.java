@@ -1,12 +1,8 @@
 package games.bad6;
 
-import games.Modus;
-import games.PC;
-import gui.components.Dice;
-
-import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import games.Modus;
+import games.PC;
+import gui.components.Dice;
 import player.Player;
 import start.X;
 import util.ChangeManager;
@@ -32,17 +31,14 @@ public class Bad6 extends games.Game implements PC {
 		return gameName;
 	}
 	public static int defaultNumOfRounds = 4;	// !!Wird im Constructor mit 10 multipliziert!!
-	private JPanel hauptbereichPanel;
 	JButton stopButton;
 	Dice[] dice;
 	private JLabel[] rundenPunkteLabel;
 	private JLabel[] punkteLabel;
-	private JPanel schaltflaechenPanel;
 	private int currentNum;
 	private int roundCredit=0;
 	private String lache = "/media/sounds/lache.wav";
 	private Bad6Robot myRobot;
-	private JPanel punktebereichPanel;
 
 	public Bad6(Player[] myPlayer, Modus modus, String background, int globalGameID) {
 		this(myPlayer, defaultNumOfRounds, modus, background, globalGameID);
@@ -61,17 +57,30 @@ public class Bad6 extends games.Game implements PC {
 	private void initGUI() {
 		try {
 			{
-				BorderLayout thisLayout = new BorderLayout();
+				GridBagLayout thisLayout = new GridBagLayout();
 				spielBereichPanel.setLayout(thisLayout);
+				spielBereichPanel.setOpaque(true);
 				{
-					punktebereichPanel = new JPanel(new GridLayout(2, spielerZahl));
-					hauptbereichPanel = new JPanel(new GridLayout(1, spielerZahl));
-					spielBereichPanel.add(punktebereichPanel, BorderLayout.CENTER);
-					spielBereichPanel.add(hauptbereichPanel, BorderLayout.NORTH);
+					for(int i=0; i<spielerZahl; i++){
+						dice[i] = new Dice(myPlayer[i].farbe);
+						dice[i].setEnabled(false);
+						GridBagConstraints c = new GridBagConstraints();
+						c.gridx = i+1;
+						c.gridy = 0;
+						c.gridwidth = 1;
+						c.gridheight = 1;
+						spielBereichPanel.add(dice[i],c);
+						dice[i].addChangeManager(new DiceChange());
+					}
 					rundenPunkteLabel = new JLabel[spielerZahl];
 					for(int i=0; i<spielerZahl; i++){
 						rundenPunkteLabel[i] = new JLabel();
-						punktebereichPanel.add(rundenPunkteLabel[i]);
+						GridBagConstraints c = new GridBagConstraints();
+						c.gridx = i+1;
+						c.gridy = 1;
+						c.gridwidth = 1;
+						c.gridheight = 1;
+						spielBereichPanel.add(rundenPunkteLabel[i], c);
 						rundenPunkteLabel[i].setText("0");
 						rundenPunkteLabel[i].setFont(STANDARD_FONT.deriveFont(24f));
 						rundenPunkteLabel[i]
@@ -80,44 +89,56 @@ public class Bad6 extends games.Game implements PC {
 					punkteLabel = new JLabel[spielerZahl];
 					for(int i=0; i<spielerZahl; i++){
 						punkteLabel[i] = new JLabel();
-						punktebereichPanel.add(punkteLabel[i]);
+						GridBagConstraints c = new GridBagConstraints();
+						c.gridx = i+1;
+						c.gridy = 2;
+						c.gridwidth = 1;
+						c.gridheight = 1;
+						spielBereichPanel.add(punkteLabel[i], c);
 						punkteLabel[i].setText("0");
 						punkteLabel[i].setFont(STANDARD_FONT.deriveFont(32f));
 						punkteLabel[i]
 						            .setHorizontalAlignment(SwingConstants.CENTER);
 					}
-					for(int i=0; i<spielerZahl; i++){
-						dice[i] = new Dice(myPlayer[i].farbe);
-						dice[i].setEnabled(false);
-						hauptbereichPanel.add(dice[i]);
-						dice[i].addChangeManager(new DiceChange());
-					}
 				}
 				{
-					JPanel explanationPanel = new JPanel(new GridLayout(2,1));
-					spielBereichPanel.add(explanationPanel, BorderLayout.WEST);
 					Font emoFont = X.getEmojiFont().deriveFont(32f);
-					JLabel roundLabel = new JLabel("🔓");
-					roundLabel.setFont(emoFont);
-					JLabel totalLabel = new JLabel("🔒");
-					totalLabel.setFont(emoFont);
-					explanationPanel.add(roundLabel);
-					explanationPanel.add(totalLabel);
+					JLabel roundLabelLeft = new JLabel("🔓");
+					roundLabelLeft.setFont(emoFont);
+					GridBagConstraints c = new GridBagConstraints();
+					c.gridx = 0; c.gridy = 1; c.gridwidth = 1; c.gridheight = 1;
+					spielBereichPanel.add(roundLabelLeft, c);
+					JLabel roundLabelRight = new JLabel("🔓");
+					roundLabelRight.setFont(emoFont);
+					c = new GridBagConstraints();
+					c.gridx = spielerZahl+1; c.gridy = 1; c.gridwidth = 1; c.gridheight = 1;
+					spielBereichPanel.add(roundLabelRight, c);
+					JLabel totalLabelLeft = new JLabel("🔒");
+					totalLabelLeft.setFont(emoFont);
+					c = new GridBagConstraints();
+					c.gridx = 0; c.gridy = 2; c.gridwidth = 1; c.gridheight = 1;
+					spielBereichPanel.add(totalLabelLeft, c);
+					JLabel totalLabelRight = new JLabel("🔒");
+					totalLabelRight.setFont(emoFont);
+					c = new GridBagConstraints();
+					c.gridx = spielerZahl+1; c.gridy = 2; c.gridwidth = 1; c.gridheight = 1;
+					spielBereichPanel.add(totalLabelRight, c);
 				}
 				{
-					schaltflaechenPanel = new JPanel(new GridLayout(1,1));
-					spielBereichPanel
-					.add(schaltflaechenPanel, BorderLayout.SOUTH);
-					{
-						stopButton = new JButton();
-						schaltflaechenPanel.add(stopButton);
-						stopButton.setText("Aufhören");
-						stopButton.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent evt) {
-								stopButtonActionPerformed(evt);
-							}
-						});
-					}
+					GridBagConstraints c = new GridBagConstraints();
+					c.gridx = 1;
+					c.gridy = 3;
+					c.gridwidth = spielerZahl;
+					c.gridheight = 1;
+					c.fill = GridBagConstraints.BOTH;
+					stopButton = new JButton();
+					spielBereichPanel.add(stopButton, c);
+					stopButton.setText("Aufhören");
+					stopButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							stopButtonActionPerformed(evt);
+						}
+					});
 				}
 			}
 			updateCreds(10);
