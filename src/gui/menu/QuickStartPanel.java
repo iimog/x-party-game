@@ -8,10 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -30,8 +33,8 @@ import util.SpielListen;
 public class QuickStartPanel extends Anzeige {
 	private static final long serialVersionUID = 1L;
 	private static final String SETTINGS_NAME = ".quickGamePlayers";
-	private static final String PLAYER1 = "Player 1";
-	private static final String PLAYER2 = "Player 2";
+	private static final String NUM_PLAYERS = "Spielerzahl";
+	private static final String[] PLAYER = {"Player 1", "Player 2", "Player 3", "Player 4"};
 	private static String myBackground = "/media/ablauf/iceBG.jpg";
 	private List<Integer> spielListe;
 	private List<String> spielNamen;
@@ -39,23 +42,20 @@ public class QuickStartPanel extends Anzeige {
 	private JPanel bottomPanel;
 	private DefaultButton hauptMenuButton;
 	private JPanel topPanel;
-	private JTextField player1TextField;
-	private JTextField player2TextField;
+	private JTextField playerTextField[];
+	private final Color[] playerColors = { Color.RED, Color.BLUE, Color.ORANGE, Color.GREEN.darker() };
+	private final int[] playerBuzzerKeys = { KeyEvent.VK_A, KeyEvent.VK_L, KeyEvent.VK_C, KeyEvent.VK_U };
+	private int spielerZahl = 2;
+	private Modus[] modi = {Modus.SOLO, Modus.DUELL, Modus.TRIPPLE, Modus.VIERER};
+	private JPanel spielPanel;
 
 	public QuickStartPanel(){
 		BorderLayout myLayout = new BorderLayout();
 		this.setLayout(myLayout);
 		this.setOpaque(false);
-		this.spielListe = SpielListen.getPCSpieleIDs(Modus.DUELL);
-		this.spielNamen = SpielListen.getGameNames(spielListe);
-		JPanel spielPanel = new JPanel(new GridLayout(0,6,5,5));
+		spielPanel = new JPanel(new GridLayout(0,6,5,5));
 		spielPanel.setOpaque(false);
 		this.add(spielPanel);
-		for(int i=0; i<spielListe.size(); i++) {
-			JButton b = new DefaultButton(spielNamen.get(i));
-			b.addActionListener(new GameButtonActionListener(spielListe.get(i)));
-			spielPanel.add(b);
-		}
 		bottomPanel = new JPanel();
 		FlowLayout bottomPanelLayout = new FlowLayout();
 		bottomPanel.setLayout(bottomPanelLayout);
@@ -79,20 +79,66 @@ public class QuickStartPanel extends Anzeige {
 		this.add(topPanel, BorderLayout.NORTH);
 		{
 			int columns = 10;
-			player1TextField = new JTextField("Player 1",columns);
-			player1TextField.setFont(X.BUTTON_FONT);
-			player1TextField.setForeground(Color.RED);
-			player2TextField = new JTextField("Player 2",columns);
-			player2TextField.setFont(X.BUTTON_FONT);
-			player2TextField.setForeground(Color.BLUE);
-			topPanel.add(player1TextField);
-			topPanel.add(player2TextField);
+			playerTextField = new JTextField[4];
+			for(int i=0; i<4; i++) {
+				playerTextField[i] = new JTextField("Player "+(i+1),columns);
+				playerTextField[i].setFont(X.BUTTON_FONT);
+				playerTextField[i].setForeground(playerColors[i]);
+				if(i>=spielerZahl) {
+					playerTextField[i].setVisible(false);
+				}
+				topPanel.add(playerTextField[i]);
+			}
 		}
 		Properties playerSettings = SettingsFileHandler.loadSettings(SETTINGS_NAME);
 		if(playerSettings != null) {
-			player1TextField.setText(playerSettings.getProperty(PLAYER1, "Player 1"));
-			player2TextField.setText(playerSettings.getProperty(PLAYER2, "Player 2"));
+			for(int i=0; i<4; i++) {
+				playerTextField[i].setText(playerSettings.getProperty(PLAYER[i], "Player "+(i+1)));
+			}
+			spielerZahl = Integer.parseInt(playerSettings.getProperty(NUM_PLAYERS, "2"));
 		}
+		JLabel playersLabel = new JLabel("Spieler: ");
+		playersLabel.setFont(X.BUTTON_FONT);
+		playersLabel.setForeground(Color.WHITE);
+		topPanel.add(playersLabel);
+		for(int i=0; i<4; i++) {
+			JButton playerCountButton = new JButton(""+(i+1));
+			topPanel.add(playerCountButton);
+			playerCountButton.addActionListener(new SpielerZahlActionListener(i+1));
+		}
+		setSpielerZahl(spielerZahl);
+	}
+	
+	private class SpielerZahlActionListener implements ActionListener{
+		private int neueSpielerZahl;
+		public SpielerZahlActionListener(int neueSpielerZahl) {
+			this.neueSpielerZahl = neueSpielerZahl;
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			setSpielerZahl(neueSpielerZahl);
+		}
+	}
+	
+	private void setSpielerZahl(int spielerZahl) {
+		this.spielerZahl = spielerZahl;
+		this.spielListe = SpielListen.getPCSpieleIDs(modi[spielerZahl-1]);
+		this.spielNamen = SpielListen.getGameNames(spielListe);
+		spielPanel.removeAll();
+		for(int i=0; i<spielListe.size(); i++) {
+			JButton b = new DefaultButton(spielNamen.get(i));
+			b.addActionListener(new GameButtonActionListener(spielListe.get(i)));
+			spielPanel.add(b);
+		}
+		for(int i=0; i<4; i++) {
+			if(i<spielerZahl) {
+				playerTextField[i].setVisible(true);
+			} else {
+				playerTextField[i].setVisible(false);
+			}
+		}
+		revalidate();
+		repaint();
 	}
 
 	class GameButtonActionListener implements ActionListener{
@@ -115,35 +161,32 @@ public class QuickStartPanel extends Anzeige {
 		formparas[1] = Modus.class;
 		formparas[2] = String.class;
 		formparas[3] = Integer.TYPE;
-		Player[] myPlayer = { 
-				new Player(player1TextField.getText(),true,Color.RED,KeyEvent.VK_A), 
-				new Player(player2TextField.getText(),false,Color.BLUE,KeyEvent.VK_L) 
-			};
+		Player[] myPlayer = new Player[spielerZahl];
+		for(int i=0; i<spielerZahl; i++){ 
+			myPlayer[i] = new Player(playerTextField[i].getText(),false,playerColors[i],playerBuzzerKeys[i]); 
+		};
 		Properties quickgamePlayersProperties = new Properties();
-		quickgamePlayersProperties.setProperty(PLAYER1, player1TextField.getText());
-		quickgamePlayersProperties.setProperty(PLAYER2, player2TextField.getText());
+		for(int i=0; i<4; i++) {
+			quickgamePlayersProperties.setProperty(PLAYER[i], playerTextField[i].getText());
+		}
+		quickgamePlayersProperties.setProperty(NUM_PLAYERS, spielerZahl+"");
 		SettingsFileHandler.saveSettings(SETTINGS_NAME, quickgamePlayersProperties);
-		Modus modus = Modus.DUELL;
+		Modus modus = modi[spielerZahl-1];
 		try {
 			Class<?> c = Class.forName(SpielListen.getSpieleMap().get(gameId).getPath());
 			String background = SpielListen.getSpieleMap().get(gameId).getBackground();
 			Constructor<?> con = c.getConstructor(formparas);
-			X.getInstance().addBuzzer(0, myPlayer[0].getKey());
-			X.getInstance().addBuzzer(1, myPlayer[1].getKey());
+			for(int i=0; i<myPlayer.length; i++) {
+				X.getInstance().addBuzzer(i, myPlayer[i].getKey());
+			}
 			game = (Game) con.newInstance(new Object[] { myPlayer, modus, background, gameId });
 			game.addGameListener(new GameListener() {
 				@Override
 				public void gameOver() {
 					X.getInstance().forgetBuzzers();
-					int winnerID = -1;
-					if(game.myPlayer[0].gameCredit > game.myPlayer[1].gameCredit) {
-						winnerID = 0;
-					}
-					if(game.myPlayer[0].gameCredit < game.myPlayer[1].gameCredit) {
-						winnerID = 1;
-					}
-					if(winnerID != -1) {
-						X.getInstance().changeAnzeige(new Siegerehrung(game.myPlayer[winnerID]));
+					List<Player> playersWithMaxScore = getPlayersWithMaxScore(game);
+					if(playersWithMaxScore.size() == 1) {
+						X.getInstance().changeAnzeige(new Siegerehrung(playersWithMaxScore.get(0)));
 					} else {						
 						if (game.myPlayer[0].gameCredit == MatchCredits.UNENTSCHIEDEN) {
 							X.getInstance().changeAnzeige(new Siegerehrung(new Player("Unentschieden",false,Color.DARK_GRAY)));
@@ -158,6 +201,21 @@ public class QuickStartPanel extends Anzeige {
 			e.printStackTrace();
 		}
 		return;
+	}
+	
+	private List<Player> getPlayersWithMaxScore(Game game) {
+		List<Player> playersWithMaxScore = new ArrayList<Player>();
+		List<Integer> scores = new ArrayList<Integer>();
+		for(Player p : game.myPlayer) {
+			scores.add(p.gameCredit);
+		}
+		int maxScore = Collections.max(scores);
+		for(Player p : game.myPlayer) {
+			if(p.gameCredit == maxScore) {
+				playersWithMaxScore.add(p);
+			}
+		}
+		return playersWithMaxScore;
 	}
 
 	@Override
