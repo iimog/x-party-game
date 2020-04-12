@@ -1,13 +1,9 @@
 package games.sautreiber;
 
-import games.Game;
-import games.Modus;
-import games.PC;
-import gui.components.Dice;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import games.Game;
+import games.Modus;
+import games.PC;
+import gui.components.Dice;
 import player.Player;
 import start.X;
 import util.ChangeManager;
@@ -58,14 +58,15 @@ public class SauTreiber extends Game implements PC {
 		initElements();
 		{
 			hauptbereichPanel = new JPanel();
-			BorderLayout hauptbereichPanelLayout = new BorderLayout();
 			spielBereichPanel.add(hauptbereichPanel);
-			hauptbereichPanel.setLayout(hauptbereichPanelLayout);
-			hauptbereichPanel.setBounds(48, 0, 10, 10);
+			hauptbereichPanel.setLayout(new GridBagLayout());
+			//hauptbereichPanel.setBounds(48, 0, 10, 10);
 			{
 				buttonPanel = new JPanel();
 				buttonPanel.setLayout(new GridLayout(1,2));
-				hauptbereichPanel.add(buttonPanel,BorderLayout.SOUTH);
+				GridBagConstraints c = new GridBagConstraints();
+				c.gridx = 1; c.gridy = 2; c.fill = GridBagConstraints.BOTH;
+				hauptbereichPanel.add(buttonPanel,c);
 				{
 					weiterButton = new JButton();
 					buttonPanel.add(weiterButton);
@@ -89,22 +90,39 @@ public class SauTreiber extends Game implements PC {
 				}
 			}
 			{
-				JPanel explanationPanel = new JPanel(new GridLayout(2,1));
-				hauptbereichPanel.add(explanationPanel, BorderLayout.WEST);
+				JPanel explanationPanelLeft = new JPanel(new GridLayout(2,1));
+				GridBagConstraints c = new GridBagConstraints();
+				c.gridx = 0; c.gridy = 1;
+				hauptbereichPanel.add(explanationPanelLeft, c);
 				Font emoFont = X.getEmojiFont().deriveFont(32f);
 				JLabel roundLabel = new JLabel("🔓");
 				roundLabel.setFont(emoFont);
 				JLabel totalLabel = new JLabel("🔒");
 				totalLabel.setFont(emoFont);
-				explanationPanel.add(roundLabel);
-				explanationPanel.add(totalLabel);
+				explanationPanelLeft.add(roundLabel);
+				explanationPanelLeft.add(totalLabel);
+			}
+			{
+				JPanel explanationPanelRight = new JPanel(new GridLayout(2,1));
+				GridBagConstraints c = new GridBagConstraints();
+				c.gridx = 2; c.gridy = 1;
+				hauptbereichPanel.add(explanationPanelRight, c);
+				Font emoFont = X.getEmojiFont().deriveFont(32f);
+				JLabel roundLabel = new JLabel("🔓");
+				roundLabel.setFont(emoFont);
+				JLabel totalLabel = new JLabel("🔒");
+				totalLabel.setFont(emoFont);
+				explanationPanelRight.add(roundLabel);
+				explanationPanelRight.add(totalLabel);
 			}
 			{
 				anzeigePanel = new JPanel();
 				GridLayout anzeigePanelLayout = new GridLayout(2, spielerZahl);
 				anzeigePanelLayout.setHgap(5);
 				anzeigePanelLayout.setVgap(5);
-				hauptbereichPanel.add(anzeigePanel, BorderLayout.CENTER);
+				GridBagConstraints c = new GridBagConstraints();
+				c.gridx = 1; c.gridy = 1; c.fill = GridBagConstraints.BOTH;
+				hauptbereichPanel.add(anzeigePanel, c);
 				anzeigePanel.setLayout(anzeigePanelLayout);
 				
 				for(int i=0; i<spielerZahl; i++){
@@ -128,7 +146,9 @@ public class SauTreiber extends Game implements PC {
 				dicePanelLayout.setHgap(5);
 				dicePanelLayout.setVgap(5);
 				dicePanelLayout.setColumns(6);
-				hauptbereichPanel.add(dicePanel, BorderLayout.NORTH);
+				GridBagConstraints c = new GridBagConstraints();
+				c.gridx = 1; c.gridy = 0;
+				hauptbereichPanel.add(dicePanel, c);
 				dicePanel.setLayout(dicePanelLayout);
 				{
 					ActionListener al = new ActionListener() {
