@@ -39,13 +39,15 @@ public class BuchstabenSalatDetailsDialog extends AnzeigeDialog {
 			{
 				scatteredWordLabel = new JLabel();
 				scatteredWordLabel.setFont(BuchstabenSalat.standardFont);
+				scatteredWordLabel.setForeground(Color.WHITE);
 				scatteredWordLabel.setText(salat.getScatteredWord());
 				hauptbereichPanel.add(scatteredWordLabel);
 			}
 			{
 				rightWordLabel = new JLabel();
 				rightWordLabel.setFont(BuchstabenSalat.standardFont);
-				rightWordLabel.setText(salat.loesungswort[salat.current]);
+				rightWordLabel.setForeground(Color.WHITE);
+				rightWordLabel.setText(salat.currentDeck.getWord(salat.current));
 				hauptbereichPanel.add(rightWordLabel);
 			}
 			{
