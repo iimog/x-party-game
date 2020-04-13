@@ -2,7 +2,6 @@ package games;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -11,7 +10,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -31,6 +30,7 @@ import games.dialogeGUIs.GameSettingsDialog;
 import games.dialogeGUIs.GameStartDialog;
 import gui.Anzeige;
 import gui.EasyDialog;
+import gui.RichDialog;
 import gui.components.GameCredits;
 import gui.components.JButtonIcon;
 import player.Team;
@@ -119,6 +119,7 @@ public abstract class Game extends Anzeige {
 		instance.setGame(this);
 		instance.changeAnzeige(this);
 		instance.showDialog(new GameStartDialog(this));
+		System.out.println("GameFileName: "+getGameFileName());
 	}
 
 	private void initVariablen() {
@@ -401,12 +402,10 @@ public abstract class Game extends Anzeige {
 	}
 
 	public void getAnleitung() {
-		try {
-			// TODO Link to Wiki
-			File anleitungFile = new File("/anleitungen/"
-					+ gameName + ".html");
-			Desktop.getDesktop().open(anleitungFile);
-		} catch (Exception e) {
+		URL anleitungURL = instance.getClass().getResource("/anleitungen/"+getGameFileName()+".html");
+		if(anleitungURL != null) {
+			instance.showDialog(new RichDialog(anleitungURL));
+		} else {
 			showMessage("Für dieses Spiel ist leider noch keine Anleitung verfügbar");
 		}
 	}
