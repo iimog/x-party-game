@@ -140,7 +140,7 @@ public class GameSettingsDialog extends AnzeigeDialog {
 	public void speichern() {
 		settingsToProperties();
 		if(defaultSettingsCheckbox.isSelected()){
-			SettingsFileHandler.saveSettings(myGame.gameName, settings);
+			SettingsFileHandler.saveSettings(myGame.getGameFileName(), settings);
 		}
 		myGame.setCustomSettings(settings);
 		myGame.settingsChanged();

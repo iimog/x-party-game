@@ -44,7 +44,7 @@ public abstract class Game extends Anzeige {
 
 	public static final Font STANDARD_FONT = X.getStandardFont().deriveFont(16f);
 	public static final Font PLAYER_FONT = X.getStandardFont().deriveFont(26f).deriveFont(Font.BOLD);
-	public String gameName;
+	private String gameName;
 	public player.Player[] myPlayer;
 	private Team[] myTeam = new Team[2];
 	
@@ -129,12 +129,21 @@ public abstract class Game extends Anzeige {
 		matchCredLabel = new JLabel[spielerZahl];
 		buzzerKeyIndicator = new JButton[spielerZahl];
 		playerPanel = new JPanel[spielerZahl];
-		customSettings = SettingsFileHandler.loadSettings(gameName);
+		customSettings = SettingsFileHandler.loadSettings(getGameFileName());
 		loadProperties();
 	}
 
 	public void loadProperties() {
 		// In Subklassen überschreiben	
+	}
+	
+	public String getGameFileName() {
+		String gameFileName = this.getClass().getPackageName();
+		gameFileName = gameFileName.replaceFirst("^games.", "");
+		if(this instanceof NonPC) {
+			gameFileName = gameName;
+		}
+		return gameFileName;
 	}
 
 	private void initGUI() {

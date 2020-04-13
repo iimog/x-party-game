@@ -157,7 +157,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 	}
 
 	private void highscoreButtonActionPerformed(ActionEvent e) {
-		GameHighscore gh = HighscoreFileHandler.loadGameHighscore(game.gameName);
+		GameHighscore gh = HighscoreFileHandler.loadGameHighscore(game.getGameFileName());
 		if(gh != null){
 			GameHighscorePanel ghp = new GameHighscorePanel(gh, game.modus);
 			EasyDialog.showMessage("", ghp);

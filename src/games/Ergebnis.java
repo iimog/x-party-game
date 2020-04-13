@@ -13,7 +13,7 @@ public class Ergebnis {
 	}
 	public Ergebnis(Game g, Player winner){
 		this.players = g.myPlayer;
-		this.gameName = g.gameName;
+		this.gameName = g.getGameFileName();
 		this.modus = g.modus;
 		this.winner = winner;
 	}
