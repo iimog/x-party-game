@@ -254,6 +254,6 @@ public class Guess extends Game implements PC {
 	@Override
 	public void loadProperties() {
 		super.loadProperties();
-		guessDecks = DeckLoader.loadDecks("guess", true);
+		guessDecks = DeckLoader.loadDecks(getGameFileName(), true);
 	}
 }

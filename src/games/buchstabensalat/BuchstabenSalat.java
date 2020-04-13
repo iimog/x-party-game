@@ -356,6 +356,6 @@ public class BuchstabenSalat extends Game implements PC {
 	@Override
 	public void loadProperties() {
 		super.loadProperties();
-		salatDecks = DeckLoader.loadDecks("buchstabensalat", true);
+		salatDecks = DeckLoader.loadDecks(getGameFileName(), true);
 	}
 }

@@ -262,6 +262,6 @@ public class Stimmts extends Game implements PC {
 	@Override
 	public void loadProperties() {
 		super.loadProperties();
-		stimmtsDecks = DeckLoader.loadDecks("stimmts", true);
+		stimmtsDecks = DeckLoader.loadDecks(getGameFileName(), true);
 	}
 }
