@@ -24,6 +24,7 @@ public class RichDialog extends AnzeigeDialog {
 	public RichDialog(URL resource){
 		this.resource = resource;
 		initGUI();
+		requestFocusForMainButton();
 	}
 
 	private JPanel getMessageButtonPanel(){
