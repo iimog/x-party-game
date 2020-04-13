@@ -9,7 +9,7 @@ Geister	games.ghosts.Ghosts	2	18	Ein Strategiespiel. Es geht darum zu bluffen, d
 Tron	games.tron.Tron	5	30	Verbaue deinem Gegner den Weg aber fahr nicht gegen die Wand.	/media/tron/Tron.jpg
 Wurst	games.wurst.Wurst	5	31	Wer mehr auf die Waage bringt gewinnt - aber gib nicht alles auf einmal aus.	/media/wurst/wurst.jpg
 Buchstabensalat	games.buchstabensalat.BuchstabenSalat	5	30	Behältst du den Überblick im Buchstabengewirr?	/media/buchstabensalat/letters.jpg
-Stimmts?	games.stimmts.Stimmts	5	31	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)\n\nSpieler 1: D->wahr F->falsch, Spieler 2: K->wahr L->falsch, \nSpieler 3: B->wahr N->falsch, Spieler 4: Z->wahr U->falsch \n\nEselsbrücken: F->Falsch, L->Lüge, N->Nichtwahr, U->Unwahr	/media/stimmts/stimmts.jpg
+Stimmts?	games.stimmts.Stimmts	5	31	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)	/media/stimmts/stimmts.jpg
 Wer lügt?	games.werLuegt.WerLuegt	5	30	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)	/media/wer_luegt/wer_luegt.jpg
 Reaktionszeit	games.reaktionszeit.ReaktionsZeit	5	30	Wessen Schrecksekunde ist länger?	/media/reaktionszeit/reaktionszeit.jpg
 Spiegelschrift	games.spiegelschrift.SpiegelSchrift	5	0	Hier wird dir ganz schön der Kopf verdreht!	/media/ablauf/iceBG.jpg
