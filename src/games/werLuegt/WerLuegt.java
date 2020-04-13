@@ -63,7 +63,7 @@ public class WerLuegt extends Game implements PC {
 						public @Override
 						boolean accept(URL u) {
 							String s = u.getFile();
-							return s.endsWith(".deck")
+							return s.endsWith(".aussage")
 									&& s.contains(systemRoot);
 						}
 					});

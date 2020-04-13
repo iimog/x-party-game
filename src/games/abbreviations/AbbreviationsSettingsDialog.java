@@ -17,7 +17,7 @@ public class AbbreviationsSettingsDialog extends GameSettingsDialog {
 	public static final String DECK = "Deck";
 	private Abbreviations abbreviations;
 	private JSlider rotationTimeSlider;
-	private JComboBox deckComboBox;
+	private JComboBox<Deck> deckComboBox;
 
 	public AbbreviationsSettingsDialog(Abbreviations abbreviations) {
 		this(abbreviations, false);
@@ -45,10 +45,10 @@ public class AbbreviationsSettingsDialog extends GameSettingsDialog {
 			addSettingsComponent("Rotationszeit", rotationTimeSlider);
 		}
 		{
-			ComboBoxModel deckComboBoxModel =
-					new DefaultComboBoxModel(abbreviations.getAbbreviationsDecks().toArray(new Deck[1]));
+			ComboBoxModel<Deck> deckComboBoxModel =
+					new DefaultComboBoxModel<Deck>(abbreviations.getAbbreviationsDecks().toArray(new Deck[1]));
 				
-			deckComboBox = new JComboBox();
+			deckComboBox = new JComboBox<Deck>();
 			deckComboBox.setBackground(Color.DARK_GRAY);
 			deckComboBox.setModel(deckComboBoxModel);	
 			addSettingsComponent("Deck", deckComboBox);
