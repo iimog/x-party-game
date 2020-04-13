@@ -188,8 +188,10 @@ public class QuickStartPanel extends Anzeige {
 					X.getInstance().forgetBuzzers();
 					List<Player> playersWithMaxScore = getPlayersWithMaxScore(game);
 					if(playersWithMaxScore.size() == 1) {
-						X.getInstance().changeAnzeige(new Siegerehrung(playersWithMaxScore.get(0)));
-					} else {						
+						Player winner = playersWithMaxScore.get(0);
+						X.getInstance().changeAnzeige(new Siegerehrung(winner));
+						HighscoreFileHandler.saveGameHighscore(new Ergebnis(game, winner));
+					} else {
 						if (game.myPlayer[0].gameCredit == MatchCredits.UNENTSCHIEDEN) {
 							X.getInstance().changeAnzeige(new Siegerehrung(new Player("Unentschieden",false,Color.DARK_GRAY)));
 						} else {
