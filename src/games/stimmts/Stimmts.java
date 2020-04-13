@@ -2,19 +2,14 @@ package games.stimmts;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
+import java.awt.GridLayout;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 
 import games.Deck;
 import games.DeckLoader;
@@ -32,11 +27,6 @@ public class Stimmts extends Game implements PC {
 	private static final long serialVersionUID = 1L;
 	private static String gameName = "Stimmts";
 	static Font standardFont = new JLabel().getFont().deriveFont(40f);
-
-	public static final int[] trueBuzz = { KeyEvent.VK_D, KeyEvent.VK_K,
-			KeyEvent.VK_B, KeyEvent.VK_Z };
-	public static final int[] falseBuzz = { KeyEvent.VK_F, KeyEvent.VK_L,
-			KeyEvent.VK_N, KeyEvent.VK_U };
 
 	private static int defaultNumOfRounds = 5;
 
@@ -57,52 +47,28 @@ public class Stimmts extends Game implements PC {
 	private JPanel hauptbereichPanel;
 
 	private JLabel aussageLabel;
-	boolean[] vermutung;
 	int timeProAussage = 5;
 	private Countdown countdown;
 	int current = -1;
 	boolean letzteAussageWahr;
 	Set<Integer> winnerIDs;
-	private boolean[] answerGiven;
+	int[] buzzerCounter;
 	List<Deck> stimmtsDecks;
 	StimmtsDeck currentDeck;
+	private JLabel deckNameLabel;
 
 	public Stimmts(Player[] player, Modus modus, String background, int globalGameID) {
 		super(player, defaultNumOfRounds, modus, background, globalGameID);
 		currentDeck = new StimmtsDeck(stimmtsDecks.get(new Random().nextInt(stimmtsDecks.size())));
-		vermutung = new boolean[player.length];
-		answerGiven = new boolean[player.length];
+		buzzerCounter = new int[player.length];
 		resetVermutungen();
 		initGUI();
-		registerBuzzerActions();
 		settingsChanged();
-	}
-
-	private void registerBuzzerActions() {
-		for (int i = 0; i < spielerZahl; i++) {
-			Action actionTrue = new BuzzerAction(i, true);
-			String actionName = "Truebuzzer" + i;
-			// Register keystroke
-			hauptbereichPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-					.put(KeyStroke.getKeyStroke(trueBuzz[i], 0), actionName);
-			// Register action
-			hauptbereichPanel.getActionMap().put(actionName, actionTrue);
-
-			Action actionFalse = new BuzzerAction(i, false);
-			String actionName2 = "Falsebuzzer" + i;
-			// Register keystroke
-			hauptbereichPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-					.put(KeyStroke.getKeyStroke(falseBuzz[i], 0), actionName2);
-			// Register action
-			hauptbereichPanel.getActionMap().put(actionName2, actionFalse);
-		}
-
 	}
 
 	private void resetVermutungen() {
 		for (int i = 0; i < spielerZahl; i++) {
-			vermutung[i] = true;
-			answerGiven[i] = false;
+			buzzerCounter[i] = 0;
 		}
 	}
 
@@ -110,8 +76,24 @@ public class Stimmts extends Game implements PC {
 		hauptbereichPanel = new JPanel();
 		hauptbereichPanel.setLayout(new BorderLayout());
 		spielBereichPanel.add(hauptbereichPanel);
+		addTopPanel();
 		addAussageLabel();
 		addCountdown();
+	}
+
+	private void addTopPanel() {
+		JPanel topPanel = new JPanel(new GridLayout(2,1));
+		hauptbereichPanel.add(topPanel, BorderLayout.NORTH);
+		deckNameLabel = new JLabel(currentDeck.toString());
+		deckNameLabel.setFont(X.BUTTON_FONT);
+		deckNameLabel.setHorizontalAlignment(JLabel.CENTER);
+		topPanel.add(deckNameLabel);
+		JLabel explanationLabel = new JLabel("Buzzern: gelogen");
+		topPanel.add(explanationLabel);
+		//JLabel explanationLabel1 = new JLabel("Wenn Aussage wahr: nicht buzzern (oder 2x, 4x, ...)");
+		//topPanel.add(explanationLabel1);
+		//JLabel explanationLabel2 = new JLabel("Wenn Aussage falsch: 1x buzzern (oder 3x, 5x, ...)");
+		//topPanel.add(explanationLabel2);
 	}
 
 	private void addAussageLabel() {
@@ -133,21 +115,30 @@ public class Stimmts extends Game implements PC {
 	}
 
 	public void roundEnd() {
+		setBuzzerActive(false);
 		letzteAussageWahr = currentDeck.getAussage(current).isWahr();
 		if (modus == Modus.SOLO) {
 			// Boten Ana wählt immer das Gegenteil des Spielers
-			vermutung[1] = !vermutung[0];
+			buzzerCounter[1] = (buzzerCounter[0]+1)%2;
 		}
 		winnerIDs = new HashSet<Integer>();
 		for (int i = 0; i < spielerZahl; i++) {
-			if (!answerGiven[i])
-				vermutung[i] = !letzteAussageWahr;
-			if (vermutung[i] == letzteAussageWahr)
+			if (buzzerCountToVermutung(buzzerCounter[i]) == letzteAussageWahr)
 				winnerIDs.add(i);
 		}
 		verbuchePunkte(winnerIDs);
 		winner = getWinnerText(winnerIDs);
 		openRoundDialog(winner);
+	}
+
+	/**
+	 * Infer vermutung from number of buzzer events
+	 * no buzzer (or even number) assumes true, one buzzer (or odd number) assumes false
+	 * @param n number of buzzer events for player
+	 * @return vermutung
+	 */
+	private boolean buzzerCountToVermutung(int n) {
+		return n%2 == 0;
 	}
 
 	private void verbuchePunkte(Set<Integer> winnerIDs) {
@@ -190,23 +181,13 @@ public class Stimmts extends Game implements PC {
 		} else {
 			aussageLabel.setText(currentDeck.getAussage(current).getAussage());
 			countdown.start();
+			setBuzzerActive(true);
 		}
 	}
 
-	private class BuzzerAction extends AbstractAction {
-		private static final long serialVersionUID = 1L;
-		private int playerID;
-		private boolean stimmt;
-
-		public BuzzerAction(int playerID, boolean stimmt) {
-			this.playerID = playerID;
-			this.stimmt = stimmt;
-		}
-
-		public void actionPerformed(ActionEvent e) {
-			answerGiven[playerID] = true;
-			vermutung[playerID] = stimmt;
-		}
+	@Override
+	public void buzzeredBy(int playerID) {
+		buzzerCounter[playerID]++;
 	}
 
 	@Override
@@ -216,7 +197,7 @@ public class Stimmts extends Game implements PC {
 		countdown.setSecs(timeProAussage);
 		schonWeg = new HashSet<Integer>();
 		current = nextRandom(currentDeck.getSize());
-		//TODO deckNameLabel.setText(currentDeck.getDeckName());
+		deckNameLabel.setText(currentDeck.getDeckName());
 		aussageLabel.setText(currentDeck.getAussage(current).getAussage());
 	}
 

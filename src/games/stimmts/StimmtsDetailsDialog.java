@@ -36,7 +36,7 @@ public class StimmtsDetailsDialog extends AnzeigeDialog {
 			dialogPane.add(hauptbereichPanel, BorderLayout.CENTER);
 			{
 				aussageLabel = new JLabel();
-				aussageLabel.setFont(Stimmts.standardFont);
+				aussageLabel.setFont(Stimmts.standardFont.deriveFont(24f));
 				aussageLabel.setText(stimmts.currentDeck.getAussage(stimmts.current).getAussage());
 				aussageLabel.setHorizontalAlignment(JLabel.CENTER);
 				hauptbereichPanel.add(aussageLabel);
@@ -55,7 +55,8 @@ public class StimmtsDetailsDialog extends AnzeigeDialog {
 				werLagRichtigPanel = new JPanel();
 				werLagRichtigPanel.setLayout(new GridLayout(1,stimmts.spielerZahl));
 				for(int i=0; i<stimmts.spielerZahl; i++){
-					JLabel spielerLabel = new JLabel(stimmts.myPlayer[i].name);
+					JLabel spielerLabel = new JLabel(
+							stimmts.myPlayer[i].name + " ("+stimmts.buzzerCounter[i]+")");
 					spielerLabel.setOpaque(true);
 					spielerLabel.setBackground(Color.RED);
 					spielerLabel.setHorizontalAlignment(JLabel.CENTER);
