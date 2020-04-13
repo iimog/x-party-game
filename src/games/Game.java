@@ -119,7 +119,6 @@ public abstract class Game extends Anzeige {
 		instance.setGame(this);
 		instance.changeAnzeige(this);
 		instance.showDialog(new GameStartDialog(this));
-		System.out.println("GameFileName: "+getGameFileName());
 	}
 
 	private void initVariablen() {

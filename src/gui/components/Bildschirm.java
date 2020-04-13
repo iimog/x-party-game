@@ -18,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import start.X;
+
 @SuppressWarnings("serial")
 public class Bildschirm extends JPanel {
 	private static final String DEFAULT_BACKGROUND = "/media/ablauf/whitenoise.png";
@@ -195,6 +197,10 @@ public class Bildschirm extends JPanel {
 		if(bildURL != null){
 			bild = getToolkit().getImage(bildURL);
 		} else {
+			// if path is not absolute, assume relative to .xpartygame in user home
+			if(!bildname.substring(0, 1).equals("/")) {
+				bildname = X.getDataDir() + "/" + bildname;
+			}
 			try {
 				bild = ImageIO.read(new java.io.File(bildname));
 			} catch (Exception e) {
