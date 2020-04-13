@@ -37,14 +37,14 @@ public class StimmtsDetailsDialog extends AnzeigeDialog {
 			{
 				aussageLabel = new JLabel();
 				aussageLabel.setFont(Stimmts.standardFont);
-				aussageLabel.setText(stimmts.aussageListe.get(stimmts.current).getAussage());
+				aussageLabel.setText(stimmts.currentDeck.getAussage(stimmts.current).getAussage());
 				aussageLabel.setHorizontalAlignment(JLabel.CENTER);
 				hauptbereichPanel.add(aussageLabel);
 			}
 			{
 				answerLabel = new JLabel();
 				answerLabel.setFont(Stimmts.standardFont);
-				boolean wahr = stimmts.aussageListe.get(stimmts.current).isWahr();
+				boolean wahr = stimmts.currentDeck.getAussage(stimmts.current).isWahr();
 				String richtigeAntwort = (wahr ? "Wahr" : "Falsch");
 				answerLabel.setText(richtigeAntwort);
 				answerLabel.setHorizontalAlignment(JLabel.CENTER);
