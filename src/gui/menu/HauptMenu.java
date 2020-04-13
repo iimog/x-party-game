@@ -43,14 +43,8 @@ public class HauptMenu extends Anzeige {
 	private JLabel updateInfoLabel;
 
 	public HauptMenu() {
-		GridLayout myLayout = new GridLayout(6, 1);
-		myLayout.setHgap(5);
-		myLayout.setVgap(5);
-		myLayout.setColumns(1);
-		myLayout.setRows(6);
-		this.setLayout(myLayout);
 		this.setLayout(new BorderLayout());
-		menuPanel = new JPanel(new GridLayout(5, 1));
+		menuPanel = new JPanel(new GridLayout(6, 1));
 		menuPanel.setOpaque(false);
 		this.add(menuPanel, BorderLayout.CENTER);
 		this.setOpaque(false);
@@ -121,7 +115,7 @@ public class HauptMenu extends Anzeige {
 		}
 		{
 			highscorePanel = new JPanel();
-			//menuPanel.add(highscorePanel);
+			menuPanel.add(highscorePanel);
 			highscorePanel.setOpaque(false);
 			{
 				highscoreButton = new DefaultButton("Highscore");

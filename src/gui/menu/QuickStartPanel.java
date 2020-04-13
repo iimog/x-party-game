@@ -20,11 +20,13 @@ import javax.swing.JTextField;
 
 import ablauf.MatchCredits;
 import ablauf.Siegerehrung;
+import games.Ergebnis;
 import games.Game;
 import games.GameListener;
 import games.Modus;
 import gui.Anzeige;
 import gui.components.DefaultButton;
+import highscore.HighscoreFileHandler;
 import player.Player;
 import settings.SettingsFileHandler;
 import start.X;

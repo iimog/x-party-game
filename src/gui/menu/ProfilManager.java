@@ -25,10 +25,10 @@ import util.InputListener;
 public class ProfilManager extends AnzeigeDialog {
 	private static final long serialVersionUID = 1L;
 	private MatchSettingsDialog matchSettingsDialog;
-	private JList profilListe;
+	private JList<String> profilListe;
 	private JPanel hauptPanel;
 	private File[] profiles;
-	private DefaultComboBoxModel profilComboBoxModel;
+	private DefaultComboBoxModel<String> profilComboBoxModel;
 	private JPanel buttonPanel;
 	private JButton neuButton;
 	private JButton bearbeitenButton;
@@ -65,17 +65,17 @@ public class ProfilManager extends AnzeigeDialog {
 	}
 	
 	private void initProfilListe() {
-		profilListe = new JList();
+		profilListe = new JList<String>();
 		profilListe.setFont(X.BUTTON_FONT);
 		updateProfiles();
 	}
 	private void initButtonPanel() {
 		buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(4,1));
+		buttonPanel.setLayout(new GridLayout(3,1));
 		initNeuButton();
 		buttonPanel.add(neuButton);
 		initBearbeitenButton();
-		buttonPanel.add(bearbeitenButton);
+		//buttonPanel.add(bearbeitenButton);
 		initUmbenennenButton();
 		buttonPanel.add(umbenennenButton);
 		initLoeschenButton();
@@ -176,7 +176,7 @@ public class ProfilManager extends AnzeigeDialog {
 		for(int i=0; i<profilZahl; i++){
 			profileNames[i] = profiles[i].getName().substring(0, profiles[i].getName().length() - 5);
 		}
-		profilComboBoxModel = new DefaultComboBoxModel(profileNames);
+		profilComboBoxModel = new DefaultComboBoxModel<String>(profileNames);
 		profilListe.setModel(profilComboBoxModel);
 	}
 
