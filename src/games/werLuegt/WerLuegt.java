@@ -1,30 +1,27 @@
 package games.werLuegt;
 
-import games.Game;
-import games.Modus;
-import games.PC;
-import games.dialogeGUIs.InfoDialog;
-import games.dialogeGUIs.RoundDialog;
-
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import games.Deck;
+import games.DeckLoader;
+import games.Game;
+import games.Modus;
+import games.PC;
+import games.dialogeGUIs.InfoDialog;
+import games.dialogeGUIs.RoundDialog;
 import player.Player;
 import start.X;
 import util.ChangeManager;
-import util.ResourceList;
-import util.ResourceURLFilter;
 
 public class WerLuegt extends Game implements PC {
 	private static final long serialVersionUID = 1L;
@@ -40,9 +37,6 @@ public class WerLuegt extends Game implements PC {
 
 	private JPanel hauptbereichPanel;
 
-	List<WerLuegtAussage> aussageListe;
-	List<File> aussageFileListe;
-	List<URL> aussageSystemListe;
 	private JLabel aussageLabel;
 	private WerLuegtRotator aktuelleAntwortRotator;
 	int timeProAussage = 5;
@@ -50,43 +44,12 @@ public class WerLuegt extends Game implements PC {
 	int whoBuzzed;
 	Set<Integer> winnerIDs;
 	private JPanel aktuelleAntwortPanel;
-	private static String systemRoot = "/conf/pc/werLuegt/";
-	private static File userFolder = new File(X.getDataDir()
-			+ "games/pc/werLuegt/");
-
-	private void initAussagen() {
-		aussageFileListe = new ArrayList<File>();
-		try {
-			aussageSystemListe = new ArrayList<URL>();
-			Set<URL> systemURLs = ResourceList
-					.getResourceURLs(new ResourceURLFilter() {
-						public @Override
-						boolean accept(URL u) {
-							String s = u.getFile();
-							return s.endsWith(".aussage")
-									&& s.contains(systemRoot);
-						}
-					});
-			for (URL url : systemURLs) {
-				aussageSystemListe.add(url);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if (userFolder.exists()) {
-			String[] userFiles = userFolder.list();
-			for (String file : userFiles) {
-				if (file.endsWith(".deck")) {
-					aussageFileListe.add(new File(userFolder + "/" + file));
-				}
-			}
-		}
-	}
+	private WerLuegtDeck currentDeck;
 
 	public WerLuegt(Player[] player, Modus modus, String background,
 			int globalGameID) {
 		super(player, defaultNumOfRounds, modus, background, globalGameID);
-		initAussagen();
+		currentDeck = new WerLuegtDeck(werLuegtDecks.get(new Random().nextInt(werLuegtDecks.size())));
 		initGUI();
 	}
 
@@ -136,6 +99,7 @@ public class WerLuegt extends Game implements PC {
 	}
 
 	private boolean aktuelleAussageWahr;
+	private List<Deck> werLuegtDecks;
 
 	public void roundEnd(int whoBuzzered) {
 		aktuelleAntwortRotator.pause();
@@ -189,20 +153,13 @@ public class WerLuegt extends Game implements PC {
 		if (modus == Modus.TEAM)
 			changeActivePlayers();
 		aktuelleAussageWahr = false;
-		current = nextRandom(aussageFileListe.size()
-				+ aussageSystemListe.size());
+		current = nextRandom(currentDeck.getSize());
 		if (current == -1) {
 			abbruch();
 			// TODO besser handhaben!
 		} else {
 			setBuzzerActive(true);
-			if (current < aussageFileListe.size()) {
-				aktuelleAntwortRotator.changeDeckToFile(aussageFileListe
-						.get(current));
-			} else {
-				aktuelleAntwortRotator.changeDeckToResource(aussageSystemListe
-						.get(current - aussageFileListe.size()));
-			}
+			aktuelleAntwortRotator.changeDeckToAussage(currentDeck.getAussage(current));
 			aussageLabel.setText(aktuelleAntwortRotator.getDeckName());
 			aktuelleAntwortRotator.start();
 		}
@@ -277,5 +234,10 @@ public class WerLuegt extends Game implements PC {
 
 	public List<String> getVerlauf() {
 		return aktuelleAntwortRotator.getVerlauf();
+	}
+	
+	@Override
+	public void loadProperties() {
+		werLuegtDecks = DeckLoader.loadDecks(getGameFileName(), true);
 	}
 }
