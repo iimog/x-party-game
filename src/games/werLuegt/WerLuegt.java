@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import games.Deck;
 import games.DeckLoader;
@@ -45,12 +46,14 @@ public class WerLuegt extends Game implements PC {
 	Set<Integer> winnerIDs;
 	private JPanel aktuelleAntwortPanel;
 	private WerLuegtDeck currentDeck;
+	private JLabel deckLabel;
 
 	public WerLuegt(Player[] player, Modus modus, String background,
 			int globalGameID) {
 		super(player, defaultNumOfRounds, modus, background, globalGameID);
 		currentDeck = new WerLuegtDeck(werLuegtDecks.get(new Random().nextInt(werLuegtDecks.size())));
 		initGUI();
+		settingsChanged();
 	}
 
 	private void initGUI() {
@@ -58,8 +61,16 @@ public class WerLuegt extends Game implements PC {
 		hauptbereichPanel.setLayout(new BorderLayout());
 		hauptbereichPanel.setOpaque(false);
 		spielBereichPanel.add(hauptbereichPanel);
+		addDeckLabel();
 		addAussageLabel();
 		addAktuelleAntwortPanel();
+	}
+
+	private void addDeckLabel() {
+		deckLabel = new JLabel(currentDeck.toString());
+		deckLabel.setFont(STANDARD_FONT);
+		deckLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		hauptbereichPanel.add(deckLabel, BorderLayout.NORTH);
 	}
 
 	private void addAktuelleAntwortPanel() {
@@ -99,7 +110,7 @@ public class WerLuegt extends Game implements PC {
 	}
 
 	private boolean aktuelleAussageWahr;
-	private List<Deck> werLuegtDecks;
+	List<Deck> werLuegtDecks;
 
 	public void roundEnd(int whoBuzzered) {
 		aktuelleAntwortRotator.pause();
@@ -181,15 +192,26 @@ public class WerLuegt extends Game implements PC {
 		updateCreds();
 		if (aktuelleAntwortRotator != null)
 			aktuelleAntwortRotator.setRotationTime(timeProAussage);
+		deckLabel.setText(currentDeck.getDeckName());
 	}
 
 	@Override
 	protected void propertiesToSettings() {
+		super.propertiesToSettings();
 		if (customSettings == null)
 			return;
 		String time = customSettings.getProperty(
 				WerLuegtSettingsDialog.AUSSAGEZEIT, "5");
 		timeProAussage = Integer.parseInt(time);
+		String deck = customSettings.getProperty(WerLuegtSettingsDialog.DECK, "");
+		if(deck.equals("Zufall")) {
+			currentDeck = new WerLuegtDeck(werLuegtDecks.get(new Random().nextInt(werLuegtDecks.size())));
+		}
+		for (int i = 0; i < werLuegtDecks.size(); i++) {
+			if (werLuegtDecks.get(i).toString().equals(deck)) {
+				currentDeck = new WerLuegtDeck(werLuegtDecks.get(i));
+			}
+		}
 	}
 
 	@Override
