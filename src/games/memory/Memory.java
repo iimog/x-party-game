@@ -48,6 +48,7 @@ public class Memory extends games.Game implements PC {
 	}
 	Bildschirm[] karte;
 	HashSet<Integer> set1, set2;
+	int cardSize = 100;
 	HashSet<Integer> open = new HashSet<Integer>();
 	ArrayList<String> pictures;
 	boolean waiting = false;
@@ -68,6 +69,7 @@ public class Memory extends games.Game implements PC {
 				int clickInd = Integer.parseInt(bs.getName());
 				if(!open.add(clickInd))return;
 				bs.changePic(pictures.get(loesung.get(clickInd)));
+				bs.scalePic(cardSize, cardSize);
 				if(modus == Modus.SOLO){
 					memoryRobot.setInfo(clickInd, loesung.get(clickInd));
 				}				
@@ -269,6 +271,7 @@ public class Memory extends games.Game implements PC {
 		int zug = memoryRobot.getAnzugPosition();
 		open.add(zug);
 		karte[zug].changePic(pictures.get(loesung.get(zug)));
+		karte[zug].scalePic(cardSize,cardSize);
 		click[0] = zug;
 		memoryRobot.setInfo(zug, loesung.get(zug));
 		try {
@@ -279,6 +282,7 @@ public class Memory extends games.Game implements PC {
 		zug = memoryRobot.getWeiterzugPosition();
 		open.add(zug);
 		karte[zug].changePic(pictures.get(loesung.get(zug)));
+		karte[zug].scalePic(cardSize,cardSize);
 		click[1] = zug;
 		memoryRobot.setInfo(zug, loesung.get(zug));
 		if(loesung.get(click[0]) == loesung.get(click[1])){
