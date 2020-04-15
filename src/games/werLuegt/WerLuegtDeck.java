@@ -40,17 +40,21 @@ public class WerLuegtDeck extends Deck{
 	
 	public WerLuegtAussage loadAussage(String deckPath) {
 		try {
-			String systemRoot = "/conf/pc/werLuegt/";
-			File userFolder = new File(X.getDataDir() + "games/pc/werLuegt/");
-			InputStream is = this.getClass().getResourceAsStream(systemRoot+"aussagen/"+deckPath);
+			String systemRoot = "/conf/pc/werLuegt";
+			File userFolder = new File(X.getDataDir() + "games/pc/werLuegt");
+			String resourcePath = systemRoot+"/aussagen/"+deckPath;
+			InputStream is = this.getClass().getResourceAsStream(resourcePath);
 			BufferedReader br;
 			if(is != null) {
 				br = new BufferedReader(new InputStreamReader(is));
 			} else {
-				File aussageFile = new File(userFolder+"aussagen/"+deckPath);
+				File aussageFile = new File(userFolder+"/aussagen/"+deckPath);
 				if(aussageFile.canRead()) {
 					br = new BufferedReader(new FileReader(aussageFile));
 				} else {
+					System.err.println("Aussage not found: " + deckPath);
+					System.err.println("Tryed resource: " + resourcePath);
+					System.err.println("Tryed file: " + aussageFile.getAbsolutePath());
 					return null;
 				}
 			}
