@@ -120,6 +120,11 @@ public class ReaktionsZeit extends Game {
 			rotationTime = Integer.parseInt(rotationTimeString);
 		String deck = customSettings.getProperty(
 				ReaktionsZeitSettingsDialog.DECK, "");
+		if(deck.startsWith("Zufall")) {
+			currentDeck = new Random().nextInt(reaktionszeitDecks.size());
+			updateQuery();
+			setTarget();
+		}
 		for (int i = 0; i < reaktionszeitDecks.size(); i++) {
 			if (reaktionszeitDecks.get(i).toString().equals(deck)) {
 				currentDeck = i;

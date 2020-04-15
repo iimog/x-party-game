@@ -2,6 +2,9 @@ package games.reaktionszeit;
 
 import games.dialogeGUIs.GameSettingsDialog;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -14,7 +17,7 @@ public class ReaktionsZeitSettingsDialog extends GameSettingsDialog {
 	public static final String DECK = "Deck";
 	private ReaktionsZeit reaktionsZeit;
 	private JSlider rotationTimeSlider;
-	private JComboBox deckComboBox;
+	private JComboBox<ReaktionsZeitDeck> deckComboBox;
 
 	public ReaktionsZeitSettingsDialog(ReaktionsZeit reaktionsZeit) {
 		this(reaktionsZeit, false);
@@ -42,10 +45,14 @@ public class ReaktionsZeitSettingsDialog extends GameSettingsDialog {
 			addSettingsComponent("Rotationszeit", rotationTimeSlider);
 		}
 		{
-			ComboBoxModel deckComboBoxModel =
-					new DefaultComboBoxModel(reaktionsZeit.getReaktionszeitDecks().toArray(new ReaktionsZeitDeck[1]));
+			List<ReaktionsZeitDeck> rzDecks = new ArrayList<ReaktionsZeitDeck>(reaktionsZeit.getReaktionszeitDecks());
+			ReaktionsZeitDeck randomDeck = new ReaktionsZeitDeck(true);
+			randomDeck.setDeckName("Zufall");
+			rzDecks.add(0, randomDeck);
+			ComboBoxModel<ReaktionsZeitDeck> deckComboBoxModel =
+					new DefaultComboBoxModel<ReaktionsZeitDeck>(rzDecks.toArray(new ReaktionsZeitDeck[0]));
 				
-			deckComboBox = new JComboBox();
+			deckComboBox = new JComboBox<ReaktionsZeitDeck>();
 			deckComboBox.setModel(deckComboBoxModel);
 			addSettingsComponent("Deck", deckComboBox, false);
 		}
