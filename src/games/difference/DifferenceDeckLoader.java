@@ -63,7 +63,7 @@ public class DifferenceDeckLoader {
 			while (br.ready()) {
 				String line = br.readLine();
 				String[] elements = line.split("\t");
-				newDeck.addPicture(userFolder+"/"+elements[0], userFolder+"/"+elements[1], new Point(Integer.parseInt(elements[2]),Integer.parseInt(elements[3])));
+				newDeck.addPicture(elements[0], elements[1], new Point(Integer.parseInt(elements[2]),Integer.parseInt(elements[3])));
 			}
 			br.close();
 			fr.close();

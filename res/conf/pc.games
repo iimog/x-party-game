@@ -1,7 +1,7 @@
 Böse 6	games.bad6.Bad6	5	31	Lass dich nicht verführen!	/media/bad6/schlange.jpg
 Säutreiber	games.sautreiber.SauTreiber	3	30	Ein spannendes Würfelspiel. Sammle Punkte, aber wer zu viel riskiert verliert alles.	/media/sautreiber/3_schweine.jpg
 Schätz mal	games.guess.Guess	5	31	Das ist ein Ratespiel. Wer näher an die richtige Antwort kommt gewinnt.	/media/ablauf/iceBG.jpg
-Fehlerteufel	games.difference.Difference	4	0	Finde den Fehler im linken Bild - bevor es dein Gegner tut.	/media/ablauf/iceBG.jpg
+Fehlerteufel	games.difference.Difference	4	31	Finde den Fehler im linken Bild - bevor es dein Gegner tut.	/media/ablauf/iceBG.jpg
 Memory	games.memory.Memory	5	31	Das klassische Merkspiel.	/media/ablauf/iceBG.jpg
 Wo?	games.world.World	4	31	Kennst du die Erde wie deine Westentasche?	/media/world/world.jpg
 Uhr	games.innereUhr.InnereUhr	5	31	Es geht darum seine innere Uhr zu nutzen um zur richtigen Zeit den Buzzer zu drücken.	/media/innereuhr/sanduhr.jpg
@@ -12,5 +12,4 @@ Buchstabensalat	games.buchstabensalat.BuchstabenSalat	5	30	Behältst du den Übe
 Stimmts?	games.stimmts.Stimmts	5	31	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)	/media/stimmts/stimmts.jpg
 Wer lügt?	games.werLuegt.WerLuegt	5	30	Was ist die Wahrheit was gelogen? (Fast wie bei X-Faktor)	/media/wer_luegt/wer_luegt.jpg
 Reaktionszeit	games.reaktionszeit.ReaktionsZeit	5	30	Wessen Schrecksekunde ist länger?	/media/reaktionszeit/reaktionszeit.jpg
-Spiegelschrift	games.spiegelschrift.SpiegelSchrift	5	0	Hier wird dir ganz schön der Kopf verdreht!	/media/ablauf/iceBG.jpg
-Nummernschilder	games.abbreviations.Abbreviations	5	30	Wie gut kennst du dich auf den Straßen aus?	/media/abbreviations/roadBG.jpg
+Abkürzungen	games.abbreviations.Abbreviations	5	30	Wie gut kennst du dich auf den Straßen aus?	/media/abbreviations/roadBG.jpg

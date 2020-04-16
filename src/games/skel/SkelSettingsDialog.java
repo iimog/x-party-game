@@ -13,7 +13,7 @@ public class SkelSettingsDialog extends GameSettingsDialog {
 	public static final String DECK = "Deck";
 	private Skel skel;
 //	private JSlider rotationTimeSlider;
-	private JComboBox deckComboBox;
+	private JComboBox<Deck> deckComboBox;
 
 	public SkelSettingsDialog(Skel skel) {
 		this(skel, false);
@@ -41,10 +41,10 @@ public class SkelSettingsDialog extends GameSettingsDialog {
 //			addSettingsComponent("Rotationszeit", rotationTimeSlider);
 //		}
 		{
-			ComboBoxModel deckComboBoxModel =
-					new DefaultComboBoxModel(skel.getSkelDecks().toArray(new Deck[1]));
+			ComboBoxModel<Deck> deckComboBoxModel =
+					new DefaultComboBoxModel<Deck>(skel.getSkelDecks().toArray(new Deck[1]));
 				
-			deckComboBox = new JComboBox();
+			deckComboBox = new JComboBox<Deck>();
 			deckComboBox.setModel(deckComboBoxModel);	
 			addSettingsComponent("Deck", deckComboBox);
 		}

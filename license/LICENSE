@@ -6,6 +6,7 @@ Licenses:
 #Abbreviation	Text	Full
 CPOL	license/CPOL.htm	Code Project Open License
 pixelio.de red.kom.	license/pixelio_lizenzvertrag_redaktionell_und_kommerziell.pdf	pixelio.de - Lizenzvertrag zwischen Urheber und Nutzer (redaktionelle und kommerzielle Nutzung)
+Pixabay License	https://pixabay.com/service/license/	Free for commercial use, No attribution required 
 
 Resources:
 
@@ -78,6 +79,7 @@ media/stimmts/stimmts.jpg	red.kom.	Rainer Sturm	http://www.pixelio.de/media/6366
 media/tron/Tron.jpg	red.kom.	Rainer Sturm	http://www.pixelio.de/media/648318	2015-04-13	no
 media/wurst/wurst.jpg	red.kom.	Klaus Steves	http://www.pixelio.de/media/640944	2015-04-13	no
 media/memory/blue.jpg	red.kom.	Joujou	http://www.pixelio.de/media/545055	2015-07-11	no
+media/difference/flower*.jpg	Pixabay License	Larisa Koshkina	https://pixabay.com/illustrations/flower-decoration-bouquet-of-flowers-3375258/	2020-04-16	yes
 
 #Icons
 #All icons are taken from the Public Domain package of the openiconlibrary (http://sourceforge.net/projects/openiconlibrary/) version 0.11 

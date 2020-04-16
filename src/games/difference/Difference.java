@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -453,6 +454,8 @@ public class Difference extends Game implements PC {
 		propertiesToSettings();
 		updateCreds();
 		count.setSecs(cdTime);
+		schonWeg = new HashSet<Integer>();
+		nextRound();
 	}
 	@Override
 	public void start(){

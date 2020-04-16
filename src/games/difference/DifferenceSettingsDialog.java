@@ -1,20 +1,14 @@
 package games.difference;
 
-import games.Modus;
-import games.dialogeGUIs.GameSettingsDialog;
-
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
+
+import games.Modus;
+import games.dialogeGUIs.GameSettingsDialog;
 
 
 public class DifferenceSettingsDialog extends GameSettingsDialog {
@@ -31,23 +25,11 @@ public class DifferenceSettingsDialog extends GameSettingsDialog {
 
 	private Difference dif;
 
-	private JLabel rundenzahlLabel;
-
-	private JSlider rundenzahlSlider;
-
-	private JLabel zeitBisVerlorenLabel;
-
-	private JSlider zeitBisVerlorenSlider;
-
-	private JLabel bildVerschwindenLabel;
-
 	private JCheckBox bildVerschwindenCheckBox;
-
-	private GridLayout settingsPanelLayout;
 
 	private JSlider timeToAnswerSlider;
 
-	private JComboBox deckComboBox;
+	private JComboBox<String> deckComboBox;
 	public DifferenceSettingsDialog(Difference dif, boolean inGame) {
 		super(dif, inGame);
 		this.dif = dif;
@@ -76,12 +58,11 @@ public class DifferenceSettingsDialog extends GameSettingsDialog {
 			addSettingsComponent("Zeit nach buzzern:", timeToAnswerSlider);
 		}
 		{
-			ComboBoxModel deckComboBoxModel =
-				new DefaultComboBoxModel(dif.getDeckNames(true).toArray(new String[1]));
+			ComboBoxModel<String> deckComboBoxModel =
+				new DefaultComboBoxModel<String>(dif.getDeckNames(true).toArray(new String[1]));
 			
-			deckComboBox = new JComboBox();
+			deckComboBox = new JComboBox<String>();
 			deckComboBox.setModel(deckComboBoxModel);
-			deckComboBox.setBackground(Color.BLACK);
 			addSettingsComponent("Deck", deckComboBox);
 		}
 		if(dif.modus == Modus.SOLO){
@@ -121,7 +102,7 @@ public class DifferenceSettingsDialog extends GameSettingsDialog {
 		}
 	}
 	
-	private void setSelectedElement(JComboBox cb, String element) {
+	private void setSelectedElement(JComboBox<String> cb, String element) {
 		if(element == null || cb == null) return;
 		for(int i=0; i<cb.getItemCount(); i++){
 			if(cb.getItemAt(i).equals(element)){
