@@ -65,7 +65,7 @@ public class DifferenceSettingsDialog extends GameSettingsDialog {
 			deckComboBox.setModel(deckComboBoxModel);
 			addSettingsComponent("Deck", deckComboBox);
 		}
-		if(dif.modus == Modus.SOLO){
+		{
 			bildVerschwindenCheckBox = new JCheckBox();
 			bildVerschwindenCheckBox.setSelected(dif.bildAusblenden);
 			addSettingsComponent("Bild nach buzzern ausblenden?", bildVerschwindenCheckBox);
@@ -84,9 +84,7 @@ public class DifferenceSettingsDialog extends GameSettingsDialog {
 		super.settingsToProperties();
 		settings.setProperty(DECK, ""+deckComboBox.getSelectedItem());
 		settings.setProperty(ANSWERTIME, ""+timeToAnswerSlider.getValue());
-		if(dif.modus == Modus.SOLO){
-			settings.setProperty(HIDE, bildVerschwindenCheckBox.isSelected() ? "TRUE" : "FALSE");
-		}
+		settings.setProperty(HIDE, bildVerschwindenCheckBox.isSelected() ? "TRUE" : "FALSE");
 	}
 	
 	public void propertiesToSettings(){
@@ -96,10 +94,8 @@ public class DifferenceSettingsDialog extends GameSettingsDialog {
 		}
 		String deck = settings.getProperty(DECK);
 		setSelectedElement(deckComboBox, deck);
-		if(myGame.modus == Modus.SOLO){
-			String hide = settings.getProperty(HIDE);
-			bildVerschwindenCheckBox.setSelected(hide.equals("TRUE"));
-		}
+		String hide = settings.getProperty(HIDE);
+		bildVerschwindenCheckBox.setSelected(hide.equals("TRUE"));
 	}
 	
 	private void setSelectedElement(JComboBox<String> cb, String element) {
