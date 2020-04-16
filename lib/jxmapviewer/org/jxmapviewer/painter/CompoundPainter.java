@@ -129,7 +129,8 @@ public class CompoundPainter<T> extends AbstractPainter<T>
      *
      * @param painters array of painters, which will be painted in order
      */
-    public CompoundPainter(Painter<T>... painters)
+    @SuppressWarnings("unchecked")
+	public CompoundPainter(Painter<T>... painters)
     {
         handler = new Handler(this);
 
@@ -192,7 +193,8 @@ public class CompoundPainter<T> extends AbstractPainter<T>
      *
      * @param painters array of painters, which will be painted in order
      */
-    public void setPainters(Painter<T>... painters)
+    @SuppressWarnings("unchecked")
+	public void setPainters(Painter<T>... painters)
     {
         List<? extends Painter<T>> l;
 

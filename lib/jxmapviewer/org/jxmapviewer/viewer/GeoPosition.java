@@ -18,7 +18,8 @@ import java.io.Serializable;
  */
 public class GeoPosition implements Serializable {
 
-    private double latitude;
+	private static final long serialVersionUID = 1L;
+	private double latitude;
     private double longitude;
 
     /**

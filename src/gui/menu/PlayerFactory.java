@@ -71,7 +71,7 @@ public class PlayerFactory extends javax.swing.JPanel {
 	private File dir = new File(X.getDataDir()+"Player");
 	private ChangeManager cM;
 	private boolean keyActive;
-	private JComboBox soundComboBox;
+	private JComboBox<String> soundComboBox;
 	private JPanel mainPanel;
 	public boolean abgebrochen;
 	private JColorChooser colorChooser;
@@ -373,12 +373,12 @@ public class PlayerFactory extends javax.swing.JPanel {
 		return sexButtonGroup;
 	}
 
-	private JComboBox getSoundComboBox() {
+	private JComboBox<String> getSoundComboBox() {
 		if(soundComboBox == null) {
-			ComboBoxModel soundComboBoxModel =
-				new DefaultComboBoxModel(
-						soundMap.keySet().toArray());
-			soundComboBox = new JComboBox();
+			ComboBoxModel<String> soundComboBoxModel =
+				new DefaultComboBoxModel<String>(
+						soundMap.keySet().toArray(new String[0]));
+			soundComboBox = new JComboBox<String>();
 			soundComboBox.setModel(soundComboBoxModel);
 		}
 		return soundComboBox;

@@ -81,7 +81,7 @@ public class Sample5
             tfLabels[i] = factories.get(i).getInfo().getName();
         }
 
-        final JComboBox combo = new JComboBox(tfLabels);
+        final JComboBox<String> combo = new JComboBox<String>(tfLabels);
         combo.addItemListener(new ItemListener()
         {
             @Override

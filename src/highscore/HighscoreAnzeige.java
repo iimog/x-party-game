@@ -31,9 +31,9 @@ public class HighscoreAnzeige extends Anzeige {
 	private JPanel topPanel;
 	private JButtonIcon quitButton;
 	private JTabbedPane hauptPanel;
-	private JList spielListe;
+	private JList<String> spielListe;
 	private File[] highscores;
-	private DefaultComboBoxModel highscoreComboBoxModel;
+	private DefaultComboBoxModel<String> highscoreComboBoxModel;
 	private MatchHighscore matchHighscore;
 	private GameHighscorePanel matchHighscorePanel;
 
@@ -77,7 +77,7 @@ public class HighscoreAnzeige extends Anzeige {
 	}
 
 	private void initSpielListe() {
-		spielListe = new JList();
+		spielListe = new JList<String>();
 		spielListe.setFont(X.BUTTON_FONT);
 		highscores = HighscoreFileHandler.getGameHighscores();
 		int highscoreZahl = 0;
@@ -87,7 +87,7 @@ public class HighscoreAnzeige extends Anzeige {
 			String name = highscores[i].getName();
 			highscoreNames[i] = name.substring(0, name.length() - 4);
 		}
-		highscoreComboBoxModel = new DefaultComboBoxModel(highscoreNames);
+		highscoreComboBoxModel = new DefaultComboBoxModel<String>(highscoreNames);
 		spielListe.setModel(highscoreComboBoxModel);
 		spielListe.addMouseListener(new MouseAdapter() {
 			@Override

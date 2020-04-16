@@ -32,7 +32,7 @@ public class PlayerWahl extends javax.swing.JPanel {
 		@Override
 		public void change() {
 			if(!playerFac.abgebrochen){
-				playerList.setModel(new DefaultComboBoxModel(getPlayerList()));
+				playerList.setModel(new DefaultComboBoxModel<String>(getPlayerList()));
 				myPlayer[activeLabel] = playerFac.getPlayer();
 				doppelteSpielerEntfernen(activeLabel);
 				playerLabel[activeLabel].setText(myPlayer[activeLabel].name);
@@ -56,7 +56,7 @@ public class PlayerWahl extends javax.swing.JPanel {
 	private JButton neuButton;
 	private JPanel playerButtonPanel;
 	private JLabel[] playerLabel;
-	private JList playerList;
+	private JList<String> playerList;
 	private JPanel spielerObenPanel;
 	private JPanel spielerPanel;
 	private int activeLabel=0;
@@ -78,7 +78,7 @@ public class PlayerWahl extends javax.swing.JPanel {
 		initGUI();
 	}
 
-	private Object[] getPlayerList(){
+	private String[] getPlayerList(){
 		java.util.ArrayList<String> list = new java.util.ArrayList<String>();
 		if(playerFolder.exists()){
 			String[] arr = playerFolder.list();
@@ -88,7 +88,7 @@ public class PlayerWahl extends javax.swing.JPanel {
 				}
 			}
 		}
-		return list.toArray();
+		return list.toArray(new String[0]);
 	}
 
 	private void initGUI() {
@@ -213,10 +213,10 @@ public class PlayerWahl extends javax.swing.JPanel {
 	}
 
 	private void initPlayerList() {
-		ListModel playerListModel =
-			new DefaultComboBoxModel(
+		ListModel<String> playerListModel =
+			new DefaultComboBoxModel<String>(
 					getPlayerList());
-		playerList = new JList();
+		playerList = new JList<String>();
 		playerList.setModel(playerListModel);
 	}
 
@@ -312,7 +312,7 @@ public class PlayerWahl extends javax.swing.JPanel {
 		if(i == JOptionPane.OK_OPTION){
 			File lf = new File(playerFolder, playerName+".player");
 			lf.delete();
-			playerList.setModel(new DefaultComboBoxModel(getPlayerList()));
+			playerList.setModel(new DefaultComboBoxModel<String>(getPlayerList()));
 		}
 	}
 
