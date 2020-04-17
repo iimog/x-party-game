@@ -104,7 +104,7 @@ public class SpielListen {
 		int counter = 1;
 		try {
 			// TODO read file inside jar
-			InputStreamReader fr = new InputStreamReader(SpielListen.class.getResourceAsStream("/conf/nonPC.games"));
+			InputStreamReader fr = new InputStreamReader(SpielListen.class.getResourceAsStream("/conf/nonPC.games"),"UTF-8");
 			BufferedReader br = new BufferedReader(fr);
 			while (br.ready()) {
 				String line = br.readLine();
@@ -133,7 +133,7 @@ public class SpielListen {
 		int counter = 1;
 		try {
 			// TODO read file inside jar
-			InputStreamReader fr = new InputStreamReader(SpielListen.class.getResourceAsStream("/conf/pc.games"));
+			InputStreamReader fr = new InputStreamReader(SpielListen.class.getResourceAsStream("/conf/pc.games"),"UTF-8");
 			BufferedReader br = new BufferedReader(fr);
 			while (br.ready()) {
 				String line = br.readLine();
