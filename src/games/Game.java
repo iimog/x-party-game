@@ -138,7 +138,7 @@ public abstract class Game extends Anzeige {
 	}
 	
 	public String getGameFileName() {
-		String gameFileName = this.getClass().getPackageName();
+		String gameFileName = this.getClass().getPackage().getName();
 		gameFileName = gameFileName.replaceFirst("^games.", "");
 		if(this instanceof NonPC) {
 			gameFileName = gameName;
