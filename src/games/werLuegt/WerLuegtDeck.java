@@ -46,7 +46,7 @@ public class WerLuegtDeck extends Deck{
 			InputStream is = this.getClass().getResourceAsStream(resourcePath);
 			BufferedReader br;
 			if(is != null) {
-				br = new BufferedReader(new InputStreamReader(is));
+				br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			} else {
 				File aussageFile = new File(userFolder+"/aussagen/"+deckPath);
 				if(aussageFile.canRead()) {

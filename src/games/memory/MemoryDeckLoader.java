@@ -80,7 +80,7 @@ public class MemoryDeckLoader {
 		MemoryDeck newDeck = null;
 		try {
 			InputStream is = url.openStream();
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			newDeck = new MemoryDeck();
 			String deckName = br.readLine();
 			newDeck.setDeckName(deckName);

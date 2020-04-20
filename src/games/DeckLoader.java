@@ -86,7 +86,7 @@ public class DeckLoader {
 		Deck newDeck = null;
 		try {
 			InputStream is = url.openStream();
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			newDeck = bufferedReaderToDeck(br, true);
 			br.close();
 			is.close();

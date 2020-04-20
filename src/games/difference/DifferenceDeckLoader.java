@@ -80,7 +80,7 @@ public class DifferenceDeckLoader {
 		DifferenceDeck newDeck = null;
 		try {
 			InputStream is = url.openStream();
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			newDeck = new DifferenceDeck();
 			String deckName = br.readLine();
 			newDeck.setDeckName(deckName);
