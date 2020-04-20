@@ -27,6 +27,7 @@ import javax.swing.border.BevelBorder;
 
 import player.Player;
 import settings.Profile;
+import start.X;
 import util.ChangeManager;
 import util.ConfirmListener;
 import util.FocusRequestListener;
@@ -45,7 +46,7 @@ public class MatchCredits extends Anzeige {
 	private JPanel[] playerPanel;
 	private JButton nextGame;
 	private JLabel[][] games;
-	private JButton[] played;
+	private JLabel[] played;
 	private JPanel playedGamesPanel;
 	private int numOfGames;
 	boolean beendet = false;
@@ -122,7 +123,7 @@ public class MatchCredits extends Anzeige {
 		}
 	}
 	private void createPlayedGamesPanel() {
-		played = new JButton[numOfGames];
+		played = new JLabel[numOfGames];
 		{
 			playedGamesPanel = new JPanel();
 			GridLayout playedGamesPanelLayout = new GridLayout(1, numOfGames);
@@ -133,11 +134,12 @@ public class MatchCredits extends Anzeige {
 			playedGamesPanel.setOpaque(false);
 			{
 				for (int i = 0; i < numOfGames; i++) {
-					played[i] = new JButton("" + (i + 1));
+					played[i] = new JLabel("" + (i + 1));
+					played[i].setOpaque(true);
 					played[i].setBackground(Color.DARK_GRAY);
 					played[i].setForeground(Color.WHITE);
+					played[i].setHorizontalAlignment(SwingConstants.CENTER);
 					playedGamesPanel.add(played[i]);
-					played[i].setEnabled(false);
 				}
 			}
 		}
@@ -157,7 +159,8 @@ public class MatchCredits extends Anzeige {
 		}
 		if(whichGame<numOfGames){
 			games[player][whichGame].setBackground(farbe);
-			played[whichGame].setBackground(Color.darkGray);
+			played[whichGame].setBackground(Color.WHITE);
+			played[whichGame].setForeground(Color.DARK_GRAY);
 		}
 		whichGame++;
 		if(whichGame>=numOfGames){
@@ -304,6 +307,7 @@ public class MatchCredits extends Anzeige {
 				nextGame = new DefaultButton();
 				this.add(nextGame, BorderLayout.SOUTH);
 				nextGame.setText("Nächstes Spiel");
+				nextGame.setFont(X.BUTTON_FONT.deriveFont(32f));
 				nextGame.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						fireChange();
