@@ -26,6 +26,7 @@ import javax.swing.event.ChangeListener;
 import player.Player;
 import settings.Profile;
 import start.X;
+import util.FocusRequestListener;
 import util.SpielListen;
 import ablauf.Spielablauf;
 
@@ -163,6 +164,7 @@ public class StartMatch extends Anzeige {
 									spielerButtonActionPerformed(evt);
 								}
 							});
+							spieleButton.addAncestorListener(new FocusRequestListener());
 						}
 					}
 					{

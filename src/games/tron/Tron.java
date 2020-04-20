@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import player.Player;
+import util.FocusRequestListener;
 
 public class Tron extends Game implements PC{
 	private static final long serialVersionUID = 1L;
@@ -133,6 +134,7 @@ public class Tron extends Game implements PC{
 				enableSettingsButton(false);
 			}
 		});
+		startButton.addAncestorListener(new FocusRequestListener());
 		addSpielfeld();
 	}
 	

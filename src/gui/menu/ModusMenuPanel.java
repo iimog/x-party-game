@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import start.X;
+import util.FocusRequestListener;
 
 public class ModusMenuPanel extends Anzeige {
 	private static final long serialVersionUID = 1L;
@@ -78,6 +79,7 @@ public class ModusMenuPanel extends Anzeige {
 						duellButtonActionPerformed(evt);
 					}
 				});
+				duellButton.addAncestorListener(new FocusRequestListener());
 			}
 		}
 		{

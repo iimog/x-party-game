@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import player.Player;
+import util.FocusRequestListener;
 
 public class InnereUhr extends games.Game implements PC {
 	private static final long serialVersionUID = -5686342203716597780L;
@@ -76,6 +77,7 @@ public class InnereUhr extends games.Game implements PC {
 						startButtonActionPerformed(evt);
 					}
 				});
+				startButton.addAncestorListener(new FocusRequestListener());
 			}
 			{
 				hauptbereichPanel = new JPanel();

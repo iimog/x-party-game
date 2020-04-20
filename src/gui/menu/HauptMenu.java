@@ -17,6 +17,7 @@ import gui.components.DefaultButton;
 import highscore.HighscoreAnzeige;
 import settings.MainSettingsDialog;
 import start.X;
+import util.FocusRequestListener;
 
 public class HauptMenu extends Anzeige {
 	/**
@@ -69,6 +70,7 @@ public class HauptMenu extends Anzeige {
 						neuesSpielButtonActionPerformed(evt);
 					}
 				});
+				neuesSpielButton.addAncestorListener(new FocusRequestListener());
 			}
 		}
 		{

@@ -30,6 +30,7 @@ import highscore.HighscoreFileHandler;
 import player.Player;
 import settings.SettingsFileHandler;
 import start.X;
+import util.FocusRequestListener;
 import util.SpielListen;
 
 public class QuickStartPanel extends Anzeige {
@@ -91,6 +92,7 @@ public class QuickStartPanel extends Anzeige {
 				}
 				topPanel.add(playerTextField[i]);
 			}
+			playerTextField[0].addAncestorListener(new FocusRequestListener());
 		}
 		Properties playerSettings = SettingsFileHandler.loadSettings(SETTINGS_NAME);
 		if(playerSettings != null) {
