@@ -164,7 +164,7 @@ public class StartMatch extends Anzeige {
 									spielerButtonActionPerformed(evt);
 								}
 							});
-							spieleButton.addAncestorListener(new FocusRequestListener());
+							spielerButton.addAncestorListener(new FocusRequestListener());
 						}
 					}
 					{
