@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
 import util.ConfirmListener;
+import util.FocusRequestListener;
 import util.InputListener;
 
 
@@ -35,14 +36,12 @@ public class EasyDialog extends AnzeigeDialog {
 		ed = new EasyDialog(message, icon, CONFIRM_MODE);
 		ed.instance.showDialog(ed);
 		ed.cListener = cLis;
-		ed.requestFocusForMainButton();
 	}
 	public static void showInput(String message, String defText, Component icon, InputListener iLis){
 		ed = new EasyDialog(message, icon, INPUT_MODE);
 		ed.setDefText(defText);
 		ed.instance.showDialog(ed);
 		ed.iListener = iLis;
-		ed.requestFocusForMainButton();
 	}
 	private void setDefText(String defText) {
 		this.defText = defText;
@@ -54,7 +53,6 @@ public class EasyDialog extends AnzeigeDialog {
 	public static void showMessage(String message, Component icon){
 		EasyDialog ed = new EasyDialog(message, icon);
 		ed.instance.showDialog(ed);
-		ed.requestFocusForMainButton();
 	}
 	
 	private int mode;
@@ -66,7 +64,6 @@ public class EasyDialog extends AnzeigeDialog {
 	private Component icon;
 	private JTextField inputTextField;
 	private String defText = "";
-	private Component preselectedComponent;
 
 	private EasyDialog(String message, Component icon){
 		this(message, icon, MESSAGE_MODE);
@@ -103,7 +100,7 @@ public class EasyDialog extends AnzeigeDialog {
 			}
 		});
 		panel.add(abbrechenButton);
-		preselectedComponent = jaButton;
+		jaButton.addAncestorListener(new FocusRequestListener());
 		return panel;
 	}
 	private JPanel getMessageButtonPanel(){
@@ -116,7 +113,7 @@ public class EasyDialog extends AnzeigeDialog {
 			}
 		});
 		panel.add(okButton);
-		preselectedComponent = okButton;
+		okButton.addAncestorListener(new FocusRequestListener());
 		return panel;
 	}
 	private JPanel getInputButtonPanel(){
@@ -141,7 +138,7 @@ public class EasyDialog extends AnzeigeDialog {
 			}
 		});
 		panel.add(abbrechenButton);
-		preselectedComponent = inputTextField;
+		inputTextField.addAncestorListener(new FocusRequestListener());
 		return hauptpanel;
 	}
 
@@ -170,20 +167,12 @@ public class EasyDialog extends AnzeigeDialog {
 		}
 		if(mode == INPUT_MODE){
 			panel = getInputButtonPanel();
-			inputTextField.requestFocus();
+			inputTextField.requestFocusInWindow();
 			inputTextField.setCaretPosition(inputTextField.getText().length());
 		}
 		hauptbereich.add(panel, BorderLayout.SOUTH);
 		dialogPane.add(hauptbereich);
 		dialogPane.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
-	}
-	
-	public boolean requestFocusForMainButton() {
-		boolean reqFoc = false;
-		if(preselectedComponent != null) {
-			reqFoc = preselectedComponent.requestFocusInWindow();
-		}
-		return reqFoc;
 	}
 }
 

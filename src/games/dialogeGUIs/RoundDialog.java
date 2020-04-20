@@ -1,8 +1,5 @@
 package games.dialogeGUIs;
 
-import games.Game;
-import gui.components.JButtonIcon;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -13,6 +10,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import games.Game;
+import gui.components.JButtonIcon;
+import util.FocusRequestListener;
 
 public class RoundDialog extends gui.AnzeigeDialog {
 	/**
@@ -103,6 +104,7 @@ public class RoundDialog extends gui.AnzeigeDialog {
 							okButtonActionPerformed(evt);
 						}
 					});
+					okButton.addAncestorListener(new FocusRequestListener());
 				}
 			}
 		} catch (Exception e) {

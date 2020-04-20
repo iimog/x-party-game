@@ -20,6 +20,7 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
+import util.FocusRequestListener;
 import util.SpielListen;
 
 public class GameStartDialog extends gui.AnzeigeDialog {
@@ -116,6 +117,7 @@ public class GameStartDialog extends gui.AnzeigeDialog {
 								startButtonActionPerformed(evt);
 							}
 						});
+						startButton.addAncestorListener(new FocusRequestListener());
 					}
 					
 				}

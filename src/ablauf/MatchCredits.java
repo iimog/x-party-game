@@ -29,6 +29,7 @@ import player.Player;
 import settings.Profile;
 import util.ChangeManager;
 import util.ConfirmListener;
+import util.FocusRequestListener;
 
 public class MatchCredits extends Anzeige {
 	/**
@@ -308,6 +309,7 @@ public class MatchCredits extends Anzeige {
 						fireChange();
 					}
 				});
+				nextGame.addAncestorListener(new FocusRequestListener());
 			}
 			{
 				this.add(playedGamesPanel, BorderLayout.NORTH);
