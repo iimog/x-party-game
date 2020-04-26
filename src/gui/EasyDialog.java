@@ -65,7 +65,7 @@ public class EasyDialog extends AnzeigeDialog {
 	private JTextField inputTextField;
 	private String defText = "";
 
-	private EasyDialog(String message, Component icon){
+	public EasyDialog(String message, Component icon){
 		this(message, icon, MESSAGE_MODE);
 	}
 

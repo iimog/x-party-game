@@ -4,6 +4,7 @@ import games.Game;
 import games.Modus;
 import games.PC;
 import games.dialogeGUIs.RoundDialog;
+import gui.AnzeigeDialog;
 import gui.EasyDialog;
 
 import java.awt.BorderLayout;
@@ -374,11 +375,12 @@ public class Ghosts extends Game implements PC {
 							// Das geklickte Feld befindet sich horizontal oder
 							// vertikal neben dem gewählten Geist
 						{
+							AnzeigeDialog goodOrBadDialog = null;
 							if (goo != null && goo.team == 1 - whosTurn) { // Ein fremder Geist steht auf dem
 								// gewälten Feld --> schmeißen
 								if(goo.isBad())badOnes[1-whosTurn].loose();
 								if(!goo.isBad())goodOnes[1-whosTurn].loose();
-								goo.die();
+								goodOrBadDialog = goo.die();
 							}
 							// Egal ob Feld frei oder mit fremdem Geist besetzt
 							selectedGeist.position = punkt;
@@ -390,6 +392,9 @@ public class Ghosts extends Game implements PC {
 							if (roundEnd()){
 								openRoundDialog(winner);
 								nextRound();
+							}
+							if(goodOrBadDialog != null) {
+								goodOrBadDialog.instance.showDialog(goodOrBadDialog);
 							}
 						}
 					}

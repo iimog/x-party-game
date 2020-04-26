@@ -1,5 +1,7 @@
 package games.ghosts;
 
+import gui.AnzeigeDialog;
+import gui.EasyDialog;
 import gui.components.Bildschirm;
 
 import java.awt.Image;
@@ -43,7 +45,7 @@ public class Geist {
 		}
 		position = pos;
 	}
-	public void die(){
+	public AnzeigeDialog die(){
 		dead = true;
 		if(bad)livingBad[team]--;
 		if(!bad)livingGood[team]--;
@@ -58,7 +60,7 @@ public class Geist {
 			b = new Bildschirm("/media/ghosts/Engel.png");
 			boese = "GUT";
 		}
-		gui.EasyDialog.showMessage("Dieser Geist ist... "+boese,b);
+		return new EasyDialog("Dieser Geist ist... "+boese,b);
 	}
 
 	public boolean isBad(){
