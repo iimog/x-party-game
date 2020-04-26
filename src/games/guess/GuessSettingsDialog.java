@@ -40,7 +40,7 @@ public class GuessSettingsDialog extends GameSettingsDialog {
 	private void initGUI(){
 		{
 			toleranzSlider = new JSlider(SwingConstants.HORIZONTAL,0,200,10);
-			toleranzSlider.setValue((int)guess.toleranz * 100);
+			toleranzSlider.setValue((int)(guess.toleranz * 100));
 			toleranzSlider.setMajorTickSpacing(25);
 			toleranzSlider.setMinorTickSpacing(5);
 			toleranzSlider.setSnapToTicks(true);
