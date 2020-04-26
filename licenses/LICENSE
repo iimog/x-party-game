@@ -7,6 +7,7 @@ Licenses:
 CPOL	license/CPOL.htm	Code Project Open License
 pixelio.de red.kom.	license/pixelio_lizenzvertrag_redaktionell_und_kommerziell.pdf	pixelio.de - Lizenzvertrag zwischen Urheber und Nutzer (redaktionelle und kommerzielle Nutzung)
 Pixabay License	https://pixabay.com/service/license/	Free for commercial use, No attribution required 
+Zapsplat	https://www.zapsplat.com/license-type/standard-license/	Zapsplat Standard License
 
 Resources:
 
@@ -137,6 +138,7 @@ media/reaktionszeit/smiley.png	Public Domain	unknown	openiconlibrary	2015-04-11	
 media/sounds/lache_original.wav	Attribution License	acekasbo	freesound.org	2013-07-05	no
 media/sounds/lache.wav	Attribution License	acekasbo	freesound.org	2013-07-05	yes
 media/sounds/sirene.wav	Public Domain	KevanGC	http://soundbible.com/1577-Siren-Noise.html	2020-04-12	yes
+media/sounds/moo.wav	Zapsplat	Audio Hero	https://www.zapsplat.com/music/cow-moo-2/	2020-04-26	yes
 
 #Fonts
 media/ablauf/fonts/monitorica	CC-BY	Sergiy S. Tkachenko	http://openfontlibrary.org/en/font/monitorica	2015-04-11	no

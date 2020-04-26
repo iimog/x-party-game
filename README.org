@@ -38,6 +38,8 @@ As soon as they are fixed and an appropriate License is found version 1.0 will b
 Following that new releases will increase the minor version number.
 The major version number 2 is reserved for a completely redesigned version (in the far future or if someone jumps in)
 
+This game contains sound effects obtained from https://www.zapsplat.com (see licenses/LICENSE for details).
+
 ** Contributing
 
 Contributions of any kind are welcome. Please see the [[https://iimog.org/X/][website]] or contact me directly.

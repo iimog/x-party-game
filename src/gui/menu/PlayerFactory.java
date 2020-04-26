@@ -81,17 +81,18 @@ public class PlayerFactory extends javax.swing.JPanel {
 	private JLabel soundLabel;
 	private JButtonIcon soundButton;
 	{
-		soundMap.put("Kuh", path + "muh.wav");
-		soundMap.put("Donner", path + "donner.wav");
-		soundMap.put("Klirr", path + "klirr.wav");
+		soundMap.put("Kuh", path + "moo.wav");
+		soundMap.put("Sirene", path + "sirene.wav");
+		//soundMap.put("Donner", path + "donner.wav");
+		//soundMap.put("Klirr", path + "klirr.wav");
 		soundMap.put("Lache", path + "lache.wav");
-		soundMap.put("Crash", path + "unfall.wav");
-		soundMap.put("VAT Schsch", path + "va-schsch.wav");
-		soundMap.put("VAT Bam", path + "va-bam.wav");
-		soundMap.put("LP Was\'n los", path + "lp-wasnlos.wav");
-		soundMap.put("INT Arsch", path + "int-arschl.wav");
-		soundMap.put("INT Hast du gelernt?", path + "int-hastdugelernt.wav");
-		soundMap.put("INT Hey Ho", path + "int-heyhoh1.wav");
+		//soundMap.put("Crash", path + "unfall.wav");
+		//soundMap.put("VAT Schsch", path + "va-schsch.wav");
+		//soundMap.put("VAT Bam", path + "va-bam.wav");
+		//soundMap.put("LP Was\'n los", path + "lp-wasnlos.wav");
+		//soundMap.put("INT Arsch", path + "int-arschl.wav");
+		//soundMap.put("INT Hast du gelernt?", path + "int-hastdugelernt.wav");
+		//soundMap.put("INT Hey Ho", path + "int-heyhoh1.wav");
 	}
 	public PlayerFactory(){
 		this("");
