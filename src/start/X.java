@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +104,15 @@ public class X extends javax.swing.JFrame {
 			@Override
 			public void run() {
 				URL audioFile = X.class.getResource(currentAudioFile);
+				if(audioFile == null) {
+					currentAudioFile = X.getDataDir() + "/" + filename;
+					try {
+						audioFile = new URL(currentAudioFile);
+					} catch (MalformedURLException e) {
+						e.printStackTrace();
+						return;
+					}
+				}
 				try {
 					AudioInputStream ais = AudioSystem
 							.getAudioInputStream(audioFile);
