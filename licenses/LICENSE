@@ -8,6 +8,7 @@ CPOL	license/CPOL.htm	Code Project Open License
 pixelio.de red.kom.	license/pixelio_lizenzvertrag_redaktionell_und_kommerziell.pdf	pixelio.de - Lizenzvertrag zwischen Urheber und Nutzer (redaktionelle und kommerzielle Nutzung)
 Pixabay License	https://pixabay.com/service/license/	Free for commercial use, No attribution required 
 Zapsplat	https://www.zapsplat.com/license-type/standard-license/	Zapsplat Standard License
+OFL	OFL (SIL Open Font License)	https://scripts.sil.org/OFL
 
 Resources:
 
@@ -141,8 +142,8 @@ media/sounds/sirene.wav	Public Domain	KevanGC	http://soundbible.com/1577-Siren-N
 media/sounds/moo.wav	Zapsplat	Audio Hero	https://www.zapsplat.com/music/cow-moo-2/	2020-04-26	yes
 
 #Fonts
-media/ablauf/fonts/monitorica	CC-BY	Sergiy S. Tkachenko	http://openfontlibrary.org/en/font/monitorica	2015-04-11	no
 media/ablauf/fonts/OpenSansEmoji.ttf	Apache License, Version 2.0	MorbZ	https://github.com/MorbZ/OpenSansEmoji	2020-04-10	no
+media/ablauf/fonts/ThatNogoFontCasual.ttf		https://fontlibrary.org/de/font/that-nogo-font-casual	2020-05-25	yes
 
 #Code
 gui/aterai/*	GitHub.com MIT (LICENSE-aterai)	TERAI Atsuhiro (aterai)	https://github.com/aterai/java-swing-tips	2015-08-09	yes
