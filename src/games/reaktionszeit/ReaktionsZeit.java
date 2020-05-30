@@ -61,7 +61,7 @@ public class ReaktionsZeit extends Game {
 
 	private void addQuery() {
 		queryPanel = new JPanel(new GridLayout(1, 1));
-		hauptbereichPanel.add(queryPanel, BorderLayout.CENTER);
+		hauptbereichPanel.add(queryPanel, BorderLayout.SOUTH);
 		updateQuery();
 	}
 	

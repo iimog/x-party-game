@@ -105,6 +105,7 @@ public class TronSettingsDialog extends GameSettingsDialog {
 
 	@Override
 	public void speichern(){
+		super.speichern();
 		try{
 			tron.numOfRounds = rundenzahlSlider.getValue();
 			tron.sleepTime = 500/geschwindigkeitSlider.getValue();
@@ -130,6 +131,5 @@ public class TronSettingsDialog extends GameSettingsDialog {
 					" Vorhanden:"  + verfuegbareBreite + "x" + verfuegbareHoehe);
 			return;
 		}
-		super.speichern();
 	}
 }

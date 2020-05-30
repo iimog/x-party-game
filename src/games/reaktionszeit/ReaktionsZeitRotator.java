@@ -1,14 +1,13 @@
 package games.reaktionszeit;
 
-import gui.components.Bildschirm;
-import gui.components.rotator.Rotator;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 
 import javax.swing.JLabel;
+
+import gui.components.Bildschirm;
+import gui.components.rotator.Rotator;
 
 public class ReaktionsZeitRotator extends Rotator {
 	private static final long serialVersionUID = 1L;
@@ -29,15 +28,15 @@ public class ReaktionsZeitRotator extends Rotator {
 		if(reaktionsZeitDeck.getDeckType().equals(ReaktionsZeitDeck.STRING)){			
 			textLabel = new JLabel("bla");
 			textLabel.setHorizontalAlignment(JLabel.CENTER);
-			add(textLabel, BorderLayout.CENTER);
+			add(textLabel);
 		}
 		else if(reaktionsZeitDeck.getDeckType().equals(ReaktionsZeitDeck.PICTURE)){
 			bildschirm = new Bildschirm(elements.get(0), true);
-			add(bildschirm, BorderLayout.CENTER);
+			add(bildschirm);
 		}
 		else{
 			textLabel = new JLabel("ERROR: Decktyp "+reaktionsZeitDeck.getDeckType()+" ist leider unbekannt.");
-			add(textLabel, BorderLayout.CENTER);
+			add(textLabel);
 		}
 	}
 
