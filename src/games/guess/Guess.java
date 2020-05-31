@@ -234,7 +234,7 @@ public class Guess extends Game implements PC {
 			toleranzOn = Boolean.parseBoolean(tolOn);
 		}
 		String toleranzPercent = customSettings.getProperty(GuessSettingsDialog.TOLERANZ_PERCENT, "95");
-		toleranz = Integer.parseInt(toleranzPercent) / 100;
+		toleranz = Integer.parseInt(toleranzPercent) / 100f;
 		String deck = customSettings.getProperty(GuessSettingsDialog.DECK, "");
 		if (deck.equals("Zufall")) {
 			currentDeck = new GuessDeck(guessDecks.get(new Random().nextInt(guessDecks.size())));
