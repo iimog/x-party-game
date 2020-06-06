@@ -1,9 +1,7 @@
 package util;
 
-import games.GameInfo;
-import games.Modus;
-
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import games.GameInfo;
+import games.Modus;
 import start.X;
 
 public class SpielListen {
@@ -46,9 +46,9 @@ public class SpielListen {
 		Map<Integer, GameInfo> userNonPC = new HashMap<Integer, GameInfo>();
 		int counter = 1;
 		try {
-			FileReader fr = new FileReader(X.getDataDir()
-					+ "games/nonPC.games");
-			BufferedReader br = new BufferedReader(fr);
+			String file = X.getDataDir() + "games/nonPC.games";
+			InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "UTF-8");
+			BufferedReader br = new BufferedReader(isr);
 			while (br.ready()) {
 				String line = br.readLine();
 				String[] elements = line.split("\t");
@@ -58,7 +58,7 @@ public class SpielListen {
 				counter++;
 			}
 			br.close();
-			fr.close();
+			isr.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Datei: "+X.getDataDir() + "games/nonPC.games nicht gefunden");
 		} catch (IOException e) {

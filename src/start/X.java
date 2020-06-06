@@ -49,7 +49,7 @@ public class X extends javax.swing.JFrame {
 	public static final Version VERSION = new Version(0,9);
 
 	private static X instance;
-	public static final Font BUTTON_FONT = getStandardFont().deriveFont(22f);
+	public static final Font BUTTON_FONT = getStandardFont().deriveFont(28f);
 
 	private static String currentAudioFile;
 
@@ -80,6 +80,10 @@ public class X extends javax.swing.JFrame {
 			}
 		}
 		return standardFont;
+	}
+	
+	public static Font getStandardFont(float fontsize) {
+		return getStandardFont().deriveFont(fontsize);
 	}
 
 	public static Font getEmojiFont() {

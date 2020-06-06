@@ -131,6 +131,7 @@ public class QuickStartPanel extends Anzeige {
 		spielPanel.removeAll();
 		for(int i=0; i<spielListe.size(); i++) {
 			JButton b = new DefaultButton(spielNamen.get(i));
+			b.setFont(X.BUTTON_FONT.deriveFont(58f));
 			b.addActionListener(new GameButtonActionListener(spielListe.get(i)));
 			spielPanel.add(b);
 		}

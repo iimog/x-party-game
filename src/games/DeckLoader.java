@@ -1,11 +1,9 @@
 package games;
 
-import games.Deck;
-
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -68,11 +66,11 @@ public class DeckLoader {
 	private static Deck fileToDeck(String file, boolean system) {
 		Deck newDeck = null;
 		try {
-			FileReader fr = new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);
+			InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "UTF-8");
+			BufferedReader br = new BufferedReader(isr);
 			newDeck = bufferedReaderToDeck(br, system);
 			br.close();
-			fr.close();
+			isr.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Datei: " + file
 					+ " nicht gefunden");

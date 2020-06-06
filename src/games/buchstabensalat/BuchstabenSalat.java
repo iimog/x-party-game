@@ -77,13 +77,13 @@ public class BuchstabenSalat extends Game implements PC {
 		JPanel labelPanel = new JPanel(new GridLayout(2,1));
 		hauptbereichPanel.add(labelPanel, BorderLayout.NORTH);
 		deckNameLabel = new JLabel("DeckName");
-		deckNameLabel.setForeground(Color.LIGHT_GRAY);
+		deckNameLabel.setForeground(Color.DARK_GRAY);
 		deckNameLabel.setFont(X.BUTTON_FONT);
 		deckNameLabel.setHorizontalAlignment(JLabel.CENTER);
 		labelPanel.add(deckNameLabel);
 		kategorieLabel = new JLabel("Kategorie");
-		kategorieLabel.setForeground(Color.LIGHT_GRAY);
-		kategorieLabel.setFont(X.BUTTON_FONT);
+		kategorieLabel.setForeground(Color.BLACK);
+		kategorieLabel.setFont(X.BUTTON_FONT.deriveFont(48f));
 		kategorieLabel.setHorizontalAlignment(JLabel.CENTER);
 		labelPanel.add(kategorieLabel);
 	}

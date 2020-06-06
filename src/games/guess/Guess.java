@@ -2,7 +2,6 @@ package games.guess;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +21,7 @@ import games.Game;
 import games.Modus;
 import games.PC;
 import player.Player;
+import start.X;
 
 public class Guess extends Game implements PC {
 
@@ -158,11 +158,12 @@ public class Guess extends Game implements PC {
 		spielBereichPanel.setOpaque(true);
 		text = new JTextArea(currentDeck.getQuestion(current));
 		text.setEditable(false);
-		text.setFont(new Font("Comic Sans MS", 0, 20));
+		text.setFont(X.getStandardFont(48));
 		text.setLineWrap(true);
 		text.setWrapStyleWord(true);
 		spielBereichPanel.add(text, BorderLayout.CENTER);
 		deckNameLabel = new JLabel(currentDeck.getDeckName());
+		deckNameLabel.setFont(X.getStandardFont(48));
 		spielBereichPanel.add(deckNameLabel, BorderLayout.NORTH);
 		updateCreds();
 		spielBereichPanel.add(split, BorderLayout.SOUTH);

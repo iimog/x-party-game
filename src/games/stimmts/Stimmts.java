@@ -85,10 +85,11 @@ public class Stimmts extends Game implements PC {
 		JPanel topPanel = new JPanel(new GridLayout(2,1));
 		hauptbereichPanel.add(topPanel, BorderLayout.NORTH);
 		deckNameLabel = new JLabel(currentDeck.toString());
-		deckNameLabel.setFont(X.BUTTON_FONT);
+		deckNameLabel.setFont(X.getStandardFont(48));
 		deckNameLabel.setHorizontalAlignment(JLabel.CENTER);
 		topPanel.add(deckNameLabel);
 		JLabel explanationLabel = new JLabel("Buzzern: gelogen");
+		explanationLabel.setFont(X.getStandardFont(24));
 		topPanel.add(explanationLabel);
 		//JLabel explanationLabel1 = new JLabel("Wenn Aussage wahr: nicht buzzern (oder 2x, 4x, ...)");
 		//topPanel.add(explanationLabel1);
@@ -98,7 +99,7 @@ public class Stimmts extends Game implements PC {
 
 	private void addAussageLabel() {
 		aussageLabel = new JLabel("Aussagee");
-		aussageLabel.setFont(X.BUTTON_FONT.deriveFont(32f));
+		aussageLabel.setFont(X.getStandardFont(42));
 		aussageLabel.setHorizontalAlignment(JLabel.CENTER);
 		hauptbereichPanel.add(aussageLabel, BorderLayout.CENTER);
 	}
