@@ -1,9 +1,5 @@
 package games.tron;
 
-import games.Game;
-import games.Modus;
-import games.PC;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -20,6 +16,10 @@ import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import games.Game;
+import games.Modus;
+import games.PC;
+import games.dialogeGUIs.GameSettingsDialog;
 import player.Player;
 import util.FocusRequestListener;
 
@@ -53,7 +53,9 @@ public class Tron extends Game implements PC{
 	JButton startButton;
 	
 	public void pause(){
-		currentGameLoop.pause();
+		if(currentGameLoop != null) {
+			currentGameLoop.pause();
+		}
 	}
 	
 	public void resume(){
@@ -292,10 +294,26 @@ public class Tron extends Game implements PC{
 		instance.showDialog(new TronSettingsDialog(this, inGame));
 	}
 	public void settingsChanged(){
+		propertiesToSettings();
 		updateCreds();
 		addSpielfeld();
 		initGame();
 	}
+	
+	@Override
+	protected void propertiesToSettings() {
+		if(customSettings == null){
+			return;
+		}
+		numOfRounds = Integer.parseInt(customSettings.getProperty(GameSettingsDialog.NUM_OF_ROUNDS, ""+numOfRounds));
+		sleepTime = 500/Integer.parseInt(customSettings.getProperty(TronSettingsDialog.GESCHWINDIGKEIT, "5"));
+		setGitterVisible(Boolean.parseBoolean(customSettings.getProperty(TronSettingsDialog.GITTER, "true")));
+		rows = Integer.parseInt(customSettings.getProperty(TronSettingsDialog.HOEHE, "50"));
+		colums = Integer.parseInt(customSettings.getProperty(TronSettingsDialog.BREITE, "100"));
+		int groesse = Integer.parseInt(customSettings.getProperty(TronSettingsDialog.GROESSE, "10"));
+		feldGroesse = new Dimension(groesse,groesse);
+	}
+	
 	public void goBack(){
 		if(!super.isOver()){
 			initGame();
