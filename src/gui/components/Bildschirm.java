@@ -198,12 +198,14 @@ public class Bildschirm extends JPanel {
 			bild = getToolkit().getImage(bildURL);
 		} else {
 			// if path is not absolute, assume relative to .xpartygame in user home
-			if(!bildname.substring(0, 1).equals("/")) {
+			// absolute for windows assumes ":" at second position in file name, for unix assumes starting with /
+			if(!bildname.substring(0, 1).equals("/") && bildname.indexOf(":")!=1) {
 				bildname = X.getDataDir() + "/" + bildname;
 			}
 			try {
 				bild = ImageIO.read(new java.io.File(bildname));
 			} catch (Exception e) {
+				System.out.println("image file name:" + bildname);
 				e.printStackTrace();
 				noPicFound();
 				return;
