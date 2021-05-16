@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -173,8 +174,15 @@ public class X extends javax.swing.JFrame {
 		try{
 			URL bildURL = X.class.getResource(bild);
 			if(bildURL == null){
-				System.err.println("Hintergrundbild "+bild+" nicht gefunden.");
-				return;
+				if(!bild.substring(0, 1).equals("/") && bild.indexOf(":")!=1) {
+					bild = X.getDataDir() + "/" + bild;
+				}
+				try {
+					ImageIO.read(new java.io.File(bild));
+				} catch (Exception e) {
+					System.out.println("Hintergrundbild " + bild + " nicht gefunden.");
+					return;
+				}
 			}
 		}catch (Exception e){
 			System.err.println("Hintergrundbild "+bild+" nicht gefunden.");
