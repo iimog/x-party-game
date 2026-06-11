@@ -1,5 +1,8 @@
 # X Party Game
 
+> [!IMPORTANT]
+> This repository was migrated to [Codeberg](https://codeberg.org) on 2026-06-11. Any future development will happen there: https://codeberg.org/iimog/x-party-game
+
 ## Installation
 
 Download the latest jar file from the release page.
